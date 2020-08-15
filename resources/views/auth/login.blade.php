@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -69,5 +68,10 @@
             </div>
         </div>
     </div>
+</div> --}}
+
+<div class="bg-viridiant-600 w-full h-full">
+    <div class="w-16 h-16">
+        <img src="{{asset('vendor/courier/icons/tool-white.svg')}}">
+    </div>
 </div>
-@endsection
