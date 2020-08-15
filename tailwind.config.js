@@ -47,6 +47,13 @@ module.exports = {
           '800' : '#7a7a7a',
           '900' : '#3d3d3d'
         },
+        borderRadius: {
+            'xl' : '0.6rem',
+            '2xl' : '0.75rem',
+            '3xl' : '0.9rem',
+            '4xl' : '1rem',
+
+        },
     },
   },
   variants: {},
