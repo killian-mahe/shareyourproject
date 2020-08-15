@@ -70,5 +70,26 @@
     </div>
 </div> --}}
 
-<div class="bg-container w-full h-full">
+@section('content')
+
+<div class="bg-viridiant-600 w-full h-screen flex items-center">
+    <div class="m-auto p-5 bg-cultured-600 shadow-lg rounded-lg">
+        <form class="w-full">
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <custom-input class="w-full md:w-1/2 px-3 mb-6 md:mb-0" label="First Name" type="text" placeholder="Jane"></custom-input>
+                <custom-input class="w-full md:w-1/2 px-3" label="Last Name" type="text" placeholder="Doe"></custom-input>
+            </div>
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <custom-input class="w-full px-3" label="Password" type="password" placeholder="******************" indication="Make it as long and as crazy as you'd like"></custom-input>
+            </div>
+            <div class="flex flex-wrap -mx-3 mb-2">
+                <custom-input class="w-full md:w-1/3 px-3 mb-6 md:mb-0" label="City" type="text" placeholder="Brest"></custom-input>
+                <select-input class="w-full md:w-1/3 px-3 mb-6 md:mb-0" label="State" v-bind:options="[{text: 'New Mexico', value: 'mexico'}]"></select-input>
+                <custom-input class="w-full md:w-1/3 px-3 mb-6 md:mb-0" label="Zip" type="text" placeholder="29280"></custom-input>
+            </div>
+        </form>
+    </div>
 </div>
+
+@endsection
+
