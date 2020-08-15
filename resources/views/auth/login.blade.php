@@ -70,8 +70,5 @@
     </div>
 </div> --}}
 
-<div class="bg-viridiant-600 w-full h-full">
-    <div class="w-16 h-16">
-        <img src="{{asset('vendor/courier/icons/tool-white.svg')}}">
-    </div>
+<div class="bg-container w-full h-full">
 </div>
