@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+{{-- @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -74,4 +74,32 @@
         </div>
     </div>
 </div>
+@endsection --}}
+
+@section('content')
+
+<div class="flex w-full h-screen">
+    <img class="w-auto h-full bg-blur-3" src="{{ asset('vendor/courier/img/jeff-sheldon-8z2Q6XWLYa4.jpg') }}" alt="" />
+    <div class="absolute right-0 px-12 pt-16 h-full bg-white w-full md:w-1/2 lg:w-5/12 justify-center">
+        <h1 class="text-onyx-600 font-sans font-bold text-center text-4xl mb-6">Register</h1>
+        <hr class="mb-6 mx-3">
+        <form class="w-full">
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <custom-input class="w-full md:w-1/2 px-3 mb-6 md:mb-0" name="first-name" label="First Name" type="text" placeholder="Jane"></custom-input>
+                <custom-input class="w-full md:w-1/2 px-3" name="last-name" label="Last Name" type="text" placeholder="Doe"></custom-input>
+            </div>
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <custom-input class="w-full px-3 mb-6 md:mb-0" nam="username" label="Username" type="text" placeholder="jane-doe"></custom-input>
+            </div>
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <custom-input class="w-full px-3" nam="email" label="E-mail" type="email" placeholder="jane.doe@shareyourproject.fr"></custom-input>
+            </div>
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <custom-input class="w-full md:w-1/2 px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************" indication="Make it as long and as crazy as you'd like"></custom-input>
+                <custom-input class="w-full md:w-1/2 px-3" name="confirm-password" label="Confirm Password" type="password" placeholder="******************"></custom-input>
+            </div>
+        </form>
+    </div>
+</div>
+
 @endsection
