@@ -24,7 +24,7 @@
         {{-- NavBar --}}
         <nav class="w-screen flex shadow-lg bg-cultured-100 nav-bar">
             <div class="flex justify-around w-full ">
-              <a><img class="my-2 " src="C:\Users\Polo\Documents\Perso\Projets\ShareYourProject\Logos\png\fit\Logo_viridiant_fit.png" width="100px" height="100px"></a>
+              <a><img class="my-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="100px" height="100px"></a>
               <ul class="my-auto flex">
                 <li><a class="inline-flex">Services</a></li>
                 <li><a class="inline-flex">Project</a></li>
