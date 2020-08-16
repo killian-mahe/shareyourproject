@@ -4,6 +4,82 @@
 
 @tailwind utilities;
 
+.btn{
+    @apply py-1 px-3 rounded-2xl  appearance-none
+}
+
+.btn:hover{
+    @apply text-cultured-100
+}
+
+.btn-viridiant{
+    @apply text-cultured-100 bg-viridiant-600 border border-transparent
+}
+
+.btn-viridiant:hover{
+    @apply border border-viridiant-600 bg-cultured-100 text-viridiant-600
+}
+
+.btn-viridiant-outline{
+    @apply text-viridiant-600 border border-viridiant-600
+}
+
+.btn-viridiant-outline:hover{
+    @apply bg-viridiant-600
+}
+
+.btn-orange-peel-outline{
+    @apply text-orange-peel-600
+}
+
+.btn-orange-peel-outline:hover{
+    @apply bg-orange-peel-600
+}
+
+.nav-bar ul li{
+    display: inline-flex;
+}
+
+.nav-bar ul li a{
+    position: relative;
+    @apply py-1;
+    margin: 0 25px;
+    @apply text-onyx-600;
+}
+
+.nav-bar ul li a:hover{
+    transition : 0.9s;
+
+}
+
+.nav-bar ul li a:after{
+    content : '';
+    position : absolute;
+    left : 50%;
+    bottom : 0;
+    transform : translateX(-50%) scaleX(0);
+    -webkit-transform : translateX(-50%) scaleX(0);
+    transform-origin : 50% 50%;
+    -webkit-transform-origin : 50% 50%;
+    width : 100%;
+    height : 3px;
+    @apply bg-viridiant-600;
+    transition : transform 250ms;
+    -webkit-transition : transform 250ms;
+}
+
+.nav-bar ul li a:hover:after{
+    transform : translateX(-50%) scaleX(1);
+    -webkit-transform : translateX(-50%) scaleX(1);
+}
+
+.search-bar{
+    @apply bg-cultured-400 text-onyx-700 border border-onyx-200 rounded-full py-3 pl-10 pr-2 leading-tight
+}
+
+.search-bar:focus{
+    @apply outline-none bg-cultured-100 border-onyx-500 w-full
+}
 
 .bg-container {
     background-color: #f5f5f5;
