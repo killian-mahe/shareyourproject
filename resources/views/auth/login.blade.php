@@ -72,20 +72,17 @@
 
 @section('content')
 
-<div class="bg-viridiant-600 w-full h-screen flex items-center">
-    <div class="m-auto p-5 bg-white shadow-lg rounded-lg">
+<div class="flex w-full h-screen">
+    <img class="w-auto h-full bg-blur-3" src="{{ asset('vendor/courier/img/jeff-sheldon-8z2Q6XWLYa4.jpg') }}" alt="" />
+    <div class="absolute right-0 px-24 pt-16 h-full bg-white w-full md:w-1/2 lg:w-5/12 justify-center">
+        <h1 class="text-onyx-600 font-sans font-bold text-center text-4xl mb-6">Login</h1>
+        <hr class="mb-12 mx-3">
         <form class="w-full">
             <div class="flex flex-wrap -mx-3 mb-6">
-                <custom-input class="w-full md:w-1/2 px-3 mb-6 md:mb-0" name="first-name" label="First Name" type="text" placeholder="Jane"></custom-input>
-                <custom-input class="w-full md:w-1/2 px-3" name="last-name" label="Last Name" type="text" placeholder="Doe"></custom-input>
+                <custom-input class="w-full px-3" nam="email" label="E-mail / Username" type="email" placeholder="jane.doe@shareyourproject.fr"></custom-input>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
-                <custom-input class="w-full px-3" name="password" label="Password" type="password" placeholder="******************" indication="Make it as long and as crazy as you'd like"></custom-input>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-2">
-                <custom-input class="w-full md:w-1/3 px-3 mb-6 md:mb-0" name="city" label="City" type="text" placeholder="Brest"></custom-input>
-                <select-input class="w-full md:w-1/3 px-3 mb-6 md:mb-0" name="state" label="State" v-bind:options="[{text: 'New Mexico', value: 'mexico'}]"></select-input>
-                <custom-input class="w-full md:w-1/3 px-3 mb-6 md:mb-0" name="zip" label="Zip" type="text" placeholder="29280"></custom-input>
+                <custom-input class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************"></custom-input>
             </div>
         </form>
     </div>
