@@ -82,7 +82,7 @@
     <img class="w-auto h-full bg-blur-3" src="{{ asset('vendor/courier/img/jeff-sheldon-8z2Q6XWLYa4.jpg') }}" alt="" />
     <div class="absolute right-0 px-12 pt-16 h-full bg-white w-full md:w-1/2 lg:w-5/12 justify-center">
         <h1 class="text-onyx-600 font-sans font-bold text-center text-4xl mb-6">Register</h1>
-        <hr class="mb-6 mx-3">
+        <hr class="mb-12 mx-3">
         <form class="w-full">
             <div class="flex flex-wrap -mx-3 mb-6">
                 <custom-input class="w-full md:w-1/2 px-3 mb-6 md:mb-0" name="first-name" label="First Name" type="text" placeholder="Jane"></custom-input>
