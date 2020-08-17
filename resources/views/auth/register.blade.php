@@ -83,21 +83,23 @@
     <div class="absolute right-0 px-12 pt-16 h-full bg-white w-full md:w-1/2 lg:w-5/12 justify-center">
         <h1 class="text-onyx-600 font-sans font-bold text-center text-4xl mb-6">Register</h1>
         <hr class="mb-12 mx-3">
-        <form class="w-full">
+        <form class="w-full" method="POST" action="{{ route('register') }}">
+            @csrf
             <div class="flex flex-wrap -mx-3 mb-6">
-                <custom-input class="w-full md:w-1/2 px-3 mb-6 md:mb-0" name="first-name" label="First Name" type="text" placeholder="Jane"></custom-input>
-                <custom-input class="w-full md:w-1/2 px-3" name="last-name" label="Last Name" type="text" placeholder="Doe"></custom-input>
+                <custom-input class="w-full md:w-1/2 px-3 mb-6 md:mb-0" name="first-name" label="First Name" type="text" placeholder="Jane" error="@error('first-name') {{ $message }} @enderror"></custom-input>
+                <custom-input class="w-full md:w-1/2 px-3" name="last-name" label="Last Name" type="text" placeholder="Doe" error="@error('last-name') {{ $message }} @enderror"></custom-input>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
-                <custom-input class="w-full px-3 mb-6 md:mb-0" nam="username" label="Username" type="text" placeholder="jane-doe"></custom-input>
+                <custom-input class="w-full px-3 mb-6 md:mb-0" name="username" label="Username" type="text" placeholder="jane-doe" error="@error('username') {{ $message }} @enderror"></custom-input>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
-                <custom-input class="w-full px-3" nam="email" label="E-mail" type="email" placeholder="jane.doe@shareyourproject.fr"></custom-input>
+                <custom-input class="w-full px-3" name="email" label="E-mail" type="email" placeholder="jane.doe@shareyourproject.fr" error="@error('email') {{ $message }} @enderror"></custom-input>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
-                <custom-input class="w-full md:w-1/2 px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************" indication="Make it as long and as crazy as you'd like"></custom-input>
-                <custom-input class="w-full md:w-1/2 px-3" name="confirm-password" label="Confirm Password" type="password" placeholder="******************"></custom-input>
+                <custom-input class="w-full md:w-1/2 px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************" indication="Make it as long and as crazy as you'd like" error="@error('password') {{ $message }} @enderror"></custom-input>
+                <custom-input class="w-full md:w-1/2 px-3" name="password_confirmation" label="Confirm Password" type="password" placeholder="******************" error="@error('password_confirmation') {{ $message }} @enderror"></custom-input>
             </div>
+            <button type="submit" class="border border-viridiant-300 rounded-full font-semibold px-4 py-2 hover:bg-viridiant-300 hover:text-white transition-colors duration-100 ease-in-out">Submit</button>
         </form>
     </div>
 </div>
