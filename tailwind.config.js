@@ -20,6 +20,20 @@ module.exports = {
                 '3/4': '75%',
                 '7/8': '87.5%'
             },
+            minWidth: {
+              '1': '1rem',
+              '2': '2rem',
+              '3': '3rem',
+              '4': '4rem',
+              '6': '6rem',
+              '8': '8rem',
+              '10': '10rem',
+              '12': '12rem',
+              '16': '16rem',
+              '20': '20rem',
+              '24': '24rem',
+              '32': '32rem',
+          },
             colors: {
                 'viridiant' : {
                 '100' : '#dff7f9',
@@ -78,4 +92,4 @@ module.exports = {
         borderWidth: ['responsive', 'hover', 'focus'],
     },
     plugins: [],
-}
+  }
