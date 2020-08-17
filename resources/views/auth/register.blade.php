@@ -99,7 +99,7 @@
                 <custom-input class="w-full md:w-1/2 px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************" indication="Make it as long and as crazy as you'd like" error="@error('password') {{ $message }} @enderror"></custom-input>
                 <custom-input class="w-full md:w-1/2 px-3" name="password_confirmation" label="Confirm Password" type="password" placeholder="******************" error="@error('password_confirmation') {{ $message }} @enderror"></custom-input>
             </div>
-            <button type="submit" class="border border-viridiant-300 rounded-full font-semibold px-4 py-2 hover:bg-viridiant-300 hover:text-white transition-colors duration-100 ease-in-out">Submit</button>
+            <button type="submit" class="border border-viridiant-600 rounded-full font-semibold px-4 py-2 hover:bg-viridiant-600 hover:text-white transition-colors duration-100 ease-in-out">Submit</button>
         </form>
     </div>
 </div>
