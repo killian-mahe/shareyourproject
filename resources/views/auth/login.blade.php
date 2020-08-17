@@ -77,13 +77,15 @@
     <div class="absolute right-0 px-24 pt-16 h-full bg-white w-full md:w-1/2 lg:w-5/12 justify-center">
         <h1 class="text-onyx-600 font-sans font-bold text-center text-4xl mb-6">Login</h1>
         <hr class="mb-12 mx-3">
-        <form class="w-full">
+        <form class="w-full" method="POST" action="{{ route('login') }}">
+            @csrf
             <div class="flex flex-wrap -mx-3 mb-6">
-                <custom-input class="w-full px-3" nam="email" label="E-mail / Username" type="email" placeholder="jane.doe@shareyourproject.fr"></custom-input>
+                <custom-input class="w-full px-3" name="email" label="E-mail" type="text" placeholder="jane.doe@shareyourproject.fr" error="@error('email') {{ $message }} @enderror"></custom-input>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
-                <custom-input class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************"></custom-input>
+                <custom-input class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************" error="@error('password') {{ $message }} @enderror"></custom-input>
             </div>
+            <button type="submit" class="border border-viridiant-300 rounded-full font-semibold px-4 py-2 hover:bg-viridiant-300 hover:text-white transition-colors duration-100 ease-in-out">Submit</button>
         </form>
     </div>
 </div>
