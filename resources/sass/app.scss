@@ -4,8 +4,12 @@
 
 @tailwind utilities;
 
+button:focus, input:focus {
+    @apply outline-none;
+}
+
 .btn{
-    @apply py-1 px-3 rounded-2xl  appearance-none
+    @apply py-1 px-3 m-2 rounded-full  appearance-none
 }
 
 .btn:hover{
@@ -74,12 +78,35 @@
 }
 
 .search-bar{
-    @apply bg-cultured-400 text-onyx-700 border border-onyx-200 rounded-full py-3 pl-10 pr-2 leading-tight
+    @apply bg-cultured-400 text-onyx-700 border border-onyx-200 rounded-full py-2 pl-10 pr-2 leading-tight
 }
 
 .search-bar:focus{
-    @apply outline-none bg-cultured-100 border-onyx-500 w-full
+    @apply bg-cultured-100 border-onyx-500 w-full
 }
+
+.search-box {
+    @apply w-32 px-4 py-2 box-border text-base bg-cultured-100 border border-cultured-700 rounded-l-full;
+    -webkit-transition: width 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out;
+
+}
+
+.search-box:focus {
+    @apply w-full border-viridiant-600
+}
+
+.search-glass {
+    @apply bg-onyx-200 border border-onyx-200 rounded-r-full p-1 pr-3;
+}
+
+.search-glass:focus {
+    @apply bg-onyx-300
+}
+
+
+
+
 
 .bg-container {
     background-color: #f5f5f5;

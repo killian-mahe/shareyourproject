@@ -22,7 +22,7 @@
 <body>
     <div id="app">
         {{-- NavBar --}}
-        <nav class="w-screen flex shadow-lg bg-cultured-100 nav-bar">
+        <nav class="w-full flex shadow-lg bg-cultured-100 nav-bar">
             <div class="flex justify-around w-full ">
               <a><img class="my-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="100px" height="100px"></a>
               <ul class="my-auto flex">
@@ -32,8 +32,11 @@
                 <li><a class="inline-flex">Account</a></li>
               </ul>
               <div class="my-auto w-1/4">
-                <form role="search" class="w-full flex justify-center">
-                  <input class="search-bar" id="search-submit" type="text" placeholder="Search ...">
+                <form role="search" class="w-full justify-center">
+                  <div class="flex justify-center">
+                    <input class="search-box" id="search-submit" type="text" placeholder="Search ...">
+                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></a></button>
+                </div>
                 </form>
               </div>
               <div class="my-auto">

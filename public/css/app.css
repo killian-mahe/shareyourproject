@@ -22377,12 +22377,17 @@ video {
           animation: bounce 1s infinite;
 }
 
+button:focus, input:focus {
+  outline: 0;
+}
+
 .btn {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  border-radius: 0.75rem;
+  margin: 0.5rem;
+  border-radius: 9999px;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -22499,15 +22504,14 @@ video {
   border-color: #b3b8ba;
   border-color: rgba(179, 184, 186, var(--border-opacity));
   border-radius: 9999px;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 2.5rem;
   padding-right: 0.5rem;
   line-height: 1.25;
 }
 
 .search-bar:focus {
-  outline: 0;
   --bg-opacity: 1;
   background-color: #fefefe;
   background-color: rgba(254, 254, 254, var(--bg-opacity));
@@ -22515,6 +22519,53 @@ video {
   border-color: #51575a;
   border-color: rgba(81, 87, 90, var(--border-opacity));
   width: 100%;
+}
+
+.search-box {
+  width: 8rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+  --bg-opacity: 1;
+  background-color: #fefefe;
+  background-color: rgba(254, 254, 254, var(--bg-opacity));
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #b8b8b8;
+  border-color: rgba(184, 184, 184, var(--border-opacity));
+  border-top-left-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+  transition: width 0.3s ease-in-out;
+}
+
+.search-box:focus {
+  width: 100%;
+  --border-opacity: 1;
+  border-color: #219fa6;
+  border-color: rgba(33, 159, 166, var(--border-opacity));
+}
+
+.search-glass {
+  --bg-opacity: 1;
+  background-color: #b3b8ba;
+  background-color: rgba(179, 184, 186, var(--bg-opacity));
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #b3b8ba;
+  border-color: rgba(179, 184, 186, var(--border-opacity));
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  padding: 0.25rem;
+  padding-right: 0.75rem;
+}
+
+.search-glass:focus {
+  --bg-opacity: 1;
+  background-color: #80888c;
+  background-color: rgba(128, 136, 140, var(--bg-opacity));
 }
 
 .bg-container {
