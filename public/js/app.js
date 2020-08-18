@@ -1962,9 +1962,12 @@ __webpack_require__.r(__webpack_exports__);
     'placeholder': String,
     'error': String,
     'indication': String,
-    'name': String
+    'name': String,
+    'value': String
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    console.log(this.value);
+  }
 });
 
 /***/ }),
@@ -37673,7 +37676,8 @@ var render = function() {
           id: _vm.name,
           type: _vm.type,
           placeholder: _vm.placeholder
-        }
+        },
+        domProps: { value: _vm.value }
       }),
       _vm._v(" "),
       _vm.error
