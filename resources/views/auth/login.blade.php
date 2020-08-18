@@ -11,7 +11,7 @@
         <form class="w-full" method="POST" action="{{ route('login') }}">
             @csrf
             <div class="flex flex-wrap -mx-3 mb-6">
-                <custom-input class="w-full px-3" name="email" label="E-mail" type="text" placeholder="jane.doe@shareyourproject.fr" error="@error('email') {{ $message }} @enderror"></custom-input>
+                <custom-input class="w-full px-3" name="email" label="E-mail" type="email" placeholder="jane.doe@shareyourproject.fr" error="@error('email') {{ $message }} @enderror" value="{{ old('email') }}"></custom-input>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
                 <custom-input class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************" error="@error('password') {{ $message }} @enderror"></custom-input>
