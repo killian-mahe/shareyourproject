@@ -22451,11 +22451,11 @@ button:focus, input:focus {
   background-color: rgba(255, 159, 28, var(--bg-opacity));
 }
 
-.nav-bar ul li {
+.nav-bar-li {
   display: inline-flex;
 }
 
-.nav-bar ul li a {
+.nav-bar-li a {
   position: relative;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -22465,11 +22465,11 @@ button:focus, input:focus {
   color: rgba(57, 61, 63, var(--text-opacity));
 }
 
-.nav-bar ul li a:hover {
+.nav-bar-li a:hover {
   transition: 0.9s;
 }
 
-.nav-bar ul li a:after {
+.nav-bar-li a:after {
   content: "";
   position: absolute;
   left: 50%;
@@ -22487,7 +22487,7 @@ button:focus, input:focus {
   -webkit-transition: transform 250ms;
 }
 
-.nav-bar ul li a:hover:after {
+.nav-bar-li a:hover:after {
   transform: translateX(-50%) scaleX(1);
   -webkit-transform: translateX(-50%) scaleX(1);
 }
@@ -22521,10 +22521,9 @@ button:focus, input:focus {
   width: 100%;
 }
 
-.search-box {
-  width: 8rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+.search-input {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   box-sizing: border-box;
@@ -22541,7 +22540,7 @@ button:focus, input:focus {
   transition: width 0.3s ease-in-out;
 }
 
-.search-box:focus {
+.search-input:focus {
   width: 100%;
   --border-opacity: 1;
   border-color: #219fa6;
@@ -22562,10 +22561,58 @@ button:focus, input:focus {
   padding-right: 0.75rem;
 }
 
-.search-glass:focus {
-  --bg-opacity: 1;
-  background-color: #80888c;
-  background-color: rgba(128, 136, 140, var(--bg-opacity));
+.menu-icon {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.menu-icon span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: #219fa6;
+  border-radius: 4px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+.menu-icon span:nth-child(1) {
+  top: 0px;
+}
+
+.menu-icon span:nth-child(2) {
+  top: 10px;
+}
+
+.menu-icon span:nth-child(3) {
+  top: 20px;
+}
+
+.menu-icon.open span:nth-child(1) {
+  top: 10px;
+  transform: rotate(-135deg);
+}
+
+.menu-icon.open span:nth-child(2) {
+  opacity: 0;
+  left: 60px;
+}
+
+.menu-icon.open span:nth-child(3) {
+  top: 10px;
+  transform: rotate(135deg);
+}
+
+.mobile-nav-list {
+  text-align: center;
+  list-style-type: none;
 }
 
 .bg-container {

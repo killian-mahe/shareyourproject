@@ -22,7 +22,7 @@
 <body>
     <div id="app">
         {{-- NavBar --}}
-        <nav class="w-full flex shadow-lg bg-cultured-100 nav-bar">
+        {{-- <nav class="w-full flex shadow-lg bg-cultured-100 nav-bar">
             <div class="flex justify-around w-full ">
               <a><img class="my-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="100px" height="100px"></a>
               <ul class="my-auto flex">
@@ -44,7 +44,60 @@
                 <button class="btn btn-viridiant">Log In</button>
               </div>
             </div>
+        </nav>--}}
+        <nav class="w-full shadow-lg bg-cultured-100 nav-bar hidden lg:flex">
+            <div class="flex justify-around w-full ">
+              <a><img class="my-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
+              <ul class="my-auto hidden lg:flex">
+                <li class="nav-bar-li"><a class="inline-flex">Services</a></li>
+                <li class="nav-bar-li"><a class="inline-flex">Project</a></li>
+                <li class="nav-bar-li"><a class="inline-flex">About</a></li>
+                <li class="nav-bar-li"><a class="inline-flex">Account</a></li>
+              </ul>
+              <div class="my-auto w-1/4">
+                <form role="search" class="w-full justify-center">
+                  <div class="flex justify-center">
+                    <input class="search-input w-56" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
+                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></a></button>
+                	</div>
+                </form>
+              </div>
+              <div class="my-auto hidden lg:block">
+                <button class="btn btn-viridiant-outline">Sign Up</button>
+                <button class="btn btn-viridiant">Log In</button>
+              </div>
+            </div>
         </nav>
+        <nav class="w-full px-2 shadow-lg bg-cultured-100 nav-bar flex lg:hidden">
+            <div class="flex justify-around w-full ">
+              <a><img class="my-2" src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
+              <div class="my-auto w-1/2">
+                <form role="search" class="w-full justify-center">
+                  <div class="flex justify-center">
+                    <input class="search-input w-32" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
+                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></a></button>
+                	</div>
+                </form>
+              </div>
+              <!-- Burger Menu -->
+              <div class="my-auto flex lg:hidden">
+                <div class="my-auto menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+              </div>
+            </div>
+        </nav>
+        <!-- ul li -->
+        <ul class="my-auto lg:hidden mobile-nav-list">
+            <li class="m-8"><a>Services</a></li>
+            <li class="m-8"><a>Project</a></li>
+            <li class="m-8"><a>About</a></li>
+            <li class="m-8"><a>Account</a></li>
+            <li class="m-8"><a>Log In</a></li>
+            <li class="m-8"><a>Sign Up</a></li>
+          </ul>
         <main>
             @yield('content')
         </main>
