@@ -1962,9 +1962,12 @@ __webpack_require__.r(__webpack_exports__);
     'placeholder': String,
     'error': String,
     'indication': String,
-    'name': String
+    'name': String,
+    'value': String
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    console.log(this.value);
+  }
 });
 
 /***/ }),
@@ -37666,14 +37669,15 @@ var render = function() {
       _vm._v(" "),
       _c("input", {
         staticClass:
-          "appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
+          "appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
         class: { "border-red-500": _vm.error },
         attrs: {
           name: _vm.name,
           id: _vm.name,
           type: _vm.type,
           placeholder: _vm.placeholder
-        }
+        },
+        domProps: { value: _vm.value }
       }),
       _vm._v(" "),
       _vm.error
@@ -37717,7 +37721,7 @@ var render = function() {
     "label",
     {
       staticClass:
-        "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 font-sans",
+        "block tracking-wide text-gray-700 text-sm font-bold mb-2 font-sans",
       attrs: { for: _vm.name }
     },
     [_vm._v("\n    " + _vm._s(_vm.label) + "\n")]
@@ -37756,7 +37760,7 @@ var render = function() {
           "select",
           {
             staticClass:
-              "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+              "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
             attrs: { name: _vm.name, id: _vm.name }
           },
           _vm._l(_vm.options, function(option) {
