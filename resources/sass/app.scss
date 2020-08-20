@@ -73,6 +73,7 @@ button:focus, input:focus {
 }
 
 .nav-bar-li a:after{
+    content : '';
     @apply origin-1/2 transform -translate-x-1/2 scale-x-0 bg-viridiant-600 w-full h-0.1875 left-1/2 transition duration-250 bottom-0 absolute;
 }
 
