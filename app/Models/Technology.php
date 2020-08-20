@@ -1,22 +1,22 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class Technology extends Model
 {
     /**
      * The name of the database.
      *
      * @var string
      */
-    protected $table = 'tags';
+    protected $table = 'technologies';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'label'];
 }
