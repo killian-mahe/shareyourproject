@@ -22764,6 +22764,7 @@ button:focus, input:focus {
 }
 
 .nav-bar-li a:after {
+  content: "";
   transform-origin: 50% 50%;
   --transform-translate-x: 0;
   --transform-translate-y: 0;
