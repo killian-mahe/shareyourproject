@@ -27,4 +27,12 @@ class Project extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * Get all of the tags for the project.
+     */
+    public function tags()
+    {
+        return $this->morphToMany('App\Tag', 'taggable');
+    }
 }
