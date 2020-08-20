@@ -11,14 +11,14 @@ class Post extends Model
      *
      * @var string
      */
-    protected $table = 'projects';
+    protected $table = 'posts';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'description', 'is_public'];
+    protected $fillable = ['content'];
 
     /**
      * Get the user that wrote the post.
