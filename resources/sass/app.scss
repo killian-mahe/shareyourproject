@@ -90,8 +90,8 @@ button:focus, input:focus {
 }
 
 .search-input {
-    @apply px-2 py-2 box-border text-base bg-cultured-100 border border-cultured-700 rounded-l-full transition duration-300 ease-in-out;
-    transition: width;
+    @apply px-2 py-2 box-border text-base bg-cultured-100 border border-cultured-700 rounded-l-full;
+    transition: width 0.3s ease-in-out;
 }
 
 .search-input:focus {
