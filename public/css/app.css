@@ -22846,10 +22846,7 @@ button:focus, input:focus {
   border-color: rgba(184, 184, 184, var(--border-opacity));
   border-top-left-radius: 9999px;
   border-bottom-left-radius: 9999px;
-  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
-  transition-duration: 300ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition: width;
+  transition: width 0.3s ease-in-out;
 }
 
 .search-input:focus {
