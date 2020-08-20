@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Post extends Model
 {
     /**
      * The name of the database.
@@ -21,11 +21,20 @@ class Project extends Model
     protected $fillable = ['name', 'description', 'is_public'];
 
     /**
-     * Get the user that owns the project.
+     * Get the user that wrote the post.
      */
     public function author()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Get the project from where this post was written.
+     * This can be NULL.
+     */
+    public function project()
+    {
+        return $this->belongsTo('App\Model\Project');
     }
 
     /**
@@ -34,13 +43,5 @@ class Project extends Model
     public function tags()
     {
         return $this->morphToMany('App\Model\Tag', 'taggable');
-    }
-
-    /**
-     * Get all of the posts for the project.
-     */
-    public function posts()
-    {
-        return $this->hasMany('App\Model\Post');
     }
 }

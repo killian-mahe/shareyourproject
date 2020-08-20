@@ -25,6 +25,14 @@ class Tag extends Model
      */
     public function projects()
     {
-        return $this->morphedByMany('App\Project', 'taggable');
+        return $this->morphedByMany('App\Model\Project', 'taggable');
+    }
+
+    /**
+     * Get all of the posts that are assigned this tag.
+     */
+    public function posts()
+    {
+        return $this->morphedByMany('App\Model\Post', 'taggable');
     }
 }
