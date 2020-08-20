@@ -25,7 +25,7 @@ class Tag extends Model
      */
     public function projects()
     {
-        return $this->morphedByMany('App\Model\Project', 'taggable');
+        return $this->morphedByMany('App\Models\Project', 'taggable');
     }
 
     /**
@@ -33,6 +33,6 @@ class Tag extends Model
      */
     public function posts()
     {
-        return $this->morphedByMany('App\Model\Post', 'taggable');
+        return $this->morphedByMany('App\Models\Post', 'taggable');
     }
 }

@@ -34,7 +34,7 @@ class Post extends Model
      */
     public function project()
     {
-        return $this->belongsTo('App\Model\Project');
+        return $this->belongsTo('App\Models\Project');
     }
 
     /**
@@ -42,6 +42,6 @@ class Post extends Model
      */
     public function tags()
     {
-        return $this->morphToMany('App\Model\Tag', 'taggable');
+        return $this->morphToMany('App\Models\Tag', 'taggable');
     }
 }

@@ -33,7 +33,7 @@ class Project extends Model
      */
     public function tags()
     {
-        return $this->morphToMany('App\Model\Tag', 'taggable');
+        return $this->morphToMany('App\Models\Tag', 'taggable');
     }
 
     /**
@@ -41,6 +41,6 @@ class Project extends Model
      */
     public function posts()
     {
-        return $this->hasMany('App\Model\Post');
+        return $this->hasMany('App\Models\Post');
     }
 }
