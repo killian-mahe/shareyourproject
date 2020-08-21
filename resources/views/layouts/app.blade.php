@@ -81,7 +81,10 @@
               </div>
               <!-- Burger Menu -->
               <div class="my-auto flex lg:hidden">
-                <div class="my-auto menu-icon">
+                <div class="icon" onclick="myFunction(this)">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
@@ -103,4 +106,9 @@
         </main>
     </div>
 </body>
+<script>
+function myFunction(h) {
+  h.classList.toggle("open");
+}
+</script>
 </html>
