@@ -81,6 +81,22 @@
         <main>
             @yield('content')
         </main>
+        {{-- Real-Time Chat --}}
+        <div class="flex-column h-100 rounded-xl bg-cultured-100 shadow w-80">
+            <div class="bg-viridiant-600 h-8 w-full flex rounded-t-xl">
+                <div class="my-auto mx-5 flex bg-red-300">IMG</div>
+                <div class="my-auto bg-purple-300 flex" for="">Unknow person</div>
+                <div class="bg-yellow-300 my-auto ml-auto mr-2">-</div>
+                <div class="bg-yellow-300 my-auto mr-2">X</div>
+            </div>
+            <div class="h-full flex w-full bg-cultured-100"></div>
+            <div class="bg-viridiant-600 flex-row justify-center p-1 rounded-t-3xl">
+                <div class="w-full flex ">
+                    <input class="message-input w-full" autocomplete="off" id="message-submit" type="text" placeholder="Type your message...">
+                    <button class="send w-auto"><a><img src="{{asset('vendor/courier/icons/send.svg')}}" width="22px" height="22px"></a></button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>

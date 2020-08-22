@@ -102,6 +102,14 @@ button:focus, input:focus {
     @apply bg-onyx-200 border border-onyx-200 rounded-r-full p-1 pr-3;
 }
 
+.message-input {
+    @apply px-2 py-1 box-border text-sm bg-cultured-100 border border-cultured-700 rounded-l-full;
+}
+
+.send {
+    @apply bg-onyx-500 border border-onyx-200 rounded-r-full p-1 pr-3;
+}
+
 .icon {
     @apply w-8 h-1.75 mx-auto my-auto relative;
 }
