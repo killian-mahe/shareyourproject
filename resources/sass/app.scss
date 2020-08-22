@@ -118,13 +118,8 @@ button:focus, input:focus {
 .icon span:nth-child(5), .icon span:nth-child(6) {
     @apply top-1.25;
 }
-.icon.open span:nth-child(1),
-.icon.open span:nth-child(2),
-.icon.open span:nth-child(5),
-.icon.open span:nth-child(6) {
-    transform: scale(.5);
-    z-index: 1;
-    opacity: 0;
+.icon.open span:nth-child(1), .icon.open span:nth-child(2), .icon.open span:nth-child(5), .icon.open span:nth-child(6) {
+    @apply transform scale-50 z-1 opacity-0;
 }
 .icon.open span:nth-child(3) {
     @apply transform rotate-45;
