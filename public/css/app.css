@@ -22740,7 +22740,7 @@ button:focus, input:focus {
   background-color: rgba(254, 254, 254, var(--bg-opacity));
 }
 
-.btn-orange-peel-outline:hover {
+.btn-onyx-outline:hover {
   --bg-opacity: 1;
   background-color: #393d3f;
   background-color: rgba(57, 61, 63, var(--bg-opacity));
