@@ -22,29 +22,6 @@
 <body>
     <div id="app">
         {{-- NavBar --}}
-        {{-- <nav class="w-full flex shadow-lg bg-cultured-100 nav-bar">
-            <div class="flex justify-around w-full ">
-              <a><img class="my-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="100px" height="100px"></a>
-              <ul class="my-auto flex">
-                <li><a class="inline-flex">Services</a></li>
-                <li><a class="inline-flex">Project</a></li>
-                <li><a class="inline-flex">About</a></li>
-                <li><a class="inline-flex">Account</a></li>
-              </ul>
-              <div class="my-auto w-1/4">
-                <form role="search" class="w-full justify-center">
-                  <div class="flex justify-center">
-                    <input class="search-box" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></a></button>
-                </div>
-                </form>
-              </div>
-              <div class="my-auto">
-                <button class="btn btn-viridiant-outline">Sign Up</button>
-                <button class="btn btn-viridiant">Log In</button>
-              </div>
-            </div>
-        </nav>--}}
         <nav class="w-full shadow-lg bg-cultured-100 nav-bar hidden lg:flex">
             <div class="flex justify-around w-full ">
               <a><img class="my-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
@@ -106,9 +83,10 @@
         </main>
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 <script>
-function myFunction(h) {
-  h.classList.toggle("open");
-}
+    function myFunction(h) {
+        h.classList.toggle("open");
+    }
 </script>
 </html>
