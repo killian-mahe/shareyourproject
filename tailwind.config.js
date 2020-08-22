@@ -2,6 +2,9 @@ module.exports = {
     purge: [],
     theme: {
         extend: {
+            zIndex: {
+                '1': '1',
+            },
             margin: {
                 '1.5625': '1.5625rem'
             },
@@ -32,6 +35,7 @@ module.exports = {
                 '7/8': '87.5%',
                 '0.1875': '0.1875rem',
                 '1.875': '1.875rem',
+                '1.75': '1.75rem',
             },
             width: {
                 '1/8': '12.5%',

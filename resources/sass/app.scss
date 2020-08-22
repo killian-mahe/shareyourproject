@@ -103,46 +103,35 @@ button:focus, input:focus {
 }
 
 .icon {
-    width: 32px;
-    height: 28px;
-    margin: auto auto;
-    position: relative;
-  }
- .icon span {
-    background: #219fa6;
-    width: 100%;
-    height: 3px;
-    position: absolute;
-    transition: .3s;
-    justify-items: center;
-    align-items: center;
-  }
+    @apply w-8 h-1.75 mx-auto my-auto relative;
+}
 
-  .icon span:nth-child(1), .icon span:nth-child(2) {
-    z-index: 1;
-  }
-  .icon span:nth-child(3), .icon span:nth-child(4) {
-    top: 10px;
-  }
-  .icon span:nth-child(5), .icon span:nth-child(6) {
-    top: 20px;
-  }
-
-  .icon.open span:nth-child(1),
-  .icon.open span:nth-child(2),
-  .icon.open span:nth-child(5),
-  .icon.open span:nth-child(6) {
+.icon span {
+    @apply justify-center items-center bg-viridiant-600 w-full h-0.1875 absolute transition duration-300;
+}
+.icon span:nth-child(1), .icon span:nth-child(2) {
+    @apply z-1;
+}
+.icon span:nth-child(3), .icon span:nth-child(4) {
+    @apply top-0.625;
+}
+.icon span:nth-child(5), .icon span:nth-child(6) {
+    @apply top-1.25;
+}
+.icon.open span:nth-child(1),
+.icon.open span:nth-child(2),
+.icon.open span:nth-child(5),
+.icon.open span:nth-child(6) {
     transform: scale(.5);
     z-index: 1;
     opacity: 0;
-  }
-
-  .icon.open span:nth-child(3) {
-    transform: rotate(45deg);
-  }
-  .icon.open span:nth-child(4) {
-    transform: rotate(-45deg);
-  }
+}
+.icon.open span:nth-child(3) {
+    @apply transform rotate-45;
+}
+.icon.open span:nth-child(4) {
+    @apply transform -rotate-45;
+}
 
 .mobile-nav-list {
     @apply text-center list-none;
