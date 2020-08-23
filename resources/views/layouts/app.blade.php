@@ -35,7 +35,7 @@
                 <form role="search" class="w-full justify-center">
                   <div class="flex justify-center">
                     <input class="search-input w-56" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></a></button>
+                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search-cultured-100.svg')}}" width="24px" height="24px"></a></button>
                 	</div>
                 </form>
               </div>
@@ -52,7 +52,7 @@
                 <form role="search" class="w-full justify-center">
                   <div class="flex justify-center">
                     <input class="search-input w-32" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></a></button>
+                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search-cultured-100.svg')}}" width="24px" height="24px"></a></button>
                 	</div>
                 </form>
               </div>
@@ -84,16 +84,17 @@
         {{-- Real-Time Chat --}}
         <div class="flex-column h-100 rounded-xl bg-cultured-100 shadow w-80">
             <div class="bg-viridiant-600 h-8 w-full flex rounded-t-xl">
-                <div class="my-auto mx-5 flex bg-red-300">IMG</div>
-                <div class="my-auto bg-purple-300 flex" for="">Unknow person</div>
-                <div class="bg-yellow-300 my-auto ml-auto mr-2">-</div>
-                <div class="bg-yellow-300 my-auto mr-2">X</div>
+                <button class="user-picture"><a><img src="{{asset('vendor/courier/icons/user-cultured-100.svg')}}" width="20px" height="20px"></a></button>
+                <div class="my-auto flex text-cultured-100" for="">Unknow person</div>
+                <button class="minus my-auto ml-auto mr-2"><a><img src="{{asset('vendor/courier/icons/minus-cultured-100.svg')}}" width="20px" height="20px"></a></button>
+                <button class="close my-auto mr-2"><a><img src="{{asset('vendor/courier/icons/close-cultured-100.svg')}}" width="20px" height="20px"></a></button>
             </div>
             <div class="h-full flex w-full bg-cultured-100"></div>
             <div class="bg-viridiant-600 flex-row justify-center p-1 rounded-t-3xl">
                 <div class="w-full flex ">
                     <input class="message-input w-full" autocomplete="off" id="message-submit" type="text" placeholder="Type your message...">
-                    <button class="send w-auto"><a><img src="{{asset('vendor/courier/icons/send.svg')}}" width="22px" height="22px"></a></button>
+                    <button class="smiley w-8"><a><img src="{{asset('vendor/courier/icons/smiley-cultured-100.svg')}}" width="24px" height="24px"></a></button>
+                    <div class="rounded-full h-8 w-10 flex items-center justify-center bg-onyx-600"><button class=""><a><img src="{{asset('vendor/courier/icons/send-cultured-100.svg')}}" width="18px" height="18px"></a></button></div>
                 </div>
             </div>
         </div>

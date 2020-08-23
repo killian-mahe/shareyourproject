@@ -103,11 +103,15 @@ button:focus, input:focus {
 }
 
 .message-input {
-    @apply px-2 py-1 box-border text-sm bg-cultured-100 border border-cultured-700 rounded-l-full;
+    @apply px-2 py-1 box-border text-sm bg-cultured-100 border border-cultured-700 rounded-full;
 }
 
-.send {
-    @apply bg-onyx-500 border border-onyx-200 rounded-r-full p-1 pr-3;
+.smiley {
+    @apply px-1;
+}
+
+.user-picture {
+    @apply px-4;
 }
 
 .icon {
