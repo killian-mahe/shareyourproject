@@ -8124,6 +8124,10 @@ video {
   height: 25rem;
 }
 
+.h-120 {
+  height: 30rem;
+}
+
 .h-auto {
   height: auto;
 }
@@ -19853,6 +19857,10 @@ video {
   width: 25rem;
 }
 
+.w-120 {
+  width: 30rem;
+}
+
 .w-auto {
   width: auto;
 }
@@ -30555,6 +30563,10 @@ button:focus, input:focus {
 
   .sm\:h-100 {
     height: 25rem;
+  }
+
+  .sm\:h-120 {
+    height: 30rem;
   }
 
   .sm\:h-auto {
@@ -42286,6 +42298,10 @@ button:focus, input:focus {
     width: 25rem;
   }
 
+  .sm\:w-120 {
+    width: 30rem;
+  }
+
   .sm\:w-auto {
     width: auto;
   }
@@ -52498,6 +52514,10 @@ button:focus, input:focus {
 
   .md\:h-100 {
     height: 25rem;
+  }
+
+  .md\:h-120 {
+    height: 30rem;
   }
 
   .md\:h-auto {
@@ -64229,6 +64249,10 @@ button:focus, input:focus {
     width: 25rem;
   }
 
+  .md\:w-120 {
+    width: 30rem;
+  }
+
   .md\:w-auto {
     width: auto;
   }
@@ -74441,6 +74465,10 @@ button:focus, input:focus {
 
   .lg\:h-100 {
     height: 25rem;
+  }
+
+  .lg\:h-120 {
+    height: 30rem;
   }
 
   .lg\:h-auto {
@@ -86172,6 +86200,10 @@ button:focus, input:focus {
     width: 25rem;
   }
 
+  .lg\:w-120 {
+    width: 30rem;
+  }
+
   .lg\:w-auto {
     width: auto;
   }
@@ -96384,6 +96416,10 @@ button:focus, input:focus {
 
   .xl\:h-100 {
     height: 25rem;
+  }
+
+  .xl\:h-120 {
+    height: 30rem;
   }
 
   .xl\:h-auto {
@@ -108113,6 +108149,10 @@ button:focus, input:focus {
 
   .xl\:w-100 {
     width: 25rem;
+  }
+
+  .xl\:w-120 {
+    width: 30rem;
   }
 
   .xl\:w-auto {

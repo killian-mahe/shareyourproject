@@ -82,19 +82,19 @@
             @yield('content')
         </main>
         {{-- Real-Time Chat --}}
-        <div class="flex-column h-100 rounded-xl bg-cultured-100 shadow w-80">
+        <div class="flex-column h-auto rounded-t-xl bg-cultured-100 shadow w-80 absolute bottom-0 right-0">
             <div class="bg-viridiant-600 h-8 w-full flex rounded-t-xl">
                 <button class="user-picture"><a><img src="{{asset('vendor/courier/icons/user-cultured-100.svg')}}" width="20px" height="20px"></a></button>
                 <div class="my-auto flex text-cultured-100" for="">Unknow person</div>
                 <button class="minus my-auto ml-auto mr-2"><a><img src="{{asset('vendor/courier/icons/minus-cultured-100.svg')}}" width="20px" height="20px"></a></button>
                 <button class="close my-auto mr-2"><a><img src="{{asset('vendor/courier/icons/close-cultured-100.svg')}}" width="20px" height="20px"></a></button>
             </div>
-            <div class="h-full flex w-full bg-cultured-100"></div>
-            <div class="bg-viridiant-600 flex-row justify-center p-1 rounded-t-3xl">
-                <div class="w-full flex ">
+            <div class="h-100 flex w-full bg-cultured-100"></div>
+            <div class="bg-viridiant-600 flex-row justify-center p-1 rounded-t-3xl w-full">
+                <div class="w-full flex">
                     <input class="message-input w-full" autocomplete="off" id="message-submit" type="text" placeholder="Type your message...">
                     <button class="smiley w-8"><a><img src="{{asset('vendor/courier/icons/smiley-cultured-100.svg')}}" width="24px" height="24px"></a></button>
-                    <div class="rounded-full h-8 w-10 flex items-center justify-center bg-onyx-600"><button class=""><a><img src="{{asset('vendor/courier/icons/send-cultured-100.svg')}}" width="18px" height="18px"></a></button></div>
+                    <button class="bg-onyx-600 rounded-full h-8 w-10 flex justify-center items-center"><a><img src="{{asset('vendor/courier/icons/send-cultured-100.svg')}}" width="18px" height="18px"></a></button>
                 </div>
             </div>
         </div>

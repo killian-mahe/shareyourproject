@@ -40,6 +40,7 @@ module.exports = {
                 '9': '2.75rem',
                 '80': '20rem',
                 '100': '25rem',
+                '120': '30rem',
             },
             width: {
                 '1/8': '12.5%',
@@ -53,6 +54,7 @@ module.exports = {
                 '9': '2.75rem',
                 '80': '20rem',
                 '100': '25rem',
+                '120': '30rem',
             },
             minWidth: {
               '1': '1rem',
