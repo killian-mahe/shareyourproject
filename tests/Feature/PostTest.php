@@ -19,7 +19,7 @@ class PostTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)
-                         ->post('/posts', ['content' => 'It\'s a test', 'project' => 1]);
+                         ->post('/posts', ['content' => 'It\'s a test']);
 
         $response->assertStatus(200);
 
