@@ -10,15 +10,15 @@ button:focus, input:focus {
 }
 
 .chat-window {
-    @apply h-auto rounded-t-xl bg-cultured-100 shadow w-80 absolute bottom-0 right-0;
+    @apply h-120 rounded-t-xl flex flex-col bg-cultured-100 shadow w-80 fixed bottom-0 right-0;
 }
 
 .chat-header {
-    @apply bg-viridiant-600 h-8 w-full flex rounded-t-xl shadow-md mb-4;
+    @apply bg-viridiant-600 h-8 w-full flex rounded-t-xl z-10 shadow-md;
 }
 
 .chat-container {
-    @apply h-100 flex w-full bg-cultured-100;
+    @apply flex-auto w-full bg-cultured-100;
 }
 
 .chat-footer {
@@ -26,7 +26,7 @@ button:focus, input:focus {
 }
 
 .chat-input {
-    @apply px-2 py-1 box-border text-sm bg-cultured-100 border border-cultured-700 rounded-full w-full;
+    @apply px-2 py-1 my-auto box-border text-sm bg-cultured-100 border border-cultured-700 rounded-full w-full;
 }
 
 .btn {
@@ -124,19 +124,11 @@ button:focus, input:focus {
 }
 
 .smiley {
-    @apply px-1 w-8;
+    @apply px-1 w-8 my-auto;
 }
 
 .send {
     @apply bg-onyx-600 rounded-full h-8 w-10 flex justify-center items-center;
-}
-
-.user-picture {
-    @apply px-4;
-}
-
-.user-name {
-    @apply my-auto flex text-cultured-100 ;
 }
 
 .icon {

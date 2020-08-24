@@ -35,7 +35,7 @@
                 <form role="search" class="w-full justify-center">
                   <div class="flex justify-center">
                     <input class="search-input w-56" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search-cultured-100.svg')}}" width="24px" height="24px"></a></button>
+                    <button class="search-glass"><span class="text-cultured-100"><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></span></button>
                 	</div>
                 </form>
               </div>
@@ -51,8 +51,8 @@
               <div class="my-auto w-1/2">
                 <form role="search" class="w-full justify-center">
                   <div class="flex justify-center">
-                    <input class="search-input w-32" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search-cultured-100.svg')}}" width="24px" height="24px"></a></button>
+                    <input class="search-input w-32 md:w-64" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
+                    <button class="search-glass"><span class="text-cultured-100"><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></span></button>
                 	</div>
                 </form>
               </div>
@@ -82,19 +82,19 @@
             @yield('content')
         </main>
         {{-- Real-Time Chat --}}
-        <div class="chat-window">
+        <div class="chat-window mx-4">
             <div class="chat-header">
-                <button class="user-picture"><a><img src="{{asset('vendor/courier/icons/user-cultured-100.svg')}}" width="20px" height="20px"></a></button>
-                <div class="user-name" for="">Unknow person</div>
-                <button class="minus my-auto ml-auto mr-2"><a><img src="{{asset('vendor/courier/icons/minus-cultured-100.svg')}}" width="20px" height="20px"></a></button>
-                <button class="close my-auto mr-2"><a><img src="{{asset('vendor/courier/icons/close-cultured-100.svg')}}" width="20px" height="20px"></a></button>
+                <button class="px-4"><img src="{{asset('vendor/courier/icons/user.svg')}}" width="20px" height="20px"></button>
+                <div class="my-auto flex text-cultured-100" for="">Unknow person</div>
+                <button class="my-auto ml-auto mr-2"><img class="text-cultured-100" src="{{asset('vendor/courier/icons/minus.svg')}}" width="20px" height="20px"></button>
+                <button class="my-auto mr-2"><img class="text-cultured-100" src="{{asset('vendor/courier/icons/x.svg')}}" width="20px" height="20px"></button>
             </div>
             <div class="chat-container"></div>
             <div class="chat-footer">
-                <div class="w-full flex">
+                <div class="w-full h-full flex my-auto">
                     <input class="chat-input" autocomplete="off" id="message-submit" type="text" placeholder="Type your message...">
-                    <button class="smiley"><a><img src="{{asset('vendor/courier/icons/smiley-cultured-100.svg')}}" width="24px" height="24px"></a></button>
-                    <button class="send"><a><img src="{{asset('vendor/courier/icons/send-cultured-100.svg')}}" width="18px" height="18px"></a></button>
+                    <button class="smiley my-auto"><img class="text-cultured-100" src="{{asset('vendor/courier/icons/smile.svg')}}" width="24px" height="24px"></button>
+                    <button class="send my-auto"><img class="text-cultured-100" src="{{asset('vendor/courier/icons/send.svg')}}" width="18px" height="18px"></button>
                 </div>
             </div>
         </div>

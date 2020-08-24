@@ -22636,15 +22636,17 @@ button:focus, input:focus {
 }
 
 .chat-window {
-  height: auto;
+  height: 30rem;
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
+  display: flex;
+  flex-direction: column;
   --bg-opacity: 1;
   background-color: #fefefe;
   background-color: rgba(254, 254, 254, var(--bg-opacity));
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   width: 20rem;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
 }
@@ -22658,13 +22660,12 @@ button:focus, input:focus {
   display: flex;
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
+  z-index: 10;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  margin-bottom: 1rem;
 }
 
 .chat-container {
-  height: 25rem;
-  display: flex;
+  flex: 1 1 auto;
   width: 100%;
   --bg-opacity: 1;
   background-color: #fefefe;
@@ -22688,6 +22689,8 @@ button:focus, input:focus {
   padding-right: 0.5rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+  margin-top: auto;
+  margin-bottom: auto;
   box-sizing: border-box;
   font-size: 0.875rem;
   --bg-opacity: 1;
@@ -22984,6 +22987,8 @@ button:focus, input:focus {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
   width: 2rem;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .send {
@@ -22996,20 +23001,6 @@ button:focus, input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.user-picture {
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.user-name {
-  margin-top: auto;
-  margin-bottom: auto;
-  display: flex;
-  --text-opacity: 1;
-  color: #fefefe;
-  color: rgba(254, 254, 254, var(--text-opacity));
 }
 
 .icon {
