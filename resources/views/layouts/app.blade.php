@@ -94,7 +94,7 @@
                 <div class="w-full flex">
                     <input class="chat-input" autocomplete="off" id="message-submit" type="text" placeholder="Type your message...">
                     <button class="smiley"><a><img src="{{asset('vendor/courier/icons/smiley-cultured-100.svg')}}" width="24px" height="24px"></a></button>
-                    <button><a><img src="{{asset('vendor/courier/icons/send-cultured-100.svg')}}" width="18px" height="18px"></a></button>
+                    <button class="send"><a><img src="{{asset('vendor/courier/icons/send-cultured-100.svg')}}" width="18px" height="18px"></a></button>
                 </div>
             </div>
         </div>
