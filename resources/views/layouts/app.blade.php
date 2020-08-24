@@ -35,7 +35,7 @@
                 <form role="search" class="w-full justify-center">
                   <div class="flex justify-center">
                     <input class="search-input w-56" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></a></button>
+                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search-cultured-100.svg')}}" width="24px" height="24px"></a></button>
                 	</div>
                 </form>
               </div>
@@ -52,7 +52,7 @@
                 <form role="search" class="w-full justify-center">
                   <div class="flex justify-center">
                     <input class="search-input w-32" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></a></button>
+                    <button class="search-glass"><a><img src="{{asset('vendor/courier/icons/search-cultured-100.svg')}}" width="24px" height="24px"></a></button>
                 	</div>
                 </form>
               </div>
@@ -81,6 +81,23 @@
         <main>
             @yield('content')
         </main>
+        {{-- Real-Time Chat --}}
+        <div class="chat-window">
+            <div class="chat-header">
+                <button class="user-picture"><a><img src="{{asset('vendor/courier/icons/user-cultured-100.svg')}}" width="20px" height="20px"></a></button>
+                <div class="user-name" for="">Unknow person</div>
+                <button class="minus my-auto ml-auto mr-2"><a><img src="{{asset('vendor/courier/icons/minus-cultured-100.svg')}}" width="20px" height="20px"></a></button>
+                <button class="close my-auto mr-2"><a><img src="{{asset('vendor/courier/icons/close-cultured-100.svg')}}" width="20px" height="20px"></a></button>
+            </div>
+            <div class="chat-container"></div>
+            <div class="chat-footer">
+                <div class="w-full flex">
+                    <input class="chat-input" autocomplete="off" id="message-submit" type="text" placeholder="Type your message...">
+                    <button class="smiley"><a><img src="{{asset('vendor/courier/icons/smiley-cultured-100.svg')}}" width="24px" height="24px"></a></button>
+                    <button class="send"><a><img src="{{asset('vendor/courier/icons/send-cultured-100.svg')}}" width="18px" height="18px"></a></button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
