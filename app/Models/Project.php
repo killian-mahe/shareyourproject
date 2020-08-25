@@ -23,7 +23,7 @@ class Project extends Model
     /**
      * Get the user that owns the project.
      */
-    public function author()
+    public function owner()
     {
         return $this->belongsTo('App\User');
     }
