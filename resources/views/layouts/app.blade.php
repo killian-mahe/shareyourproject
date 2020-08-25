@@ -35,7 +35,7 @@
                 <form role="search" class="w-full justify-center">
                   <div class="flex justify-center">
                     <input class="search-input w-56" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><span class="text-cultured-100"><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></span></button>
+                    <button class="search-glass"><i class="text-cultured-100" data-feather="search"></i></button>
                 	</div>
                 </form>
               </div>
@@ -52,7 +52,7 @@
                 <form role="search" class="w-full justify-center">
                   <div class="flex justify-center">
                     <input class="search-input w-32 md:w-64" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><span class="text-cultured-100"><img src="{{asset('vendor/courier/icons/search.svg')}}" width="24px" height="24px"></span></button>
+                    <button class="search-glass"><i class="text-cultured-100" data-feather="search"></i></button>
                 	</div>
                 </form>
               </div>
@@ -84,24 +84,26 @@
         {{-- Real-Time Chat --}}
         <div class="chat-window mx-4">
             <div class="chat-header">
-                <button class="px-4"><img src="{{asset('vendor/courier/icons/user.svg')}}" width="20px" height="20px"></button>
-                <div class="my-auto flex text-cultured-100" for="">Unknow person</div>
-                <button class="my-auto ml-auto mr-2"><img class="text-cultured-100" src="{{asset('vendor/courier/icons/minus.svg')}}" width="20px" height="20px"></button>
-                <button class="my-auto mr-2"><img class="text-cultured-100" src="{{asset('vendor/courier/icons/x.svg')}}" width="20px" height="20px"></button>
+                <button class="px-4"><i class="text-cultured-100 w-5" data-feather="user"></i></button>
+                <div class="my-auto flex text-cultured-100">Unknow person</div>
+                <button class="my-auto ml-auto mr-2"><i class="text-cultured-100 w-5" data-feather="minus"></i></button>
+                <button class="my-auto mr-2"><i class="text-cultured-100 w-5" data-feather="x"></i></button>
             </div>
             <div class="chat-container"></div>
             <div class="chat-footer">
                 <div class="w-full h-full flex my-auto">
                     <input class="chat-input" autocomplete="off" id="message-submit" type="text" placeholder="Type your message...">
-                    <button class="smiley my-auto"><img class="text-cultured-100" src="{{asset('vendor/courier/icons/smile.svg')}}" width="24px" height="24px"></button>
-                    <button class="send my-auto"><img class="text-cultured-100" src="{{asset('vendor/courier/icons/send.svg')}}" width="18px" height="18px"></button>
+                    <button class="btn-smiley my-auto"><i class="text-cultured-100 w-5" data-feather="smile"></i></button>
+                    <button class="btn-send my-auto"><i class="text-cultured-100 w-4 transform -translate-x-0.25 translate-y-0.25" data-feather="send"></i></button>
                 </div>
             </div>
         </div>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/feather-icons"></script>
 <script>
+    feather.replace()
     function myFunction(h) {
         h.classList.toggle("open");
     }
