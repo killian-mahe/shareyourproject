@@ -42,6 +42,22 @@ class User extends Authenticatable
      */
     public function posts()
     {
-        return $this->hasMany('App\Models\Post');
+        return $this->hasMany('App\Models\Post', 'author_id');
+    }
+
+    /**
+     * Get the user that wrote the post.
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment', 'author_id');
+    }
+
+    /**
+     * Get the user that wrote the post.
+     */
+    public function owned_projects()
+    {
+        return $this->hasMany('App\Models\Project', 'owner_id');
     }
 }
