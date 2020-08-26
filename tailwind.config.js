@@ -137,6 +137,9 @@ module.exports = {
                 '3xl' : '0.9rem',
                 '4xl' : '1rem',
             },
+            borderWidth: {
+                '0.0625' : '0.0625rem',
+            },
         },
     },
     variants: {
@@ -144,3 +147,4 @@ module.exports = {
     },
     plugins: [],
   }
+

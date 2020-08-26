@@ -5,6 +5,54 @@
 @tailwind utilities;
 
 
+.center-container {
+    @apply w-1/2 bg-green-300 p-4;
+}
+
+.side-container {
+    @apply w-1/5 bg-orange-300;
+}
+
+.card {
+    @apply w-full bg-white shadow-md px-3 mb-3;
+}
+
+.card .card-title {
+    @apply w-full h-16 p-2 border-b-0.0625 border-onyx-100 flex;
+}
+
+.card .card-body {
+    @apply font-sans px-4 py-5 text-base font-normal;
+}
+
+.card .card-footer {
+    @apply w-full h-10 flex justify-between items-center border-t-0.0625 border-onyx-100;
+}
+
+.card .card-footer > * + * {
+    border-left-width: 2px;
+}
+
+.card .card-footer .card-link {
+    @apply flex-1 flex justify-center items-center;
+}
+
+.card-link a {
+    @apply flex items-center;
+}
+
+.card-link svg {
+    @apply h-5 w-auto inline-block;
+}
+
+.card .card-tags {
+    @apply mt-3;
+}
+
+.card-tags .tag {
+    @apply bg-onyx-100 rounded-full px-2 py-1 text-sm;
+}
+
 button:focus, input:focus {
     @apply outline-none;
 }

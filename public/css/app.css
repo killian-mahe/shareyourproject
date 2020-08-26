@@ -1202,6 +1202,18 @@ video {
   border-left-width: calc(1px * calc(1 - var(--divide-x-reverse)));
 }
 
+.divide-y-0\.0625 > :not(template) ~ :not(template) {
+  --divide-y-reverse: 0;
+  border-top-width: calc(0.0625rem * calc(1 - var(--divide-y-reverse)));
+  border-bottom-width: calc(0.0625rem * var(--divide-y-reverse));
+}
+
+.divide-x-0\.0625 > :not(template) ~ :not(template) {
+  --divide-x-reverse: 0;
+  border-right-width: calc(0.0625rem * var(--divide-x-reverse));
+  border-left-width: calc(0.0625rem * calc(1 - var(--divide-x-reverse)));
+}
+
 .divide-y-reverse > :not(template) ~ :not(template) {
   --divide-y-reverse: 1;
 }
@@ -7366,6 +7378,10 @@ video {
   border-width: 1px;
 }
 
+.border-0\.0625 {
+  border-width: 0.0625rem;
+}
+
 .border-t-0 {
   border-top-width: 0;
 }
@@ -7446,6 +7462,22 @@ video {
   border-left-width: 1px;
 }
 
+.border-t-0\.0625 {
+  border-top-width: 0.0625rem;
+}
+
+.border-r-0\.0625 {
+  border-right-width: 0.0625rem;
+}
+
+.border-b-0\.0625 {
+  border-bottom-width: 0.0625rem;
+}
+
+.border-l-0\.0625 {
+  border-left-width: 0.0625rem;
+}
+
 .hover\:border-0:hover {
   border-width: 0;
 }
@@ -7464,6 +7496,10 @@ video {
 
 .hover\:border:hover {
   border-width: 1px;
+}
+
+.hover\:border-0\.0625:hover {
+  border-width: 0.0625rem;
 }
 
 .hover\:border-t-0:hover {
@@ -7546,6 +7582,22 @@ video {
   border-left-width: 1px;
 }
 
+.hover\:border-t-0\.0625:hover {
+  border-top-width: 0.0625rem;
+}
+
+.hover\:border-r-0\.0625:hover {
+  border-right-width: 0.0625rem;
+}
+
+.hover\:border-b-0\.0625:hover {
+  border-bottom-width: 0.0625rem;
+}
+
+.hover\:border-l-0\.0625:hover {
+  border-left-width: 0.0625rem;
+}
+
 .focus\:border-0:focus {
   border-width: 0;
 }
@@ -7564,6 +7616,10 @@ video {
 
 .focus\:border:focus {
   border-width: 1px;
+}
+
+.focus\:border-0\.0625:focus {
+  border-width: 0.0625rem;
 }
 
 .focus\:border-t-0:focus {
@@ -7644,6 +7700,22 @@ video {
 
 .focus\:border-l:focus {
   border-left-width: 1px;
+}
+
+.focus\:border-t-0\.0625:focus {
+  border-top-width: 0.0625rem;
+}
+
+.focus\:border-r-0\.0625:focus {
+  border-right-width: 0.0625rem;
+}
+
+.focus\:border-b-0\.0625:focus {
+  border-bottom-width: 0.0625rem;
+}
+
+.focus\:border-l-0\.0625:focus {
+  border-left-width: 0.0625rem;
 }
 
 .box-border {
@@ -23201,6 +23273,103 @@ video {
           animation: bounce 1s infinite;
 }
 
+.center-container {
+  width: 50%;
+  --bg-opacity: 1;
+  background-color: #9ae6b4;
+  background-color: rgba(154, 230, 180, var(--bg-opacity));
+  padding: 1rem;
+}
+
+.side-container {
+  width: 20%;
+  --bg-opacity: 1;
+  background-color: #fbd38d;
+  background-color: rgba(251, 211, 141, var(--bg-opacity));
+}
+
+.card {
+  width: 100%;
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.card .card-title {
+  width: 100%;
+  height: 4rem;
+  padding: 0.5rem;
+  border-bottom-width: 0.0625rem;
+  --border-opacity: 1;
+  border-color: #e6e7e8;
+  border-color: rgba(230, 231, 232, var(--border-opacity));
+  display: flex;
+}
+
+.card .card-body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.card .card-footer {
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-width: 0.0625rem;
+  --border-opacity: 1;
+  border-color: #e6e7e8;
+  border-color: rgba(230, 231, 232, var(--border-opacity));
+}
+
+.card .card-footer > * + * {
+  border-left-width: 2px;
+}
+
+.card .card-footer .card-link {
+  flex: 1 1 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-link a {
+  display: flex;
+  align-items: center;
+}
+
+.card-link svg {
+  height: 1.25rem;
+  width: auto;
+  display: inline-block;
+}
+
+.card .card-tags {
+  margin-top: 0.75rem;
+}
+
+.card-tags .tag {
+  --bg-opacity: 1;
+  background-color: #e6e7e8;
+  background-color: rgba(230, 231, 232, var(--bg-opacity));
+  border-radius: 9999px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+
 button:focus, input:focus {
   outline: 0;
 }
@@ -24276,6 +24445,18 @@ button:focus, input:focus {
     --divide-x-reverse: 0;
     border-right-width: calc(1px * var(--divide-x-reverse));
     border-left-width: calc(1px * calc(1 - var(--divide-x-reverse)));
+  }
+
+  .sm\:divide-y-0\.0625 > :not(template) ~ :not(template) {
+    --divide-y-reverse: 0;
+    border-top-width: calc(0.0625rem * calc(1 - var(--divide-y-reverse)));
+    border-bottom-width: calc(0.0625rem * var(--divide-y-reverse));
+  }
+
+  .sm\:divide-x-0\.0625 > :not(template) ~ :not(template) {
+    --divide-x-reverse: 0;
+    border-right-width: calc(0.0625rem * var(--divide-x-reverse));
+    border-left-width: calc(0.0625rem * calc(1 - var(--divide-x-reverse)));
   }
 
   .sm\:divide-y-reverse > :not(template) ~ :not(template) {
@@ -30442,6 +30623,10 @@ button:focus, input:focus {
     border-width: 1px;
   }
 
+  .sm\:border-0\.0625 {
+    border-width: 0.0625rem;
+  }
+
   .sm\:border-t-0 {
     border-top-width: 0;
   }
@@ -30522,6 +30707,22 @@ button:focus, input:focus {
     border-left-width: 1px;
   }
 
+  .sm\:border-t-0\.0625 {
+    border-top-width: 0.0625rem;
+  }
+
+  .sm\:border-r-0\.0625 {
+    border-right-width: 0.0625rem;
+  }
+
+  .sm\:border-b-0\.0625 {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .sm\:border-l-0\.0625 {
+    border-left-width: 0.0625rem;
+  }
+
   .sm\:hover\:border-0:hover {
     border-width: 0;
   }
@@ -30540,6 +30741,10 @@ button:focus, input:focus {
 
   .sm\:hover\:border:hover {
     border-width: 1px;
+  }
+
+  .sm\:hover\:border-0\.0625:hover {
+    border-width: 0.0625rem;
   }
 
   .sm\:hover\:border-t-0:hover {
@@ -30622,6 +30827,22 @@ button:focus, input:focus {
     border-left-width: 1px;
   }
 
+  .sm\:hover\:border-t-0\.0625:hover {
+    border-top-width: 0.0625rem;
+  }
+
+  .sm\:hover\:border-r-0\.0625:hover {
+    border-right-width: 0.0625rem;
+  }
+
+  .sm\:hover\:border-b-0\.0625:hover {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .sm\:hover\:border-l-0\.0625:hover {
+    border-left-width: 0.0625rem;
+  }
+
   .sm\:focus\:border-0:focus {
     border-width: 0;
   }
@@ -30640,6 +30861,10 @@ button:focus, input:focus {
 
   .sm\:focus\:border:focus {
     border-width: 1px;
+  }
+
+  .sm\:focus\:border-0\.0625:focus {
+    border-width: 0.0625rem;
   }
 
   .sm\:focus\:border-t-0:focus {
@@ -30720,6 +30945,22 @@ button:focus, input:focus {
 
   .sm\:focus\:border-l:focus {
     border-left-width: 1px;
+  }
+
+  .sm\:focus\:border-t-0\.0625:focus {
+    border-top-width: 0.0625rem;
+  }
+
+  .sm\:focus\:border-r-0\.0625:focus {
+    border-right-width: 0.0625rem;
+  }
+
+  .sm\:focus\:border-b-0\.0625:focus {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .sm\:focus\:border-l-0\.0625:focus {
+    border-left-width: 0.0625rem;
   }
 
   .sm\:box-border {
@@ -46799,6 +47040,18 @@ button:focus, input:focus {
     border-left-width: calc(1px * calc(1 - var(--divide-x-reverse)));
   }
 
+  .md\:divide-y-0\.0625 > :not(template) ~ :not(template) {
+    --divide-y-reverse: 0;
+    border-top-width: calc(0.0625rem * calc(1 - var(--divide-y-reverse)));
+    border-bottom-width: calc(0.0625rem * var(--divide-y-reverse));
+  }
+
+  .md\:divide-x-0\.0625 > :not(template) ~ :not(template) {
+    --divide-x-reverse: 0;
+    border-right-width: calc(0.0625rem * var(--divide-x-reverse));
+    border-left-width: calc(0.0625rem * calc(1 - var(--divide-x-reverse)));
+  }
+
   .md\:divide-y-reverse > :not(template) ~ :not(template) {
     --divide-y-reverse: 1;
   }
@@ -52963,6 +53216,10 @@ button:focus, input:focus {
     border-width: 1px;
   }
 
+  .md\:border-0\.0625 {
+    border-width: 0.0625rem;
+  }
+
   .md\:border-t-0 {
     border-top-width: 0;
   }
@@ -53043,6 +53300,22 @@ button:focus, input:focus {
     border-left-width: 1px;
   }
 
+  .md\:border-t-0\.0625 {
+    border-top-width: 0.0625rem;
+  }
+
+  .md\:border-r-0\.0625 {
+    border-right-width: 0.0625rem;
+  }
+
+  .md\:border-b-0\.0625 {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .md\:border-l-0\.0625 {
+    border-left-width: 0.0625rem;
+  }
+
   .md\:hover\:border-0:hover {
     border-width: 0;
   }
@@ -53061,6 +53334,10 @@ button:focus, input:focus {
 
   .md\:hover\:border:hover {
     border-width: 1px;
+  }
+
+  .md\:hover\:border-0\.0625:hover {
+    border-width: 0.0625rem;
   }
 
   .md\:hover\:border-t-0:hover {
@@ -53143,6 +53420,22 @@ button:focus, input:focus {
     border-left-width: 1px;
   }
 
+  .md\:hover\:border-t-0\.0625:hover {
+    border-top-width: 0.0625rem;
+  }
+
+  .md\:hover\:border-r-0\.0625:hover {
+    border-right-width: 0.0625rem;
+  }
+
+  .md\:hover\:border-b-0\.0625:hover {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .md\:hover\:border-l-0\.0625:hover {
+    border-left-width: 0.0625rem;
+  }
+
   .md\:focus\:border-0:focus {
     border-width: 0;
   }
@@ -53161,6 +53454,10 @@ button:focus, input:focus {
 
   .md\:focus\:border:focus {
     border-width: 1px;
+  }
+
+  .md\:focus\:border-0\.0625:focus {
+    border-width: 0.0625rem;
   }
 
   .md\:focus\:border-t-0:focus {
@@ -53241,6 +53538,22 @@ button:focus, input:focus {
 
   .md\:focus\:border-l:focus {
     border-left-width: 1px;
+  }
+
+  .md\:focus\:border-t-0\.0625:focus {
+    border-top-width: 0.0625rem;
+  }
+
+  .md\:focus\:border-r-0\.0625:focus {
+    border-right-width: 0.0625rem;
+  }
+
+  .md\:focus\:border-b-0\.0625:focus {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .md\:focus\:border-l-0\.0625:focus {
+    border-left-width: 0.0625rem;
   }
 
   .md\:box-border {
@@ -69320,6 +69633,18 @@ button:focus, input:focus {
     border-left-width: calc(1px * calc(1 - var(--divide-x-reverse)));
   }
 
+  .lg\:divide-y-0\.0625 > :not(template) ~ :not(template) {
+    --divide-y-reverse: 0;
+    border-top-width: calc(0.0625rem * calc(1 - var(--divide-y-reverse)));
+    border-bottom-width: calc(0.0625rem * var(--divide-y-reverse));
+  }
+
+  .lg\:divide-x-0\.0625 > :not(template) ~ :not(template) {
+    --divide-x-reverse: 0;
+    border-right-width: calc(0.0625rem * var(--divide-x-reverse));
+    border-left-width: calc(0.0625rem * calc(1 - var(--divide-x-reverse)));
+  }
+
   .lg\:divide-y-reverse > :not(template) ~ :not(template) {
     --divide-y-reverse: 1;
   }
@@ -75484,6 +75809,10 @@ button:focus, input:focus {
     border-width: 1px;
   }
 
+  .lg\:border-0\.0625 {
+    border-width: 0.0625rem;
+  }
+
   .lg\:border-t-0 {
     border-top-width: 0;
   }
@@ -75564,6 +75893,22 @@ button:focus, input:focus {
     border-left-width: 1px;
   }
 
+  .lg\:border-t-0\.0625 {
+    border-top-width: 0.0625rem;
+  }
+
+  .lg\:border-r-0\.0625 {
+    border-right-width: 0.0625rem;
+  }
+
+  .lg\:border-b-0\.0625 {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .lg\:border-l-0\.0625 {
+    border-left-width: 0.0625rem;
+  }
+
   .lg\:hover\:border-0:hover {
     border-width: 0;
   }
@@ -75582,6 +75927,10 @@ button:focus, input:focus {
 
   .lg\:hover\:border:hover {
     border-width: 1px;
+  }
+
+  .lg\:hover\:border-0\.0625:hover {
+    border-width: 0.0625rem;
   }
 
   .lg\:hover\:border-t-0:hover {
@@ -75664,6 +76013,22 @@ button:focus, input:focus {
     border-left-width: 1px;
   }
 
+  .lg\:hover\:border-t-0\.0625:hover {
+    border-top-width: 0.0625rem;
+  }
+
+  .lg\:hover\:border-r-0\.0625:hover {
+    border-right-width: 0.0625rem;
+  }
+
+  .lg\:hover\:border-b-0\.0625:hover {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .lg\:hover\:border-l-0\.0625:hover {
+    border-left-width: 0.0625rem;
+  }
+
   .lg\:focus\:border-0:focus {
     border-width: 0;
   }
@@ -75682,6 +76047,10 @@ button:focus, input:focus {
 
   .lg\:focus\:border:focus {
     border-width: 1px;
+  }
+
+  .lg\:focus\:border-0\.0625:focus {
+    border-width: 0.0625rem;
   }
 
   .lg\:focus\:border-t-0:focus {
@@ -75762,6 +76131,22 @@ button:focus, input:focus {
 
   .lg\:focus\:border-l:focus {
     border-left-width: 1px;
+  }
+
+  .lg\:focus\:border-t-0\.0625:focus {
+    border-top-width: 0.0625rem;
+  }
+
+  .lg\:focus\:border-r-0\.0625:focus {
+    border-right-width: 0.0625rem;
+  }
+
+  .lg\:focus\:border-b-0\.0625:focus {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .lg\:focus\:border-l-0\.0625:focus {
+    border-left-width: 0.0625rem;
   }
 
   .lg\:box-border {
@@ -91841,6 +92226,18 @@ button:focus, input:focus {
     border-left-width: calc(1px * calc(1 - var(--divide-x-reverse)));
   }
 
+  .xl\:divide-y-0\.0625 > :not(template) ~ :not(template) {
+    --divide-y-reverse: 0;
+    border-top-width: calc(0.0625rem * calc(1 - var(--divide-y-reverse)));
+    border-bottom-width: calc(0.0625rem * var(--divide-y-reverse));
+  }
+
+  .xl\:divide-x-0\.0625 > :not(template) ~ :not(template) {
+    --divide-x-reverse: 0;
+    border-right-width: calc(0.0625rem * var(--divide-x-reverse));
+    border-left-width: calc(0.0625rem * calc(1 - var(--divide-x-reverse)));
+  }
+
   .xl\:divide-y-reverse > :not(template) ~ :not(template) {
     --divide-y-reverse: 1;
   }
@@ -98005,6 +98402,10 @@ button:focus, input:focus {
     border-width: 1px;
   }
 
+  .xl\:border-0\.0625 {
+    border-width: 0.0625rem;
+  }
+
   .xl\:border-t-0 {
     border-top-width: 0;
   }
@@ -98085,6 +98486,22 @@ button:focus, input:focus {
     border-left-width: 1px;
   }
 
+  .xl\:border-t-0\.0625 {
+    border-top-width: 0.0625rem;
+  }
+
+  .xl\:border-r-0\.0625 {
+    border-right-width: 0.0625rem;
+  }
+
+  .xl\:border-b-0\.0625 {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .xl\:border-l-0\.0625 {
+    border-left-width: 0.0625rem;
+  }
+
   .xl\:hover\:border-0:hover {
     border-width: 0;
   }
@@ -98103,6 +98520,10 @@ button:focus, input:focus {
 
   .xl\:hover\:border:hover {
     border-width: 1px;
+  }
+
+  .xl\:hover\:border-0\.0625:hover {
+    border-width: 0.0625rem;
   }
 
   .xl\:hover\:border-t-0:hover {
@@ -98185,6 +98606,22 @@ button:focus, input:focus {
     border-left-width: 1px;
   }
 
+  .xl\:hover\:border-t-0\.0625:hover {
+    border-top-width: 0.0625rem;
+  }
+
+  .xl\:hover\:border-r-0\.0625:hover {
+    border-right-width: 0.0625rem;
+  }
+
+  .xl\:hover\:border-b-0\.0625:hover {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .xl\:hover\:border-l-0\.0625:hover {
+    border-left-width: 0.0625rem;
+  }
+
   .xl\:focus\:border-0:focus {
     border-width: 0;
   }
@@ -98203,6 +98640,10 @@ button:focus, input:focus {
 
   .xl\:focus\:border:focus {
     border-width: 1px;
+  }
+
+  .xl\:focus\:border-0\.0625:focus {
+    border-width: 0.0625rem;
   }
 
   .xl\:focus\:border-t-0:focus {
@@ -98283,6 +98724,22 @@ button:focus, input:focus {
 
   .xl\:focus\:border-l:focus {
     border-left-width: 1px;
+  }
+
+  .xl\:focus\:border-t-0\.0625:focus {
+    border-top-width: 0.0625rem;
+  }
+
+  .xl\:focus\:border-r-0\.0625:focus {
+    border-right-width: 0.0625rem;
+  }
+
+  .xl\:focus\:border-b-0\.0625:focus {
+    border-bottom-width: 0.0625rem;
+  }
+
+  .xl\:focus\:border-l-0\.0625:focus {
+    border-left-width: 0.0625rem;
   }
 
   .xl\:box-border {
