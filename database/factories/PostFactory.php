@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Post;
+use App\Models\Post;
 use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
@@ -11,8 +11,8 @@ $factory->define(Post::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(Post::class, 'withAuthor', function (Fake $faker) {
+$factory->state(Post::class, 'withAuthor', function (Faker $faker) {
     return [
-        'author' => factory(App\User::class),
+        'author_id' => factory(App\User::class),
     ];
 });
