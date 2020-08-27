@@ -70,14 +70,14 @@
             </div>
         </nav>
         <!-- ul li -->
-        <ul class="my-auto lg:hidden mobile-nav-list">
+        {{-- <ul class="my-auto lg:hidden mobile-nav-list">
             <li class="m-8"><a>Services</a></li>
             <li class="m-8"><a>Project</a></li>
             <li class="m-8"><a>About</a></li>
             <li class="m-8"><a>Account</a></li>
             <li class="m-8"><a>Log In</a></li>
             <li class="m-8"><a>Sign Up</a></li>
-          </ul>
+          </ul> --}}
         <main>
             @yield('content')
         </main>

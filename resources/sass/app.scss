@@ -4,17 +4,36 @@
 
 @tailwind utilities;
 
+.page {
+    @apply w-full h-auto bg-cultured-400 flex justify-center py-6;
+}
 
 .center-container {
-    @apply w-1/2 bg-green-300 p-4;
+    @apply flex-col;
+}
+
+.center-container .header {
+    @apply w-full h-auto bg-red-300 mb-6 shadow flex-col;
+}
+
+.center-container .project-banner {
+    @apply w-full h-48 bg-blue-300;
+}
+
+.center-container .project-tags {
+    @apply w-full h-auto bg-yellow-300;
+}
+
+.center-container .project-badges {
+    @apply w-full h-auto bg-indigo-300;
 }
 
 .side-container {
-    @apply w-1/5 bg-orange-300;
+    @apply justify-center flex-row;
 }
 
 .card {
-    @apply w-full bg-white shadow-md px-3 mb-3;
+    @apply w-auto bg-white shadow-md px-3 mb-6;
 }
 
 .card .card-title {
