@@ -30,7 +30,7 @@ class PostControllerTest extends TestCase
 
         $response->assertRedirect(route('login'));
 
-        $user = factory(\App\User::class, 1)->create();
+        $user = factory(\App\User::class)->create();
 
         $response = $this->actingAs($user)->get(route('posts.create'));
         $response->assertStatus(200);
@@ -44,8 +44,8 @@ class PostControllerTest extends TestCase
      */
     public function testEditPostForm()
     {
-        $user = factory(\App\User::class, 1)->create();
-        $post = factory(\App\Models\Post::class, 1)->make();
+        $user = factory(\App\User::class)->create();
+        $post = factory(\App\Models\Post::class)->make();
         $post->author()->save($user);
         $post->push();
 
