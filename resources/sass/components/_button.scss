@@ -1,0 +1,64 @@
+
+button:focus, input:focus {
+    @apply outline-none;
+}
+
+.btn {
+    @apply py-1 px-3 m-2 rounded-full appearance-none;
+}
+
+.btn-viridiant {
+    @apply text-cultured-100 bg-viridiant-600 border border-transparent;
+}
+
+.btn-viridiant:hover {
+    @apply border border-viridiant-600 bg-cultured-100 text-viridiant-600;
+}
+
+.btn-viridiant-outline {
+    @apply text-viridiant-600 border border-viridiant-600 bg-cultured-100;
+}
+
+.btn-viridiant-outline:hover {
+    @apply bg-viridiant-600 text-cultured-100;
+}
+
+.btn-orange-peel {
+    @apply text-cultured-100 bg-orange-peel-600 border border-transparent;
+}
+
+.btn-orange-peel:hover {
+    @apply border border-orange-peel-600 bg-cultured-100 text-orange-peel-600;
+}
+
+.btn-orange-peel-outline {
+    @apply text-orange-peel-600 border border-orange-peel-600 bg-cultured-100;
+}
+
+.btn-orange-peel-outline:hover {
+    @apply bg-orange-peel-600 text-cultured-100;
+}
+
+.btn-onyx {
+    @apply text-cultured-100 bg-onyx-600 border border-transparent;
+}
+
+.btn-onyx:hover {
+    @apply border border-onyx-600 bg-cultured-100 text-onyx-600;
+}
+
+.btn-onyx-outline {
+    @apply text-onyx-600 border border-onyx-600 bg-cultured-100;
+}
+
+.btn-onyx-outline:hover {
+    @apply bg-onyx-600 text-cultured-100;
+}
+
+.btn-smiley {
+    @apply px-1 mx-1 w-8 my-auto;
+}
+
+.btn-send {
+    @apply bg-onyx-600 rounded-full h-7 w-7 flex flex-none justify-center items-center;
+}
