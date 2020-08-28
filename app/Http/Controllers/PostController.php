@@ -24,7 +24,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('post.list');
     }
 
     /**
@@ -34,7 +34,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -72,7 +72,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('post.post', ['post' => $post]);
     }
 
     /**
@@ -83,7 +83,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.edit', ['post' => $post]);
     }
 
     /**
