@@ -4,82 +4,10 @@
 
 @tailwind utilities;
 
-
-button:focus, input:focus {
-    @apply outline-none;
-}
-
-.chat-window {
-    @apply h-120 rounded-t-2xl flex flex-col bg-cultured-100 shadow w-80 fixed bottom-0 right-0;
-}
-
-.chat-header {
-    @apply bg-viridiant-600 h-8 w-full flex rounded-t-2xl z-10 shadow-md;
-}
-
-.chat-container {
-    @apply flex-auto w-full bg-cultured-100;
-}
-
-.chat-footer {
-    @apply bg-viridiant-600 flex-row justify-center p-1 rounded-t-3xl w-full;
-}
-
-.chat-input {
-    @apply px-2 py-1 my-auto box-border text-sm bg-cultured-100 border border-cultured-700 rounded-full w-full;
-}
-
-.btn {
-    @apply py-1 px-3 m-2 rounded-full appearance-none;
-}
-
-.btn-viridiant {
-    @apply text-cultured-100 bg-viridiant-600 border border-transparent;
-}
-
-.btn-viridiant:hover {
-    @apply border border-viridiant-600 bg-cultured-100 text-viridiant-600;
-}
-
-.btn-viridiant-outline {
-    @apply text-viridiant-600 border border-viridiant-600 bg-cultured-100;
-}
-
-.btn-viridiant-outline:hover {
-    @apply bg-viridiant-600 text-cultured-100;
-}
-
-.btn-orange-peel {
-    @apply text-cultured-100 bg-orange-peel-600 border border-transparent;
-}
-
-.btn-orange-peel:hover {
-    @apply border border-orange-peel-600 bg-cultured-100 text-orange-peel-600;
-}
-
-.btn-orange-peel-outline {
-    @apply text-orange-peel-600 border border-orange-peel-600 bg-cultured-100;
-}
-
-.btn-orange-peel-outline:hover {
-    @apply bg-orange-peel-600 text-cultured-100;
-}
-
-.btn-onyx {
-    @apply text-cultured-100 bg-onyx-600 border border-transparent;
-}
-
-.btn-onyx:hover {
-    @apply border border-onyx-600 bg-cultured-100 text-onyx-600;
-}
-
-.btn-onyx-outline {
-    @apply text-onyx-600 border border-onyx-600 bg-cultured-100;
-}
-
-.btn-onyx-outline:hover {
-    @apply bg-onyx-600 text-cultured-100;
-}
+@import './components/button';
+@import './components/card';
+@import './components/chat';
+@import './components/inputs';
 
 .nav-bar-li {
     @apply inline-flex;
@@ -100,35 +28,6 @@ button:focus, input:focus {
 
 .nav-bar-li a:hover:after {
     @apply transform -translate-x-1/2 scale-x-100;
-}
-
-.search-bar {
-    @apply bg-cultured-400 text-onyx-700 border border-onyx-200 rounded-full py-2 pl-10 pr-2 leading-tight;
-}
-
-.search-bar:focus {
-    @apply bg-cultured-100 border-onyx-500 w-full;
-}
-
-.search-input {
-    @apply px-2 py-2 box-border text-base bg-cultured-100 border border-cultured-700 rounded-l-full;
-    transition: width 0.3s ease-in-out;
-}
-
-.search-input:focus {
-    @apply w-full border-viridiant-600;
-}
-
-.search-glass {
-    @apply bg-onyx-200 border border-onyx-200 rounded-r-full p-1 pr-3;
-}
-
-.btn-smiley {
-    @apply px-1 mx-1 w-8 my-auto;
-}
-
-.btn-send {
-    @apply bg-onyx-600 rounded-full h-7 w-7 flex flex-none justify-center items-center;
 }
 
 .icon {
