@@ -49,10 +49,10 @@ class PostControllerTest extends TestCase
         $post->author()->associate($user);
         $post->push();
 
-        $reponse = $this->get(route('posts.edit', ['post' => $post->id]));
+        $response = $this->get(route('posts.edit', ['post' => $post->id]));
         $response->assertRedirect(route('login'));
 
-        $reponse = $this->actingAs($user)->get(route('posts.edit', ['post' => $post->id]));
+        $response = $this->actingAs($user)->get(route('posts.edit', ['post' => $post->id]));
         $response->assertStatus(200);
         $response->assertViewIs('post.edit');
     }
