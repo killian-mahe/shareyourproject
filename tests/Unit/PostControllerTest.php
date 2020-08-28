@@ -56,4 +56,19 @@ class PostControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewIs('post.edit');
     }
+
+    /**
+     * A test for displaying a post
+     *
+     * @return void
+     */
+    public function testShowPost()
+    {
+        $post = factory(\App\Models\Post::class)->create();
+
+        $response = $this->get(route('posts.show', ['post' => $post->id]));
+
+        $response->assertStatus(200);
+        $response->assertViewIs('post.post');
+    }
 }
