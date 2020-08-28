@@ -7,10 +7,10 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class ProjectController extends Controller
 {
     /**
-     * Instantiate a new PostController instance.
+     * Instantiate a new ProjectController instance.
      */
     public function __construct()
     {
@@ -26,7 +26,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('post.list');
+        return view('project.list');
     }
 
     /**
@@ -36,7 +36,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+        return view('project.create');
     }
 
     /**
@@ -47,55 +47,39 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'content' => ['required', 'max:255'],
-            'project' => ['nullable', 'numeric', 'exists:projects,id']
-        ]);
-
-        $post = new Post;
-        $post->content = $validatedData['content'];
-
-        $post->author()->associate(Auth::user());
-
-        if (array_key_exists('project', $validatedData))
-        {
-            $project  = Project::where('id', $validatedData['project'])->first();
-            $post->project()->associate($project);
-        }
-
-        $post->save();
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Project $project)
     {
-        return view('post.post', ['post' => $post]);
+        return view('project.public', ['project' => $project]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Project $project)
     {
-        return view('post.edit', ['post' => $post]);
+        return view('project.edit', ['project' => $project]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Project $project)
     {
         //
     }
@@ -103,10 +87,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Project $project)
     {
         //
     }
