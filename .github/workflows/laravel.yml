@@ -50,4 +50,5 @@ jobs:
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
       run: |
         php artisan migrate
+        php artisan db:seed
         vendor/bin/phpunit

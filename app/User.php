@@ -56,7 +56,7 @@ class User extends Authenticatable
     /**
      * Get the user that wrote the post.
      */
-    public function owned_projects()
+    public function owned_project()
     {
         return $this->hasMany('App\Models\Project', 'owner_id');
     }
