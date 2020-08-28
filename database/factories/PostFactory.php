@@ -11,7 +11,7 @@ $factory->define(Post::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(Post::class, 'withAuthor', function (Fake $faker) {
+$factory->state(Post::class, 'withAuthor', function (Faker $faker) {
     return [
         'author_id' => factory(App\User::class),
     ];
