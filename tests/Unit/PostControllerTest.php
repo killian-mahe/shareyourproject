@@ -46,7 +46,7 @@ class PostControllerTest extends TestCase
     {
         $user = factory(\App\User::class)->create();
         $post = factory(\App\Models\Post::class)->make();
-        $post->author()->save($user);
+        $post->author()->associate($user);
         $post->push();
 
         $reponse = $this->get(route('posts.edit', ['post' => $post->id]));
