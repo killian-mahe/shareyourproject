@@ -16,7 +16,9 @@ class DatabaseSeeder extends Seeder
         });
 
         $users->each(function ($user) {
-            $posts = factory(App\Models\Post::class, 2)->make();
+            $posts = factory(App\Models\Post::class, 2)->make()->each(function ($post) {
+                $post->tags()->attach(factory(App\Models\Tag::class, 3)->make());
+            });
             $user->posts()->saveMany($posts);
         });
     }
