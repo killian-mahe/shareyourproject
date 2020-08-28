@@ -34,7 +34,7 @@ class PostControllerTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('posts.create'));
         $response->assertStatus(200);
-        $response->assertViewIs('posts.create');
+        $response->assertViewIs('post.create');
     }
 
     /**
@@ -54,6 +54,6 @@ class PostControllerTest extends TestCase
 
         $reponse = $this->actingAs($user)->get(route('posts.edit', ['post' => $post->id]));
         $response->assertStatus(200);
-        $response->assertViewIs('posts.edit');
+        $response->assertViewIs('post.edit');
     }
 }
