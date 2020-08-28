@@ -1,0 +1,21 @@
+
+.search-bar {
+    @apply bg-cultured-400 text-onyx-700 border border-onyx-200 rounded-full py-2 pl-10 pr-2 leading-tight;
+}
+
+.search-bar:focus {
+    @apply bg-cultured-100 border-onyx-500 w-full;
+}
+
+.search-input {
+    @apply px-2 py-2 box-border text-base bg-cultured-100 border border-cultured-700 rounded-l-full;
+    transition: width 0.3s ease-in-out;
+}
+
+.search-input:focus {
+    @apply w-full border-viridiant-600;
+}
+
+.search-glass {
+    @apply bg-onyx-200 border border-onyx-200 rounded-r-full p-1 pr-3;
+}
