@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
+    /**
+     * Instantiate a new ProjectController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except([
+            'index', 'show'
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        return view('project.list');
     }
 
     /**
@@ -24,7 +36,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create');
     }
 
     /**
@@ -41,7 +53,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
@@ -52,22 +64,22 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('project.edit', ['project' => $project]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
         //
     }
@@ -75,10 +87,10 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
         //
     }

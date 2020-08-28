@@ -14,7 +14,9 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except([
+            'index', 'show'
+        ]);
     }
 
     /**
@@ -24,7 +26,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('post.list');
     }
 
     /**
@@ -34,7 +36,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -72,7 +74,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('post.post', ['post' => $post]);
     }
 
     /**
@@ -83,7 +85,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('post.edit', ['post' => $post]);
     }
 
     /**
