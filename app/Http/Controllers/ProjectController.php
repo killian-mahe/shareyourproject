@@ -58,7 +58,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('project.public', ['project' => $project]);
     }
 
     /**
