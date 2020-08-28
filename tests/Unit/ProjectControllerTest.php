@@ -64,7 +64,7 @@ class ProjectControllerTest extends TestCase
      */
     public function testShowProject()
     {
-        $project = factory(\App\Models\Project::class)->create();
+        $project = factory(\App\Models\Project::class)->state('withOwner')->create();
 
         $response = $this->get(route('projects.show', ['project' => $project->id]));
 

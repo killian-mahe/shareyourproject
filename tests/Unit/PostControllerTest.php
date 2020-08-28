@@ -64,7 +64,7 @@ class PostControllerTest extends TestCase
      */
     public function testShowPost()
     {
-        $post = factory(\App\Models\Post::class)->create();
+        $post = factory(\App\Models\Post::class)->state('withAuthor')->create();
 
         $response = $this->get(route('posts.show', ['post' => $post->id]));
 

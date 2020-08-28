@@ -18,8 +18,8 @@ $factory->state(Project::class, 'private', function ($faker) {
     ];
 });
 
-$factory->state(Project::class, 'withAuthor', function ($faker) {
+$factory->state(Project::class, 'withOwner', function ($faker) {
     return [
-        'author' => factory(App\User::class),
+        'owner_id' => factory(App\User::class),
     ];
 });
