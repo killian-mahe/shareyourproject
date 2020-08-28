@@ -23450,6 +23450,88 @@ button:focus, input:focus {
   align-items: center;
 }
 
+.card {
+  width: auto;
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.card .card-title {
+  width: 100%;
+  height: 4rem;
+  padding: 0.5rem;
+  border-bottom-width: 0.0625rem;
+  --border-opacity: 1;
+  border-color: #e6e7e8;
+  border-color: rgba(230, 231, 232, var(--border-opacity));
+  display: flex;
+}
+
+.card .card-body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.card .card-footer {
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-width: 0.0625rem;
+  --border-opacity: 1;
+  border-color: #e6e7e8;
+  border-color: rgba(230, 231, 232, var(--border-opacity));
+}
+
+.card .card-footer > * + * {
+  border-left-width: 2px;
+}
+
+.card .card-footer .card-link {
+  flex: 1 1 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-link a {
+  display: flex;
+  align-items: center;
+}
+
+.card-link svg {
+  height: 1.25rem;
+  width: auto;
+  display: inline-block;
+}
+
+.card .card-tags {
+  margin-top: 0.75rem;
+}
+
+.card-tags .tag {
+  --bg-opacity: 1;
+  background-color: #e6e7e8;
+  background-color: rgba(230, 231, 232, var(--bg-opacity));
+  border-radius: 9999px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+
 .chat-window {
   height: 30rem;
   border-top-left-radius: 0.75rem;
@@ -23588,144 +23670,6 @@ button:focus, input:focus {
   padding-right: 0.75rem;
 }
 
-.page {
-  width: 100%;
-  height: auto;
-  --bg-opacity: 1;
-  background-color: #f7f7f7;
-  background-color: rgba(247, 247, 247, var(--bg-opacity));
-  display: flex;
-  justify-content: center;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-}
-
-.center-container {
-  flex-direction: column;
-}
-
-.center-container .header {
-  width: 100%;
-  height: auto;
-  --bg-opacity: 1;
-  background-color: #feb2b2;
-  background-color: rgba(254, 178, 178, var(--bg-opacity));
-  margin-bottom: 1.5rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  flex-direction: column;
-}
-
-.center-container .project-banner {
-  width: 100%;
-  height: 12rem;
-  --bg-opacity: 1;
-  background-color: #90cdf4;
-  background-color: rgba(144, 205, 244, var(--bg-opacity));
-}
-
-.center-container .project-tags {
-  width: 100%;
-  height: auto;
-  --bg-opacity: 1;
-  background-color: #faf089;
-  background-color: rgba(250, 240, 137, var(--bg-opacity));
-}
-
-.center-container .project-badges {
-  width: 100%;
-  height: auto;
-  --bg-opacity: 1;
-  background-color: #a3bffa;
-  background-color: rgba(163, 191, 250, var(--bg-opacity));
-}
-
-.side-container {
-  justify-content: center;
-  flex-direction: row;
-}
-
-.card {
-  width: auto;
-  --bg-opacity: 1;
-  background-color: #fff;
-  background-color: rgba(255, 255, 255, var(--bg-opacity));
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-.card .card-title {
-  width: 100%;
-  height: 4rem;
-  padding: 0.5rem;
-  border-bottom-width: 0.0625rem;
-  --border-opacity: 1;
-  border-color: #e6e7e8;
-  border-color: rgba(230, 231, 232, var(--border-opacity));
-  display: flex;
-}
-
-.card .card-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-.card .card-footer {
-  width: 100%;
-  height: 2.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top-width: 0.0625rem;
-  --border-opacity: 1;
-  border-color: #e6e7e8;
-  border-color: rgba(230, 231, 232, var(--border-opacity));
-}
-
-.card .card-footer > * + * {
-  border-left-width: 2px;
-}
-
-.card .card-footer .card-link {
-  flex: 1 1 0%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-link a {
-  display: flex;
-  align-items: center;
-}
-
-.card-link svg {
-  height: 1.25rem;
-  width: auto;
-  display: inline-block;
-}
-
-.card .card-tags {
-  margin-top: 0.75rem;
-}
-
-.card-tags .tag {
-  --bg-opacity: 1;
-  background-color: #e6e7e8;
-  background-color: rgba(230, 231, 232, var(--bg-opacity));
-  border-radius: 9999px;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  font-size: 0.875rem;
-}
-
 .nav-bar-li {
   display: inline-flex;
 }
@@ -23786,7 +23730,7 @@ button:focus, input:focus {
   --transform-scale-x: 1;
 }
 
-.icon {
+.burger-menu.icon {
   width: 2rem;
   height: 1.75rem;
   margin-left: auto;
@@ -23796,7 +23740,7 @@ button:focus, input:focus {
   position: relative;
 }
 
-.icon span {
+.burger-menu.icon span {
   justify-content: center;
   align-items: center;
   --bg-opacity: 1;
@@ -23809,19 +23753,19 @@ button:focus, input:focus {
   transition-duration: 300ms;
 }
 
-.icon span:nth-child(1), .icon span:nth-child(2) {
+.burger-menu.icon span:nth-child(1), .burger-menu.icon span:nth-child(2) {
   z-index: 1;
 }
 
-.icon span:nth-child(3), .icon span:nth-child(4) {
+.burger-menu.icon span:nth-child(3), .burger-menu.icon span:nth-child(4) {
   top: 0.625rem;
 }
 
-.icon span:nth-child(5), .icon span:nth-child(6) {
+.burger-menu.icon span:nth-child(5), .burger-menu.icon span:nth-child(6) {
   top: 1.25rem;
 }
 
-.icon.open span:nth-child(1), .icon.open span:nth-child(2), .icon.open span:nth-child(5), .icon.open span:nth-child(6) {
+.burger-menu.icon.open span:nth-child(1), .burger-menu.icon.open span:nth-child(2), .burger-menu.icon.open span:nth-child(5), .burger-menu.icon.open span:nth-child(6) {
   --transform-translate-x: 0;
   --transform-translate-y: 0;
   --transform-rotate: 0;
@@ -23836,7 +23780,7 @@ button:focus, input:focus {
   opacity: 0;
 }
 
-.icon.open span:nth-child(3) {
+.burger-menu.icon.open span:nth-child(3) {
   --transform-translate-x: 0;
   --transform-translate-y: 0;
   --transform-rotate: 0;
@@ -23848,7 +23792,7 @@ button:focus, input:focus {
   --transform-rotate: 45deg;
 }
 
-.icon.open span:nth-child(4) {
+.burger-menu.icon.open span:nth-child(4) {
   --transform-translate-x: 0;
   --transform-translate-y: 0;
   --transform-rotate: 0;
@@ -23863,6 +23807,62 @@ button:focus, input:focus {
 .mobile-nav-list {
   text-align: center;
   list-style-type: none;
+}
+
+.page {
+  width: 100%;
+  height: auto;
+  --bg-opacity: 1;
+  background-color: #f7f7f7;
+  background-color: rgba(247, 247, 247, var(--bg-opacity));
+  display: flex;
+  justify-content: center;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.center-container {
+  flex-direction: column;
+}
+
+.center-container .header {
+  width: 100%;
+  height: auto;
+  --bg-opacity: 1;
+  background-color: #feb2b2;
+  background-color: rgba(254, 178, 178, var(--bg-opacity));
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  flex-direction: column;
+}
+
+.center-container .project-banner {
+  width: 100%;
+  height: 12rem;
+  --bg-opacity: 1;
+  background-color: #90cdf4;
+  background-color: rgba(144, 205, 244, var(--bg-opacity));
+}
+
+.center-container .project-tags {
+  width: 100%;
+  height: auto;
+  --bg-opacity: 1;
+  background-color: #faf089;
+  background-color: rgba(250, 240, 137, var(--bg-opacity));
+}
+
+.center-container .project-badges {
+  width: 100%;
+  height: auto;
+  --bg-opacity: 1;
+  background-color: #a3bffa;
+  background-color: rgba(163, 191, 250, var(--bg-opacity));
+}
+
+.side-container {
+  justify-content: center;
+  flex-direction: row;
 }
 
 .bg-blur-3 {

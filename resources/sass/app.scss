@@ -8,6 +8,7 @@
 @import './components/card';
 @import './components/chat';
 @import './components/inputs';
+@import './components/navbar';
 
 .page {
     @apply w-full h-auto bg-cultured-400 flex justify-center py-6;
@@ -35,57 +36,6 @@
 
 .side-container {
     @apply justify-center flex-row;
-}
-
-.nav-bar-li {
-    @apply inline-flex;
-}
-
-.nav-bar-li a {
-    @apply text-onyx-600 py-1 relative my-0 mx-1.5625;
-}
-
-.nav-bar-li a:hover {
-    @apply transition duration-900;
-}
-
-.nav-bar-li a:after {
-    content : '';
-    @apply origin-1/2 transform -translate-x-1/2 scale-x-0 bg-viridiant-600 w-full h-0.1875 left-1/2 transition duration-250 bottom-0 absolute;
-}
-
-.nav-bar-li a:hover:after {
-    @apply transform -translate-x-1/2 scale-x-100;
-}
-
-.icon {
-    @apply w-8 h-1.75 mx-auto my-auto relative;
-}
-
-.icon span {
-    @apply justify-center items-center bg-viridiant-600 w-full h-0.1875 absolute transition duration-300;
-}
-.icon span:nth-child(1), .icon span:nth-child(2) {
-    @apply z-1;
-}
-.icon span:nth-child(3), .icon span:nth-child(4) {
-    @apply top-0.625;
-}
-.icon span:nth-child(5), .icon span:nth-child(6) {
-    @apply top-1.25;
-}
-.icon.open span:nth-child(1), .icon.open span:nth-child(2), .icon.open span:nth-child(5), .icon.open span:nth-child(6) {
-    @apply transform scale-50 z-1 opacity-0;
-}
-.icon.open span:nth-child(3) {
-    @apply transform rotate-45;
-}
-.icon.open span:nth-child(4) {
-    @apply transform -rotate-45;
-}
-
-.mobile-nav-list {
-    @apply text-center list-none;
 }
 
 .bg-blur-3 {

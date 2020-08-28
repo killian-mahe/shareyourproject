@@ -57,7 +57,7 @@
                 </form>
               </div>
               <!-- Burger Menu -->
-              <div class="my-auto flex lg:hidden">
+              <div class="burger-menu my-auto flex lg:hidden">
                 <div class="icon" onclick="myFunction(this)">
                     <span></span>
                     <span></span>
@@ -68,16 +68,17 @@
                 </div>
               </div>
             </div>
+            <!-- ul li -->
+            {{-- <ul class="my-auto lg:hidden mobile-nav-list">
+                <li class="m-8"><a>Services</a></li>
+                <li class="m-8"><a>Project</a></li>
+                <li class="m-8"><a>About</a></li>
+                <li class="m-8"><a>Account</a></li>
+                <li class="m-8"><a>Log In</a></li>
+                <li class="m-8"><a>Sign Up</a></li>
+              </ul> --}}
         </nav>
-        <!-- ul li -->
-        {{-- <ul class="my-auto lg:hidden mobile-nav-list">
-            <li class="m-8"><a>Services</a></li>
-            <li class="m-8"><a>Project</a></li>
-            <li class="m-8"><a>About</a></li>
-            <li class="m-8"><a>Account</a></li>
-            <li class="m-8"><a>Log In</a></li>
-            <li class="m-8"><a>Sign Up</a></li>
-          </ul> --}}
+
         <main>
             @yield('content')
         </main>
