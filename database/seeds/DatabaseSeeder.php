@@ -15,11 +15,14 @@ class DatabaseSeeder extends Seeder
             $user->owned_project()->save(factory(App\Models\Project::class)->make());
         });
 
-        $users->each(function ($user) {
+        $tags = factory(App\Models\Tag::class, 25)->create();
+
+        $users->each(function ($user) use ($tags) {
             $posts = factory(App\Models\Post::class, 2)->make();
             $user->posts()->saveMany($posts);
-            $posts->each(function ($post) {
-                $post->tags()->attach(factory(App\Models\Tag::class, 3)->create());
+
+            $posts->each(function ($post) use ($tags) {
+                $post->tags()->attach($tags->random(3));
             });
         });
     }
