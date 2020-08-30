@@ -43,4 +43,12 @@ class Project extends Model
     {
         return $this->hasMany('App\Models\Post');
     }
+
+    /**
+     * Get the members of the project.
+     */
+    public function members()
+    {
+        return $this->belongsToMan('App\User', 'project_user', 'project_id', 'user_id');
+    }
 }
