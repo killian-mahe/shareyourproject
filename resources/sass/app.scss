@@ -10,33 +10,6 @@
 @import './components/inputs';
 @import './components/navbar';
 
-.page {
-    @apply w-full h-auto bg-cultured-400 flex justify-center py-6;
-}
-
-.center-container {
-    @apply flex-col;
-}
-
-.center-container .header {
-    @apply w-full h-auto bg-red-300 mb-6 shadow flex-col;
-}
-
-.center-container .project-banner {
-    @apply w-full h-48 bg-blue-300;
-}
-
-.center-container .project-tags {
-    @apply w-full h-auto bg-yellow-300;
-}
-
-.center-container .project-badges {
-    @apply w-full h-auto bg-indigo-300;
-}
-
-.side-container {
-    @apply justify-center flex-row;
-}
 
 .bg-blur-3 {
     filter: blur(3px);
