@@ -28,3 +28,7 @@ Route::resource('projects', 'ProjectController');
 Route::resource('users', 'UserController')->except([
     'create', 'store'
 ]);
+
+Route::resource('comments', 'CommentController')->only([
+    'store', 'update', 'destroy'
+]);
