@@ -17281,6 +17281,13 @@ video {
   left: 0;
 }
 
+.inset-6 {
+  top: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  left: 1.5rem;
+}
+
 .inset-8 {
   top: 2rem;
   right: 2rem;
@@ -17337,6 +17344,13 @@ video {
   left: 50%;
 }
 
+.-inset-6 {
+  top: -1.5rem;
+  right: -1.5rem;
+  bottom: -1.5rem;
+  left: -1.5rem;
+}
+
 .-inset-8 {
   top: -2rem;
   right: -2rem;
@@ -17366,6 +17380,16 @@ video {
 .inset-x-0 {
   right: 0;
   left: 0;
+}
+
+.inset-y-6 {
+  top: 1.5rem;
+  bottom: 1.5rem;
+}
+
+.inset-x-6 {
+  right: 1.5rem;
+  left: 1.5rem;
 }
 
 .inset-y-8 {
@@ -17448,6 +17472,16 @@ video {
   left: 50%;
 }
 
+.-inset-y-6 {
+  top: -1.5rem;
+  bottom: -1.5rem;
+}
+
+.-inset-x-6 {
+  right: -1.5rem;
+  left: -1.5rem;
+}
+
 .-inset-y-8 {
   top: -2rem;
   bottom: -2rem;
@@ -17492,6 +17526,22 @@ video {
 
 .left-0 {
   left: 0;
+}
+
+.top-6 {
+  top: 1.5rem;
+}
+
+.right-6 {
+  right: 1.5rem;
+}
+
+.bottom-6 {
+  bottom: 1.5rem;
+}
+
+.left-6 {
+  left: 1.5rem;
 }
 
 .top-8 {
@@ -17620,6 +17670,22 @@ video {
 
 .left-1\/2 {
   left: 50%;
+}
+
+.-top-6 {
+  top: -1.5rem;
+}
+
+.-right-6 {
+  right: -1.5rem;
+}
+
+.-bottom-6 {
+  bottom: -1.5rem;
+}
+
+.-left-6 {
+  left: -1.5rem;
 }
 
 .-top-8 {
@@ -40739,6 +40805,13 @@ button:focus, input:focus {
     left: 0;
   }
 
+  .sm\:inset-6 {
+    top: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+
   .sm\:inset-8 {
     top: 2rem;
     right: 2rem;
@@ -40795,6 +40868,13 @@ button:focus, input:focus {
     left: 50%;
   }
 
+  .sm\:-inset-6 {
+    top: -1.5rem;
+    right: -1.5rem;
+    bottom: -1.5rem;
+    left: -1.5rem;
+  }
+
   .sm\:-inset-8 {
     top: -2rem;
     right: -2rem;
@@ -40824,6 +40904,16 @@ button:focus, input:focus {
   .sm\:inset-x-0 {
     right: 0;
     left: 0;
+  }
+
+  .sm\:inset-y-6 {
+    top: 1.5rem;
+    bottom: 1.5rem;
+  }
+
+  .sm\:inset-x-6 {
+    right: 1.5rem;
+    left: 1.5rem;
   }
 
   .sm\:inset-y-8 {
@@ -40906,6 +40996,16 @@ button:focus, input:focus {
     left: 50%;
   }
 
+  .sm\:-inset-y-6 {
+    top: -1.5rem;
+    bottom: -1.5rem;
+  }
+
+  .sm\:-inset-x-6 {
+    right: -1.5rem;
+    left: -1.5rem;
+  }
+
   .sm\:-inset-y-8 {
     top: -2rem;
     bottom: -2rem;
@@ -40950,6 +41050,22 @@ button:focus, input:focus {
 
   .sm\:left-0 {
     left: 0;
+  }
+
+  .sm\:top-6 {
+    top: 1.5rem;
+  }
+
+  .sm\:right-6 {
+    right: 1.5rem;
+  }
+
+  .sm\:bottom-6 {
+    bottom: 1.5rem;
+  }
+
+  .sm\:left-6 {
+    left: 1.5rem;
   }
 
   .sm\:top-8 {
@@ -41078,6 +41194,22 @@ button:focus, input:focus {
 
   .sm\:left-1\/2 {
     left: 50%;
+  }
+
+  .sm\:-top-6 {
+    top: -1.5rem;
+  }
+
+  .sm\:-right-6 {
+    right: -1.5rem;
+  }
+
+  .sm\:-bottom-6 {
+    bottom: -1.5rem;
+  }
+
+  .sm\:-left-6 {
+    left: -1.5rem;
   }
 
   .sm\:-top-8 {
@@ -63560,6 +63692,13 @@ button:focus, input:focus {
     left: 0;
   }
 
+  .md\:inset-6 {
+    top: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+
   .md\:inset-8 {
     top: 2rem;
     right: 2rem;
@@ -63616,6 +63755,13 @@ button:focus, input:focus {
     left: 50%;
   }
 
+  .md\:-inset-6 {
+    top: -1.5rem;
+    right: -1.5rem;
+    bottom: -1.5rem;
+    left: -1.5rem;
+  }
+
   .md\:-inset-8 {
     top: -2rem;
     right: -2rem;
@@ -63645,6 +63791,16 @@ button:focus, input:focus {
   .md\:inset-x-0 {
     right: 0;
     left: 0;
+  }
+
+  .md\:inset-y-6 {
+    top: 1.5rem;
+    bottom: 1.5rem;
+  }
+
+  .md\:inset-x-6 {
+    right: 1.5rem;
+    left: 1.5rem;
   }
 
   .md\:inset-y-8 {
@@ -63727,6 +63883,16 @@ button:focus, input:focus {
     left: 50%;
   }
 
+  .md\:-inset-y-6 {
+    top: -1.5rem;
+    bottom: -1.5rem;
+  }
+
+  .md\:-inset-x-6 {
+    right: -1.5rem;
+    left: -1.5rem;
+  }
+
   .md\:-inset-y-8 {
     top: -2rem;
     bottom: -2rem;
@@ -63771,6 +63937,22 @@ button:focus, input:focus {
 
   .md\:left-0 {
     left: 0;
+  }
+
+  .md\:top-6 {
+    top: 1.5rem;
+  }
+
+  .md\:right-6 {
+    right: 1.5rem;
+  }
+
+  .md\:bottom-6 {
+    bottom: 1.5rem;
+  }
+
+  .md\:left-6 {
+    left: 1.5rem;
   }
 
   .md\:top-8 {
@@ -63899,6 +64081,22 @@ button:focus, input:focus {
 
   .md\:left-1\/2 {
     left: 50%;
+  }
+
+  .md\:-top-6 {
+    top: -1.5rem;
+  }
+
+  .md\:-right-6 {
+    right: -1.5rem;
+  }
+
+  .md\:-bottom-6 {
+    bottom: -1.5rem;
+  }
+
+  .md\:-left-6 {
+    left: -1.5rem;
   }
 
   .md\:-top-8 {
@@ -86381,6 +86579,13 @@ button:focus, input:focus {
     left: 0;
   }
 
+  .lg\:inset-6 {
+    top: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+
   .lg\:inset-8 {
     top: 2rem;
     right: 2rem;
@@ -86437,6 +86642,13 @@ button:focus, input:focus {
     left: 50%;
   }
 
+  .lg\:-inset-6 {
+    top: -1.5rem;
+    right: -1.5rem;
+    bottom: -1.5rem;
+    left: -1.5rem;
+  }
+
   .lg\:-inset-8 {
     top: -2rem;
     right: -2rem;
@@ -86466,6 +86678,16 @@ button:focus, input:focus {
   .lg\:inset-x-0 {
     right: 0;
     left: 0;
+  }
+
+  .lg\:inset-y-6 {
+    top: 1.5rem;
+    bottom: 1.5rem;
+  }
+
+  .lg\:inset-x-6 {
+    right: 1.5rem;
+    left: 1.5rem;
   }
 
   .lg\:inset-y-8 {
@@ -86548,6 +86770,16 @@ button:focus, input:focus {
     left: 50%;
   }
 
+  .lg\:-inset-y-6 {
+    top: -1.5rem;
+    bottom: -1.5rem;
+  }
+
+  .lg\:-inset-x-6 {
+    right: -1.5rem;
+    left: -1.5rem;
+  }
+
   .lg\:-inset-y-8 {
     top: -2rem;
     bottom: -2rem;
@@ -86592,6 +86824,22 @@ button:focus, input:focus {
 
   .lg\:left-0 {
     left: 0;
+  }
+
+  .lg\:top-6 {
+    top: 1.5rem;
+  }
+
+  .lg\:right-6 {
+    right: 1.5rem;
+  }
+
+  .lg\:bottom-6 {
+    bottom: 1.5rem;
+  }
+
+  .lg\:left-6 {
+    left: 1.5rem;
   }
 
   .lg\:top-8 {
@@ -86720,6 +86968,22 @@ button:focus, input:focus {
 
   .lg\:left-1\/2 {
     left: 50%;
+  }
+
+  .lg\:-top-6 {
+    top: -1.5rem;
+  }
+
+  .lg\:-right-6 {
+    right: -1.5rem;
+  }
+
+  .lg\:-bottom-6 {
+    bottom: -1.5rem;
+  }
+
+  .lg\:-left-6 {
+    left: -1.5rem;
   }
 
   .lg\:-top-8 {
@@ -109202,6 +109466,13 @@ button:focus, input:focus {
     left: 0;
   }
 
+  .xl\:inset-6 {
+    top: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+
   .xl\:inset-8 {
     top: 2rem;
     right: 2rem;
@@ -109258,6 +109529,13 @@ button:focus, input:focus {
     left: 50%;
   }
 
+  .xl\:-inset-6 {
+    top: -1.5rem;
+    right: -1.5rem;
+    bottom: -1.5rem;
+    left: -1.5rem;
+  }
+
   .xl\:-inset-8 {
     top: -2rem;
     right: -2rem;
@@ -109287,6 +109565,16 @@ button:focus, input:focus {
   .xl\:inset-x-0 {
     right: 0;
     left: 0;
+  }
+
+  .xl\:inset-y-6 {
+    top: 1.5rem;
+    bottom: 1.5rem;
+  }
+
+  .xl\:inset-x-6 {
+    right: 1.5rem;
+    left: 1.5rem;
   }
 
   .xl\:inset-y-8 {
@@ -109369,6 +109657,16 @@ button:focus, input:focus {
     left: 50%;
   }
 
+  .xl\:-inset-y-6 {
+    top: -1.5rem;
+    bottom: -1.5rem;
+  }
+
+  .xl\:-inset-x-6 {
+    right: -1.5rem;
+    left: -1.5rem;
+  }
+
   .xl\:-inset-y-8 {
     top: -2rem;
     bottom: -2rem;
@@ -109413,6 +109711,22 @@ button:focus, input:focus {
 
   .xl\:left-0 {
     left: 0;
+  }
+
+  .xl\:top-6 {
+    top: 1.5rem;
+  }
+
+  .xl\:right-6 {
+    right: 1.5rem;
+  }
+
+  .xl\:bottom-6 {
+    bottom: 1.5rem;
+  }
+
+  .xl\:left-6 {
+    left: 1.5rem;
   }
 
   .xl\:top-8 {
@@ -109541,6 +109855,22 @@ button:focus, input:focus {
 
   .xl\:left-1\/2 {
     left: 50%;
+  }
+
+  .xl\:-top-6 {
+    top: -1.5rem;
+  }
+
+  .xl\:-right-6 {
+    right: -1.5rem;
+  }
+
+  .xl\:-bottom-6 {
+    bottom: -1.5rem;
+  }
+
+  .xl\:-left-6 {
+    left: -1.5rem;
   }
 
   .xl\:-top-8 {
