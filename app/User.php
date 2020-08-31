@@ -60,4 +60,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Project', 'owner_id');
     }
+
+    /**
+     * Get the project where user is member.
+     */
+    public function projects()
+    {
+        return $this->belongsToMany('App\Models\Project');
+    }
 }
