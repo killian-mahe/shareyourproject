@@ -3,8 +3,13 @@
 @section('content')
 
 <div class="w-full h-auto bg-cultured-400 flex justify-center py-6">
-    <div class="sticky top-6 h-full justify-center flex-row hidden sm:block w-1/4 md:w-1/4 lg:w-1/6">
-        <div class="w-full h-120 bg-cultured-100 rounded-lg shadow-md"></div>
+    <div class="h-128 justify-center flex-row hidden sm:block w-1/4 md:w-1/4 lg:w-1/6">
+        <div class="block-menu mt-48">
+            <span href="#">Publications</span>
+            <span href="#">Description</span>
+            <span href="#">Members</span>
+            <span href="#">About</span>
+        </div>
     </div>
     <div class="w-full mx-2 sm:mx-5 sm:w-3/5 md:w-2/3 lg:w-1/2 rounded-lg">
         <div class="w-full h-auto mb-6 shadow bg-cultured-100 md:rounded-lg">
