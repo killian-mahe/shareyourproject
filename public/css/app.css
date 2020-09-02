@@ -24103,6 +24103,35 @@ button:focus, input:focus {
   list-style-type: none;
 }
 
+.block-menu {
+  width: 100%;
+  height: auto;
+  --bg-opacity: 1;
+  background-color: #fefefe;
+  background-color: rgba(254, 254, 254, var(--bg-opacity));
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.block-menu span {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.block-menu span:hover {
+  --text-opacity: 1;
+  color: #219fa6;
+  color: rgba(33, 159, 166, var(--text-opacity));
+}
+
 .bg-blur-3 {
   -webkit-filter: blur(3px);
           filter: blur(3px);
