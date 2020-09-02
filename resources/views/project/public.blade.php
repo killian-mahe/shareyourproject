@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <h1>{{$project->owner}}</h1> --}}
 
 <div class="w-full h-auto bg-cultured-400 flex justify-center py-6">
-    <div class="sticky top-6 h-full justify-center flex-row hidden sm:block w-1/4 md:w-1/4 lg:w-1/6 bg-red-300">
+    <div class="sticky top-6 h-full justify-center flex-row hidden sm:block w-1/4 md:w-1/4 lg:w-1/6">
         <div class="w-full h-120 bg-cultured-100 rounded-lg shadow-md"></div>
     </div>
     <div class="w-full mx-2 sm:mx-5 sm:w-3/5 md:w-2/3 lg:w-1/2 rounded-lg">
@@ -14,8 +13,16 @@
                 <img class=" border-4 border-cultured-100 shadow-md object-cover w-40 h-40 rounded-full mx-auto sm:left-8 lg:left-16 -bottom-12 absolute" src="https://cdn.pixabay.com/photo/2016/03/27/17/42/man-1283235_960_720.jpg" alt="test">
             </div>
             <div class="text-center md:text-right font-semibold font-sans text-2xl md:mr-1/7 mt-12 md:my-4">{{$project->name}}</div>
-            <span class="bg-yellow-300">{{$project->owner->username}}</span>
-            <div class="">{{$project->created_at}}</div>
+            <div class="flex py-2 px-4 justify-between">
+                <div>
+                    <span class="text-sm">An idea from </span>
+                    <span href="#" class="text-sm hover:underline">{{$project->owner->username}}</span>
+                </div>
+                <div>
+                    <span class="text-sm italic">Created on </span>
+                    <span href="#" class="text-sm">{{$project->created_at}}</span>
+                </div>
+            </div>
             <div class="tags w-full h-auto bg-yellow-300"></div>
             <div class="badges w-full h-auto bg-indigo-300"></div>
         </div>
@@ -24,7 +31,7 @@
 
             <div class="card md:rounded-lg">
                 <div class="card-title">
-                <img class="rounded-full my-auto h-full w-auto hover:shadow-md" src="https://cdn.pixabay.com/photo/2016/08/10/18/04/eat-1583954_1280.jpg"/>
+                <img class="rounded-full my-auto h-full w-auto hover:shadow-md" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"/>
                 <div class="flex flex-col ml-3 justify-start">
                     <div class="font-sans font-bold text-base hover:underline"><a href="#">{{$post->author->username}}</a></div>
                     <span class="font-sans italic text-base">Web Designer</span>
@@ -59,4 +66,5 @@
 
     </div>
 </div>
+
 @endsection
