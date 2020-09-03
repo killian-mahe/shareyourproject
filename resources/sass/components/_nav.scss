@@ -1,3 +1,6 @@
+// ******* //
+// Nav Bar //
+// ******* //
 
 .nav-bar-li {
     @apply inline-flex;
@@ -48,4 +51,20 @@
 
 .mobile-nav-list {
     @apply text-center list-none;
+}
+
+// ********** //
+// Block Menu //
+// ********** //
+
+.block-menu{
+    @apply w-full h-auto bg-cultured-100 rounded-lg shadow-md mb-4 flex flex-col flex-none py-1;
+}
+
+.block-menu span{
+    @apply py-2 px-6;
+}
+
+.block-menu span:hover{
+    @apply text-viridiant-600;
 }

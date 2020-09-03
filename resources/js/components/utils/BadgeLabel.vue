@@ -1,0 +1,15 @@
+<template>
+    <span class="rounded-full px-2 pb-1 pt-0.25 text-sm font-semibold bg-onyx-200 lowercase"><a v-bind:href="link">{{label}}</a></span>
+</template>
+
+<script>
+    export default {
+        props: {
+            'label': String,
+            'link': String
+        },
+        mounted() {
+            console.log('Component mounted.')
+        }
+    }
+</script>

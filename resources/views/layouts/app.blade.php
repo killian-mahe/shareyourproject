@@ -22,7 +22,7 @@
 <body>
     <div id="app">
         {{-- NavBar --}}
-        <nav class="w-full shadow-lg bg-cultured-100 nav-bar hidden lg:flex">
+        <nav class="w-full shadow-lg bg-cultured-100 nav-bar hidden lg:flex z-50">
             <div class="flex justify-around w-full ">
               <a><img class="my-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
               <ul class="my-auto hidden lg:flex">
@@ -79,7 +79,7 @@
               </ul> --}}
         </nav>
 
-        <main>
+        <main class="z-1">
             @yield('content')
         </main>
         {{-- Real-Time Chat --}}
