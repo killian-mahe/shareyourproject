@@ -5,9 +5,9 @@
 <div class="w-full h-auto bg-cultured-400 flex justify-center py-6">
     <div class="h-128 justify-center flex-row hidden sm:block w-1/4 md:w-1/4 lg:w-1/6">
         <div class="block-menu mt-48">
-            <span href="#">Publications</span>
-            <span href="#">Members</span>
-            <span href="#">About</span>
+            <a href="{{route('projects.show', ['project'=>$project->id])}}">Publications</a>
+            <a href="{{route('projects.members', ['project'=>$project->id])}}">Members</a>
+            <a href="{{route('projects.about', ['project'=>$project->id])}}">About</a>
         </div>
     </div>
     <div class="w-full mx-2 sm:mx-5 sm:w-3/5 md:w-2/3 lg:w-1/2 rounded-lg">
