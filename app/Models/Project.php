@@ -37,6 +37,14 @@ class Project extends Model
     }
 
     /**
+     * Get all of the technologies for the project.
+     */
+    public function technologies()
+    {
+        return $this->morphToMany('App\Models\Technology', 'technologisable');
+    }
+
+    /**
      * Get all of the posts for the project.
      */
     public function posts()

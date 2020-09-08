@@ -54,6 +54,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get all of the technologies for the user.
+     */
+    public function technologies()
+    {
+        return $this->morphToMany('App\Models\Technology', 'technologisable');
+    }
+
+    /**
      * Get the user that wrote the post.
      */
     public function owned_project()
