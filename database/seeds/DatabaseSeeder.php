@@ -17,6 +17,11 @@ class DatabaseSeeder extends Seeder
             $project = factory(App\Models\Project::class)->make();
             $user->owned_project()->save($project);
             $project->technologies()->attach($techno->random(3));
+
+            $posts = factory(App\Models\Post::class, 2)->make([
+                'author_id' => $user->id
+            ]);
+            $project->posts()->saveMany($posts);
         });
 
         $tags = factory(App\Models\Tag::class, 25)->create();
