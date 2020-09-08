@@ -94,4 +94,26 @@ class ProjectController extends Controller
     {
         //
     }
+
+    /**
+     * Display project members list.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function members(Project $project)
+    {
+        return view('project.members', ['project'=>$project]);
+    }
+
+    /**
+     * Display project About description.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function about(Project $project)
+    {
+        return view('project.about', ['project'=>$project]);
+    }
 }

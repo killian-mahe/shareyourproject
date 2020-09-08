@@ -32,3 +32,8 @@ Route::resource('users', 'UserController')->except([
 Route::resource('comments', 'CommentController')->only([
     'store', 'update', 'destroy'
 ]);
+
+Route::name('projects.')->prefix('projects')->group(function () {
+    Route::get('{project}/members', 'ProjectController@members')->name('members');
+    Route::get('{project}/about', 'ProjectController@about')->name('about');
+});
