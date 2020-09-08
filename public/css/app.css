@@ -24119,14 +24119,14 @@ button:focus, input:focus {
   padding-bottom: 0.25rem;
 }
 
-.block-menu span {
+.block-menu a {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
 
-.block-menu span:hover {
+.block-menu a:hover {
   --text-opacity: 1;
   color: #219fa6;
   color: rgba(33, 159, 166, var(--text-opacity));
