@@ -11,13 +11,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $users = factory(App\User::class, 50)->create()->each(function ($user) {
-            $user->owned_project()->save(factory(App\Models\Project::class)->make());
+        $techno = factory(App\Models\Technology::class, 15)->create();
+
+        $users = factory(App\User::class, 50)->create()->each(function ($user) use ($techno){
+            $project = factory(App\Models\Project::class)->make();
+            $user->owned_project()->save($project);
+            $project->technologies()->attach($techno->random(3));
         });
 
         $tags = factory(App\Models\Tag::class, 25)->create();
 
-        $users->each(function ($user) use ($tags) {
+        $users->each(function ($user) use ($tags, $techno) {
             $posts = factory(App\Models\Post::class, 2)->make();
             $user->posts()->saveMany($posts);
 
