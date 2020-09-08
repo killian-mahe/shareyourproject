@@ -6,7 +6,6 @@
     <div class="h-128 justify-center flex-row hidden sm:block w-1/4 md:w-1/4 lg:w-1/6">
         <div class="block-menu mt-48">
             <span href="#">Publications</span>
-            <span href="#">Description</span>
             <span href="#">Members</span>
             <span href="#">About</span>
         </div>
