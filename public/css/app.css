@@ -23832,9 +23832,20 @@ button:focus, input:focus {
   background-color: rgba(254, 254, 254, var(--bg-opacity));
   width: auto;
   margin-bottom: 1.5rem;
+  padding: 1.5rem;
 }
 
-.member-card img {
+.member-card-right {
+  --bg-opacity: 1;
+  background-color: #fefefe;
+  background-color: rgba(254, 254, 254, var(--bg-opacity));
+  width: auto;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  justify-content: flex-end;
+}
+
+.member-card-image {
   height: 5rem;
   width: 5rem;
   border-radius: 9999px;
@@ -23848,6 +23859,12 @@ button:focus, input:focus {
   transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
+}
+
+.member-card-image:hover {
+  --transform-scale-x: 1.05;
+  --transform-scale-y: 1.05;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .member-card-name {
