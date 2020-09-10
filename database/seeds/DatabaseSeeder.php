@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Project;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,6 +34,11 @@ class DatabaseSeeder extends Seeder
             $posts->each(function ($post) use ($tags) {
                 $post->tags()->attach($tags->random(3));
             });
+        });
+
+        $projects = Project::all();
+        $projects->each(function ($project) use ($users) {
+            $project->members()->attach($users->random(5)->pluck('id'));
         });
     }
 }
