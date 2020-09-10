@@ -23831,6 +23831,7 @@ button:focus, input:focus {
   background-color: #fefefe;
   background-color: rgba(254, 254, 254, var(--bg-opacity));
   width: auto;
+  margin-bottom: 1.5rem;
 }
 
 .member-card img {
@@ -23875,12 +23876,6 @@ button:focus, input:focus {
   color: #393d3f;
   color: rgba(57, 61, 63, var(--text-opacity));
   text-decoration: underline;
-}
-
-.member-card-phone {
-  --text-opacity: 1;
-  color: #718096;
-  color: rgba(113, 128, 150, var(--text-opacity));
 }
 
 .chat-window {

@@ -1,4 +1,6 @@
-
+// ************ //
+// Generic-Card //
+// ************ //
 .card {
     @apply w-auto bg-cultured-100 shadow-md px-3 mb-6;
 }
@@ -39,8 +41,12 @@
     @apply bg-onyx-100 rounded-full px-2 py-1 text-sm;
 }
 
+// *********** //
+// Member-Card //
+// *********** //
+
 .member-card{
-    @apply bg-cultured-100 w-auto;
+    @apply bg-cultured-100 w-auto mb-6;
 }
 
 .member-card img {
@@ -65,8 +71,4 @@
 
 .member-card-email:hover {
     @apply text-onyx-600 underline;
-}
-
-.member-card-phone {
-    @apply text-gray-600;
 }
