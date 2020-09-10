@@ -23747,8 +23747,8 @@ button:focus, input:focus {
 .card {
   width: auto;
   --bg-opacity: 1;
-  background-color: #fff;
-  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  background-color: #fefefe;
+  background-color: rgba(254, 254, 254, var(--bg-opacity));
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   padding-left: 0.75rem;
   padding-right: 0.75rem;
@@ -23824,6 +23824,75 @@ button:focus, input:focus {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   font-size: 0.875rem;
+}
+
+.member-card {
+  --bg-opacity: 1;
+  background-color: #fefefe;
+  background-color: rgba(254, 254, 254, var(--bg-opacity));
+  width: auto;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+}
+
+.member-card-right {
+  --bg-opacity: 1;
+  background-color: #fefefe;
+  background-color: rgba(254, 254, 254, var(--bg-opacity));
+  width: auto;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  justify-content: flex-end;
+}
+
+.member-card-image {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 9999px;
+  --transform-translate-x: 0;
+  --transform-translate-y: 0;
+  --transform-rotate: 0;
+  --transform-skew-x: 0;
+  --transform-skew-y: 0;
+  --transform-scale-x: 1;
+  --transform-scale-y: 1;
+  transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+.member-card-image:hover {
+  --transform-scale-x: 1.05;
+  --transform-scale-y: 1.05;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.member-card-name {
+  font-size: 1.125rem;
+}
+
+.member-card-name:hover {
+  text-decoration: underline;
+}
+
+.member-card-job {
+  --text-opacity: 1;
+  color: #219fa6;
+  color: rgba(33, 159, 166, var(--text-opacity));
+  font-style: italic;
+}
+
+.member-card-email {
+  --text-opacity: 1;
+  color: #718096;
+  color: rgba(113, 128, 150, var(--text-opacity));
+}
+
+.member-card-email:hover {
+  --text-opacity: 1;
+  color: #393d3f;
+  color: rgba(57, 61, 63, var(--text-opacity));
+  text-decoration: underline;
 }
 
 .chat-window {
@@ -24110,7 +24179,7 @@ button:focus, input:focus {
   background-color: #fefefe;
   background-color: rgba(254, 254, 254, var(--bg-opacity));
   border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
