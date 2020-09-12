@@ -1,7 +1,14 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use App\Models\Project;
+use App\Models\Technology;
+use App\Models\Tag;
+use App\Models\Post;
+use App\User;
+use App\Models\Comment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,23 +19,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $techno = factory(App\Models\Technology::class, 15)->create();
+        $techno = Technology::factory()->count(15)->create();
 
-        $users = factory(App\User::class, 50)->create()->each(function ($user) use ($techno){
-            $project = factory(App\Models\Project::class)->make();
+        $users = User::factory()->count(50)->create()->each(function ($user) use ($techno){
+            $project = Project::factory()->make();
             $user->owned_project()->save($project);
             $project->technologies()->attach($techno->random(3));
 
-            $posts = factory(App\Models\Post::class, 2)->make([
+            $posts = Post::factory()->count(2)->make([
                 'author_id' => $user->id
             ]);
             $project->posts()->saveMany($posts);
         });
 
-        $tags = factory(App\Models\Tag::class, 25)->create();
+        $tags = Tag::factory()->count(25)->create();
 
         $users->each(function ($user) use ($tags, $techno) {
-            $posts = factory(App\Models\Post::class, 2)->make();
+            $posts = Post::factory()->count(2)->make();
             $user->posts()->saveMany($posts);
 
             $posts->each(function ($post) use ($tags) {
