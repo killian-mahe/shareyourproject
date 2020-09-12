@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Post;
+use App\User;
 
 class PostFactory extends Factory
 {
@@ -28,8 +29,8 @@ class PostFactory extends Factory
 
     public function with_author()
     {
-        return [
-            'author_id' => App\User::factory(),
-        ];
+        return $this->state([
+            'author_id' => User::factory(),
+        ]);
     }
 }

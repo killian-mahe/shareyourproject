@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Project;
+use App\User;
 
 class ProjectFactory extends Factory
 {
@@ -29,15 +30,15 @@ class ProjectFactory extends Factory
 
     public function private()
     {
-        return [
+        return $this->state([
             'is_public' => false,
-        ];
+        ]);
     }
 
     public function with_owner()
     {
-        return [
-            'owner_id' => App\User::factory(),
-        ];
+        return $this->state([
+            'owner_id' => User::factory(),
+        ]);
     }
 }
