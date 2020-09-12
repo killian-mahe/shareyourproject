@@ -1,25 +1,44 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Project;
-use Faker\Generator as Faker;
+use App\User;
 
-$factory->define(Project::class, function (Faker $faker) {
-    return [
-        'name' => $faker->company,
-        'description' => $faker->text($maxNbChars = 150)
-    ];
-});
+class ProjectFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Project::class;
 
-$factory->state(Project::class, 'private', function ($faker) {
-    return [
-        'is_public' => false,
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->company,
+            'description' => $this->faker->text($maxNbChars = 150)
+        ];
+    }
 
-$factory->state(Project::class, 'withOwner', function ($faker) {
-    return [
-        'owner_id' => factory(App\User::class),
-    ];
-});
+    public function private()
+    {
+        return $this->state([
+            'is_public' => false,
+        ]);
+    }
+
+    public function with_owner()
+    {
+        return $this->state([
+            'owner_id' => User::factory(),
+        ]);
+    }
+}
