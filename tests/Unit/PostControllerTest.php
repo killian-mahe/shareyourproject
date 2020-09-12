@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use \App\User;
 
 class PostControllerTest extends TestCase
 {
@@ -30,7 +31,7 @@ class PostControllerTest extends TestCase
 
         $response->assertRedirect(route('login'));
 
-        $user = factory(\App\User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->get(route('posts.create'));
         $response->assertStatus(200);
@@ -44,8 +45,8 @@ class PostControllerTest extends TestCase
      */
     public function testEditPostForm()
     {
-        $user = factory(\App\User::class)->create();
-        $post = factory(\App\Models\Post::class)->make();
+        $user = User::factory()->create();
+        $post = \App\Models\Post::factory()->make();
         $post->author()->associate($user);
         $post->push();
 
@@ -64,7 +65,7 @@ class PostControllerTest extends TestCase
      */
     public function testShowPost()
     {
-        $post = factory(\App\Models\Post::class)->state('withAuthor')->create();
+        $post = \App\Models\Post::factory()->with_author()->create();
 
         $response = $this->get(route('posts.show', ['post' => $post->id]));
 
