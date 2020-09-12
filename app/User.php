@@ -84,4 +84,12 @@ class User extends Authenticatable
     {
         return $this->first_name." ".$this->last_name;
     }
+
+    /**
+     * Get the user profile picture.
+     */
+    public function profile_picture()
+    {
+        return asset('vendor/courier/img/default_profile_picture.jpg');
+    }
 }
