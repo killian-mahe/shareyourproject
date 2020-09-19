@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="flex justify-center mt-4">
+<div class="flex justify-center mt-4 bg-cultured-400 min-h-screen">
 
     <div class="w-2/5">
 
