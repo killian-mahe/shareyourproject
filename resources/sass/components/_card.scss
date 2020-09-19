@@ -81,3 +81,22 @@
     @apply text-onyx-600 underline;
 }
 
+// **************** //
+// Description-Card //
+// **************** //
+
+.description-card{
+    @apply w-auto bg-cultured-100 shadow-md px-3 mb-6;
+}
+
+.description-card .line{
+    @apply w-full h-auto p-2 border-b-0.0625 border-onyx-100 flex;
+}
+
+.description-card .title{
+    @apply font-sans text-xl ml-3 my-1;
+}
+
+.description-card .description{
+    @apply px-8 pb-8 pt-4 text-justify;
+}
