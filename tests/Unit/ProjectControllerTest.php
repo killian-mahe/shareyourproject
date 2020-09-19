@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
+use \App\User;
 
 class ProjectControllerTest extends TestCase
 {
@@ -30,7 +31,7 @@ class ProjectControllerTest extends TestCase
 
         $response->assertRedirect(route('login'));
 
-        $user = factory(\App\User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->get(route('projects.create'));
         $response->assertStatus(200);
@@ -44,8 +45,8 @@ class ProjectControllerTest extends TestCase
      */
     public function testEditProjectForm()
     {
-        $user = factory(\App\User::class)->create();
-        $project = factory(\App\Models\Project::class)->make();
+        $user = User::factory()->create();
+        $project = \App\Models\Project::factory()->make();
         $project->owner()->associate($user);
         $project->push();
 
@@ -64,7 +65,7 @@ class ProjectControllerTest extends TestCase
      */
     public function testShowProject()
     {
-        $project = factory(\App\Models\Project::class)->state('withOwner')->create();
+        $project = \App\Models\Project::factory()->with_owner()->create();
 
         $response = $this->get(route('projects.show', ['project' => $project->id]));
 

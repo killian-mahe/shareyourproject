@@ -16,7 +16,7 @@ class PostTest extends TestCase
      */
     public function testCreatePostWithAuthenticatedUser()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)
                          ->post('/posts', ['content' => 'It\'s a test']);
@@ -36,7 +36,7 @@ class PostTest extends TestCase
      */
     public function testCreatePostWithoutAuthenticatedUser()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->postJson('/posts', ['content' => 'It\'s a test']);
 

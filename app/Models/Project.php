@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    use HasFactory;
+    
     /**
      * The name of the database.
      *
@@ -57,6 +60,6 @@ class Project extends Model
      */
     public function members()
     {
-        return $this->belongsToMan('App\User', 'project_user', 'project_id', 'user_id');
+        return $this->belongsToMany('App\User', 'project_user', 'project_id', 'user_id');
     }
 }

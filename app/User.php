@@ -2,13 +2,14 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -75,5 +76,21 @@ class User extends Authenticatable
     public function projects()
     {
         return $this->belongsToMany('App\Models\Project');
+    }
+
+    /**
+     * Get the full-name of the user.
+     */
+    public function full_name()
+    {
+        return $this->first_name." ".$this->last_name;
+    }
+
+    /**
+     * Get the user profile picture.
+     */
+    public function profile_picture()
+    {
+        return asset('vendor/courier/img/default_profile_picture.jpg');
     }
 }
