@@ -5,12 +5,12 @@
 <div class="w-full h-auto bg-cultured-400 flex justify-center py-6">
     <div class="h-128 justify-center flex-row hidden sm:block w-1/4 md:w-1/4 lg:w-1/6">
         <div class="block-menu mt-48">
-            <a href="{{route('projects.show', ['project'=>$project->id])}}">Publications</a>
-            <a href="{{route('projects.members', ['project'=>$project->id])}}">Members</a>
-            <a href="{{route('projects.about', ['project'=>$project->id])}}">About</a>
+            <a class="py-2 px-6" href="{{route('projects.show', ['project'=>$project->id])}}">Publications</a>
+            <a class="py-2 px-6" href="{{route('projects.members', ['project'=>$project->id])}}">Members</a>
+            <a class="py-2 px-6" href="{{route('projects.about', ['project'=>$project->id])}}">About</a>
         </div>
     </div>
-    <div class="w-full mx-2 sm:mx-5 sm:w-3/5 md:w-2/3 lg:w-1/2 rounded-lg">
+    <div class="w-full mx-4 sm:mx-5 sm:w-3/5 md:w-2/3 lg:w-1/2 rounded-lg">
         <div class="w-full h-auto mb-6 shadow bg-cultured-100 md:rounded-lg">
             <div class="flex relative justify-center">
                 <img class=" md:rounded-t-lg object-cover w-full h-48 shadow" src="https://cdn.pixabay.com/photo/2013/03/06/23/09/color-91059_1280.jpg" alt="test">

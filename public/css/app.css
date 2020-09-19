@@ -1998,6 +1998,24 @@ video {
   border-color: rgba(61, 61, 61, var(--divide-opacity));
 }
 
+.divide-linkedin > :not(template) ~ :not(template) {
+  --divide-opacity: 1;
+  border-color: #0077B5;
+  border-color: rgba(0, 119, 181, var(--divide-opacity));
+}
+
+.divide-github > :not(template) ~ :not(template) {
+  --divide-opacity: 1;
+  border-color: #211F1F;
+  border-color: rgba(33, 31, 31, var(--divide-opacity));
+}
+
+.divide-twitter > :not(template) ~ :not(template) {
+  --divide-opacity: 1;
+  border-color: #08A0E9;
+  border-color: rgba(8, 160, 233, var(--divide-opacity));
+}
+
 .divide-opacity-0 > :not(template) ~ :not(template) {
   --divide-opacity: 0;
 }
@@ -2858,6 +2876,24 @@ video {
   background-color: rgba(61, 61, 61, var(--bg-opacity));
 }
 
+.bg-linkedin {
+  --bg-opacity: 1;
+  background-color: #0077B5;
+  background-color: rgba(0, 119, 181, var(--bg-opacity));
+}
+
+.bg-github {
+  --bg-opacity: 1;
+  background-color: #211F1F;
+  background-color: rgba(33, 31, 31, var(--bg-opacity));
+}
+
+.bg-twitter {
+  --bg-opacity: 1;
+  background-color: #08A0E9;
+  background-color: rgba(8, 160, 233, var(--bg-opacity));
+}
+
 .hover\:bg-transparent:hover {
   background-color: transparent;
 }
@@ -3634,6 +3670,24 @@ video {
   background-color: rgba(61, 61, 61, var(--bg-opacity));
 }
 
+.hover\:bg-linkedin:hover {
+  --bg-opacity: 1;
+  background-color: #0077B5;
+  background-color: rgba(0, 119, 181, var(--bg-opacity));
+}
+
+.hover\:bg-github:hover {
+  --bg-opacity: 1;
+  background-color: #211F1F;
+  background-color: rgba(33, 31, 31, var(--bg-opacity));
+}
+
+.hover\:bg-twitter:hover {
+  --bg-opacity: 1;
+  background-color: #08A0E9;
+  background-color: rgba(8, 160, 233, var(--bg-opacity));
+}
+
 .focus\:bg-transparent:focus {
   background-color: transparent;
 }
@@ -4408,6 +4462,24 @@ video {
   --bg-opacity: 1;
   background-color: #3d3d3d;
   background-color: rgba(61, 61, 61, var(--bg-opacity));
+}
+
+.focus\:bg-linkedin:focus {
+  --bg-opacity: 1;
+  background-color: #0077B5;
+  background-color: rgba(0, 119, 181, var(--bg-opacity));
+}
+
+.focus\:bg-github:focus {
+  --bg-opacity: 1;
+  background-color: #211F1F;
+  background-color: rgba(33, 31, 31, var(--bg-opacity));
+}
+
+.focus\:bg-twitter:focus {
+  --bg-opacity: 1;
+  background-color: #08A0E9;
+  background-color: rgba(8, 160, 233, var(--bg-opacity));
 }
 
 .bg-opacity-0 {
@@ -5326,6 +5398,24 @@ video {
   border-color: rgba(61, 61, 61, var(--border-opacity));
 }
 
+.border-linkedin {
+  --border-opacity: 1;
+  border-color: #0077B5;
+  border-color: rgba(0, 119, 181, var(--border-opacity));
+}
+
+.border-github {
+  --border-opacity: 1;
+  border-color: #211F1F;
+  border-color: rgba(33, 31, 31, var(--border-opacity));
+}
+
+.border-twitter {
+  --border-opacity: 1;
+  border-color: #08A0E9;
+  border-color: rgba(8, 160, 233, var(--border-opacity));
+}
+
 .hover\:border-transparent:hover {
   border-color: transparent;
 }
@@ -6102,6 +6192,24 @@ video {
   border-color: rgba(61, 61, 61, var(--border-opacity));
 }
 
+.hover\:border-linkedin:hover {
+  --border-opacity: 1;
+  border-color: #0077B5;
+  border-color: rgba(0, 119, 181, var(--border-opacity));
+}
+
+.hover\:border-github:hover {
+  --border-opacity: 1;
+  border-color: #211F1F;
+  border-color: rgba(33, 31, 31, var(--border-opacity));
+}
+
+.hover\:border-twitter:hover {
+  --border-opacity: 1;
+  border-color: #08A0E9;
+  border-color: rgba(8, 160, 233, var(--border-opacity));
+}
+
 .focus\:border-transparent:focus {
   border-color: transparent;
 }
@@ -6876,6 +6984,24 @@ video {
   --border-opacity: 1;
   border-color: #3d3d3d;
   border-color: rgba(61, 61, 61, var(--border-opacity));
+}
+
+.focus\:border-linkedin:focus {
+  --border-opacity: 1;
+  border-color: #0077B5;
+  border-color: rgba(0, 119, 181, var(--border-opacity));
+}
+
+.focus\:border-github:focus {
+  --border-opacity: 1;
+  border-color: #211F1F;
+  border-color: rgba(33, 31, 31, var(--border-opacity));
+}
+
+.focus\:border-twitter:focus {
+  --border-opacity: 1;
+  border-color: #08A0E9;
+  border-color: rgba(8, 160, 233, var(--border-opacity));
 }
 
 .border-opacity-0 {
@@ -13981,6 +14107,78 @@ video {
   color: rgba(61, 61, 61, var(--placeholder-opacity));
 }
 
+.placeholder-linkedin::-moz-placeholder {
+  --placeholder-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--placeholder-opacity));
+}
+
+.placeholder-linkedin:-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--placeholder-opacity));
+}
+
+.placeholder-linkedin::-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--placeholder-opacity));
+}
+
+.placeholder-linkedin::placeholder {
+  --placeholder-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--placeholder-opacity));
+}
+
+.placeholder-github::-moz-placeholder {
+  --placeholder-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--placeholder-opacity));
+}
+
+.placeholder-github:-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--placeholder-opacity));
+}
+
+.placeholder-github::-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--placeholder-opacity));
+}
+
+.placeholder-github::placeholder {
+  --placeholder-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--placeholder-opacity));
+}
+
+.placeholder-twitter::-moz-placeholder {
+  --placeholder-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--placeholder-opacity));
+}
+
+.placeholder-twitter:-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--placeholder-opacity));
+}
+
+.placeholder-twitter::-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--placeholder-opacity));
+}
+
+.placeholder-twitter::placeholder {
+  --placeholder-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--placeholder-opacity));
+}
+
 .focus\:placeholder-transparent:focus::-moz-placeholder {
   color: transparent;
 }
@@ -17085,6 +17283,78 @@ video {
   color: rgba(61, 61, 61, var(--placeholder-opacity));
 }
 
+.focus\:placeholder-linkedin:focus::-moz-placeholder {
+  --placeholder-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-linkedin:focus:-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-linkedin:focus::-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-linkedin:focus::placeholder {
+  --placeholder-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-github:focus::-moz-placeholder {
+  --placeholder-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-github:focus:-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-github:focus::-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-github:focus::placeholder {
+  --placeholder-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-twitter:focus::-moz-placeholder {
+  --placeholder-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-twitter:focus:-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-twitter:focus::-ms-input-placeholder {
+  --placeholder-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--placeholder-opacity));
+}
+
+.focus\:placeholder-twitter:focus::placeholder {
+  --placeholder-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--placeholder-opacity));
+}
+
 .placeholder-opacity-0::-moz-placeholder {
   --placeholder-opacity: 0;
 }
@@ -18692,6 +18962,24 @@ video {
   color: rgba(61, 61, 61, var(--text-opacity));
 }
 
+.text-linkedin {
+  --text-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--text-opacity));
+}
+
+.text-github {
+  --text-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--text-opacity));
+}
+
+.text-twitter {
+  --text-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--text-opacity));
+}
+
 .hover\:text-transparent:hover {
   color: transparent;
 }
@@ -19468,6 +19756,24 @@ video {
   color: rgba(61, 61, 61, var(--text-opacity));
 }
 
+.hover\:text-linkedin:hover {
+  --text-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--text-opacity));
+}
+
+.hover\:text-github:hover {
+  --text-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--text-opacity));
+}
+
+.hover\:text-twitter:hover {
+  --text-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--text-opacity));
+}
+
 .focus\:text-transparent:focus {
   color: transparent;
 }
@@ -20242,6 +20548,24 @@ video {
   --text-opacity: 1;
   color: #3d3d3d;
   color: rgba(61, 61, 61, var(--text-opacity));
+}
+
+.focus\:text-linkedin:focus {
+  --text-opacity: 1;
+  color: #0077B5;
+  color: rgba(0, 119, 181, var(--text-opacity));
+}
+
+.focus\:text-github:focus {
+  --text-opacity: 1;
+  color: #211F1F;
+  color: rgba(33, 31, 31, var(--text-opacity));
+}
+
+.focus\:text-twitter:focus {
+  --text-opacity: 1;
+  color: #08A0E9;
+  color: rgba(8, 160, 233, var(--text-opacity));
 }
 
 .text-opacity-0 {
@@ -24222,21 +24546,20 @@ button:focus, input:focus {
   display: flex;
   flex-direction: column;
   flex: none;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
-.block-menu a {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
 }
 
 .block-menu a:hover {
   --text-opacity: 1;
   color: #219fa6;
   color: rgba(33, 159, 166, var(--text-opacity));
+}
+
+.category-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
 }
 
 .bg-blur-3 {
@@ -25658,6 +25981,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--divide-opacity));
   }
 
+  .sm\:divide-linkedin > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--divide-opacity));
+  }
+
+  .sm\:divide-github > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--divide-opacity));
+  }
+
+  .sm\:divide-twitter > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--divide-opacity));
+  }
+
   .sm\:divide-opacity-0 > :not(template) ~ :not(template) {
     --divide-opacity: 0;
   }
@@ -26518,6 +26859,24 @@ button:focus, input:focus {
     background-color: rgba(61, 61, 61, var(--bg-opacity));
   }
 
+  .sm\:bg-linkedin {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .sm\:bg-github {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .sm\:bg-twitter {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
+  }
+
   .sm\:hover\:bg-transparent:hover {
     background-color: transparent;
   }
@@ -27294,6 +27653,24 @@ button:focus, input:focus {
     background-color: rgba(61, 61, 61, var(--bg-opacity));
   }
 
+  .sm\:hover\:bg-linkedin:hover {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .sm\:hover\:bg-github:hover {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .sm\:hover\:bg-twitter:hover {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
+  }
+
   .sm\:focus\:bg-transparent:focus {
     background-color: transparent;
   }
@@ -28068,6 +28445,24 @@ button:focus, input:focus {
     --bg-opacity: 1;
     background-color: #3d3d3d;
     background-color: rgba(61, 61, 61, var(--bg-opacity));
+  }
+
+  .sm\:focus\:bg-linkedin:focus {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .sm\:focus\:bg-github:focus {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .sm\:focus\:bg-twitter:focus {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
   }
 
   .sm\:bg-opacity-0 {
@@ -28986,6 +29381,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--border-opacity));
   }
 
+  .sm\:border-linkedin {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .sm\:border-github {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .sm\:border-twitter {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
+  }
+
   .sm\:hover\:border-transparent:hover {
     border-color: transparent;
   }
@@ -29762,6 +30175,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--border-opacity));
   }
 
+  .sm\:hover\:border-linkedin:hover {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .sm\:hover\:border-github:hover {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .sm\:hover\:border-twitter:hover {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
+  }
+
   .sm\:focus\:border-transparent:focus {
     border-color: transparent;
   }
@@ -30536,6 +30967,24 @@ button:focus, input:focus {
     --border-opacity: 1;
     border-color: #3d3d3d;
     border-color: rgba(61, 61, 61, var(--border-opacity));
+  }
+
+  .sm\:focus\:border-linkedin:focus {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .sm\:focus\:border-github:focus {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .sm\:focus\:border-twitter:focus {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
   }
 
   .sm\:border-opacity-0 {
@@ -37641,6 +38090,78 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--placeholder-opacity));
   }
 
+  .sm\:placeholder-linkedin::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-linkedin:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-linkedin::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-linkedin::placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-github::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-github:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-github::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-github::placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-twitter::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-twitter:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-twitter::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .sm\:placeholder-twitter::placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
   .sm\:focus\:placeholder-transparent:focus::-moz-placeholder {
     color: transparent;
   }
@@ -40745,6 +41266,78 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--placeholder-opacity));
   }
 
+  .sm\:focus\:placeholder-linkedin:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-linkedin:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-linkedin:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-linkedin:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-github:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-github:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-github:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-github:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-twitter:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-twitter:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-twitter:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .sm\:focus\:placeholder-twitter:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
   .sm\:placeholder-opacity-0::-moz-placeholder {
     --placeholder-opacity: 0;
   }
@@ -42352,6 +42945,24 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--text-opacity));
   }
 
+  .sm\:text-linkedin {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .sm\:text-github {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .sm\:text-twitter {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
+  }
+
   .sm\:hover\:text-transparent:hover {
     color: transparent;
   }
@@ -43128,6 +43739,24 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--text-opacity));
   }
 
+  .sm\:hover\:text-linkedin:hover {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .sm\:hover\:text-github:hover {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .sm\:hover\:text-twitter:hover {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
+  }
+
   .sm\:focus\:text-transparent:focus {
     color: transparent;
   }
@@ -43902,6 +44531,24 @@ button:focus, input:focus {
     --text-opacity: 1;
     color: #3d3d3d;
     color: rgba(61, 61, 61, var(--text-opacity));
+  }
+
+  .sm\:focus\:text-linkedin:focus {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .sm\:focus\:text-github:focus {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .sm\:focus\:text-twitter:focus {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
   }
 
   .sm\:text-opacity-0 {
@@ -48545,6 +49192,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--divide-opacity));
   }
 
+  .md\:divide-linkedin > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--divide-opacity));
+  }
+
+  .md\:divide-github > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--divide-opacity));
+  }
+
+  .md\:divide-twitter > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--divide-opacity));
+  }
+
   .md\:divide-opacity-0 > :not(template) ~ :not(template) {
     --divide-opacity: 0;
   }
@@ -49405,6 +50070,24 @@ button:focus, input:focus {
     background-color: rgba(61, 61, 61, var(--bg-opacity));
   }
 
+  .md\:bg-linkedin {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .md\:bg-github {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .md\:bg-twitter {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
+  }
+
   .md\:hover\:bg-transparent:hover {
     background-color: transparent;
   }
@@ -50181,6 +50864,24 @@ button:focus, input:focus {
     background-color: rgba(61, 61, 61, var(--bg-opacity));
   }
 
+  .md\:hover\:bg-linkedin:hover {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .md\:hover\:bg-github:hover {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .md\:hover\:bg-twitter:hover {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
+  }
+
   .md\:focus\:bg-transparent:focus {
     background-color: transparent;
   }
@@ -50955,6 +51656,24 @@ button:focus, input:focus {
     --bg-opacity: 1;
     background-color: #3d3d3d;
     background-color: rgba(61, 61, 61, var(--bg-opacity));
+  }
+
+  .md\:focus\:bg-linkedin:focus {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .md\:focus\:bg-github:focus {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .md\:focus\:bg-twitter:focus {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
   }
 
   .md\:bg-opacity-0 {
@@ -51873,6 +52592,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--border-opacity));
   }
 
+  .md\:border-linkedin {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .md\:border-github {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .md\:border-twitter {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
+  }
+
   .md\:hover\:border-transparent:hover {
     border-color: transparent;
   }
@@ -52649,6 +53386,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--border-opacity));
   }
 
+  .md\:hover\:border-linkedin:hover {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .md\:hover\:border-github:hover {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .md\:hover\:border-twitter:hover {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
+  }
+
   .md\:focus\:border-transparent:focus {
     border-color: transparent;
   }
@@ -53423,6 +54178,24 @@ button:focus, input:focus {
     --border-opacity: 1;
     border-color: #3d3d3d;
     border-color: rgba(61, 61, 61, var(--border-opacity));
+  }
+
+  .md\:focus\:border-linkedin:focus {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .md\:focus\:border-github:focus {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .md\:focus\:border-twitter:focus {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
   }
 
   .md\:border-opacity-0 {
@@ -60528,6 +61301,78 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--placeholder-opacity));
   }
 
+  .md\:placeholder-linkedin::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-linkedin:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-linkedin::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-linkedin::placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-github::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-github:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-github::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-github::placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-twitter::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-twitter:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-twitter::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .md\:placeholder-twitter::placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
   .md\:focus\:placeholder-transparent:focus::-moz-placeholder {
     color: transparent;
   }
@@ -63632,6 +64477,78 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--placeholder-opacity));
   }
 
+  .md\:focus\:placeholder-linkedin:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-linkedin:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-linkedin:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-linkedin:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-github:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-github:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-github:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-github:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-twitter:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-twitter:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-twitter:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .md\:focus\:placeholder-twitter:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
   .md\:placeholder-opacity-0::-moz-placeholder {
     --placeholder-opacity: 0;
   }
@@ -65239,6 +66156,24 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--text-opacity));
   }
 
+  .md\:text-linkedin {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .md\:text-github {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .md\:text-twitter {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
+  }
+
   .md\:hover\:text-transparent:hover {
     color: transparent;
   }
@@ -66015,6 +66950,24 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--text-opacity));
   }
 
+  .md\:hover\:text-linkedin:hover {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .md\:hover\:text-github:hover {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .md\:hover\:text-twitter:hover {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
+  }
+
   .md\:focus\:text-transparent:focus {
     color: transparent;
   }
@@ -66789,6 +67742,24 @@ button:focus, input:focus {
     --text-opacity: 1;
     color: #3d3d3d;
     color: rgba(61, 61, 61, var(--text-opacity));
+  }
+
+  .md\:focus\:text-linkedin:focus {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .md\:focus\:text-github:focus {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .md\:focus\:text-twitter:focus {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
   }
 
   .md\:text-opacity-0 {
@@ -71432,6 +72403,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--divide-opacity));
   }
 
+  .lg\:divide-linkedin > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--divide-opacity));
+  }
+
+  .lg\:divide-github > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--divide-opacity));
+  }
+
+  .lg\:divide-twitter > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--divide-opacity));
+  }
+
   .lg\:divide-opacity-0 > :not(template) ~ :not(template) {
     --divide-opacity: 0;
   }
@@ -72292,6 +73281,24 @@ button:focus, input:focus {
     background-color: rgba(61, 61, 61, var(--bg-opacity));
   }
 
+  .lg\:bg-linkedin {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .lg\:bg-github {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .lg\:bg-twitter {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
+  }
+
   .lg\:hover\:bg-transparent:hover {
     background-color: transparent;
   }
@@ -73068,6 +74075,24 @@ button:focus, input:focus {
     background-color: rgba(61, 61, 61, var(--bg-opacity));
   }
 
+  .lg\:hover\:bg-linkedin:hover {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .lg\:hover\:bg-github:hover {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .lg\:hover\:bg-twitter:hover {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
+  }
+
   .lg\:focus\:bg-transparent:focus {
     background-color: transparent;
   }
@@ -73842,6 +74867,24 @@ button:focus, input:focus {
     --bg-opacity: 1;
     background-color: #3d3d3d;
     background-color: rgba(61, 61, 61, var(--bg-opacity));
+  }
+
+  .lg\:focus\:bg-linkedin:focus {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .lg\:focus\:bg-github:focus {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .lg\:focus\:bg-twitter:focus {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
   }
 
   .lg\:bg-opacity-0 {
@@ -74760,6 +75803,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--border-opacity));
   }
 
+  .lg\:border-linkedin {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .lg\:border-github {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .lg\:border-twitter {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
+  }
+
   .lg\:hover\:border-transparent:hover {
     border-color: transparent;
   }
@@ -75536,6 +76597,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--border-opacity));
   }
 
+  .lg\:hover\:border-linkedin:hover {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .lg\:hover\:border-github:hover {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .lg\:hover\:border-twitter:hover {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
+  }
+
   .lg\:focus\:border-transparent:focus {
     border-color: transparent;
   }
@@ -76310,6 +77389,24 @@ button:focus, input:focus {
     --border-opacity: 1;
     border-color: #3d3d3d;
     border-color: rgba(61, 61, 61, var(--border-opacity));
+  }
+
+  .lg\:focus\:border-linkedin:focus {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .lg\:focus\:border-github:focus {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .lg\:focus\:border-twitter:focus {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
   }
 
   .lg\:border-opacity-0 {
@@ -83415,6 +84512,78 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--placeholder-opacity));
   }
 
+  .lg\:placeholder-linkedin::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-linkedin:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-linkedin::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-linkedin::placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-github::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-github:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-github::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-github::placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-twitter::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-twitter:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-twitter::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .lg\:placeholder-twitter::placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
   .lg\:focus\:placeholder-transparent:focus::-moz-placeholder {
     color: transparent;
   }
@@ -86519,6 +87688,78 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--placeholder-opacity));
   }
 
+  .lg\:focus\:placeholder-linkedin:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-linkedin:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-linkedin:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-linkedin:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-github:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-github:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-github:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-github:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-twitter:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-twitter:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-twitter:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .lg\:focus\:placeholder-twitter:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
   .lg\:placeholder-opacity-0::-moz-placeholder {
     --placeholder-opacity: 0;
   }
@@ -88126,6 +89367,24 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--text-opacity));
   }
 
+  .lg\:text-linkedin {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .lg\:text-github {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .lg\:text-twitter {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
+  }
+
   .lg\:hover\:text-transparent:hover {
     color: transparent;
   }
@@ -88902,6 +90161,24 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--text-opacity));
   }
 
+  .lg\:hover\:text-linkedin:hover {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .lg\:hover\:text-github:hover {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .lg\:hover\:text-twitter:hover {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
+  }
+
   .lg\:focus\:text-transparent:focus {
     color: transparent;
   }
@@ -89676,6 +90953,24 @@ button:focus, input:focus {
     --text-opacity: 1;
     color: #3d3d3d;
     color: rgba(61, 61, 61, var(--text-opacity));
+  }
+
+  .lg\:focus\:text-linkedin:focus {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .lg\:focus\:text-github:focus {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .lg\:focus\:text-twitter:focus {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
   }
 
   .lg\:text-opacity-0 {
@@ -94319,6 +95614,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--divide-opacity));
   }
 
+  .xl\:divide-linkedin > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--divide-opacity));
+  }
+
+  .xl\:divide-github > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--divide-opacity));
+  }
+
+  .xl\:divide-twitter > :not(template) ~ :not(template) {
+    --divide-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--divide-opacity));
+  }
+
   .xl\:divide-opacity-0 > :not(template) ~ :not(template) {
     --divide-opacity: 0;
   }
@@ -95179,6 +96492,24 @@ button:focus, input:focus {
     background-color: rgba(61, 61, 61, var(--bg-opacity));
   }
 
+  .xl\:bg-linkedin {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .xl\:bg-github {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .xl\:bg-twitter {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
+  }
+
   .xl\:hover\:bg-transparent:hover {
     background-color: transparent;
   }
@@ -95955,6 +97286,24 @@ button:focus, input:focus {
     background-color: rgba(61, 61, 61, var(--bg-opacity));
   }
 
+  .xl\:hover\:bg-linkedin:hover {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .xl\:hover\:bg-github:hover {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .xl\:hover\:bg-twitter:hover {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
+  }
+
   .xl\:focus\:bg-transparent:focus {
     background-color: transparent;
   }
@@ -96729,6 +98078,24 @@ button:focus, input:focus {
     --bg-opacity: 1;
     background-color: #3d3d3d;
     background-color: rgba(61, 61, 61, var(--bg-opacity));
+  }
+
+  .xl\:focus\:bg-linkedin:focus {
+    --bg-opacity: 1;
+    background-color: #0077B5;
+    background-color: rgba(0, 119, 181, var(--bg-opacity));
+  }
+
+  .xl\:focus\:bg-github:focus {
+    --bg-opacity: 1;
+    background-color: #211F1F;
+    background-color: rgba(33, 31, 31, var(--bg-opacity));
+  }
+
+  .xl\:focus\:bg-twitter:focus {
+    --bg-opacity: 1;
+    background-color: #08A0E9;
+    background-color: rgba(8, 160, 233, var(--bg-opacity));
   }
 
   .xl\:bg-opacity-0 {
@@ -97647,6 +99014,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--border-opacity));
   }
 
+  .xl\:border-linkedin {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .xl\:border-github {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .xl\:border-twitter {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
+  }
+
   .xl\:hover\:border-transparent:hover {
     border-color: transparent;
   }
@@ -98423,6 +99808,24 @@ button:focus, input:focus {
     border-color: rgba(61, 61, 61, var(--border-opacity));
   }
 
+  .xl\:hover\:border-linkedin:hover {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .xl\:hover\:border-github:hover {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .xl\:hover\:border-twitter:hover {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
+  }
+
   .xl\:focus\:border-transparent:focus {
     border-color: transparent;
   }
@@ -99197,6 +100600,24 @@ button:focus, input:focus {
     --border-opacity: 1;
     border-color: #3d3d3d;
     border-color: rgba(61, 61, 61, var(--border-opacity));
+  }
+
+  .xl\:focus\:border-linkedin:focus {
+    --border-opacity: 1;
+    border-color: #0077B5;
+    border-color: rgba(0, 119, 181, var(--border-opacity));
+  }
+
+  .xl\:focus\:border-github:focus {
+    --border-opacity: 1;
+    border-color: #211F1F;
+    border-color: rgba(33, 31, 31, var(--border-opacity));
+  }
+
+  .xl\:focus\:border-twitter:focus {
+    --border-opacity: 1;
+    border-color: #08A0E9;
+    border-color: rgba(8, 160, 233, var(--border-opacity));
   }
 
   .xl\:border-opacity-0 {
@@ -106302,6 +107723,78 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--placeholder-opacity));
   }
 
+  .xl\:placeholder-linkedin::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-linkedin:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-linkedin::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-linkedin::placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-github::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-github:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-github::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-github::placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-twitter::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-twitter:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-twitter::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .xl\:placeholder-twitter::placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
   .xl\:focus\:placeholder-transparent:focus::-moz-placeholder {
     color: transparent;
   }
@@ -109406,6 +110899,78 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--placeholder-opacity));
   }
 
+  .xl\:focus\:placeholder-linkedin:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-linkedin:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-linkedin:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-linkedin:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-github:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-github:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-github:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-github:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-twitter:focus::-moz-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-twitter:focus:-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-twitter:focus::-ms-input-placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
+  .xl\:focus\:placeholder-twitter:focus::placeholder {
+    --placeholder-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--placeholder-opacity));
+  }
+
   .xl\:placeholder-opacity-0::-moz-placeholder {
     --placeholder-opacity: 0;
   }
@@ -111013,6 +112578,24 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--text-opacity));
   }
 
+  .xl\:text-linkedin {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .xl\:text-github {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .xl\:text-twitter {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
+  }
+
   .xl\:hover\:text-transparent:hover {
     color: transparent;
   }
@@ -111789,6 +113372,24 @@ button:focus, input:focus {
     color: rgba(61, 61, 61, var(--text-opacity));
   }
 
+  .xl\:hover\:text-linkedin:hover {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .xl\:hover\:text-github:hover {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .xl\:hover\:text-twitter:hover {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
+  }
+
   .xl\:focus\:text-transparent:focus {
     color: transparent;
   }
@@ -112563,6 +114164,24 @@ button:focus, input:focus {
     --text-opacity: 1;
     color: #3d3d3d;
     color: rgba(61, 61, 61, var(--text-opacity));
+  }
+
+  .xl\:focus\:text-linkedin:focus {
+    --text-opacity: 1;
+    color: #0077B5;
+    color: rgba(0, 119, 181, var(--text-opacity));
+  }
+
+  .xl\:focus\:text-github:focus {
+    --text-opacity: 1;
+    color: #211F1F;
+    color: rgba(33, 31, 31, var(--text-opacity));
+  }
+
+  .xl\:focus\:text-twitter:focus {
+    --text-opacity: 1;
+    color: #08A0E9;
+    color: rgba(8, 160, 233, var(--text-opacity));
   }
 
   .xl\:text-opacity-0 {
