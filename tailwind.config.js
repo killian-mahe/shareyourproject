@@ -139,6 +139,9 @@ module.exports = {
                 '800' : '#7a7a7a',
                 '900' : '#3d3d3d'
                 },
+                'linkedin' : '#0077B5',
+                'github' : '#211F1F',
+                'twitter' : '#08A0E9'
             },
             borderRadius: {
                 'xl' : '0.6rem',
