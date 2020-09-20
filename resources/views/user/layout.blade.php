@@ -4,7 +4,7 @@
 
 <div class="flex justify-center mt-4 min-h-screen">
 
-    <div class="w-1/8">
+    <div class="hidden md:block md:w-1/3 md:ml-4 lg:w-1/4 xl:w-1/6">
         <div class="block-menu p-5 mt-48">
             <h2 class="category-title">Links</h2>
             <div class="flex justify-between py-2"><span class="text-linkedin">LinkedIn</span><a href="https://www.linkedin.com/in/killian-mah%C3%A9-246928135/">killian-mahe</a></div>
@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="w-2/5 mx-4">
+    <div class="w-full md:w-2/3 lg:w-1/2 mx-4">
 
         <div class="w-full h-auto mb-3 pb-4 shadow bg-cultured-100 md:rounded-lg">
             <div class="flex relative justify-center">
@@ -25,7 +25,7 @@
         @yield('main')
 
     </div>
-    <div class="w-1/8"></div>
+    <div class="hidden xl:block lg:w-1/6 xl:w-1/8"></div>
 
 </div>
 
