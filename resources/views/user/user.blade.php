@@ -16,15 +16,17 @@
 
 @foreach ($user->projects as $project)
 
-<div class="bg-cultured-100 shadow md:rounded-lg flex mb-3 border-b-8 border-viridiant-600">
-    <img class="w-1/5 md:rounded-tl-md object-cover" src="{{asset('vendor/courier/img/jeff-sheldon-8z2Q6XWLYa4.jpg')}}" alt="project_picture">
-    <div class="p-3">
-        <h3 class="font-semibold mb-4">{{$project->name}}</h3>
-        <p class="font-light text-sm">{{$project->description}}</p>
-        <div class="mt-4 mb-2">
-            @foreach ($project->technologies as $technology)
-                <badge-label label="{{$technology->label}}" link="#"></badge-label>
-            @endforeach
+<div class="bg-cultured-100 shadow md:rounded-lg flex mb-3 border-b-8 border-viridiant-600 w-3/4 min-h-14">
+    <img class="w-1/4 md:rounded-tl-md object-cover" src="{{asset('vendor/courier/img/jeff-sheldon-8z2Q6XWLYa4.jpg')}}" alt="project_picture">
+    <div class="p-3 flex flex-col justify-between">
+        <div>
+            <h3 class="font-semibold mb-4">{{$project->name}}</h3>
+            <p class="font-light text-sm">{{$project->description}}</p>
+            <div class="mt-4 mb-2">
+                @foreach ($project->technologies as $technology)
+                    <badge-label label="{{$technology->label}}" link="#"></badge-label>
+                @endforeach
+            </div>
         </div>
         <div class="w-full flex justify-end items-center">
             <span class="relative w-24 h-7">
