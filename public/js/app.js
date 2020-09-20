@@ -37881,7 +37881,7 @@ var render = function() {
     "span",
     {
       staticClass:
-        "rounded-full px-2 pb-1 pt-0.25 text-sm font-semibold bg-onyx-200 lowercase"
+        "rounded-full px-2 pb-1 pt-0.25 text-xs font-semibold bg-onyx-200 lowercase"
     },
     [_c("a", { attrs: { href: _vm.link } }, [_vm._v(_vm._s(_vm.label))])]
   )
