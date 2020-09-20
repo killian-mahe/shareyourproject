@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="bg-cultured-400">
     <div id="app">
         {{-- NavBar --}}
         <nav class="w-full shadow-lg bg-cultured-100 nav-bar hidden lg:flex z-50">
