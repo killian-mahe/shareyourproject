@@ -52,15 +52,3 @@
 .mobile-nav-list {
     @apply text-center list-none;
 }
-
-// ********** //
-// Block Menu //
-// ********** //
-
-.block-menu{
-    @apply w-full h-auto bg-cultured-100 rounded-lg shadow mb-4 flex flex-col flex-none py-2;
-}
-
-.block-menu a:hover{
-    @apply text-viridiant-600;
-}

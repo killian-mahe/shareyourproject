@@ -4,7 +4,7 @@
 
 <div class="w-full h-auto bg-cultured-400 flex justify-center py-6">
     <div class="h-128 justify-center flex-row hidden sm:block w-1/4 md:w-1/4 lg:w-1/6">
-        <div class="block-menu mt-48">
+        <div class="w-full h-auto bg-cultured-100 rounded-lg shadow mb-4 flex flex-col flex-none py-2 mt-48">
             <a class="py-2 px-6" href="{{route('projects.show', ['project'=>$project->id])}}">Publications</a>
             <a class="py-2 px-6" href="{{route('projects.members', ['project'=>$project->id])}}">Members</a>
             <a class="py-2 px-6" href="{{route('projects.about', ['project'=>$project->id])}}">About</a>

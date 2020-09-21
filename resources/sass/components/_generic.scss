@@ -1,3 +1,7 @@
 .category-title {
     @apply font-semibold mb-2 text-xl;
 }
+
+a:hover {
+    @apply text-viridiant-600;
+}
