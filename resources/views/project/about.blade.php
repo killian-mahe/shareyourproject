@@ -12,7 +12,7 @@
         <div class="px-8 pb-8 pt-4 text-justify">
             {{$project->description}}
         </div>
-        </div>
     </div>
+
 
 @endsection
