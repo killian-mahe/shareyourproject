@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\User;
+use App\Http\Resources\User as UserResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::name('api.')->group(function() {
+
+    Route::name('users.')->group(function() {
+
+        Route::get('users/{user}', function (Request $request, User $user) {
+            return new UserResource($user);
+        })->name('get');
+        
+    });
+
 });
