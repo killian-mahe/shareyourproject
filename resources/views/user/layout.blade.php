@@ -5,7 +5,7 @@
 <div class="flex justify-center mt-4 min-h-screen">
 
     <div class="hidden md:block md:w-1/3 md:ml-4 lg:w-1/4 xl:w-1/6">
-        <div class="block-menu p-5 mt-48">
+        <div class="w-full h-auto bg-cultured-100 rounded-lg shadow mb-4 flex flex-col flex-none py-2 p-5 mt-48">
             <h2 class="category-title">Links</h2>
             <div class="flex justify-between py-2"><span class="text-linkedin">LinkedIn</span><a href="https://www.linkedin.com/in/killian-mah%C3%A9-246928135/">killian-mahe</a></div>
             <div class="flex justify-between py-2"><span class="text-github">GitHub</span><a href="https://github.com/killian-mahe">@killian-mahe</a></div>
