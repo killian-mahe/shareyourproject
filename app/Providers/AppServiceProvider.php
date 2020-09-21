@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../../resources/assets' => \public_path('vendor/courier'),
         ], 'public');
+
+        JsonResource::withoutWrapping();
     }
 }
