@@ -1,9 +1,11 @@
 <div class="card md:rounded-lg">
     <div class="card-title">
-        <img class="rounded-full my-auto h-full w-auto hover:shadow-md" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"/>
-        <div class="flex flex-col ml-3 justify-start">
-            <div class="font-sans font-bold text-base hover:underline"><a href="#">{{$post->author->username}}</a></div>
-            <span class="font-sans italic text-base">Web Designer</span>
+        <a href="{{route('users.show', ['user'=>$post->author_id])}}" class="w-auto inline-grid">
+            <img class="rounded-full my-auto h-full w-auto hover:shadow-md" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"/>
+        </a>
+        <div class="flex flex-col ml-3 justify-start w-full">
+            <div class="font-sans font-bold text-base hover:underline"><a href="{{route('users.show', ['user'=>$post->author_id])}}">{{$post->author->full_name()}}</a></div>
+            <span class="font-sans italic text-base">{{$post->author->title}}</span>
         </div>
     </div>
 

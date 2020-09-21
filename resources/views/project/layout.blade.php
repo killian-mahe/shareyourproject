@@ -23,7 +23,7 @@
             <div class="flex py-2 px-4 justify-between">
                 <div>
                     <span class="text-sm">An idea from </span>
-                    <a href="#" class="text-sm hover:underline">{{$project->owner->full_name()}}</a>
+                    <a href="{{route('users.show', ['user'=>$project->owner_id])}}" class="text-sm hover:underline">{{$project->owner->full_name()}}</a>
                 </div>
                 <div>
                     <span class="text-sm italic">Created on </span>
