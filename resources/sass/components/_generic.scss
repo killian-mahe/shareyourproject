@@ -5,3 +5,13 @@
 a:hover {
     @apply text-viridiant-600;
 }
+
+.box {
+    @apply shadow bg-cultured-100;
+}
+
+@screen md {
+    .box {
+        @apply rounded-md;
+    }
+}

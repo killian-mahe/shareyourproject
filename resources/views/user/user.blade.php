@@ -2,7 +2,7 @@
 
 @section('main')
 
-<div class="bg-cultured-100 shadow md:rounded-lg p-5">
+<div class="box p-5">
 
     <h2 class="category-title">Who he is ?</h2>
     <span class="font-light text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac eros vitae nisl ultrices laoreet.
