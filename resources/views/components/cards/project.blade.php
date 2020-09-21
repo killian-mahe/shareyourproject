@@ -2,7 +2,9 @@
     <img class="w-1/4 md:rounded-tl-md object-cover" src="{{asset('vendor/courier/img/jeff-sheldon-8z2Q6XWLYa4.jpg')}}" alt="project_picture">
     <div class="p-3 flex flex-col justify-between w-full">
         <div>
-            <h3 class="font-semibold mb-4">{{$project->name}}</h3>
+            <a href="{{route('projects.show', ['project'=>$project->id])}}">
+                <h3 class="font-semibold mb-4">{{$project->name}}</h3>
+            </a>
             <p class="font-light text-sm">{{$project->description}}</p>
             <div class="mt-4 mb-2">
                 @foreach ($project->technologies as $technology)
@@ -20,7 +22,9 @@
                     <img class="h-7 w-7 rounded-full absolute right-0" src="{{$member->profile_picture()}}" alt="">
                 @endforeach
             </span>
-            <span class="text-sm font-light ml-2">{{$project->members->count()}} members</span>
+            <a href="{{route('projects.members', ['project'=>$project->id])}}">
+                <span class="text-sm font-light ml-2">{{$project->members->count()}} members</span>
+            </a>
         </div>
     </div>
 </div>
