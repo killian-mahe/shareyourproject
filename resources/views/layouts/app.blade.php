@@ -19,7 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-cultured-400">
+<body class="bg-cultured-200">
     <div id="app">
         {{-- NavBar --}}
         <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50">
@@ -40,7 +40,7 @@
                 </form>
               </div>
               <div class="my-auto hidden lg:block">
-                <button class="btn btn-viridiant-outline">Sign Up</button>
+                <button class="btn-classic mr-2">Sign Up</button>
                 <button class="btn btn-viridiant">Log In</button>
               </div>
             </div>

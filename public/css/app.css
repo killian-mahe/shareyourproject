@@ -24067,15 +24067,48 @@ button:focus, input:focus {
 }
 
 .btn {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  margin: 0.5rem;
-  border-radius: 9999px;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-width: 1px;
+  border-color: transparent;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  --text-opacity: 1;
+  color: #51575a;
+  color: rgba(81, 87, 90, var(--text-opacity));
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.btn-classic {
+  white-space: nowrap;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  --text-opacity: 1;
+  color: #a0aec0;
+  color: rgba(160, 174, 192, var(--text-opacity));
+}
+
+.btn-classic:focus {
+  --text-opacity: 1;
+  color: #1a202c;
+  color: rgba(26, 32, 44, var(--text-opacity));
+}
+
+.btn-classic:hover {
+  --text-opacity: 1;
+  color: #1a202c;
+  color: rgba(26, 32, 44, var(--text-opacity));
 }
 
 .btn-viridiant {
@@ -24090,16 +24123,9 @@ button:focus, input:focus {
 }
 
 .btn-viridiant:hover {
-  border-width: 1px;
-  --border-opacity: 1;
-  border-color: #219fa6;
-  border-color: rgba(33, 159, 166, var(--border-opacity));
   --bg-opacity: 1;
-  background-color: #fefefe;
-  background-color: rgba(254, 254, 254, var(--bg-opacity));
-  --text-opacity: 1;
-  color: #219fa6;
-  color: rgba(33, 159, 166, var(--text-opacity));
+  background-color: #27bfc7;
+  background-color: rgba(39, 191, 199, var(--bg-opacity));
 }
 
 .btn-viridiant-outline {
@@ -24136,16 +24162,9 @@ button:focus, input:focus {
 }
 
 .btn-orange-peel:hover {
-  border-width: 1px;
-  --border-opacity: 1;
-  border-color: #ff9f1c;
-  border-color: rgba(255, 159, 28, var(--border-opacity));
   --bg-opacity: 1;
-  background-color: #fefefe;
-  background-color: rgba(254, 254, 254, var(--bg-opacity));
-  --text-opacity: 1;
-  color: #ff9f1c;
-  color: rgba(255, 159, 28, var(--text-opacity));
+  background-color: #ffab36;
+  background-color: rgba(255, 171, 54, var(--bg-opacity));
 }
 
 .btn-orange-peel-outline {
@@ -24182,16 +24201,9 @@ button:focus, input:focus {
 }
 
 .btn-onyx:hover {
-  border-width: 1px;
-  --border-opacity: 1;
-  border-color: #393d3f;
-  border-color: rgba(57, 61, 63, var(--border-opacity));
   --bg-opacity: 1;
-  background-color: #fefefe;
-  background-color: rgba(254, 254, 254, var(--bg-opacity));
-  --text-opacity: 1;
-  color: #393d3f;
-  color: rgba(57, 61, 63, var(--text-opacity));
+  background-color: #51575a;
+  background-color: rgba(81, 87, 90, var(--bg-opacity));
 }
 
 .btn-onyx-outline {
@@ -24401,7 +24413,7 @@ button:focus, input:focus {
   --border-opacity: 1;
   border-color: #b3b8ba;
   border-color: rgba(179, 184, 186, var(--border-opacity));
-  border-radius: 9999px;
+  border-radius: 0.6rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 2.5rem;
@@ -24433,8 +24445,8 @@ button:focus, input:focus {
   --border-opacity: 1;
   border-color: #b8b8b8;
   border-color: rgba(184, 184, 184, var(--border-opacity));
-  border-top-left-radius: 9999px;
-  border-bottom-left-radius: 9999px;
+  border-top-left-radius: 0.6rem;
+  border-bottom-left-radius: 0.6rem;
   transition: width 0.3s ease-in-out;
 }
 
@@ -24453,8 +24465,8 @@ button:focus, input:focus {
   --border-opacity: 1;
   border-color: #b3b8ba;
   border-color: rgba(179, 184, 186, var(--border-opacity));
-  border-top-right-radius: 9999px;
-  border-bottom-right-radius: 9999px;
+  border-top-right-radius: 0.6rem;
+  border-bottom-right-radius: 0.6rem;
   padding: 0.25rem;
   padding-right: 0.75rem;
 }
