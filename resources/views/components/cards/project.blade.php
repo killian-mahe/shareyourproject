@@ -7,13 +7,16 @@
             </a>
             <p class="font-light text-sm">{{$project->description}}</p>
             <div class="mt-4 mb-2">
+
                 @foreach ($project->technologies as $technology)
                     <badge-label label="{{$technology->label}}" link="#"></badge-label>
                 @endforeach
+
             </div>
         </div>
         <div class="w-full flex justify-end items-center">
             <span class="relative w-24 h-7">
+
                 @foreach ($project->members->slice(0, 1) as $member)
                     <img class="h-7 w-7 rounded-full absolute right-4" src="{{$member->profile_picture()}}" alt="">
                 @endforeach
@@ -21,6 +24,7 @@
                 @foreach ($project->members->slice(1, 1) as $member)
                     <img class="h-7 w-7 rounded-full absolute right-0" src="{{$member->profile_picture()}}" alt="">
                 @endforeach
+
             </span>
             <a href="{{route('projects.members', ['project'=>$project->id])}}">
                 <span class="text-sm font-light ml-2">{{$project->members->count()}} members</span>
