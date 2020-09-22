@@ -1,7 +1,7 @@
 <template>
     <div>
         <project-card v-for="project in projects" :key="project.id" v-bind:project="project"></project-card>
-        <button v-if="this.index < this.projects_ids.length" class="btn btn-viridiant-outline w-full font-sans text-sm" @click="addProject">Load more projects <i class="inline" data-feather="rotate-ccw"></i></button>
+        <button v-if="this.index < this.projects_ids.length" class="btn-classic w-full font-sans text-sm" @click="addProject">Load more projects</button>
     </div>
 </template>
 

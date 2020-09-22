@@ -38294,16 +38294,10 @@ var render = function() {
         ? _c(
             "button",
             {
-              staticClass: "btn btn-viridiant-outline w-full font-sans text-sm",
+              staticClass: "btn-classic w-full font-sans text-sm",
               on: { click: _vm.addProject }
             },
-            [
-              _vm._v("Load more projects "),
-              _c("i", {
-                staticClass: "inline",
-                attrs: { "data-feather": "rotate-ccw" }
-              })
-            ]
+            [_vm._v("Load more projects")]
           )
         : _vm._e()
     ],

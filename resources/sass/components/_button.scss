@@ -4,7 +4,19 @@ button:focus, input:focus {
 }
 
 .btn {
-    @apply py-1 px-3 m-2 rounded-full appearance-none;
+    @apply whitespace-no-wrap inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-onyx-500 transition ease-in-out duration-150;
+}
+
+.btn-classic {
+    @apply whitespace-no-wrap text-base leading-6 font-medium text-gray-500;
+}
+
+.btn-classic:focus {
+    @apply text-gray-900;
+}
+
+.btn-classic:hover {
+    @apply text-gray-900;
 }
 
 .btn-viridiant {
@@ -12,7 +24,7 @@ button:focus, input:focus {
 }
 
 .btn-viridiant:hover {
-    @apply border border-viridiant-600 bg-cultured-100 text-viridiant-600;
+    @apply bg-viridiant-500;
 }
 
 .btn-viridiant-outline {
@@ -28,7 +40,7 @@ button:focus, input:focus {
 }
 
 .btn-orange-peel:hover {
-    @apply border border-orange-peel-600 bg-cultured-100 text-orange-peel-600;
+    @apply bg-orange-peel-500;
 }
 
 .btn-orange-peel-outline {
@@ -44,7 +56,7 @@ button:focus, input:focus {
 }
 
 .btn-onyx:hover {
-    @apply border border-onyx-600 bg-cultured-100 text-onyx-600;
+    @apply bg-onyx-500;
 }
 
 .btn-onyx-outline {
