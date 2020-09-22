@@ -14,11 +14,13 @@
 
 <h2 class="font-semibold text-xl my-5 ml-3">Projects</h2>
 
-@foreach ($user->projects as $project)
+{{-- @foreach ($user->projects as $project)
 
     @include('components.cards.project')
 
-@endforeach
+@endforeach --}}
+
+<project-list :projects_ids='@json($user->projects->pluck('id'))'></project-list>
 
 <h2 class="font-semibold text-xl my-5 ml-3">Posts</h2>
 
