@@ -47,4 +47,12 @@ class Post extends Model
     {
         return $this->morphToMany('App\Models\Tag', 'taggable');
     }
+
+    /**
+     * Get users that liked the post.
+     */
+    public function liking_users()
+    {
+        return $this->belongsToMany('App\User');
+    }
 }
