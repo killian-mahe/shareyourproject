@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
+use \App\Http\Resources\User as UserResource;
+
+class Post extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'content' => $this->content,
+            'author' => new UserResource($this->author),
+            'project_id' => $this->project_id,
+            'url' => [
+                'author' => route('users.show', ['user'=>$this->author_id]),
+            ],
+            'liked' => Auth::user()->does_it_like($this->resource),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
+        ];
+    }
+}

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\User;
 use App\Models\Project;
+use App\Models\Post;
 use App\Http\Resources\User as UserResource;
 use App\Http\Resources\Project as ProjectResource;
 
@@ -43,7 +44,21 @@ Route::name('api.')->group(function() {
                 }
             }
             return ProjectResource::collection($projects);
-        });
+        })->name('getMany');
+
+    });
+
+    Route::name('post.')->group(function() {
+
+        Route::get('posts/{post}/like', function (Request $request, Post $post) {
+            Auth::user()->liked_posts()->attach($post);
+            return json_encode(['ok' => true]);
+        })->middleware('auth:api')->name('like');
+
+        Route::get('posts/{post}/unlike', function (Request $request, Post $post) {
+            Auth::user()->liked_posts()->detach($post);
+            return json_encode(['ok' => true]);
+        })->middleware('auth:api')->name('unlike');
 
     });
 

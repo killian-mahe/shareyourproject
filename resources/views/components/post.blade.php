@@ -1,4 +1,4 @@
-<div class="card md:rounded-lg">
+{{-- <div class="card md:rounded-lg">
     <div class="card-title">
         <a href="{{route('users.show', ['user'=>$post->author_id])}}" class="w-auto inline-grid">
             <img class="rounded-full my-auto h-full w-auto hover:shadow-md" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"/>
@@ -35,4 +35,6 @@
             <a class="hover:text-viridiant-400" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span class="ml-1 hidden md:inline">Share</span></a>
         </div>
     </div>
-</div>
+</div> --}}
+
+<post-card :post_props='@json(new \App\Http\Resources\Post($post))'></post-card>
