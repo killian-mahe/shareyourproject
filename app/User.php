@@ -80,6 +80,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the post liked by the user.
+     */
+    public function liked_posts()
+    {
+        return $this->belongsToMany('App\Models\Post');
+    }
+
+    /**
      * Get the full-name of the user.
      */
     public function full_name()
