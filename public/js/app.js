@@ -2026,12 +2026,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      post: this.post_props
+    };
   },
   props: {
-    'post': Object
+    'post_props': Object
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {},
+  methods: {
+    like: function like(_like) {
+      var _this = this;
+
+      if (_like == true) {
+        axios.get('/api/posts/' + this.post.id + '/like').then(function (response) {
+          if (response.status === 200) _this.post.liked = true;
+        });
+      } else {
+        axios.get('/api/posts/' + this.post.id + '/unlike').then(function (response) {
+          if (response.status === 200) _this.post.liked = false;
+        });
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -38036,7 +38053,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.post
+  return _vm.post !== undefined
     ? _c("div", { staticClass: "card md:rounded-lg" }, [
         _c("div", { staticClass: "card-title" }, [
           _c(
@@ -38105,7 +38122,14 @@ var render = function() {
             _vm.post.liked
               ? _c(
                   "span",
-                  { staticClass: "cursor-pointer text-red-600 fill-current" },
+                  {
+                    staticClass: "cursor-pointer text-red-600 fill-current",
+                    on: {
+                      click: function($event) {
+                        return _vm.like(false)
+                      }
+                    }
+                  },
                   [
                     _c(
                       "svg",
@@ -38139,7 +38163,12 @@ var render = function() {
                   "span",
                   {
                     staticClass:
-                      "cursor-pointer hover:text-red-600 fill-current"
+                      "cursor-pointer hover:text-red-600 fill-current",
+                    on: {
+                      click: function($event) {
+                        return _vm.like(true)
+                      }
+                    }
                   },
                   [
                     _c(

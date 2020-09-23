@@ -37,4 +37,4 @@
     </div>
 </div> --}}
 
-<post-card :post='@json(new \App\Http\Resources\Post($post))'></post-card>
+<post-card :post_props='@json(new \App\Http\Resources\Post($post))'></post-card>
