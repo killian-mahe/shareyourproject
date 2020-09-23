@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use App\Models\Post;
 
 class User extends Authenticatable
 {
@@ -101,5 +102,14 @@ class User extends Authenticatable
     public function profile_picture()
     {
         return asset('vendor/courier/img/default_profile_picture.jpg');
+    }
+
+    /**
+     * Check if the user likes the post.
+     * @return bool
+     */
+    public function does_it_like(Post $post)
+    {
+        return $this->liked_posts->contains($post);
     }
 }
