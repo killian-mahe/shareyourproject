@@ -55,4 +55,12 @@ class Post extends Model
     {
         return $this->belongsToMany('App\User');
     }
+
+    /**
+     * Get the comments of the post.
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
 }
