@@ -7,7 +7,7 @@
 }
 
 .nav-bar-li a {
-    @apply text-onyx-600 py-1 relative my-0 mx-1.5625;
+    @apply text-onyx-600 py-1 relative my-0 mx-1.5625 cursor-pointer;
 }
 
 .nav-bar-li a:hover {

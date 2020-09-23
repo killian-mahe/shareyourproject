@@ -29,7 +29,7 @@
         {{-- NavBar --}}
         <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50">
             <div class="flex justify-around w-full ">
-              <a><img class="my-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
+              <a><img class="m-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="90px" height="90px"></a>
               <ul class="my-auto hidden lg:flex">
                 <li class="nav-bar-li"><a class="inline-flex">Services</a></li>
                 <li class="nav-bar-li"><a class="inline-flex">Project</a></li>
@@ -38,27 +38,34 @@
               </ul>
               <div class="my-auto w-1/4">
                 <form role="search" class="w-full justify-center">
-                  <div class="flex justify-center">
-                    <input class="search-input w-56" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><i class="text-cultured-100" data-feather="search"></i></button>
+                  <div class="flex items-center relative">
+                    <i class="search-glass" data-feather="search"></i></button>
+                    <input  autocomplete="off" id="search-submit" type="text" placeholder="Search" class="search-input placeholder-onyx-300">
                 	</div>
                 </form>
               </div>
-              <div class="my-auto hidden lg:block">
-                <button class="btn-classic mr-2">Sign Up</button>
-                <button class="btn btn-viridiant">Log In</button>
-              </div>
+
+              @auth
+              @else
+
+                <div class="my-auto hidden lg:block">
+                    <a href="{{ route("register") }}" class="btn-classic mr-5">Sign Up</a>
+                    <a href="{{ route("login") }}" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
+                </div>
+
+              @endauth
+
             </div>
         </nav>
         <nav class="w-full px-2 shadow-lg bg-cultured-100 nav-bar flex lg:hidden">
             <div class="flex justify-around w-full ">
               <a><img class="my-2" src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
               <div class="my-auto w-1/2">
-                <form role="search" class="w-full justify-center">
-                  <div class="flex justify-center">
-                    <input class="search-input w-32 md:w-64" autocomplete="off" id="search-submit" type="text" placeholder="Search ...">
-                    <button class="search-glass"><i class="text-cultured-100" data-feather="search"></i></button>
-                	</div>
+                <form role="search" class="w-full justify-center flex">
+                    <div class="w-40 sm:w-56 md:w-full flex justify-center relative items-center">
+                      <i class="search-glass" data-feather="search"></i></button>
+                      <input class="search-input placeholder-onyx-300" autocomplete="off" id="search-submit" type="text" placeholder="Search">
+                    </div>
                 </form>
               </div>
               <!-- Burger Menu -->
