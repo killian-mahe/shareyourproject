@@ -25,7 +25,7 @@ class Post extends JsonResource
             'url' => [
                 'author' => route('users.show', ['user'=>$this->author_id]),
             ],
-            'liked' => Auth::user()->does_it_like($this->resource),
+            'liked' => Auth::user() ? Auth::user()->does_it_like($this->resource) : false,
             'comments_overview' => CommentResource::collection($this->comments->slice(0, 3)),
             'comments_ids' => $this->comments->pluck('id'),
             'created_at' => $this->created_at,

@@ -11,7 +11,7 @@
         </div>
 
         <div class="card-body md:text-lg">
-            <p class="mb-4">
+            <p class="mb-4 leading-5 font-normal text-onyx-600">
                 {{ post.content }}
             </p>
             <img class="max-w-full rounded" src="https://cdn.pixabay.com/photo/2016/08/10/18/04/eat-1583954_1280.jpg"/>
@@ -33,11 +33,19 @@
                 <a class="hover:text-viridiant-400" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span class="ml-1 hidden md:inline">Share</span></a>
             </div>
         </div>
+        <div v-if="post.comments_overview.length > 0" class="p-5 mb-2 border-t-0.0625 border-onyx-100">
+            <comment-component v-for="comment in post.comments_overview" :key="comment.id" :comment="comment" class="mb-3"></comment-component>
+        </div>
     </div>
 </template>
 
 <script>
+    import CommentComponent from '../posts/CommentComponent.vue';
+
     export default {
+        components: {
+            CommentComponent
+        },
         data() {
             return {
                 post: this.post_props
