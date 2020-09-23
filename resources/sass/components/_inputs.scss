@@ -8,14 +8,13 @@
 }
 
 .search-input {
-    @apply px-2 py-2 box-border text-base bg-cultured-100 border border-cultured-700 rounded-l-xl;
-    transition: width 0.3s ease-in-out;
+    @apply  appearance-none relative block w-full pl-10 py-2 border border-gray-300 text-onyx-800 rounded-md;
 }
 
 .search-input:focus {
-    @apply w-full border-viridiant-600;
+    @apply outline-none border-viridiant-500 border-2;
 }
 
 .search-glass {
-    @apply bg-onyx-200 border border-onyx-200 rounded-r-xl p-1 pr-3;
+    @apply text-onyx-300 my-auto h-5 w-5 cursor-pointer absolute z-10 left-2;
 }

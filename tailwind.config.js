@@ -38,6 +38,8 @@ module.exports = {
                 '3.75': '3.75rem',
                 '1/2': '50%',
                 '-1/2': '-50%',
+                '2': '0.5rem',
+                '-2': '-0.5rem',
                 '4': '1rem',
                 '-4': '-1rem',
                 '6': '1.5rem',
@@ -175,6 +177,8 @@ module.exports = {
             borderWidth: {
                 '0.0625' : '0.0625rem',
             },
+            screens: {
+                'xs': '425px',
         },
     },
     variants: {
@@ -182,4 +186,4 @@ module.exports = {
     },
     plugins: [],
   }
-
+}
