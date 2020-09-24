@@ -17400,6 +17400,13 @@ video {
   left: 0.5rem;
 }
 
+.inset-3 {
+  top: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  left: 0.75rem;
+}
+
 .inset-4 {
   top: 1rem;
   right: 1rem;
@@ -17484,6 +17491,13 @@ video {
   left: -0.5rem;
 }
 
+.-inset-3 {
+  top: -0.75rem;
+  right: -0.75rem;
+  bottom: -0.75rem;
+  left: -0.75rem;
+}
+
 .-inset-4 {
   top: -1rem;
   right: -1rem;
@@ -17537,6 +17551,16 @@ video {
 .inset-x-2 {
   right: 0.5rem;
   left: 0.5rem;
+}
+
+.inset-y-3 {
+  top: 0.75rem;
+  bottom: 0.75rem;
+}
+
+.inset-x-3 {
+  right: 0.75rem;
+  left: 0.75rem;
 }
 
 .inset-y-4 {
@@ -17659,6 +17683,16 @@ video {
   left: -0.5rem;
 }
 
+.-inset-y-3 {
+  top: -0.75rem;
+  bottom: -0.75rem;
+}
+
+.-inset-x-3 {
+  right: -0.75rem;
+  left: -0.75rem;
+}
+
 .-inset-y-4 {
   top: -1rem;
   bottom: -1rem;
@@ -17739,6 +17773,22 @@ video {
 
 .left-2 {
   left: 0.5rem;
+}
+
+.top-3 {
+  top: 0.75rem;
+}
+
+.right-3 {
+  right: 0.75rem;
+}
+
+.bottom-3 {
+  bottom: 0.75rem;
+}
+
+.left-3 {
+  left: 0.75rem;
 }
 
 .top-4 {
@@ -17931,6 +17981,22 @@ video {
 
 .-left-2 {
   left: -0.5rem;
+}
+
+.-top-3 {
+  top: -0.75rem;
+}
+
+.-right-3 {
+  right: -0.75rem;
+}
+
+.-bottom-3 {
+  bottom: -0.75rem;
+}
+
+.-left-3 {
+  left: -0.75rem;
 }
 
 .-top-4 {
@@ -41295,6 +41361,13 @@ a:hover {
     left: 0.5rem;
   }
 
+  .sm\:inset-3 {
+    top: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+  }
+
   .sm\:inset-4 {
     top: 1rem;
     right: 1rem;
@@ -41379,6 +41452,13 @@ a:hover {
     left: -0.5rem;
   }
 
+  .sm\:-inset-3 {
+    top: -0.75rem;
+    right: -0.75rem;
+    bottom: -0.75rem;
+    left: -0.75rem;
+  }
+
   .sm\:-inset-4 {
     top: -1rem;
     right: -1rem;
@@ -41432,6 +41512,16 @@ a:hover {
   .sm\:inset-x-2 {
     right: 0.5rem;
     left: 0.5rem;
+  }
+
+  .sm\:inset-y-3 {
+    top: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .sm\:inset-x-3 {
+    right: 0.75rem;
+    left: 0.75rem;
   }
 
   .sm\:inset-y-4 {
@@ -41554,6 +41644,16 @@ a:hover {
     left: -0.5rem;
   }
 
+  .sm\:-inset-y-3 {
+    top: -0.75rem;
+    bottom: -0.75rem;
+  }
+
+  .sm\:-inset-x-3 {
+    right: -0.75rem;
+    left: -0.75rem;
+  }
+
   .sm\:-inset-y-4 {
     top: -1rem;
     bottom: -1rem;
@@ -41634,6 +41734,22 @@ a:hover {
 
   .sm\:left-2 {
     left: 0.5rem;
+  }
+
+  .sm\:top-3 {
+    top: 0.75rem;
+  }
+
+  .sm\:right-3 {
+    right: 0.75rem;
+  }
+
+  .sm\:bottom-3 {
+    bottom: 0.75rem;
+  }
+
+  .sm\:left-3 {
+    left: 0.75rem;
   }
 
   .sm\:top-4 {
@@ -41826,6 +41942,22 @@ a:hover {
 
   .sm\:-left-2 {
     left: -0.5rem;
+  }
+
+  .sm\:-top-3 {
+    top: -0.75rem;
+  }
+
+  .sm\:-right-3 {
+    right: -0.75rem;
+  }
+
+  .sm\:-bottom-3 {
+    bottom: -0.75rem;
+  }
+
+  .sm\:-left-3 {
+    left: -0.75rem;
   }
 
   .sm\:-top-4 {
@@ -64513,6 +64645,13 @@ a:hover {
     left: 0.5rem;
   }
 
+  .md\:inset-3 {
+    top: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+  }
+
   .md\:inset-4 {
     top: 1rem;
     right: 1rem;
@@ -64597,6 +64736,13 @@ a:hover {
     left: -0.5rem;
   }
 
+  .md\:-inset-3 {
+    top: -0.75rem;
+    right: -0.75rem;
+    bottom: -0.75rem;
+    left: -0.75rem;
+  }
+
   .md\:-inset-4 {
     top: -1rem;
     right: -1rem;
@@ -64650,6 +64796,16 @@ a:hover {
   .md\:inset-x-2 {
     right: 0.5rem;
     left: 0.5rem;
+  }
+
+  .md\:inset-y-3 {
+    top: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .md\:inset-x-3 {
+    right: 0.75rem;
+    left: 0.75rem;
   }
 
   .md\:inset-y-4 {
@@ -64772,6 +64928,16 @@ a:hover {
     left: -0.5rem;
   }
 
+  .md\:-inset-y-3 {
+    top: -0.75rem;
+    bottom: -0.75rem;
+  }
+
+  .md\:-inset-x-3 {
+    right: -0.75rem;
+    left: -0.75rem;
+  }
+
   .md\:-inset-y-4 {
     top: -1rem;
     bottom: -1rem;
@@ -64852,6 +65018,22 @@ a:hover {
 
   .md\:left-2 {
     left: 0.5rem;
+  }
+
+  .md\:top-3 {
+    top: 0.75rem;
+  }
+
+  .md\:right-3 {
+    right: 0.75rem;
+  }
+
+  .md\:bottom-3 {
+    bottom: 0.75rem;
+  }
+
+  .md\:left-3 {
+    left: 0.75rem;
   }
 
   .md\:top-4 {
@@ -65044,6 +65226,22 @@ a:hover {
 
   .md\:-left-2 {
     left: -0.5rem;
+  }
+
+  .md\:-top-3 {
+    top: -0.75rem;
+  }
+
+  .md\:-right-3 {
+    right: -0.75rem;
+  }
+
+  .md\:-bottom-3 {
+    bottom: -0.75rem;
+  }
+
+  .md\:-left-3 {
+    left: -0.75rem;
   }
 
   .md\:-top-4 {
@@ -87731,6 +87929,13 @@ a:hover {
     left: 0.5rem;
   }
 
+  .lg\:inset-3 {
+    top: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+  }
+
   .lg\:inset-4 {
     top: 1rem;
     right: 1rem;
@@ -87815,6 +88020,13 @@ a:hover {
     left: -0.5rem;
   }
 
+  .lg\:-inset-3 {
+    top: -0.75rem;
+    right: -0.75rem;
+    bottom: -0.75rem;
+    left: -0.75rem;
+  }
+
   .lg\:-inset-4 {
     top: -1rem;
     right: -1rem;
@@ -87868,6 +88080,16 @@ a:hover {
   .lg\:inset-x-2 {
     right: 0.5rem;
     left: 0.5rem;
+  }
+
+  .lg\:inset-y-3 {
+    top: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .lg\:inset-x-3 {
+    right: 0.75rem;
+    left: 0.75rem;
   }
 
   .lg\:inset-y-4 {
@@ -87990,6 +88212,16 @@ a:hover {
     left: -0.5rem;
   }
 
+  .lg\:-inset-y-3 {
+    top: -0.75rem;
+    bottom: -0.75rem;
+  }
+
+  .lg\:-inset-x-3 {
+    right: -0.75rem;
+    left: -0.75rem;
+  }
+
   .lg\:-inset-y-4 {
     top: -1rem;
     bottom: -1rem;
@@ -88070,6 +88302,22 @@ a:hover {
 
   .lg\:left-2 {
     left: 0.5rem;
+  }
+
+  .lg\:top-3 {
+    top: 0.75rem;
+  }
+
+  .lg\:right-3 {
+    right: 0.75rem;
+  }
+
+  .lg\:bottom-3 {
+    bottom: 0.75rem;
+  }
+
+  .lg\:left-3 {
+    left: 0.75rem;
   }
 
   .lg\:top-4 {
@@ -88262,6 +88510,22 @@ a:hover {
 
   .lg\:-left-2 {
     left: -0.5rem;
+  }
+
+  .lg\:-top-3 {
+    top: -0.75rem;
+  }
+
+  .lg\:-right-3 {
+    right: -0.75rem;
+  }
+
+  .lg\:-bottom-3 {
+    bottom: -0.75rem;
+  }
+
+  .lg\:-left-3 {
+    left: -0.75rem;
   }
 
   .lg\:-top-4 {
@@ -110949,6 +111213,13 @@ a:hover {
     left: 0.5rem;
   }
 
+  .xl\:inset-3 {
+    top: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+  }
+
   .xl\:inset-4 {
     top: 1rem;
     right: 1rem;
@@ -111033,6 +111304,13 @@ a:hover {
     left: -0.5rem;
   }
 
+  .xl\:-inset-3 {
+    top: -0.75rem;
+    right: -0.75rem;
+    bottom: -0.75rem;
+    left: -0.75rem;
+  }
+
   .xl\:-inset-4 {
     top: -1rem;
     right: -1rem;
@@ -111086,6 +111364,16 @@ a:hover {
   .xl\:inset-x-2 {
     right: 0.5rem;
     left: 0.5rem;
+  }
+
+  .xl\:inset-y-3 {
+    top: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .xl\:inset-x-3 {
+    right: 0.75rem;
+    left: 0.75rem;
   }
 
   .xl\:inset-y-4 {
@@ -111208,6 +111496,16 @@ a:hover {
     left: -0.5rem;
   }
 
+  .xl\:-inset-y-3 {
+    top: -0.75rem;
+    bottom: -0.75rem;
+  }
+
+  .xl\:-inset-x-3 {
+    right: -0.75rem;
+    left: -0.75rem;
+  }
+
   .xl\:-inset-y-4 {
     top: -1rem;
     bottom: -1rem;
@@ -111288,6 +111586,22 @@ a:hover {
 
   .xl\:left-2 {
     left: 0.5rem;
+  }
+
+  .xl\:top-3 {
+    top: 0.75rem;
+  }
+
+  .xl\:right-3 {
+    right: 0.75rem;
+  }
+
+  .xl\:bottom-3 {
+    bottom: 0.75rem;
+  }
+
+  .xl\:left-3 {
+    left: 0.75rem;
   }
 
   .xl\:top-4 {
@@ -111480,6 +111794,22 @@ a:hover {
 
   .xl\:-left-2 {
     left: -0.5rem;
+  }
+
+  .xl\:-top-3 {
+    top: -0.75rem;
+  }
+
+  .xl\:-right-3 {
+    right: -0.75rem;
+  }
+
+  .xl\:-bottom-3 {
+    bottom: -0.75rem;
+  }
+
+  .xl\:-left-3 {
+    left: -0.75rem;
   }
 
   .xl\:-top-4 {
@@ -134167,6 +134497,13 @@ a:hover {
     left: 0.5rem;
   }
 
+  .xs\:inset-3 {
+    top: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    left: 0.75rem;
+  }
+
   .xs\:inset-4 {
     top: 1rem;
     right: 1rem;
@@ -134251,6 +134588,13 @@ a:hover {
     left: -0.5rem;
   }
 
+  .xs\:-inset-3 {
+    top: -0.75rem;
+    right: -0.75rem;
+    bottom: -0.75rem;
+    left: -0.75rem;
+  }
+
   .xs\:-inset-4 {
     top: -1rem;
     right: -1rem;
@@ -134304,6 +134648,16 @@ a:hover {
   .xs\:inset-x-2 {
     right: 0.5rem;
     left: 0.5rem;
+  }
+
+  .xs\:inset-y-3 {
+    top: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .xs\:inset-x-3 {
+    right: 0.75rem;
+    left: 0.75rem;
   }
 
   .xs\:inset-y-4 {
@@ -134426,6 +134780,16 @@ a:hover {
     left: -0.5rem;
   }
 
+  .xs\:-inset-y-3 {
+    top: -0.75rem;
+    bottom: -0.75rem;
+  }
+
+  .xs\:-inset-x-3 {
+    right: -0.75rem;
+    left: -0.75rem;
+  }
+
   .xs\:-inset-y-4 {
     top: -1rem;
     bottom: -1rem;
@@ -134506,6 +134870,22 @@ a:hover {
 
   .xs\:left-2 {
     left: 0.5rem;
+  }
+
+  .xs\:top-3 {
+    top: 0.75rem;
+  }
+
+  .xs\:right-3 {
+    right: 0.75rem;
+  }
+
+  .xs\:bottom-3 {
+    bottom: 0.75rem;
+  }
+
+  .xs\:left-3 {
+    left: 0.75rem;
   }
 
   .xs\:top-4 {
@@ -134698,6 +135078,22 @@ a:hover {
 
   .xs\:-left-2 {
     left: -0.5rem;
+  }
+
+  .xs\:-top-3 {
+    top: -0.75rem;
+  }
+
+  .xs\:-right-3 {
+    right: -0.75rem;
+  }
+
+  .xs\:-bottom-3 {
+    bottom: -0.75rem;
+  }
+
+  .xs\:-left-3 {
+    left: -0.75rem;
   }
 
   .xs\:-top-4 {
