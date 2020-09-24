@@ -6,13 +6,25 @@
                 <span class="leading-4 text-sm font-medium block">{{comment.author.first_name}} {{comment.author.last_name}}</span>
                 <span class="leading-3 text-xs block italic">{{comment.author.title}}</span>
             </div>
-            <span class="leading-5 text-md text-gray-700">{{ comment.content }}</span>
+            <v-clamp autoresize :max-lines="3">
+                <template slot="default">
+                    {{ comment.content }}
+                </template>
+                <template slot="after" slot-scope="expand">
+                    <span v-if="expand.clamped" class="cursor-pointer ml-2 text-base leading-6 font-semibold text-onyx-500" @click="expand.expand()">more</span>
+                </template>
+            </v-clamp>
         </div>
     </div>
 </template>
 
 <script>
+import VClamp from 'vue-clamp';
+
     export default {
+        components: {
+            VClamp
+        },
         data() {
             return {
             }
@@ -22,8 +34,6 @@
         },
         mounted() {
             console.log(this.comment)
-        },
-        methods: {
         }
     }
 </script>

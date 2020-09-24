@@ -35,6 +35,7 @@
         </div>
         <div v-if="post.comments_overview.length > 0" class="p-5 mb-2 border-t-0.0625 border-onyx-100">
             <comment-component v-for="comment in post.comments_overview" :key="comment.id" :comment="comment" class="mb-3"></comment-component>
+            <button v-if="comments_to_load.length > 0" class="btn-classic w-full font-sans text-sm" @click="addComments">Load more comments</button>
         </div>
     </div>
 </template>
@@ -48,13 +49,17 @@
         },
         data() {
             return {
-                post: this.post_props
+                post: this.post_props,
+                comments: this.post_props.comments_overview,
+                comments_to_load: Array
             }
         },
         props: {
             'post_props': Object
         },
         mounted() {
+            this.comments_to_load = this.post.comments_ids.filter(comment_id => !this.comments.map(x => x.id).includes(comment_id));
+            console.log(this.comments_to_load)
         },
         methods: {
             like: function(like) {
@@ -65,6 +70,23 @@
                 } else {
                     axios.get('/api/posts/'+this.post.id+'/unlike').then(response => {
                         if (response.status === 200) this.post.liked = false;
+                    })
+                }
+            },
+            addComments: function() {
+                if (this.comments_to_load.length > 0)
+                {
+                    let ids = this.comments_to_load.slice(0, 3);
+                    this.comments_to_load = this.comments_to_load.slice(3);
+                    
+                    axios.post('/api/comments/get', {
+                        comments_ids: ids
+                    }).then(response => {
+                        if (response.status === 200) {
+                            response.data.forEach(data => {
+                                this.comments.push(data);
+                            });
+                        }
                     })
                 }
             }

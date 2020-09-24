@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\User;
 use App\Models\Project;
 use App\Models\Post;
+use App\Models\Comment;
 use App\Http\Resources\User as UserResource;
 use App\Http\Resources\Project as ProjectResource;
+use App\Http\Resources\Comment as CommentResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +61,25 @@ Route::name('api.')->group(function() {
             Auth::user()->liked_posts()->detach($post);
             return json_encode(['ok' => true]);
         })->middleware('auth:api')->name('unlike');
+
+    });
+
+    Route::name('comment.')->group(function() {
+
+        Route::get('comments/{comment}', function (Request $request, Comment $comment) {
+            return new CommentResource($comment);
+        })->name('get');
+
+        Route::post('comments/get', function (Request $request) {
+            $comments = collect([]);
+            if ($request->input('comments_ids'))
+            {
+                foreach ($request->input('comments_ids') as $comment_id) {
+                    $comments->push(Comment::find($comment_id));
+                }
+            }
+            return CommentResource::collection($comments);
+        })->name('getMany');
 
     });
 

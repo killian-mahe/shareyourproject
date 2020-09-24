@@ -38,7 +38,7 @@
                 if (this.index < this.projects_ids.length)
                 {
                     axios.post('/api/projects/get', {
-                        projects_ids: this.projects_ids.slice(this.index, Math.min(this.index+3, this.projects_ids.length))
+                        projects_ids: this.projects_ids.slice(this.index, this.index+3)
                     }).then(response => {
                         response.data.forEach(data => {
                             this.projects.push(data);
