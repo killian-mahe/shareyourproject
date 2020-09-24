@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "feather-icons": "^4.28.0",
-        "tailwindcss": "^1.8.10"
+        "tailwindcss": "^1.8.10",
+        "vue-clamp": "^0.3.1"
     }
 }
