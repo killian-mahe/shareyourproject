@@ -29,7 +29,7 @@
         {{-- NavBar --}}
         <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50">
             <div class="flex justify-around w-full ">
-              <a><img class="m-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="90px" height="90px"></a>
+              <a href="{{route('home')}}"><img class="m-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="90px" height="90px"></a>
               <ul class="my-auto hidden lg:flex">
                 <li class="nav-bar-li"><a class="inline-flex">Services</a></li>
                 <li class="nav-bar-li"><a class="inline-flex">Project</a></li>
@@ -59,7 +59,7 @@
         </nav>
         <nav class="w-full px-2 shadow-lg bg-cultured-100 nav-bar flex lg:hidden">
             <div class="flex justify-around w-full ">
-              <a><img class="my-2" src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
+              <a href="{{route('home')}}"><img class="my-2" src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
               <div class="my-auto w-1/2">
                 <form role="search" class="w-full justify-center flex">
                     <div class="w-40 sm:w-56 md:w-full flex justify-center relative items-center">
