@@ -1971,7 +1971,7 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('/api/users/' + this.user_id).then(function (response) {
       console.log(response);
       if (response.status === 200) _this.user = response.data;
-    });
+    })["catch"](function (error) {});
   }
 });
 
@@ -2061,11 +2061,11 @@ __webpack_require__.r(__webpack_exports__);
       if (_like == true) {
         axios.get('/api/posts/' + this.post.id + '/like').then(function (response) {
           if (response.status === 200) _this2.post.liked = true;
-        });
+        })["catch"](function (error) {});
       } else {
         axios.get('/api/posts/' + this.post.id + '/unlike').then(function (response) {
           if (response.status === 200) _this2.post.liked = false;
-        });
+        })["catch"](function (error) {});
       }
     },
     addComments: function addComments() {
@@ -2082,7 +2082,7 @@ __webpack_require__.r(__webpack_exports__);
               _this3.comments.push(data);
             });
           }
-        });
+        })["catch"](function (error) {});
       }
     }
   }
@@ -2154,7 +2154,7 @@ __webpack_require__.r(__webpack_exports__);
     this.project.members_ids.slice(0, 2).forEach(function (member_id) {
       axios.get('/api/users/' + member_id).then(function (member) {
         _this.members_overview.push(member.data);
-      });
+      })["catch"](function (error) {});
     });
   }
 });

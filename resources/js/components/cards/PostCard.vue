@@ -64,13 +64,21 @@
         methods: {
             like: function(like) {
                 if (like == true) {
-                    axios.get('/api/posts/'+this.post.id+'/like').then(response => {
-                        if (response.status === 200) this.post.liked = true;
-                    })
+                    axios.get('/api/posts/'+this.post.id+'/like')
+                        .then(response => {
+                            if (response.status === 200) this.post.liked = true;
+                        })
+                        .catch(error => {
+
+                        })
                 } else {
-                    axios.get('/api/posts/'+this.post.id+'/unlike').then(response => {
-                        if (response.status === 200) this.post.liked = false;
-                    })
+                    axios.get('/api/posts/'+this.post.id+'/unlike')
+                        .then(response => {
+                            if (response.status === 200) this.post.liked = false;
+                        })
+                        .catch(error => {
+
+                        })
                 }
             },
             addComments: function() {
@@ -78,15 +86,19 @@
                 {
                     let ids = this.comments_to_load.slice(0, 3);
                     this.comments_to_load = this.comments_to_load.slice(3);
-                    
+
                     axios.post('/api/comments/get', {
                         comments_ids: ids
-                    }).then(response => {
+                    })
+                    .then(response => {
                         if (response.status === 200) {
                             response.data.forEach(data => {
                                 this.comments.push(data);
                             });
                         }
+                    })
+                    .catch(error => {
+
                     })
                 }
             }
