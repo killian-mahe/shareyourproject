@@ -28,7 +28,10 @@
                  .then(response => {
                      console.log(response);
                     if (response.status === 200) this.user = response.data;
-                 });
+                 })
+                 .catch(error => {
+
+                });
         }
     }
 </script>

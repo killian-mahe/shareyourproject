@@ -52,6 +52,9 @@
             this.project.members_ids.slice(0, 2).forEach(member_id => {
                 axios.get('/api/users/'+member_id).then(member => {
                     this.members_overview.push(member.data);
+                })
+                .catch(error => {
+
                 });
             });
         }
