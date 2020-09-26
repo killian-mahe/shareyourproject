@@ -48,6 +48,10 @@ module.exports = {
                 '-6': '-1.5rem',
                 '8': '2rem',
                 '-8': '-2rem',
+                '10': '2.5rem',
+                '-10': '-2.5rem',
+                '11': '2.75rem',
+                '-11': '-2.75rem',
                 '12': '3rem',
                 '-12': '-3rem',
                 '16': '4rem',
@@ -185,6 +189,7 @@ module.exports = {
     },
     variants: {
         borderWidth: ['responsive', 'hover', 'focus'],
+        borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus'],
     },
     plugins: [],
   }
