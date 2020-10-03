@@ -30,8 +30,10 @@
                     <span href="#" class="text-sm">{{$project->created_at}}</span>
                 </div>
             </div>
+            {{-- Adding Tags and Badges --}}
             <div class="tags w-full h-auto bg-yellow-300"></div>
             <div class="badges w-full h-auto bg-indigo-300"></div>
+            {{--  --}}
         </div>
 
         @yield('main')
