@@ -4,6 +4,7 @@
         <textarea
           :class="child_class + ' appearance-none bg-white text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none'"
           @input="resize"
+          :placeholder="placeholder"
         ></textarea>
       </template>
     </resize-auto>
@@ -14,7 +15,8 @@
     export default {
         components: { ResizeAuto },
         props: {
-            'child_class': String
+            'child_class': String,
+            'placeholder': String
         }
     };
 </script>

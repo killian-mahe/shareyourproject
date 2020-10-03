@@ -36,7 +36,7 @@
         <div v-if="post.comments_overview.length > 0 || first_comment" class="p-5 mb-2 border-t-0.0625 border-onyx-100">
             <div v-if="auth_user != null" class="mb-3 flex relative items-start">
                 <img :src="auth_user.profile_picture" class="h-12 w-12 rounded-full mr-3" alt="profile_picture">
-                <text-area class="w-full" child_class="pr-10"></text-area>
+                <text-area class="w-full" child_class="pr-10 overflow-y-hidden resize-none" placeholder="Write a comment..."></text-area>
                 <svg class="feather feather-send absolute right-4 top-4 cursor-pointer" @click="writeComment" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </div>
             <comment-component v-for="comment in post.comments_overview" :key="comment.id" :comment="comment" class="mb-3"></comment-component>

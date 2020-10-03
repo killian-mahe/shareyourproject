@@ -2376,13 +2376,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ResizeAuto: _utils_ResizeAuto_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
-    'child_class': String
+    'child_class': String,
+    'placeholder': String
   }
 });
 
@@ -39423,7 +39425,10 @@ var render = function() {
                         _vm._v(" "),
                         _c("text-area", {
                           staticClass: "w-full",
-                          attrs: { child_class: "pr-10" }
+                          attrs: {
+                            child_class: "pr-10 overflow-y-hidden resize-none",
+                            placeholder: "Write a comment..."
+                          }
                         }),
                         _vm._v(" "),
                         _c(
@@ -39830,6 +39835,7 @@ var render = function() {
               class:
                 _vm.child_class +
                 " appearance-none bg-white text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none",
+              attrs: { placeholder: _vm.placeholder },
               on: { input: resize }
             })
           ]
