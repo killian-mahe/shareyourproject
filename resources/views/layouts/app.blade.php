@@ -36,14 +36,7 @@
                 <li class="nav-bar-li"><a class="inline-flex">About</a></li>
                 <li class="nav-bar-li"><a class="inline-flex">Account</a></li>
               </ul>
-              <div class="my-auto w-1/4">
-                <form role="search" class="w-full justify-center">
-                  <div class="flex items-center relative">
-                    <i class="search-glass" data-feather="search"></i></button>
-                    <input  autocomplete="off" id="search-submit" type="text" placeholder="Search" class="search-input placeholder-onyx-300">
-                	</div>
-                </form>
-              </div>
+              <search-bar></search-bar>
 
               @auth
               @else

@@ -83,4 +83,6 @@ Route::name('api.')->group(function() {
 
     });
 
+    Route::get('search/{search}', 'SearchController@index')->where('search', '.*')->name('search');
+
 });
