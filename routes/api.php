@@ -81,6 +81,8 @@ Route::name('api.')->group(function() {
             return CommentResource::collection($comments);
         })->name('getMany');
 
+        Route::post('comments', 'CommentController@store')->name('store')->middleware('auth:api');
+
     });
 
     Route::get('search/{search}', 'SearchController@index')->where('search', '.*')->name('search');

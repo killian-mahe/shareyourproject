@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Comment as CommentResource;
 use App\Models\Comment;
+use App\Models\Post;
 
 class CommentController extends Controller
 {
@@ -23,7 +26,18 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'content' => 'required|max:255',
+            'post_id' => 'required|numeric|exists:posts,id',
+        ]);
+
+        $comment = new Comment;
+        $comment->content = $validatedData['content'];
+        $comment->author()->associate(Auth::user());
+
+        Post::find($validatedData['post_id'])->comments()->save($comment);
+        
+        return new CommentResource($comment);
     }
 
     /**
