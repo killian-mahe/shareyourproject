@@ -2131,7 +2131,8 @@ __webpack_require__.r(__webpack_exports__);
       post: this.post_props,
       comments: this.post_props.comments_overview,
       comments_to_load: [],
-      first_comment: false
+      first_comment: false,
+      newCommentContent: ""
     };
   },
   props: {
@@ -2178,7 +2179,18 @@ __webpack_require__.r(__webpack_exports__);
         })["catch"](function (error) {});
       }
     },
-    writeComment: function writeComment() {}
+    writeComment: function writeComment() {
+      var _this4 = this;
+
+      axios.post('/api/comments', {
+        'content': this.newCommentContent,
+        'post_id': this.post.id
+      }).then(function (response) {
+        if (response.status === 201) {
+          _this4.comments.push(response.data);
+        }
+      })["catch"](function (error) {});
+    }
   }
 });
 
@@ -2377,6 +2389,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2384,7 +2398,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     'child_class': String,
-    'placeholder': String
+    'placeholder': String,
+    'value': String
   }
 });
 
@@ -39428,6 +39443,13 @@ var render = function() {
                           attrs: {
                             child_class: "pr-10 overflow-y-hidden resize-none",
                             placeholder: "Write a comment..."
+                          },
+                          model: {
+                            value: _vm.newCommentContent,
+                            callback: function($$v) {
+                              _vm.newCommentContent = $$v
+                            },
+                            expression: "newCommentContent"
                           }
                         }),
                         _vm._v(" "),
@@ -39836,7 +39858,15 @@ var render = function() {
                 _vm.child_class +
                 " appearance-none bg-white text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none",
               attrs: { placeholder: _vm.placeholder },
-              on: { input: resize }
+              domProps: { value: _vm.value },
+              on: {
+                input: [
+                  resize,
+                  function($event) {
+                    return _vm.$emit("input", $event.target.value)
+                  }
+                ]
+              }
             })
           ]
         }
