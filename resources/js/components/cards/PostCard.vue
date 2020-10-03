@@ -27,13 +27,18 @@
                 <span v-else @click="like(true)" class="cursor-pointer hover:text-red-600 fill-current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="ml-1 hidden md:inline">I like</span></span>
             </div>
             <div class="card-link">
-                <a class="hover:text-orange-peel-400" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span class="ml-1 hidden md:inline">Comment</span></a>
+                <span class="hover:text-orange-peel-400 cursor-pointer" @click="first_comment = true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span class="ml-1 hidden md:inline">Comment</span></span>
             </div>
             <div class="card-link">
-                <a class="hover:text-viridiant-400" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span class="ml-1 hidden md:inline">Share</span></a>
+                <span class="hover:text-viridiant-400 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span class="ml-1 hidden md:inline">Share</span></span>
             </div>
         </div>
-        <div v-if="post.comments_overview.length > 0" class="p-5 mb-2 border-t-0.0625 border-onyx-100">
+        <div v-if="post.comments_overview.length > 0 || first_comment" class="p-5 mb-2 border-t-0.0625 border-onyx-100">
+            <div v-if="auth_user != null" class="mb-3 flex relative items-start">
+                <img :src="auth_user.profile_picture" class="h-12 w-12 rounded-full mr-3" alt="profile_picture">
+                <text-area class="w-full" child_class="pr-10"></text-area>
+                <svg class="feather feather-send absolute right-4 top-4 cursor-pointer" @click="writeComment" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </div>
             <comment-component v-for="comment in post.comments_overview" :key="comment.id" :comment="comment" class="mb-3"></comment-component>
             <button v-if="comments_to_load.length > 0" class="btn-classic w-full font-sans text-sm" @click="addComments">Load more comments</button>
         </div>
@@ -42,24 +47,27 @@
 
 <script>
     import CommentComponent from '../posts/CommentComponent.vue';
+    import TextArea from '../inputs/TextArea.vue';
 
     export default {
         components: {
-            CommentComponent
+            CommentComponent,
+            TextArea
         },
         data() {
             return {
                 post: this.post_props,
                 comments: this.post_props.comments_overview,
-                comments_to_load: Array
+                comments_to_load: [],
+                first_comment : false
             }
         },
         props: {
-            'post_props': Object
+            'post_props': Object,
+            'auth_user': Object
         },
         mounted() {
             this.comments_to_load = this.post.comments_ids.filter(comment_id => !this.comments.map(x => x.id).includes(comment_id));
-            console.log(this.comments_to_load)
         },
         methods: {
             like: function(like) {
@@ -101,6 +109,9 @@
 
                     })
                 }
+            },
+            writeComment: function() {
+
             }
         }
     }
