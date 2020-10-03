@@ -13,11 +13,11 @@ class SearchController extends Controller
 {
     public function index(Request $request, string $search)
     {
-        $projects = Project::where('name', 'like', '%'.$search.'%')->get();
+        $projects = Project::where('name', 'like', '%'.$search.'%')->limit(5)->get();
         $users = User::where('first_name', 'like', '%'.$search.'%')
-                        ->orWhere('last_name', 'like', '%'.$search.'%')->get();
+                        ->orWhere('last_name', 'like', '%'.$search.'%')->limit(5)->get();
         return response()->json([
-            'projects' => ProjectResource::collection($pojects),
+            'projects' => ProjectResource::collection($projects),
             'users' => UserResource::collection($users)
         ], 200);
     }
