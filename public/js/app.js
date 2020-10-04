@@ -2286,6 +2286,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2298,10 +2313,12 @@ __webpack_require__.r(__webpack_exports__);
     'error': String,
     'indication': String,
     'name': String,
-    'value': String
+    'value': String,
+    'icon': String,
+    'right': Boolean
   },
   mounted: function mounted() {
-    console.log(this.value);
+    feather.replace();
   }
 });
 
@@ -39686,18 +39703,43 @@ var render = function() {
     [
       _c("InputLabel", { attrs: { label: _vm.label, name: _vm.name } }),
       _vm._v(" "),
-      _c("input", {
-        staticClass:
-          "appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-lg py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white",
-        class: { "border-red-500": _vm.error },
-        attrs: {
-          name: _vm.name,
-          id: _vm.name,
-          type: _vm.type,
-          placeholder: _vm.placeholder
-        },
-        domProps: { value: _vm.value }
-      }),
+      _c("div", { staticClass: "flex items-center relative" }, [
+        _c("input", {
+          staticClass:
+            "appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white",
+          class: {
+            "border-red-500": _vm.error,
+            "pr-10": _vm.icon && _vm.right,
+            "pl-12": _vm.icon && !_vm.right
+          },
+          attrs: {
+            name: _vm.name,
+            id: _vm.name,
+            type: _vm.type,
+            placeholder: _vm.placeholder
+          },
+          domProps: { value: _vm.value },
+          on: {
+            input: function($event) {
+              return _vm.$emit("input", $event.target.value)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _vm.icon !== "" && _vm.right == false
+          ? _c("i", {
+              staticClass: "absolute left-3 block",
+              attrs: { "data-feather": _vm.icon }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.icon !== "" && _vm.right == true
+          ? _c("i", {
+              staticClass: "absolute right-3 block",
+              attrs: { "data-feather": _vm.icon }
+            })
+          : _vm._e()
+      ]),
       _vm._v(" "),
       _vm.error
         ? _c("p", { staticClass: "text-red-500 text-xs italic" }, [
@@ -39770,7 +39812,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" },
     [
       _c("InputLabel", { attrs: { label: _vm.label, name: _vm.name } }),
       _vm._v(" "),
@@ -39779,7 +39820,7 @@ var render = function() {
           "select",
           {
             staticClass:
-              "block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+              "block shadow-sm appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:border-gray-500",
             attrs: { name: _vm.name, id: _vm.name }
           },
           _vm._l(_vm.options, function(option) {
@@ -39798,26 +39839,8 @@ var render = function() {
             staticClass:
               "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
           },
-          [
-            _c(
-              "svg",
-              {
-                staticClass: "fill-current h-4 w-4",
-                attrs: {
-                  xmlns: "http://www.w3.org/2000/svg",
-                  viewBox: "0 0 20 20"
-                }
-              },
-              [
-                _c("path", {
-                  attrs: {
-                    d:
-                      "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                  }
-                })
-              ]
-            )
-          ]
+          [_vm._t("default")],
+          2
         )
       ])
     ],
