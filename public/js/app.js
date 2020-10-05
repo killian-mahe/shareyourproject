@@ -1989,7 +1989,8 @@ __webpack_require__.r(__webpack_exports__);
       focus: false,
       projects: [],
       users: [],
-      searchQuery: ""
+      searchQuery: "",
+      x: null
     };
   },
   mounted: function mounted() {
@@ -2002,14 +2003,17 @@ __webpack_require__.r(__webpack_exports__);
     refreshLists: function refreshLists() {
       var _this = this;
 
-      if (this.searchQuery !== "") {
-        axios.get('/api/search/' + this.searchQuery).then(function (response) {
-          if (response.status === 200) {
-            _this.projects = response.data.projects;
-            _this.users = response.data.users;
-          }
-        })["catch"](function (error) {});
-      }
+      if (this.x) clearTimeout(this.x);
+      this.x = setTimeout(function () {
+        if (_this.searchQuery !== "") {
+          axios.get('/api/search/' + _this.searchQuery).then(function (response) {
+            if (response.status === 200) {
+              _this.projects = response.data.projects;
+              _this.users = response.data.users;
+            }
+          })["catch"](function (error) {});
+        }
+      }, 250);
     }
   }
 });
@@ -2267,6 +2271,127 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _InputLabel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InputLabel.vue */ "./resources/js/components/inputs/InputLabel.vue");
+/* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-click-outside */ "./node_modules/v-click-outside/dist/v-click-outside.umd.js");
+/* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(v_click_outside__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    InputLabel: _InputLabel_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  directives: {
+    clickOutside: v_click_outside__WEBPACK_IMPORTED_MODULE_1___default.a.directive
+  },
+  data: function data() {
+    return {
+      'badges': [],
+      'selectedBadges': [],
+      'searchQuery': "",
+      'focus': false
+    };
+  },
+  props: {
+    'label': String,
+    'name': String,
+    'placeholder': String,
+    'error': String,
+    'indication': String,
+    'icon': String,
+    'right': Boolean,
+    'multiple': Boolean
+  },
+  mounted: function mounted() {
+    feather.replace();
+  },
+  methods: {
+    updateBadgeList: function updateBadgeList() {
+      var _this = this;
+
+      if (this.searchQuery === "") {
+        this.badges = [];
+        return;
+      }
+
+      axios.get('/api/badges/search/' + this.searchQuery).then(function (response) {
+        if (response.status === 200) {
+          _this.badges = response.data;
+        }
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
+    addBadge: function addBadge(badge) {
+      if (this.selectedBadges.map(function (badge) {
+        return badge.id;
+      }).includes(badge.id)) return;
+      this.selectedBadges.push(badge);
+    },
+    removeBadge: function removeBadge(badge) {
+      var index = this.selectedBadges.map(function (badge) {
+        return badge.id;
+      }).indexOf(badge.id);
+
+      if (index > -1) {
+        this.selectedBadges.splice(index, 1);
+      }
+    },
+    onClickOutside: function onClickOutside() {
+      this.focus = false;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/inputs/CustomInput.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/inputs/CustomInput.vue?vue&type=script&lang=js& ***!
@@ -2487,7 +2612,8 @@ __webpack_require__.r(__webpack_exports__);
       'users': [],
       'selectedUsers': [],
       'searchQuery': "",
-      'focus': false
+      'focus': false,
+      'x': null
     };
   },
   props: {
@@ -2507,18 +2633,21 @@ __webpack_require__.r(__webpack_exports__);
     updateUserList: function updateUserList() {
       var _this = this;
 
-      if (this.searchQuery === "") {
-        this.users = [];
-        return;
-      }
-
-      axios.get('/api/users/search/' + this.searchQuery).then(function (response) {
-        if (response.status === 200) {
-          _this.users = response.data;
+      if (this.x) clearTimeout(this.x);
+      this.x = setTimeout(function () {
+        if (_this.searchQuery === "") {
+          _this.users = [];
+          return;
         }
-      })["catch"](function (error) {
-        console.error(error);
-      });
+
+        axios.get('/api/users/search/' + _this.searchQuery).then(function (response) {
+          if (response.status === 200) {
+            _this.users = response.data;
+          }
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      }, 250);
     },
     addUser: function addUser(user) {
       if (this.selectedUsers.map(function (user) {
@@ -39804,6 +39933,235 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=template&id=bdaf59d4&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=template&id=bdaf59d4& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "click-outside",
+          rawName: "v-click-outside",
+          value: _vm.onClickOutside,
+          expression: "onClickOutside"
+        }
+      ],
+      staticClass: "w-full"
+    },
+    [
+      _c("InputLabel", { attrs: { label: _vm.label, name: _vm.name } }),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex items-center relative" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.searchQuery,
+              expression: "searchQuery"
+            }
+          ],
+          staticClass:
+            "appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-t-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white",
+          class: {
+            "border-red-500": _vm.error,
+            "pr-10": _vm.icon && _vm.right,
+            "pl-12": _vm.icon && !_vm.right,
+            "rounded-b-lg": _vm.selectedBadges.length == 0
+          },
+          attrs: { placeholder: _vm.placeholder },
+          domProps: { value: _vm.searchQuery },
+          on: {
+            click: function($event) {
+              _vm.focus = true
+            },
+            input: [
+              function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.searchQuery = $event.target.value
+              },
+              _vm.updateBadgeList
+            ]
+          }
+        }),
+        _vm._v(" "),
+        _vm.icon !== "" && _vm.right == false
+          ? _c("i", {
+              staticClass: "absolute left-3 block",
+              attrs: { "data-feather": _vm.icon }
+            })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.icon !== "" && _vm.right == true
+          ? _c("i", {
+              staticClass: "absolute right-3 block",
+              attrs: { "data-feather": _vm.icon }
+            })
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm.focus
+        ? _c(
+            "div",
+            { staticClass: "absolute bg-white rounded z-10 shadow-md" },
+            _vm._l(_vm.badges, function(badge) {
+              return _c(
+                "div",
+                {
+                  key: badge.id,
+                  staticClass:
+                    "flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100",
+                  on: {
+                    click: function($event) {
+                      return _vm.addBadge(badge)
+                    }
+                  }
+                },
+                [
+                  _c("img", {
+                    staticClass: "block h-8 w-8 rounded-full mr-3",
+                    attrs: {
+                      src: badge.profile_picture,
+                      alt: "profile_picture"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", [
+                    _vm._v(
+                      _vm._s(badge.first_name) + " " + _vm._s(badge.last_name)
+                    )
+                  ])
+                ]
+              )
+            }),
+            0
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.selectedBadges.length > 0
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "w-full border border-gray-200 rounded-b-md flex flex-wrap p-2 bg-cultured-300"
+            },
+            _vm._l(_vm.selectedBadges, function(badge) {
+              return _c(
+                "div",
+                {
+                  key: badge.id + "_selected",
+                  staticClass:
+                    "flex items-center px-2 py-1 border border-gray-400 bg-cultured-100 rounded-lg mr-2 mb-2"
+                },
+                [
+                  _c("img", {
+                    staticClass: "h-6 w-6 rounded-full",
+                    attrs: {
+                      src: badge.profile_picture,
+                      alt: "profile_picture"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    { staticClass: "mx-2 leading-6 font-medium text-gray-700" },
+                    [
+                      _vm._v(
+                        _vm._s(badge.first_name) + " " + _vm._s(badge.last_name)
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "feather feather-x h-4 w-4 cursor-pointer",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        width: "24",
+                        height: "24",
+                        viewBox: "0 0 24 24",
+                        fill: "none",
+                        stroke: "currentColor",
+                        "stroke-width": "2",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.removeBadge(badge)
+                        }
+                      }
+                    },
+                    [
+                      _c("line", {
+                        attrs: { x1: "18", y1: "6", x2: "6", y2: "18" }
+                      }),
+                      _c("line", {
+                        attrs: { x1: "6", y1: "6", x2: "18", y2: "18" }
+                      })
+                    ]
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.error
+        ? _c("p", { staticClass: "text-red-500 text-xs italic" }, [
+            _vm._v(_vm._s(_vm.error))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.indication
+        ? _c("p", { staticClass: "text-gray-600 text-xs italic" }, [
+            _vm._v(_vm._s(_vm.indication))
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          staticClass: "hidden",
+          attrs: { name: _vm.name, id: _vm.name + "_id", multiple: "" }
+        },
+        _vm._l(_vm.selectedBadges, function(badge) {
+          return _c("option", {
+            key: badge.id + "_select",
+            attrs: { selected: "" },
+            domProps: { value: badge.id }
+          })
+        }),
+        0
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/inputs/CustomInput.vue?vue&type=template&id=57f0b0c4&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/inputs/CustomInput.vue?vue&type=template&id=57f0b0c4& ***!
@@ -52620,6 +52978,7 @@ var map = {
 	"./components/cards/MemberCard.vue": "./resources/js/components/cards/MemberCard.vue",
 	"./components/cards/PostCard.vue": "./resources/js/components/cards/PostCard.vue",
 	"./components/cards/ProjectCard.vue": "./resources/js/components/cards/ProjectCard.vue",
+	"./components/inputs/BadgeSelectInput.vue": "./resources/js/components/inputs/BadgeSelectInput.vue",
 	"./components/inputs/CustomInput.vue": "./resources/js/components/inputs/CustomInput.vue",
 	"./components/inputs/InputLabel.vue": "./resources/js/components/inputs/InputLabel.vue",
 	"./components/inputs/SelectInput.vue": "./resources/js/components/inputs/SelectInput.vue",
@@ -53079,6 +53438,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectCard_vue_vue_type_template_id_687aa87c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProjectCard_vue_vue_type_template_id_687aa87c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/inputs/BadgeSelectInput.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/inputs/BadgeSelectInput.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BadgeSelectInput_vue_vue_type_template_id_bdaf59d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BadgeSelectInput.vue?vue&type=template&id=bdaf59d4& */ "./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=template&id=bdaf59d4&");
+/* harmony import */ var _BadgeSelectInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BadgeSelectInput.vue?vue&type=script&lang=js& */ "./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BadgeSelectInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BadgeSelectInput_vue_vue_type_template_id_bdaf59d4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BadgeSelectInput_vue_vue_type_template_id_bdaf59d4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/inputs/BadgeSelectInput.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BadgeSelectInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BadgeSelectInput.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BadgeSelectInput_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=template&id=bdaf59d4&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=template&id=bdaf59d4& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BadgeSelectInput_vue_vue_type_template_id_bdaf59d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BadgeSelectInput.vue?vue&type=template&id=bdaf59d4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/inputs/BadgeSelectInput.vue?vue&type=template&id=bdaf59d4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BadgeSelectInput_vue_vue_type_template_id_bdaf59d4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BadgeSelectInput_vue_vue_type_template_id_bdaf59d4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

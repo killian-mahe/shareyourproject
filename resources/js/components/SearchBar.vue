@@ -46,7 +46,8 @@
                 focus: false,
                 projects: [],
                 users: [],
-                searchQuery: ""
+                searchQuery: "",
+                x: null
             }
         },
         mounted() {
@@ -57,18 +58,22 @@
                 this.focus = false;
             },
             refreshLists: function() {
-                if (this.searchQuery !== "") {
-                    axios.get('/api/search/'+this.searchQuery)
-                        .then(response => {
-                            if (response.status === 200) {
-                                this.projects = response.data.projects;
-                                this.users = response.data.users;
-                            }
-                        })
-                        .catch(error => {
+                if (this.x) clearTimeout(this.x);
 
-                        })
-                }
+                this.x = setTimeout(() => {
+                    if (this.searchQuery !== "") {
+                        axios.get('/api/search/'+this.searchQuery)
+                            .then(response => {
+                                if (response.status === 200) {
+                                    this.projects = response.data.projects;
+                                    this.users = response.data.users;
+                                }
+                            })
+                            .catch(error => {
+
+                            })
+                    }
+                }, 250);
             }
         }
     }
