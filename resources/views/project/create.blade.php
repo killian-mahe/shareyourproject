@@ -18,7 +18,7 @@
             <form action="">
                 <custom-input class="w-full md:w-1/2 mb-4" name="project-name" label="Project name" indication="Great project names are short and memorable." type="text" placeholder="ex : Share Your Project" error=""></custom-input>
                 <custom-input class="w-full mb-4" name="description" label="Description" type="text" error=""></custom-input>
-                <custom-input class="w-full mb-4" name="description" label="Add a new collaborator" placeholder="ex : John Doe" type="text" error=""></custom-input>
+                <user-select-input class="w-full mb-4" name="description" label="Add a new collaborator" placeholder="ex : John Doe" error=""></user-select-input>
             </form>
 
                 {{-- Select you badge(s) --}}
@@ -36,7 +36,6 @@
                         <i class="text-onyx-900 my-auto h-4 w-4 cursor-pointer absolute right-3 transform rotate-90" data-feather="plus-circle"></i>
                     </button>
                 </div> --}}
-
 
                 {{-- Project status --}}
                 {{-- Probleme outline --}}
