@@ -1,11 +1,12 @@
 <template>
-    <div class="w-full" v-click-outside="onClickOutside">
+    <div class="w-full relative" v-click-outside="onClickOutside">
         <InputLabel :label="label"  :name="name" />
         <div class="flex items-center relative">
             <input :class="{'border-red-500': error, 'pr-10': icon && right, 'pl-12': icon && !right, 'rounded-b-lg': selectedUsers.length == 0}"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-t-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                     :placeholder="placeholder"
                     v-model="searchQuery"
+                    :id="name"
                     @click="focus = true"
                     @input="updateUserList">
             <i v-if="icon !== '' && right == false"
@@ -15,7 +16,7 @@
                 :data-feather="icon"
                 class="absolute right-3 block"></i>
         </div>
-        <div v-if="focus" class="absolute bg-white rounded z-10 shadow-md">
+        <div v-if="focus" class="absolute w-full bg-white rounded z-10 shadow-md">
             <div v-for="user in users" :key="user.id" @click="addUser(user)" class="flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100">
                 <img :src="user.profile_picture" alt="profile_picture" class="block h-8 w-8 rounded-full mr-3" />
                 <div>{{user.first_name}} {{user.last_name}}</div>

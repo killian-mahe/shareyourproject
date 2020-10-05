@@ -2281,8 +2281,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _InputLabel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InputLabel.vue */ "./resources/js/components/inputs/InputLabel.vue");
-/* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-click-outside */ "./node_modules/v-click-outside/dist/v-click-outside.umd.js");
-/* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(v_click_outside__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_BadgeLabel_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/BadgeLabel.vue */ "./resources/js/components/utils/BadgeLabel.vue");
+/* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! v-click-outside */ "./node_modules/v-click-outside/dist/v-click-outside.umd.js");
+/* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(v_click_outside__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2319,17 +2320,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    InputLabel: _InputLabel_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    InputLabel: _InputLabel_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    BadgeLabel: _utils_BadgeLabel_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   directives: {
-    clickOutside: v_click_outside__WEBPACK_IMPORTED_MODULE_1___default.a.directive
+    clickOutside: v_click_outside__WEBPACK_IMPORTED_MODULE_2___default.a.directive
   },
   data: function data() {
     return {
@@ -2362,6 +2362,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       axios.get('/api/badges/search/' + this.searchQuery).then(function (response) {
+        console.log(response);
+
         if (response.status === 200) {
           _this.badges = response.data;
         }
@@ -2374,6 +2376,7 @@ __webpack_require__.r(__webpack_exports__);
         return badge.id;
       }).includes(badge.id)) return;
       this.selectedBadges.push(badge);
+      console.log(this.selectedBadges);
     },
     removeBadge: function removeBadge(badge) {
       var index = this.selectedBadges.map(function (badge) {
@@ -2559,6 +2562,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _InputLabel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InputLabel.vue */ "./resources/js/components/inputs/InputLabel.vue");
 /* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-click-outside */ "./node_modules/v-click-outside/dist/v-click-outside.umd.js");
 /* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(v_click_outside__WEBPACK_IMPORTED_MODULE_1__);
+//
 //
 //
 //
@@ -39959,7 +39963,7 @@ var render = function() {
           expression: "onClickOutside"
         }
       ],
-      staticClass: "w-full"
+      staticClass: "w-full relative"
     },
     [
       _c("InputLabel", { attrs: { label: _vm.label, name: _vm.name } }),
@@ -39982,7 +39986,7 @@ var render = function() {
             "pl-12": _vm.icon && !_vm.right,
             "rounded-b-lg": _vm.selectedBadges.length == 0
           },
-          attrs: { placeholder: _vm.placeholder },
+          attrs: { placeholder: _vm.placeholder, id: _vm.name },
           domProps: { value: _vm.searchQuery },
           on: {
             click: function($event) {
@@ -40018,38 +40022,23 @@ var render = function() {
       _vm.focus
         ? _c(
             "div",
-            { staticClass: "absolute bg-white rounded z-10 shadow-md" },
+            {
+              staticClass:
+                "absolute w-full bg-white rounded z-10 shadow-md px-3 py-2 flex flex-wrap"
+            },
             _vm._l(_vm.badges, function(badge) {
-              return _c(
-                "div",
-                {
-                  key: badge.id,
-                  staticClass:
-                    "flex items-center px-3 py-2 cursor-pointer hover:bg-gray-100",
-                  on: {
-                    click: function($event) {
-                      return _vm.addBadge(badge)
-                    }
+              return _c("badge-label", {
+                key: badge.id,
+                staticClass: "block my-2 w-auto mr-2 cursor-pointer",
+                attrs: { label: badge.label },
+                on: {
+                  click: function($event) {
+                    return _vm.addBadge(badge)
                   }
-                },
-                [
-                  _c("img", {
-                    staticClass: "block h-8 w-8 rounded-full mr-3",
-                    attrs: {
-                      src: badge.profile_picture,
-                      alt: "profile_picture"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", [
-                    _vm._v(
-                      _vm._s(badge.first_name) + " " + _vm._s(badge.last_name)
-                    )
-                  ])
-                ]
-              )
+                }
+              })
             }),
-            0
+            1
           )
         : _vm._e(),
       _vm._v(" "),
@@ -40061,66 +40050,13 @@ var render = function() {
                 "w-full border border-gray-200 rounded-b-md flex flex-wrap p-2 bg-cultured-300"
             },
             _vm._l(_vm.selectedBadges, function(badge) {
-              return _c(
-                "div",
-                {
-                  key: badge.id + "_selected",
-                  staticClass:
-                    "flex items-center px-2 py-1 border border-gray-400 bg-cultured-100 rounded-lg mr-2 mb-2"
-                },
-                [
-                  _c("img", {
-                    staticClass: "h-6 w-6 rounded-full",
-                    attrs: {
-                      src: badge.profile_picture,
-                      alt: "profile_picture"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    { staticClass: "mx-2 leading-6 font-medium text-gray-700" },
-                    [
-                      _vm._v(
-                        _vm._s(badge.first_name) + " " + _vm._s(badge.last_name)
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "svg",
-                    {
-                      staticClass: "feather feather-x h-4 w-4 cursor-pointer",
-                      attrs: {
-                        xmlns: "http://www.w3.org/2000/svg",
-                        width: "24",
-                        height: "24",
-                        viewBox: "0 0 24 24",
-                        fill: "none",
-                        stroke: "currentColor",
-                        "stroke-width": "2",
-                        "stroke-linecap": "round",
-                        "stroke-linejoin": "round"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.removeBadge(badge)
-                        }
-                      }
-                    },
-                    [
-                      _c("line", {
-                        attrs: { x1: "18", y1: "6", x2: "6", y2: "18" }
-                      }),
-                      _c("line", {
-                        attrs: { x1: "6", y1: "6", x2: "18", y2: "18" }
-                      })
-                    ]
-                  )
-                ]
-              )
+              return _c("badge-label", {
+                key: badge.id + "_selected",
+                staticClass: "mr-2",
+                attrs: { label: badge.label }
+              })
             }),
-            0
+            1
           )
         : _vm._e(),
       _vm._v(" "),
@@ -40409,7 +40345,7 @@ var render = function() {
           expression: "onClickOutside"
         }
       ],
-      staticClass: "w-full"
+      staticClass: "w-full relative"
     },
     [
       _c("InputLabel", { attrs: { label: _vm.label, name: _vm.name } }),
@@ -40432,7 +40368,7 @@ var render = function() {
             "pl-12": _vm.icon && !_vm.right,
             "rounded-b-lg": _vm.selectedUsers.length == 0
           },
-          attrs: { placeholder: _vm.placeholder },
+          attrs: { placeholder: _vm.placeholder, id: _vm.name },
           domProps: { value: _vm.searchQuery },
           on: {
             click: function($event) {
@@ -40468,7 +40404,7 @@ var render = function() {
       _vm.focus
         ? _c(
             "div",
-            { staticClass: "absolute bg-white rounded z-10 shadow-md" },
+            { staticClass: "absolute w-full bg-white rounded z-10 shadow-md" },
             _vm._l(_vm.users, function(user) {
               return _c(
                 "div",
@@ -40765,7 +40701,12 @@ var render = function() {
     "span",
     {
       staticClass:
-        "rounded-full px-2 pb-1 pt-0.25 text-xs font-semibold bg-onyx-200 lowercase"
+        "rounded-full px-2 pb-1 pt-0.25 text-xs font-semibold bg-onyx-200 lowercase",
+      on: {
+        click: function($event) {
+          return _vm.$emit("click")
+        }
+      }
     },
     [_c("a", { attrs: { href: _vm.link } }, [_vm._v(_vm._s(_vm.label))])]
   )

@@ -89,4 +89,6 @@ Route::name('api.')->group(function() {
 
     Route::get('search/{search}', 'SearchController@index')->where('search', '.*')->name('search');
 
+    Route::get('badges/search/{search}', 'SearchController@badges')->where('search', '.*')->name('badges.search');
+
 });
