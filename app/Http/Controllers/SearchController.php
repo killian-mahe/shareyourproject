@@ -15,7 +15,11 @@ class SearchController extends Controller
     {
         $projects = Project::where('name', 'like', '%'.$search.'%')->limit(5)->get();
         $users = User::where('first_name', 'like', '%'.$search.'%')
-                        ->orWhere('last_name', 'like', '%'.$search.'%')->limit(5)->get();
+                        ->orWhere('last_name', 'like', '%'.$search.'%')
+                        ->orWhere('username', 'like', '%'.$search.'%')
+                        ->orWhereRaw(
+                            "concat(first_name, ' ', last_name) like '%" . $search . "%' "
+                        )->limit(5)->get();
         return response()->json([
             'projects' => ProjectResource::collection($projects),
             'users' => UserResource::collection($users)

@@ -86,7 +86,11 @@ class UserController extends Controller
     public function search(Request $request, String $query)
     {
         $users = User::where('first_name', 'like', '%'.$query.'%')
-                        ->orWhere('last_name', 'like', '%'.$query.'%')->limit(5)->get();
+                                ->orWhere('last_name', 'like', '%'.$query.'%')
+                                ->orWhere('username', 'like', '%'.$query.'%')
+                                ->orWhereRaw(
+                                    "concat(first_name, ' ', last_name) like '%" . $query . "%' "
+                                )->limit(5)->get();
 
         return response()->json(UserResource::collection($users), 200);
     }
