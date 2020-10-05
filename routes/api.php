@@ -29,6 +29,8 @@ Route::name('api.')->group(function() {
             return new UserResource($user);
         })->name('get');
 
+        Route::get('users/search/{search}', 'UserController@search')->where('search', '.*')->name('search');
+
     });
 
     Route::name('project.')->group(function() {
