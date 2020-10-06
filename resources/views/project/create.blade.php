@@ -36,7 +36,7 @@
                     <i class="text-onyx-900 my-auto h-4 w-4 cursor-pointer absolute right-3 transform rotate-90" data-feather="code"></i>
                 </select-input>
 
-                <custom-input class="w-full mb-4" name="hashtag" label="Select a hashtag" type="text" error="" icon="hash"></custom-input>
+                <tag-select-input></tag-select-input>
 
                 {{-- Project planning --}}
                 <h2 class="text-onyx-600 font-sans font-semibold text-left text-xl px-4 pb-1 pt-4">Project planning</h2>
