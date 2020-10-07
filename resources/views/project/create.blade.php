@@ -18,7 +18,7 @@
             <form action="{{route('projects.store')}}" method="POST">
                 @csrf
                 <custom-input class="w-full md:w-1/2 mb-4" name="name" label="Project name" indication="Great project names are short and memorable." type="text" placeholder="ex : Share Your Project" error="@error('name') {{$message}} @enderror"></custom-input>
-                <custom-input class="w-full mb-4" name="description" label="Description" type="text" error="@error('description') {{$message}} @enderror"></custom-input>
+                <text-area child_class="w-full" label="Description" name="description"></text-area>
                 <user-select-input class="w-full mb-4" name="collaborators[]" label="Add a new collaborator" placeholder="ex : John Doe" error="@error('collaborators') {{$message}} @enderror"></user-select-input>
 
                 <badge-select-input class="w-full mb-4" name="badges[]" label="Select your badge(s)" placeholder="ex : Python" error=""></badge-select-input>

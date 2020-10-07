@@ -2616,6 +2616,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_ResizeAuto_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/ResizeAuto.vue */ "./resources/js/components/utils/ResizeAuto.vue");
+/* harmony import */ var _InputLabel_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputLabel.vue */ "./resources/js/components/inputs/InputLabel.vue");
+//
+//
+//
+//
 //
 //
 //
@@ -2630,14 +2635,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ResizeAuto: _utils_ResizeAuto_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ResizeAuto: _utils_ResizeAuto_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    InputLabel: _InputLabel_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     'child_class': String,
     'placeholder': String,
-    'value': String
+    'value': String,
+    'name': String,
+    'label': String
   }
 });
 
@@ -40214,7 +40223,7 @@ var render = function() {
       _c("div", { staticClass: "flex items-center relative" }, [
         _c("input", {
           staticClass:
-            "appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white",
+            "appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:bg-white",
           class: {
             "border-red-500": _vm.error,
             "pr-10": _vm.icon && _vm.right,
@@ -40328,7 +40337,7 @@ var render = function() {
           "select",
           {
             staticClass:
-              "block shadow-sm appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:border-gray-500",
+              "block shadow-sm appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg focus:outline-none focus:border-gray-500",
             attrs: { name: _vm.name, id: _vm.name }
           },
           _vm._l(_vm.options, function(option) {
@@ -40543,21 +40552,31 @@ var render = function() {
         fn: function(ref) {
           var resize = ref.resize
           return [
-            _c("textarea", {
-              class:
-                _vm.child_class +
-                " appearance-none bg-white text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none",
-              attrs: { placeholder: _vm.placeholder },
-              domProps: { value: _vm.value },
-              on: {
-                input: [
-                  resize,
-                  function($event) {
-                    return _vm.$emit("input", $event.target.value)
+            _c(
+              "div",
+              [
+                _c("InputLabel", {
+                  attrs: { label: _vm.label, name: _vm.name }
+                }),
+                _vm._v(" "),
+                _c("textarea", {
+                  class:
+                    _vm.child_class +
+                    " appearance-none bg-white text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none",
+                  attrs: { placeholder: _vm.placeholder, name: _vm.name },
+                  domProps: { value: _vm.value },
+                  on: {
+                    input: [
+                      resize,
+                      function($event) {
+                        return _vm.$emit("input", $event.target.value)
+                      }
+                    ]
                   }
-                ]
-              }
-            })
+                })
+              ],
+              1
+            )
           ]
         }
       }
@@ -54464,8 +54483,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\share-your-project\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\share-your-project\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\shareyourproject\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\shareyourproject\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

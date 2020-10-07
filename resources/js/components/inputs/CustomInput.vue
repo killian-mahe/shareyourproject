@@ -4,7 +4,7 @@
         <div class="flex items-center relative">
             <input v-bind:class="{'border-red-500': error, 'pr-10': icon && right, 'pl-12': icon && !right}"
                     v-bind:name="name"
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-lg py-3 px-4 focus:outline-none focus:bg-white"
                     v-bind:id="name"
                     v-bind:type="type"
                     v-bind:placeholder="placeholder"
