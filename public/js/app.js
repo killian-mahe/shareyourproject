@@ -2544,6 +2544,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2575,7 +2579,13 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.input.value = "";
       if (this.tags.includes(tag) || tag === " ") return;
       this.tags.push(tag);
-      console.log(this.tags);
+    },
+    onDelete: function onDelete() {
+      var tag = this.$refs.input.value;
+
+      if (tag === "") {
+        this.tags.pop();
+      }
     },
     onFocus: function onFocus() {
       this.focus = true;
@@ -40445,22 +40455,48 @@ var render = function() {
             class: { "bg-white": _vm.focus, "bg-gray-200": !_vm.focus },
             attrs: { type: "text" },
             on: {
-              keyup: function($event) {
-                if (
-                  !$event.type.indexOf("key") &&
-                  _vm._k($event.keyCode, "space", 32, $event.key, [
-                    " ",
-                    "Spacebar"
-                  ])
-                ) {
-                  return null
+              keyup: [
+                function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "space", 32, $event.key, [
+                      " ",
+                      "Spacebar"
+                    ])
+                  ) {
+                    return null
+                  }
+                  return _vm.onSpace($event)
+                },
+                function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k(
+                      $event.keyCode,
+                      "backspace",
+                      undefined,
+                      $event.key,
+                      undefined
+                    )
+                  ) {
+                    return null
+                  }
+                  return _vm.onDelete($event)
                 }
-                return _vm.onSpace($event)
-              }
+              ]
             }
           })
         ],
         2
+      ),
+      _vm._v(" "),
+      _c(
+        "select",
+        { staticClass: "hidden", attrs: { name: _vm.name } },
+        _vm._l(_vm.tags, function(tag) {
+          return _c("option", { key: tag, domProps: { value: tag } })
+        }),
+        0
       ),
       _vm._v(" "),
       _vm.error

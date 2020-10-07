@@ -10,8 +10,12 @@
                     class="appearance-none"
                     :class="{'bg-white': focus, 'bg-gray-200': !focus}"
                     @keyup.space="onSpace"
+                    @keyup.backspace="onDelete"
                     ref="input">
         </div>
+        <select :name="name" class="hidden">
+            <option v-for="tag in tags" :key="tag" :value="tag"></option>
+        </select>
         <p v-if="error" class="text-red-500 text-xs italic">{{ error }}</p>
         <p v-if="indication" class="text-gray-600 text-xs italic">{{ indication }}</p>
     </div>
@@ -51,7 +55,12 @@
 
                 if (this.tags.includes(tag) || tag === " ") return;
                 this.tags.push(tag);
-                console.log(this.tags);
+            },
+            onDelete: function() {
+                let tag = this.$refs.input.value;
+                if (tag === "") {
+                    this.tags.pop();
+                }
             },
             onFocus: function () {
                 this.focus = true;
