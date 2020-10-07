@@ -32,7 +32,7 @@
         </div>
         <p v-if="error" class="text-red-500 text-xs italic">{{ error }}</p>
         <p v-if="indication" class="text-gray-600 text-xs italic">{{ indication }}</p>
-        <select name="name" id="name" class="hidden" multiple>
+        <select :name="name" id="name" class="hidden" multiple>
             <option v-for="user in selectedUsers" :key="user.id+'_select'" selected :value="user.id"></option>
         </select>
     </div>
