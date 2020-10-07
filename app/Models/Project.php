@@ -8,7 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-    
+
+    public const STATUS = [
+        'ongoing' => 0,
+        'onbreak' => 1,
+        'finished' => 2,
+        'abandoned' => 3
+    ];
+
     /**
      * The name of the database.
      *
@@ -61,5 +68,27 @@ class Project extends Model
     public function members()
     {
         return $this->belongsToMany('App\User', 'project_user', 'project_id', 'user_id');
+    }
+
+    /**
+     * Get the project status.
+     *
+     * @param integer $value
+     * @return string
+     */
+    public function getStatusAttribute($value)
+    {
+        return array_search($value, Project::STATUS);
+    }
+
+    /**
+     * Set the project status.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['status'] = Project::STATUS[$value];
     }
 }
