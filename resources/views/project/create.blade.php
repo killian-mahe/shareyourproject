@@ -17,9 +17,9 @@
 
             <form action="{{route('projects.store')}}" method="POST">
                 @csrf
-                <custom-input class="w-full md:w-1/2 mb-4" name="project-name" label="Project name" indication="Great project names are short and memorable." type="text" placeholder="ex : Share Your Project" error=""></custom-input>
-                <custom-input class="w-full mb-4" name="description" label="Description" type="text" error=""></custom-input>
-                <user-select-input class="w-full mb-4" name="collaborators[]" label="Add a new collaborator" placeholder="ex : John Doe" error=""></user-select-input>
+                <custom-input class="w-full md:w-1/2 mb-4" name="name" label="Project name" indication="Great project names are short and memorable." type="text" placeholder="ex : Share Your Project" error="@error('name') {{$message}} @enderror"></custom-input>
+                <custom-input class="w-full mb-4" name="description" label="Description" type="text" error="@error('description') {{$message}} @enderror"></custom-input>
+                <user-select-input class="w-full mb-4" name="collaborators[]" label="Add a new collaborator" placeholder="ex : John Doe" error="@error('collaborators') {{$message}} @enderror"></user-select-input>
 
                 <badge-select-input class="w-full mb-4" name="badges[]" label="Select your badge(s)" placeholder="ex : Python" error=""></badge-select-input>
 
@@ -44,8 +44,8 @@
                 <hr class="mx-4 mb-6">
 
                 <div class="w-full block md:flex">
-                    <custom-input class="w-full md:w-1/2 mr-2" name="project-start-date" label="Start Date" type="date" error=""></custom-input>
-                    <custom-input class="w-full md:w-1/2 ml-2" name="project-due-date" label="Due date" type="date" error=""></custom-input>
+                    <custom-input class="w-full md:w-1/2 mr-2" name="start_date" label="Start Date" type="date" error=""></custom-input>
+                    <custom-input class="w-full md:w-1/2 ml-2" name="finished_date" label="Due date" type="date" error=""></custom-input>
                 </div>
 
                 <div>

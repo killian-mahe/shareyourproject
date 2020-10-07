@@ -47,12 +47,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'name' => ['required', 'max:255'],
-        //     'description' => ['required ', 'min:200'],
-        //     'start_date' => ['nullable', 'date'],
-        //     'finished_date' => ['nullable', 'date'],
-        // ]);
+        $validatedData = $request->validate([
+            'name' => ['required', 'max:255'],
+            'description' => ['required ', 'min:200'],
+            'collaborators' => ['required', 'array', 'exists:users,id'],
+            'badges' => ['array', 'exists:technologies,id'],
+            'tags' => ['array'],
+            'status' => ['required'],
+            'start_date' => ['nullable', 'date'],
+            'finished_date' => ['nullable', 'date'],
+        ]);
     }
 
     /**
