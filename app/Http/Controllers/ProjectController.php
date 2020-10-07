@@ -47,7 +47,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $validatedData = $request->validate([
+        //     'name' => ['required', 'max:255'],
+        //     'description' => ['required ', 'min:200'],
+        //     'start_date' => ['nullable', 'date'],
+        //     'finished_date' => ['nullable', 'date'],
+        // ]);
     }
 
     /**
