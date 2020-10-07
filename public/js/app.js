@@ -40772,7 +40772,7 @@ var render = function() {
         "select",
         {
           staticClass: "hidden",
-          attrs: { name: "name", id: "name", multiple: "" }
+          attrs: { name: _vm.name, id: "name", multiple: "" }
         },
         _vm._l(_vm.selectedUsers, function(user) {
           return _c("option", {
