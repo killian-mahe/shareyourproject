@@ -2430,6 +2430,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2444,10 +2445,20 @@ __webpack_require__.r(__webpack_exports__);
     'name': String,
     'value': String,
     'icon': String,
-    'right': Boolean
+    'right': Boolean,
+    'autocomplete': Boolean
   },
   mounted: function mounted() {
     feather.replace();
+  },
+  computed: {
+    _autocmoplete: function _autocmoplete() {
+      if (this.autocomplete) {
+        return "on";
+      }
+
+      return "off";
+    }
   }
 });
 
@@ -40269,7 +40280,8 @@ var render = function() {
             name: _vm.name,
             id: _vm.name,
             type: _vm.type,
-            placeholder: _vm.placeholder
+            placeholder: _vm.placeholder,
+            autocomplete: _vm._autocmoplete
           },
           domProps: { value: _vm.value },
           on: {
