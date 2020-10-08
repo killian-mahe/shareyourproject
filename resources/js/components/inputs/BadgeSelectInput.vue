@@ -16,7 +16,7 @@
                 :data-feather="icon"
                 class="absolute right-3 block"></i>
         </div>
-        <div v-if="focus" class="absolute w-full bg-white rounded z-10 shadow-md px-3 py-2 flex flex-wrap">
+        <div v-if="focus && badges.length > 0" class="absolute w-full bg-white rounded z-10 shadow-md px-3 py-2 flex flex-wrap">
             <badge-label class="block my-2 w-auto mr-2 cursor-pointer"
                         v-for="badge in badges"
                         @click="addBadge(badge)"
@@ -86,7 +86,8 @@
                 if (this.selectedBadges.map(badge => badge.id).includes(badge.id)) return;
 
                 this.selectedBadges.push(badge);
-                console.log(this.selectedBadges);
+                this.searchQuery="";
+                this.badges = [];
             },
             removeBadge : function (badge) {
                 let index = this.selectedBadges.map(badge => badge.id).indexOf(badge.id);

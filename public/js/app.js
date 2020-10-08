@@ -2376,7 +2376,8 @@ __webpack_require__.r(__webpack_exports__);
         return badge.id;
       }).includes(badge.id)) return;
       this.selectedBadges.push(badge);
-      console.log(this.selectedBadges);
+      this.searchQuery = "";
+      this.badges = [];
     },
     removeBadge: function removeBadge(badge) {
       var index = this.selectedBadges.map(function (badge) {
@@ -2569,7 +2570,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       focus: false,
       tags: [],
-      selectedTags: []
+      selectedTags: [],
+      x: null
     };
   },
   props: {
@@ -2586,24 +2588,30 @@ __webpack_require__.r(__webpack_exports__);
     updateTagList: function updateTagList() {
       var _this = this;
 
-      if (this.$refs.input.value === "") {
-        return;
-      }
-
-      axios.get('/api/tags/search/' + this.$refs.input.value).then(function (response) {
-        if (response.status === 200) {
-          _this.tags = response.data;
+      if (this.x) clearTimeout(this.x);
+      this.x = setTimeout(function () {
+        if (_this.$refs.input.value.replace(" ", "") === "") {
+          return;
         }
-      })["catch"](function (error) {
-        console.error(error);
-      });
+
+        axios.get('/api/tags/search/' + _this.$refs.input.value.replace(" ", "")).then(function (response) {
+          if (response.status === 200) {
+            _this.tags = response.data;
+          }
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      }, 250);
     },
     onSpace: function onSpace() {
       var tag = this.$refs.input.value;
       this.addTag(tag);
+      this.$refs.input.value = "";
     },
     addTag: function addTag(tag) {
-      if (this.selectedTags.includes(tag) || tag === " ") return;
+      tag = tag.replace(" ", "");
+      if (this.selectedTags.includes(tag) || tag === "") return;
+      console.log(tag);
       this.selectedTags.push(tag);
       this.$refs.input.value = "";
       this.tags = [];
@@ -40149,7 +40157,7 @@ var render = function() {
           : _vm._e()
       ]),
       _vm._v(" "),
-      _vm.focus
+      _vm.focus && _vm.badges.length > 0
         ? _c(
             "div",
             {

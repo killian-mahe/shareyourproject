@@ -44,7 +44,8 @@
             return {
                 focus: false,
                 tags: [],
-                selectedTags: []
+                selectedTags: [],
+                x: null
             }
         },
         props: {
@@ -59,24 +60,31 @@
         },
         methods: {
             updateTagList : function () {
-                if (this.$refs.input.value === "") { return; }
+                if (this.x) clearTimeout(this.x);
 
-                axios.get('/api/tags/search/' + this.$refs.input.value)
-                    .then(response => {
-                        if (response.status === 200) {
-                            this.tags = response.data;
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    })
+                this.x = setTimeout(() => {
+                    if (this.$refs.input.value.replace(" ","") === "") { return; }
+
+                    axios.get('/api/tags/search/' + this.$refs.input.value.replace(" ",""))
+                        .then(response => {
+                            if (response.status === 200) {
+                                this.tags = response.data;
+                            }
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        })
+                }, 250);
             },
             onSpace: function() {
                 let tag = this.$refs.input.value;
                 this.addTag(tag);
+                this.$refs.input.value = "";
             },
             addTag: function(tag) {
-                if (this.selectedTags.includes(tag) || tag === " ") return;
+                tag = tag.replace(" ","");
+                if (this.selectedTags.includes(tag) || tag === "") return;
+                console.log(tag);
                 this.selectedTags.push(tag);
                 this.$refs.input.value="";
                 this.tags = [];
