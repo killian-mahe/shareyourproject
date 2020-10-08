@@ -1,5 +1,5 @@
 <template>
-    <span class="italic hover:underline cursor-pointer"><a v-bind:href="link">#{{label}}</a></span>
+    <span @click="$emit('click')" class="italic hover:underline cursor-pointer"><a v-bind:href="link">#{{label}}</a></span>
 </template>
 
 <script>

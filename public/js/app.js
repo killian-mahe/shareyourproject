@@ -2548,6 +2548,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2560,7 +2568,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       focus: false,
-      tags: []
+      tags: [],
+      selectedTags: []
     };
   },
   props: {
@@ -2574,17 +2583,36 @@ __webpack_require__.r(__webpack_exports__);
     feather.replace();
   },
   methods: {
+    updateTagList: function updateTagList() {
+      var _this = this;
+
+      if (this.$refs.input.value === "") {
+        return;
+      }
+
+      axios.get('/api/tags/search/' + this.$refs.input.value).then(function (response) {
+        if (response.status === 200) {
+          _this.tags = response.data;
+        }
+      })["catch"](function (error) {
+        console.error(error);
+      });
+    },
     onSpace: function onSpace() {
       var tag = this.$refs.input.value;
+      this.addTag(tag);
+    },
+    addTag: function addTag(tag) {
+      if (this.selectedTags.includes(tag) || tag === " ") return;
+      this.selectedTags.push(tag);
       this.$refs.input.value = "";
-      if (this.tags.includes(tag) || tag === " ") return;
-      this.tags.push(tag);
+      this.tags = [];
     },
     onDelete: function onDelete() {
       var tag = this.$refs.input.value;
 
       if (tag === "") {
-        this.tags.pop();
+        this.selectedTags.pop();
       }
     },
     onFocus: function onFocus() {
@@ -2592,10 +2620,10 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.input.focus();
     },
     removeTag: function removeTag(tag) {
-      var index = this.tags.indexOf(tag);
+      var index = this.selectedTags.indexOf(tag);
 
       if (index > -1) {
-        this.tags.splice(tag, 1);
+        this.selectedTags.splice(index, 1);
       }
     },
     onClickOutside: function onClickOutside() {
@@ -40414,7 +40442,7 @@ var render = function() {
           }
         },
         [
-          _vm._l(_vm.tags, function(tag) {
+          _vm._l(_vm.selectedTags, function(tag) {
             return _c(
               "span",
               {
@@ -40492,17 +40520,41 @@ var render = function() {
                   }
                   return _vm.onDelete($event)
                 }
-              ]
+              ],
+              input: _vm.updateTagList
             }
           })
         ],
         2
       ),
       _vm._v(" "),
+      _vm.focus && _vm.tags.length > 0
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "absolute w-full bg-white rounded z-10 shadow-md px-3 py-2 flex flex-wrap"
+            },
+            _vm._l(_vm.tags, function(tag) {
+              return _c("tag-label", {
+                key: tag.id,
+                staticClass: "block my-2 w-auto mr-2 cursor-pointer",
+                attrs: { label: tag.name },
+                on: {
+                  click: function($event) {
+                    return _vm.addTag(tag.name)
+                  }
+                }
+              })
+            }),
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "select",
         { staticClass: "hidden", attrs: { name: _vm.name } },
-        _vm._l(_vm.tags, function(tag) {
+        _vm._l(_vm.selectedTags, function(tag) {
           return _c("option", { key: tag, domProps: { value: tag } })
         }),
         0
@@ -41004,9 +41056,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", { staticClass: "italic hover:underline cursor-pointer" }, [
-    _c("a", { attrs: { href: _vm.link } }, [_vm._v("#" + _vm._s(_vm.label))])
-  ])
+  return _c(
+    "span",
+    {
+      staticClass: "italic hover:underline cursor-pointer",
+      on: {
+        click: function($event) {
+          return _vm.$emit("click")
+        }
+      }
+    },
+    [_c("a", { attrs: { href: _vm.link } }, [_vm._v("#" + _vm._s(_vm.label))])]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -54483,8 +54544,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\shareyourproject\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\shareyourproject\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\share-your-project\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\share-your-project\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
