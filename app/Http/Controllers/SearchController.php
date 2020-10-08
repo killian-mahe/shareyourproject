@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Resources\Project as ProjectResource;
 use App\Http\Resources\User as UserResource;
 use App\Http\Resources\Badge as BadgeResource;
+use App\Http\Resources\Tag as TagResource;
 // Models
 use App\User;
 use App\Models\Technology;
 use App\Models\Project;
+use App\Models\Tag;
 
 class SearchController extends Controller
 {
@@ -47,5 +49,19 @@ class SearchController extends Controller
         $technologies = Technology::where('label', 'like', '%'.$search.'%')->limit(5)->get();
 
         return response()->json(BadgeResource::collection($technologies));
+    }
+
+    /**
+     * Get tags
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param String $search
+     * @return \App\Http\Resources\Tag
+     */
+    public function tags(Request $request, string $search)
+    {
+        $tags = Tag::where('name', 'like', '%'.$search.'%')->limit(7)->get();
+
+        return response()->json(TagResource::collection($tags));
     }
 }
