@@ -2320,6 +2320,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2568,6 +2569,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2711,6 +2713,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _InputLabel_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InputLabel.vue */ "./resources/js/components/inputs/InputLabel.vue");
 /* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-click-outside */ "./node_modules/v-click-outside/dist/v-click-outside.umd.js");
 /* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(v_click_outside__WEBPACK_IMPORTED_MODULE_1__);
+//
 //
 //
 //
@@ -40135,7 +40138,11 @@ var render = function() {
             "pl-12": _vm.icon && !_vm.right,
             "rounded-b-lg": _vm.selectedBadges.length == 0
           },
-          attrs: { placeholder: _vm.placeholder, id: _vm.name },
+          attrs: {
+            placeholder: _vm.placeholder,
+            id: _vm.name,
+            autocomplete: "off"
+          },
           domProps: { value: _vm.searchQuery },
           on: {
             click: function($event) {
@@ -40510,7 +40517,7 @@ var render = function() {
             ref: "input",
             staticClass: "appearance-none",
             class: { "bg-white": _vm.focus, "bg-gray-200": !_vm.focus },
-            attrs: { type: "text" },
+            attrs: { type: "text", autocomplete: "off" },
             on: {
               keyup: [
                 function($event) {
@@ -40711,7 +40718,11 @@ var render = function() {
             "pl-12": _vm.icon && !_vm.right,
             "rounded-b-lg": _vm.selectedUsers.length == 0
           },
-          attrs: { placeholder: _vm.placeholder, id: _vm.name },
+          attrs: {
+            placeholder: _vm.placeholder,
+            id: _vm.name,
+            autocomplete: "off"
+          },
           domProps: { value: _vm.searchQuery },
           on: {
             click: function($event) {

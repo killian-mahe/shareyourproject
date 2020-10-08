@@ -12,6 +12,7 @@
                     @keyup.space="onSpace"
                     @keyup.backspace="onDelete"
                     @input="updateTagList"
+                    autocomplete="off"
                     ref="input">
         </div>
         <div v-if="focus && tags.length > 0" class="absolute w-full bg-white rounded z-10 shadow-md px-3 py-2 flex flex-wrap">

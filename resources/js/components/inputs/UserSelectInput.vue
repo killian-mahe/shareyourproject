@@ -8,6 +8,7 @@
                     v-model="searchQuery"
                     :id="name"
                     @click="focus = true"
+                    autocomplete="off"
                     @input="updateUserList">
             <i v-if="icon !== '' && right == false"
                 :data-feather="icon"

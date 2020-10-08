@@ -8,7 +8,8 @@
                     v-model="searchQuery"
                     :id="name"
                     @click="focus = true"
-                    @input="updateBadgeList">
+                    @input="updateBadgeList"
+                    autocomplete="off">
             <i v-if="icon !== '' && right == false"
                 :data-feather="icon"
                 class="absolute left-3 block"></i>
