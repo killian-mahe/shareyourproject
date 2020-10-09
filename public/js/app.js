@@ -2321,6 +2321,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2381,6 +2384,7 @@ __webpack_require__.r(__webpack_exports__);
       this.badges = [];
     },
     removeBadge: function removeBadge(badge) {
+      console.log(badge);
       var index = this.selectedBadges.map(function (badge) {
         return badge.id;
       }).indexOf(badge.id);
@@ -40186,8 +40190,8 @@ var render = function() {
             _vm._l(_vm.badges, function(badge) {
               return _c("badge-label", {
                 key: badge.id,
-                staticClass: "block my-2 w-auto mr-2 cursor-pointer",
-                attrs: { label: badge.label },
+                staticClass: "block ",
+                attrs: { close: false, label: badge.label },
                 on: {
                   click: function($event) {
                     return _vm.addBadge(badge)
@@ -40207,13 +40211,49 @@ var render = function() {
                 "w-full border border-gray-200 rounded-b-md flex flex-wrap p-2 bg-cultured-300"
             },
             _vm._l(_vm.selectedBadges, function(badge) {
-              return _c("badge-label", {
-                key: badge.id + "_selected",
-                staticClass: "mr-2",
-                attrs: { label: badge.label }
-              })
+              return _c(
+                "span",
+                {
+                  key: badge.id + "_selected",
+                  staticClass:
+                    "rounded-full px-2 pb-1 pt-0.25 text-xs flex items-center font-semibold bg-onyx-200 lowercase mr-2"
+                },
+                [
+                  _vm._v(_vm._s(badge.label) + "\n            "),
+                  _c(
+                    "svg",
+                    {
+                      staticClass: "feather feather-x h-4 w-4 cursor-pointer",
+                      attrs: {
+                        xmlns: "http://www.w3.org/2000/svg",
+                        width: "24",
+                        height: "24",
+                        viewBox: "0 0 24 24",
+                        fill: "none",
+                        stroke: "currentColor",
+                        "stroke-width": "2",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round"
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.removeBadge(badge)
+                        }
+                      }
+                    },
+                    [
+                      _c("line", {
+                        attrs: { x1: "18", y1: "6", x2: "6", y2: "18" }
+                      }),
+                      _c("line", {
+                        attrs: { x1: "6", y1: "6", x2: "18", y2: "18" }
+                      })
+                    ]
+                  )
+                ]
+              )
             }),
-            1
+            0
           )
         : _vm._e(),
       _vm._v(" "),

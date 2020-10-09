@@ -18,14 +18,17 @@
                 class="absolute right-3 block"></i>
         </div>
         <div v-if="focus && badges.length > 0" class="absolute w-full bg-white rounded z-10 shadow-md px-3 py-2 flex flex-wrap">
-            <badge-label class="block my-2 w-auto mr-2 cursor-pointer"
+            <badge-label class="block "
                         v-for="badge in badges"
                         @click="addBadge(badge)"
+                        :close="false"
                         :key="badge.id"
                         :label="badge.label"></badge-label>
         </div>
         <div v-if="selectedBadges.length > 0" class="w-full border border-gray-200 rounded-b-md flex flex-wrap p-2 bg-cultured-300">
-            <badge-label v-for="badge in selectedBadges" class="mr-2" :key="badge.id+'_selected'" :label="badge.label"></badge-label>
+            <span v-for="badge in selectedBadges" :key="badge.id+'_selected'" class="rounded-full px-2 pb-1 pt-0.25 text-xs flex items-center font-semibold bg-onyx-200 lowercase mr-2">{{badge.label}}
+                <svg @click="removeBadge(badge)" class="feather feather-x h-4 w-4 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </span>
         </div>
         <p v-if="error" class="text-red-500 text-xs italic">{{ error }}</p>
         <p v-if="indication" class="text-gray-600 text-xs italic">{{ indication }}</p>
@@ -91,6 +94,7 @@
                 this.badges = [];
             },
             removeBadge : function (badge) {
+                console.log(badge)
                 let index = this.selectedBadges.map(badge => badge.id).indexOf(badge.id);
                 if (index > -1) {
                     this.selectedBadges.splice(index, 1);
