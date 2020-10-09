@@ -13,64 +13,58 @@
         {{-- Center Block --}}
         <div class="box w-full h-auto mb-6 px-8">
             <h1 class="text-onyx-600 font-sans font-bold text-center text-3xl p-4">Create a new project</h1>
-            <hr class="mx-4 mb-6">
+            <hr class="mb-6">
 
-            <form action="">
-                <custom-input class="w-full md:w-1/2 mb-4" name="project-name" label="Project name" indication="Great project names are short and memorable." type="text" placeholder="ex : Share Your Project" error=""></custom-input>
-                <custom-input class="w-full mb-4" name="description" label="Description" type="text" error=""></custom-input>
-                <user-select-input class="w-full mb-4" name="description" label="Add a new collaborator" placeholder="ex : John Doe" error=""></user-select-input>
-            </form>
+            <form action="{{route('projects.store')}}" method="POST">
+                @csrf
+                <div class="w-full h-auto flex space-x-4">
+                    <custom-input class="w-full xl:w-1/2 mb-4" :autocomplete="false" name="name" label="Project name" indication="Great project names are short and memorable." type="text" placeholder="ex : Share Your Project" error="@error('name') {{$message}} @enderror"></custom-input>
+                    {{-- Import Background Image
+                    <div class="bg-orange-peel-300 rounded-lg w-1/2 h-24"></div>
+                    --}}
+                </div>
+                <text-area child_class="w-full" label="Description" name="description"></text-area>
+                <user-select-input class="w-full mb-4" name="collaborators[]" label="Add a new collaborator" placeholder="ex : John Doe" error="@error('collaborators') {{$message}} @enderror"></user-select-input>
 
-                {{-- Select you badge(s) --}}
-                <div class="inline-flex w-full rounded-md shadow-sm mb-4">
-                    <button class="flex relative items-center cursor-pointer w-full rounded-lg border border-gray-300 bg-cultured-100 pl-4 pr-10 py-3 text-left hover:border-gray-400 focus:border-viridiant-600">
-                        <span class="block truncate">Select your badge(s)</span>
-                        <i class="text-onyx-900 my-auto h-4 w-4 cursor-pointer absolute right-3 transform rotate-90" data-feather="code"></i>
-                    </button>
+                <h1 class="text-onyx-600 font-sans font-semiboldbold text-left text-lg pb-4 pt-8">Project referencing</h1>
+                <hr class="mb-6">
+
+
+                <div class="block md:flex w-full h-auto md:space-x-4">
+                    <badge-select-input class="w-full md:w-1/2 mb-4" name="badges[]" label="Select your badge(s)" placeholder="ex : Python" error=""></badge-select-input>
+                    @php
+                        $options = [
+                            ['text' => 'Ongoing', 'value' => 'ongoing'],
+                            ['text' => 'On Break', 'value' => 'onbreak'],
+                            ['text' => 'Finished', 'value' => 'finished'],
+                            ['text' => 'Abandoned', 'value' => 'abandoned'],
+                        ];
+
+                    @endphp
+                    <tag-select-input class="w-full md:w-1/2" name="tags[]" label="Type your Hash-tag(s)"></tag-select-input>
                 </div>
 
-                {{-- Add a hashtag
-                <div class="inline-flex w-auto rounded-md shadow-sm mb-4">
-                    <button class="flex relative items-center cursor-pointer w-auto rounded-lg border border-gray-300 bg-cultured-100 pl-4 pr-10 py-3 text-left hover:border-gray-400 focus:border-viridiant-600">
-                        <span class="block truncate">Add a hashtag</span>
-                        <i class="text-onyx-900 my-auto h-4 w-4 cursor-pointer absolute right-3 transform rotate-90" data-feather="plus-circle"></i>
-                    </button>
-                </div> --}}
-
-                {{-- Project status --}}
-                {{-- Probleme outline --}}
-                <div class="inline-block relative w-auto">
-                    <select class="block appearance-none w-full bg-white border border-gray-300 hover:border-gray-400 focus:border-viridiant-600 px-4 py-3 pr-8 rounded-lg shadow-sm focus:outline-none focus:shadow-outline">
-                        <option>Ongoing</option>
-                        <option>On break</option>
-                        <option>Finished</option>
-                        <option>Abandoned</option>
-                    </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                        <i class="text-onyx-900 my-auto h-4 w-4 cursor-pointer absolute right-3 transform rotate-90" data-feather="code"></i>
-                    </div>
-                </div>
-
-                {{-- Add a hashtag --}}
-                {{-- Probleme d'alignement de labal --}}
-                <div class="relative w-auto">
-                    <custom-input class="w-full md:w-1/2 mb-4 pl-10" name="description" label="Add a Hash-Tag" placeholder="trucmuche" type="text" error=""></custom-input>
-                    <i class="text-onyx-900 h-4 w-4 cursor-pointer absolute top-11 left-3" data-feather="hash"></i>
-                </div>
 
 
                 {{-- Project planning --}}
-                <h2 class="text-onyx-600 font-sans font-semibold text-left text-xl px-4 pb-1 pt-4">Project planning</h2>
-                <hr class="mx-4 mb-6">
+                <h1 class="text-onyx-600 font-sans font-semiboldbold text-left text-lg pb-4 pt-8">Project Planning</h1>
+                <hr class="mb-6">
 
-            <div class="w-full block md:flex">
-                <custom-input class="w-full md:w-1/2 mr-2" name="project-start-date" label="Start Date" type="date" error=""></custom-input>
-                <custom-input class="w-full md:w-1/2 ml-2" name="project-due-date" label="Due date" type="date" error=""></custom-input>
-            </div>
+                <div class="w-full block xl:flex xl:space-x-4">
+                    <div class="block md:flex w-full md:space-x-4 xl:w-2/3">
+                        <custom-input class="md:w-1/2 mb-4" name="start_date" label="Start Date" type="date" error=""></custom-input>
+                        <custom-input class="md:w-1/2 mb-4" name="finished_date" label="Due date" type="date" error=""></custom-input>
+                    </div>
+                    <select-input class="w-1/2 xl:w-1/3 mb-4" label="Project status" name="status" :options='@json($options)'>
+                        <i class="text-onyx-900 my-auto h-4 w-4 cursor-pointer absolute right-3 transform rotate-90" data-feather="code"></i>
+                    </select-input>
+                </div>
 
-            <div>
-                <a href="#" class="my-4 btn btn-viridiant hover:text-cultured-100">Create project</a>
-            </div>
+                <div>
+                    <button type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Create project</button>
+                </div>
+            </form>
+
         </div>
 
         @yield('main')
@@ -79,27 +73,6 @@
     <div class="hidden xl:block lg:w-1/6 xl:w-1/8">
         {{-- Side Right Block --}}
     </div>
-
-
-    <div class="block">
-        <label for="price" class="block text-sm leading-5 font-medium text-gray-700">Price</label>
-        <div class="mt-1 relative rounded-md shadow-sm">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span class="text-gray-500 sm:text-sm sm:leading-5">
-              $
-            </span>
-          </div>
-          <input id="price" class="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5" placeholder="0.00">
-          <div class="absolute inset-y-0 right-0 flex items-center">
-            <select aria-label="Currency" class="form-select h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5">
-              <option>USD</option>
-              <option>CAD</option>
-              <option>EUR</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
 </div>
 
 @endsection

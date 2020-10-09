@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaggablesTable extends Migration
+class EditTagPrimaryKey extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateTaggablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('taggables', function (Blueprint $table) {
-            $table->morphs('taggable');
-            $table->string('tag_name');
-            $table->timestamps();
-
-            $table->foreign('tag_name')->references('name')->on('tags');
+        Schema::table('tags', function (Blueprint $table) {
+            $table->index('id');
+            $table->dropPrimary('PRIMARY');
+            $table->primary('name');
         });
     }
 
@@ -29,6 +27,9 @@ class CreateTaggablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taggables');
+        Schema::table('tags', function (Blueprint $table) {
+            $table->dropPrimary('name');
+            $table->primary('id');
+        });
     }
 }
