@@ -87,7 +87,7 @@ class Project extends Model
      * @param  string  $value
      * @return void
      */
-    public function setFirstNameAttribute($value)
+    public function setStatusAttribute($value)
     {
         $this->attributes['status'] = Project::STATUS[$value];
     }

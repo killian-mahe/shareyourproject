@@ -2626,6 +2626,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.selectedTags.includes(tag) || tag === "") return;
       console.log(tag);
       this.selectedTags.push(tag);
+      console.log(this.selectedTags);
       this.$refs.input.value = "";
       this.tags = [];
     },
@@ -40580,9 +40581,13 @@ var render = function() {
       _vm._v(" "),
       _c(
         "select",
-        { staticClass: "hidden", attrs: { name: _vm.name } },
+        { staticClass: "hidden", attrs: { name: _vm.name, multiple: "" } },
         _vm._l(_vm.selectedTags, function(tag) {
-          return _c("option", { key: tag, domProps: { value: tag } })
+          return _c("option", {
+            key: tag,
+            attrs: { selected: "" },
+            domProps: { value: tag }
+          })
         }),
         0
       ),

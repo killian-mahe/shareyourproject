@@ -22,8 +22,8 @@
                         :key="tag.id"
                         :label="tag.name"></tag-label>
         </div>
-        <select :name="name" class="hidden">
-            <option v-for="tag in selectedTags" :key="tag" :value="tag"></option>
+        <select :name="name" class="hidden" multiple>
+            <option v-for="tag in selectedTags" :key="tag" :value="tag" selected></option>
         </select>
         <p v-if="error" class="text-red-500 text-xs italic">{{ error }}</p>
         <p v-if="indication" class="text-gray-600 text-xs italic">{{ indication }}</p>
@@ -87,6 +87,7 @@
                 if (this.selectedTags.includes(tag) || tag === "") return;
                 console.log(tag);
                 this.selectedTags.push(tag);
+                console.log(this.selectedTags);
                 this.$refs.input.value="";
                 this.tags = [];
             },
