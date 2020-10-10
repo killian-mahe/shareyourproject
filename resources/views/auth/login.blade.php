@@ -16,7 +16,8 @@
             <div class="flex flex-wrap -mx-3 mb-6">
                 <custom-input class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************" error="@error('password') {{ $message }} @enderror"></custom-input>
             </div>
-            <button type="submit" class="border border-viridiant-600 rounded-full font-semibold px-4 py-2 hover:bg-viridiant-600 hover:text-white transition-colors duration-100 ease-in-out">Submit</button>
+            <i class="block mb-3 text-sm">No account yet ? <a class="font-medium" href="{{route('register')}}">Register</a></i>
+            <button type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Log In</button>
         </form>
     </div>
 </div>
