@@ -12,22 +12,25 @@
     <span class="font-light text-xs block text-right">Member since {{$user->created_at}}</span>
 </div>
 
-<h2 class="font-semibold text-xl my-5 ml-3">Projects</h2>
+@php
+    $projects = $user->projects;
+    $posts = $user->posts;
+@endphp
 
-{{-- @foreach ($user->projects as $project)
+@if ($projects->count() > 0)
+    <h2 class="font-semibold text-xl my-5 ml-3">Projects</h2>
 
-    @include('components.cards.project')
+    <project-list :projects_ids='@json($user->projects->pluck('id'))'></project-list>
+@endif
 
-@endforeach --}}
+@if ($posts->count() > 0)
+    <h2 class="font-semibold text-xl my-5 ml-3">Posts</h2>
 
-<project-list :projects_ids='@json($user->projects->pluck('id'))'></project-list>
+    @foreach ($user->posts as $post)
 
-<h2 class="font-semibold text-xl my-5 ml-3">Posts</h2>
+        @include('components.post')
 
-@foreach ($user->posts as $post)
-
-    @include('components.post')
-
-@endforeach
+    @endforeach
+@endif
 
 @endsection
