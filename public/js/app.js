@@ -39869,7 +39869,8 @@ var render = function() {
                         _c("text-area", {
                           staticClass: "w-full",
                           attrs: {
-                            child_class: "pr-10 overflow-y-hidden resize-none",
+                            child_class:
+                              "w-full pr-10 overflow-y-hidden resize-none",
                             placeholder: "Write a comment..."
                           },
                           model: {
