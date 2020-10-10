@@ -17,7 +17,7 @@
                 <custom-input class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************" error="@error('password') {{ $message }} @enderror"></custom-input>
             </div>
             <i class="block mb-3 text-sm">No account yet ? <a class="font-medium" href="{{route('register')}}">Register</a></i>
-            <button type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Submit</button>
+            <button type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Log In</button>
         </form>
     </div>
 </div>
