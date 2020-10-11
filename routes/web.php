@@ -37,3 +37,9 @@ Route::name('projects.')->prefix('projects')->group(function () {
     Route::get('{project}/members', 'ProjectController@members')->name('members');
     Route::get('{project}/about', 'ProjectController@about')->name('about');
 });
+
+Route::name('admin.')->prefix('admin')->group(function() {
+
+    Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
+
+});
