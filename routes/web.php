@@ -38,7 +38,7 @@ Route::name('projects.')->prefix('projects')->group(function () {
     Route::get('{project}/about', 'ProjectController@about')->name('about');
 });
 
-Route::name('admin.')->prefix('admin')->group(function() {
+Route::name('admin.')->prefix('admin')->middleware('admin')->group(function() {
 
     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
 
