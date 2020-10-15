@@ -24,17 +24,61 @@
 
 </head>
 
-<body class="bg-cultured-200">
-    <div id="app">
-        @yield('content')
+<body class="bg-cultured-400">
+    <div id="app" class="flex h-screen">
+
+        <nav class="w-64 h-full bg-onyx-600">
+            {{-- Navbar Header --}}
+            <div class="w-full bg-onyx-700 h-16 py-2">
+                <img class="h-full w-auto mx-auto" src="{{asset('/vendor/courier/logos/svg/text/Logo_cultured_text.svg')}}" alt="logo_text">
+            </div>
+
+            @php
+                $categories = [
+                    [
+                        'name' => 'User Management',
+                        'display' => false,
+                        'icon' => 'user',
+                        'items' => [
+                            [
+                                'label' => 'Projects',
+                                'link' => route('projects.create'),
+                            ]
+                        ]
+                    ]
+                ];
+            @endphp
+
+            {{-- Navbar Links --}}
+            <admin-navbar :links='@json($categories)'></admin-navbar>
+        </nav>
+
+        <main class="flex-grow flex flex-col">
+            <header class="h-16 bg-white shadow-md pl-10 pr-6 flex items-center justify-between">
+                {{-- Section Title --}}
+                <span class="font-semibold text-xl flex my-3">
+                    @yield('section-title')
+                </span>
+
+                {{-- Account section --}}
+                <div class="flex items-center hover:bg-gray-200 h-full px-3">
+                <a href="{{route('users.show', ['user' => Auth::user()->id])}}"><img class="h-10 w-10 rounded-full mr-3" src="{{Auth::user()->profile_picture()}}" alt="profile_picture"></a>
+                    <div class="flex flex-col">
+                        <span class="text-gray-700 font-medium">{{Auth::user()->fullname}}</span>
+                        <span class="text-gray-700 text-sm">{{Auth::user()->title}}</span>
+                    </div>
+                </div>
+
+            </header>
+            <section>
+                @yield('content')
+            </section>
+        </main>
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/feather-icons"></script>
 <script>
     feather.replace()
-    function myFunction(h) {
-        h.classList.toggle("open");
-    }
 </script>
 </html>
