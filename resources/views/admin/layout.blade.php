@@ -36,13 +36,29 @@
             @php
                 $categories = [
                     [
-                        'name' => 'User Management',
+                        'name' => 'Models',
                         'display' => false,
-                        'icon' => 'user',
+                        'icon' => 'box',
                         'items' => [
                             [
                                 'label' => 'Projects',
-                                'link' => route('projects.create'),
+                                'link' => route('admin.models.projects'),
+                            ],
+                            [
+                                'label' => 'Posts',
+                                'link' => route('admin.models.posts'),
+                            ],
+                            [
+                                'label' => 'Users',
+                                'link' => route('admin.models.users'),
+                            ],
+                            [
+                                'label' => 'Tags',
+                                'link' => route('admin.models.tags'),
+                            ],
+                            [
+                                'label' => 'Technologies',
+                                'link' => route('admin.models.technologies'),
                             ]
                         ]
                     ]
@@ -56,7 +72,7 @@
         <main class="flex-grow flex flex-col">
             <header class="h-16 bg-white shadow-md pl-10 pr-6 flex items-center justify-between">
                 {{-- Section Title --}}
-                <span class="font-semibold text-xl flex my-3">
+                <span class="font-semibold text-xl flex my-3 items-center">
                     @yield('section-title')
                 </span>
 

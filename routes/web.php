@@ -42,4 +42,18 @@ Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(fun
 
     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
 
+    Route::name('models.')->prefix('models')->group(function() {
+
+        Route::get('projects', 'AdminController@projects')->name('projects');
+
+        Route::get('posts', 'AdminController@posts')->name('posts');
+
+        Route::get('users', 'AdminController@users')->name('users');
+
+        Route::get('tags', 'AdminController@tags')->name('tags');
+
+        Route::get('technologies', 'AdminController@technologies')->name('technologies');
+
+    });
+
 });

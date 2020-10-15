@@ -39684,7 +39684,8 @@ var staticRenderFns = [
     return _c(
       "a",
       {
-        staticClass: "a-none text-onyx-200 hover:text-onyx-100 flex my-10",
+        staticClass:
+          "a-none text-onyx-200 text-lg font-semibold hover:text-onyx-100 flex my-10",
         attrs: { href: "/admin/dashboard" }
       },
       [

@@ -1,6 +1,6 @@
 <template>
     <div class="px-6 mt-8">
-        <a class="a-none text-onyx-200 hover:text-onyx-100 flex my-10" href="/admin/dashboard">
+        <a class="a-none text-onyx-200 text-lg font-semibold hover:text-onyx-100 flex my-10" href="/admin/dashboard">
             <i data-feather="home" class="mr-4 h-5 w-5"></i>
             Dashboard
         </a>
