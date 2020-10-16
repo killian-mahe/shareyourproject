@@ -2738,6 +2738,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2748,9 +2750,27 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     'child_class': String,
     'placeholder': String,
-    'value': String,
+    'value': {
+      type: String,
+      "default": ""
+    },
     'name': String,
-    'label': String
+    'label': String,
+    'max_length': Number
+  },
+  data: function data() {
+    return {
+      inputValue: this.value
+    };
+  },
+  computed: {
+    classIntern: function classIntern() {
+      if (this.inputValue.length > this.max_length) {
+        return this.child_class + " focus:border-red-500 border-red-500";
+      } else {
+        return this.child_class + " focus:border-viridiant-600";
+      }
+    }
   }
 });
 
@@ -40878,20 +40898,51 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("textarea", {
-                  class:
-                    _vm.child_class +
-                    " appearance-none bg-white text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none",
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.inputValue,
+                      expression: "inputValue"
+                    }
+                  ],
+                  staticClass:
+                    "appearance-none bg-white text-gray-700 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none",
+                  class: _vm.classIntern,
                   attrs: { placeholder: _vm.placeholder, name: _vm.name },
-                  domProps: { value: _vm.value },
+                  domProps: { value: _vm.inputValue },
                   on: {
                     input: [
+                      function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.inputValue = $event.target.value
+                      },
                       resize,
                       function($event) {
                         return _vm.$emit("input", $event.target.value)
                       }
                     ]
                   }
-                })
+                }),
+                _vm._v(" "),
+                _c(
+                  "p",
+                  {
+                    staticClass: "text-gray-600 text-xs italic text-right",
+                    class: {
+                      "text-red-500": _vm.inputValue.length > _vm.max_length
+                    }
+                  },
+                  [
+                    _vm._v(
+                      _vm._s(_vm.inputValue.length) +
+                        "/" +
+                        _vm._s(_vm.max_length)
+                    )
+                  ]
+                )
               ],
               1
             )
@@ -54884,8 +54935,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\share-your-project\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\share-your-project\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\shareyourproject\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\shareyourproject\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -23,7 +23,7 @@
                     <div class="bg-orange-peel-300 rounded-lg w-1/2 h-24"></div>
                     --}}
                 </div>
-                <text-area child_class="w-full" label="Description" name="description"></text-area>
+                <text-area :max_length="200" child_class="w-full" label="Description" name="description"></text-area>
                 <user-select-input class="w-full mb-4" name="collaborators[]" label="Add a new collaborator" placeholder="ex : John Doe" error="@error('collaborators') {{$message}} @enderror"></user-select-input>
 
                 <h1 class="text-onyx-600 font-sans font-semiboldbold text-left text-lg pb-4 pt-8">Project referencing</h1>
