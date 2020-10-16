@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="body-bg">
+<body class="bg-cultured-200">
     <div id="app">
         {{-- NavBar --}}
         <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50">
