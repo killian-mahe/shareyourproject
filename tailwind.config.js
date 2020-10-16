@@ -94,6 +94,7 @@ module.exports = {
                 '120': '30rem',
             },
             minWidth: {
+              '0': '0rem',
               '1': '1rem',
               '2': '2rem',
               '3': '3rem',
@@ -111,6 +112,7 @@ module.exports = {
               '64': '64rem',
             },
             minHeight: {
+              '0': '0rem',
               '1': '1rem',
               '2': '2rem',
               '3': '3rem',
@@ -128,6 +130,7 @@ module.exports = {
               '64': '64rem',
             },
             maxWidth: {
+              '0': '0rem',
               '1': '1rem',
               '2': '2rem',
               '3': '3rem',
@@ -145,6 +148,7 @@ module.exports = {
               '64': '64rem',
             },
             maxHeight: {
+              '0': '0rem',
               '1': '1rem',
               '2': '2rem',
               '3': '3rem',

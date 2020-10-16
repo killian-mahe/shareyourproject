@@ -37,3 +37,23 @@ Route::name('projects.')->prefix('projects')->group(function () {
     Route::get('{project}/members', 'ProjectController@members')->name('members');
     Route::get('{project}/about', 'ProjectController@about')->name('about');
 });
+
+Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function() {
+
+    Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
+
+    Route::name('models.')->prefix('models')->group(function() {
+
+        Route::get('projects', 'AdminController@projects')->name('projects');
+
+        Route::get('posts', 'AdminController@posts')->name('posts');
+
+        Route::get('users', 'AdminController@users')->name('users');
+
+        Route::get('tags', 'AdminController@tags')->name('tags');
+
+        Route::get('technologies', 'AdminController@technologies')->name('technologies');
+
+    });
+
+});

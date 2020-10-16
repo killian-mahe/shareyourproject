@@ -2,7 +2,7 @@
     @apply font-semibold mb-2 text-xl;
 }
 
-a:hover {
+a:hover:not(.a-none) {
     @apply text-viridiant-600;
 }
 
