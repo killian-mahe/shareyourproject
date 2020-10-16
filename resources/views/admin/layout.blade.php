@@ -86,7 +86,7 @@
                 </div>
 
             </header>
-            <section>
+            <section class="grid grid-cols-8 p-4">
                 @yield('content')
             </section>
         </main>
