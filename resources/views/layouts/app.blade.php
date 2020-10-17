@@ -26,7 +26,7 @@
 
 <body class="bg-cultured-200">
     <div id="app">
-        {{-- NavBar --}}
+        {{-- Laptop NavBar --}}
         <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50">
             <div class="flex justify-around w-full ">
               <a href="{{route('home')}}"><img class="m-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="90px" height="90px"></a>
@@ -50,30 +50,28 @@
 
             </div>
         </nav>
-        <nav class="w-full px-2 shadow-lg bg-cultured-100 nav-bar flex lg:hidden">
+
+        {{-- Mobile Nav-Bar --}}
+
+        <mobile-nav-bar home_link="{{route('home')}}" logo="{{asset('vendor/courier/logos/png/simple/Logo_viridiant_simple.png')}}">
+
+        </mobile-nav-bar>
+        {{-- <nav class="w-16 px-2 h-full shadow bg-cultured-100 nav-bar flex lg:hidden absolute">
             <div class="flex justify-around w-full ">
-              <a href="{{route('home')}}"><img class="my-2" src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
-              <div class="my-auto w-1/2">
-                <form role="search" class="w-full justify-center flex">
-                    <div class="w-40 sm:w-56 md:w-full flex justify-center relative items-center">
-                      <i class="search-glass" data-feather="search"></i></button>
-                      <input class="search-input placeholder-onyx-300" autocomplete="off" id="search-submit" type="text" placeholder="Search">
+                <a href="{{route('home')}}"><img class="my-2" src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
+                <!-- Burger Menu -->
+                <div class="burger-menu my-auto flex lg:hidden">
+                    <div class="icon" onclick="myFunction(this)">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
-                </form>
-              </div>
-              <!-- Burger Menu -->
-              <div class="burger-menu my-auto flex lg:hidden">
-                <div class="icon" onclick="myFunction(this)">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
                 </div>
-              </div>
-            </div>
-            <!-- ul li -->
+            </div> --}}
+            {{-- ul li --}}
             {{-- <ul class="my-auto lg:hidden mobile-nav-list">
                 <li class="m-8"><a>Services</a></li>
                 <li class="m-8"><a>Project</a></li>
@@ -81,10 +79,12 @@
                 <li class="m-8"><a>Account</a></li>
                 <li class="m-8"><a>Log In</a></li>
                 <li class="m-8"><a>Sign Up</a></li>
-              </ul> --}}
-        </nav>
+                </ul> --}}
+        {{-- </nav> --}}
+
 
         <main class="z-1">
+
             @yield('content')
         </main>
         {{-- Real-Time Chat --}}
@@ -110,8 +110,5 @@
 <script src="https://unpkg.com/feather-icons"></script>
 <script>
     feather.replace()
-    function myFunction(h) {
-        h.classList.toggle("open");
-    }
 </script>
 </html>

@@ -35,7 +35,9 @@ module.exports = {
                 '-135': '-135deg',
             },
             inset: {
+                '0.5625': '0.5625rem',
                 '0.625': '0.625rem',
+                '1.125': '1.125rem',
                 '1.25': '1.25rem',
                 '3.75': '3.75rem',
                 '1/2': '50%',
@@ -68,6 +70,7 @@ module.exports = {
                 '3/4': '75%',
                 '7/8': '87.5%',
                 '0.1875': '0.1875rem',
+                '1.375': '1.375rem',
                 '1.875': '1.875rem',
                 '1.75': '1.75rem',
                 '7': '1.75rem',
@@ -85,6 +88,7 @@ module.exports = {
                 '5/8': '62.5%',
                 '3/4': '75%',
                 '7/8': '87.5%',
+                '1.8125': '1.8125rem',
                 '1.875': '1.875rem',
                 '7': '1.75rem',
                 '8.5': '2.125rem',
@@ -226,6 +230,7 @@ module.exports = {
             },
             borderWidth: {
                 '0.0625' : '0.0625rem',
+                '1' : '1px',
             },
             screens: {
                 'xs': '425px',
@@ -233,6 +238,7 @@ module.exports = {
     },
     variants: {
         borderWidth: ['responsive', 'hover', 'focus'],
+        space: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus'],
         borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus'],
     },
     plugins: [],
