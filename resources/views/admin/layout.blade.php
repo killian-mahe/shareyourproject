@@ -37,7 +37,7 @@
                 $categories = [
                     [
                         'name' => 'Models',
-                        'display' => false,
+                        'display' => true,
                         'icon' => 'box',
                         'items' => [
                             [
