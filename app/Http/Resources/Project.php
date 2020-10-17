@@ -27,7 +27,8 @@ class Project extends JsonResource
             ],
             'technologies' => $this->technologies,
             'members_ids' => $this->members->pluck('id'),
-            'picture' => asset('vendor/courier/img/jeff-sheldon-8z2Q6XWLYa4.jpg'),
+            'profile_picture' => $this->profile_picture(),
+            'banner_picture' => $this->banner_picture(),
             'created_ad' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

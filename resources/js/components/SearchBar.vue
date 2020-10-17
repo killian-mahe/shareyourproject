@@ -22,7 +22,7 @@
                     <hr class="mb-1">
                     <a v-for="project in projects" :key="'project_'+project.id" :href="project.url.index" class="flex justify-between p-2 w-full rounded hover:bg-gray-200 cursor-pointer">
                         <span class="flex items-center">
-                            <img :src="project.picture" alt="project_picture" class="w-8 h-8 rounded-full mr-2">
+                            <img :src="project.profile_picture" alt="project_picture" class="w-8 h-8 rounded-full mr-2">
                             <span class="leading-4">{{ project.name }}</span>
                         </span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
