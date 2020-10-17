@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Post;
 
@@ -110,7 +111,7 @@ class User extends Authenticatable
     public function profile_picture()
     {
         if ($this->profile_picture) {
-
+            return $this->profile_picture;
         } else {
             return asset('vendor/courier/img/default_profile_picture.jpg');
         }
@@ -122,7 +123,7 @@ class User extends Authenticatable
     public function banner_picture()
     {
         if ($this->banner_picture) {
-
+            return $this->banner_picture;
         } else {
             return asset('vendor/courier/img/default_project_banner.jpg');
         }

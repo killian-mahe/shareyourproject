@@ -98,7 +98,7 @@ class Project extends Model
     public function profile_picture()
     {
         if ($this->profile_picture) {
-
+            return $this->profile_picture;
         } else {
             return asset('vendor/courier/img/default_project_picture.jpg');
         }
@@ -109,8 +109,8 @@ class Project extends Model
      */
     public function banner_picture()
     {
-        if ($this->profile_banner) {
-
+        if ($this->banner_picture) {
+            return $this->banner_picture;
         } else {
             return asset('vendor/courier/img/default_project_banner.jpg');
         }
