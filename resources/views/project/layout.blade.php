@@ -16,8 +16,8 @@
 
         <div class="box w-full h-auto mb-6">
             <div class="flex relative justify-center">
-                <img class=" md:rounded-t-md object-cover w-full h-48 shadow" src="https://cdn.pixabay.com/photo/2013/03/06/23/09/color-91059_1280.jpg" alt="test">
-                <img class=" border-4 border-cultured-100 shadow-md object-cover w-40 h-40 rounded-full mx-auto sm:left-8 lg:left-16 -bottom-12 absolute" src="https://cdn.pixabay.com/photo/2016/03/27/17/42/man-1283235_960_720.jpg" alt="test">
+            <img class=" md:rounded-t-md object-cover w-full h-48 shadow" src="{{ $project->banner_picture() }}" alt="test">
+            <img class=" border-4 border-cultured-100 shadow-md object-cover w-40 h-40 rounded-full mx-auto sm:left-8 lg:left-16 -bottom-12 absolute" src="{{ $project->profile_picture() }}" alt="test">
             </div>
             <div class="text-center md:text-right font-semibold font-sans text-2xl md:mr-1/7 mt-12 md:my-4">{{$project->name}}</div>
             <div class="flex py-2 px-4 justify-between">

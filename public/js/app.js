@@ -39508,7 +39508,7 @@ var render = function() {
                               _c("img", {
                                 staticClass: "w-8 h-8 rounded-full mr-2",
                                 attrs: {
-                                  src: project.picture,
+                                  src: project.profile_picture,
                                   alt: "project_picture"
                                 }
                               }),
@@ -39835,10 +39835,7 @@ var render = function() {
               _c("img", {
                 staticClass:
                   "rounded-full my-auto h-full w-auto hover:shadow-md",
-                attrs: {
-                  src:
-                    "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
-                }
+                attrs: { src: _vm.post.author.profile_picture }
               })
             ]
           ),
@@ -54935,8 +54932,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\shareyourproject\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\shareyourproject\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\share-your-project\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\share-your-project\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -109,7 +109,23 @@ class User extends Authenticatable
      */
     public function profile_picture()
     {
-        return asset('vendor/courier/img/default_profile_picture.jpg');
+        if ($this->profile_picture) {
+
+        } else {
+            return asset('vendor/courier/img/default_profile_picture.jpg');
+        }
+    }
+
+    /**
+     * Get the user profile picture.
+     */
+    public function banner_picture()
+    {
+        if ($this->banner_picture) {
+
+        } else {
+            return asset('vendor/courier/img/default_project_banner.jpg');
+        }
     }
 
     /**
