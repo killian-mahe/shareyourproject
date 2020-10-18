@@ -2907,10 +2907,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      display: false
+      display: false,
+      display2: false,
+      timeout: 100
     };
   },
   props: {
@@ -2920,7 +2928,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     toggle: function toggle() {
-      this.display = !this.display;
+      var _this = this;
+
+      if (this.display) {
+        this.display2 = false;
+        setTimeout(function () {
+          _this.display = false;
+        }, this.timeout);
+      } else {
+        this.display = true;
+        setTimeout(function () {
+          _this.display2 = true;
+        }, this.timeout);
+      }
     }
   }
 });
@@ -41036,15 +41056,14 @@ var render = function() {
     "div",
     {
       staticClass:
-        "w-16 shadow h-screen transform ease-in-out duration-250 flex flex-col justify-between bg-cultured-100 absolute top-0 lg:hidden",
+        " fixed w-16 h-screen transform ease-in-out duration-250 flex flex-col justify-between bg-gradient-to-t from-cultured-400 via-cultured-100 to-cultured-100 top-0 lg:hidden",
       class: { "w-64": _vm.display }
     },
     [
-      _c("div", { staticClass: "flex items-center" }, [
+      _c("div", { staticClass: "flex items-center mt-6 h-8" }, [
         _c("a", { attrs: { href: _vm.home_link } }, [
           _c("img", {
-            staticClass:
-              "mt-6 w-10 h-auto mx-3 transform ease-in-out duration-250",
+            staticClass: "w-10 h-auto mx-3 transform ease-in-out duration-250",
             class: { "w-16 h-auto": _vm.display },
             attrs: { src: _vm.logo_simple }
           })
@@ -41052,12 +41071,32 @@ var render = function() {
         _vm._v(" "),
         _c("a", { attrs: { href: _vm.home_link } }, [
           _c("img", {
-            staticClass: "mt-8 w-0 h-auto transform ease-in-out duration-200",
-            class: { "w-32 h-auto ml-2": _vm.display },
+            staticClass: "w-0 h-auto transform ease-in-out duration-200",
+            class: { "w-32 h-auto ml-2": _vm.display2 },
             attrs: { src: _vm.logo_text }
           })
         ])
       ]),
+      _vm._v(" "),
+      _c(
+        "ul",
+        {
+          staticClass: "mobile-nav-bar-list",
+          class: {
+            "text-onyx-800 left-16": _vm.display2,
+            "text-transparent -left-16": !_vm.display2
+          }
+        },
+        [
+          _c("li", [_vm._v("Services")]),
+          _vm._v(" "),
+          _c("li", [_vm._v("Projects")]),
+          _vm._v(" "),
+          _c("li", [_vm._v("About")]),
+          _vm._v(" "),
+          _c("li", [_vm._v("Account")])
+        ]
+      ),
       _vm._v(" "),
       _c(
         "div",

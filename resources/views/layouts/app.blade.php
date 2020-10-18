@@ -29,7 +29,7 @@
         {{-- Laptop NavBar --}}
         <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50">
             <div class="flex justify-around w-full ">
-              <a href="{{route('home')}}"><img class="m-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="90px" height="90px"></a>
+              <a href="{{route('home')}}"><img class="m-2 " src="{{asset('vendor/courier/logos/svg/fit/Logo_viridiant_fit.svg')}}" width="90px" height="90px"></a>
               <ul class="my-auto hidden lg:flex">
                 <li class="nav-bar-li"><a class="inline-flex">Services</a></li>
                 <li class="nav-bar-li"><a class="inline-flex">Project</a></li>

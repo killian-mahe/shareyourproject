@@ -27,7 +27,7 @@
 
 /* Burger-Menu */
 #nav-icon {
-    @apply w-full relative transform duration-500 mx-auto my-12 h-1.375 ease-in-out cursor-pointer;
+    @apply w-full relative transform duration-500 mx-auto my-6 h-1.375 ease-in-out cursor-pointer;
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -65,6 +65,10 @@
     @apply w-0 left-8 top-0.5625;
 }
 
-.mobile-nav-list {
-    @apply text-center list-none;
+.mobile-nav-bar-list {
+    @apply text-left list-none absolute top-1/2 transform duration-250 ease-in-out;
+}
+
+.mobile-nav-bar-list li {
+    @apply my-6;
 }
