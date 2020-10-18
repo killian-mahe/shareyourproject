@@ -51,11 +51,9 @@
             </div>
         </nav>
 
-        {{-- Mobile Nav-Bar --}}
+        {{-- Tablet Nav-Bar --}}
 
-        <mobile-nav-bar home_link="{{route('home')}}" logo_text="{{asset('vendor/courier/logos/svg/text/Logo_viridiant_text.svg')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}">
-
-        </mobile-nav-bar>
+        <tablet-nav-bar home_link="{{route('home')}}" logo_text="{{asset('vendor/courier/logos/svg/text/Logo_viridiant_text.svg')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}"></tablet-nav-bar>
         {{-- <nav class="w-16 px-2 h-full shadow bg-cultured-100 nav-bar flex lg:hidden absolute">
             <div class="flex justify-around w-full ">
                 <a href="{{route('home')}}"><img class="my-2" src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
