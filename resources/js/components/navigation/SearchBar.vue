@@ -1,5 +1,5 @@
 <template>
-    <div class="my-auto w-1/4" @focusin="focus = true" v-click-outside="onClickOutside">
+    <div class="my-auto" @focusin="focus = true" v-click-outside="onClickOutside">
         <form role="search" class="w-full justify-center">
             <div class="flex items-center relative">
                 <i class="search-glass" data-feather="search"></i>

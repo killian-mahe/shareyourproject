@@ -36,7 +36,7 @@
                 <li class="nav-bar-li"><a class="inline-flex">About</a></li>
                 <li class="nav-bar-li"><a class="inline-flex">Account</a></li>
               </ul>
-              <search-bar></search-bar>
+              <search-bar class="w-1/4"></search-bar>
 
               @auth
               @else
@@ -52,33 +52,10 @@
         </nav>
 
         {{-- Tablet Nav-Bar --}}
+        <tablet-nav-bar class="hidden sm:block lg:hidden" home_link="{{route('home')}}" logo_text="{{asset('vendor/courier/logos/svg/text/Logo_viridiant_text.svg')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}"></tablet-nav-bar>
 
-        <tablet-nav-bar home_link="{{route('home')}}" logo_text="{{asset('vendor/courier/logos/svg/text/Logo_viridiant_text.svg')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}"></tablet-nav-bar>
-        {{-- <nav class="w-16 px-2 h-full shadow bg-cultured-100 nav-bar flex lg:hidden absolute">
-            <div class="flex justify-around w-full ">
-                <a href="{{route('home')}}"><img class="my-2" src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
-                <!-- Burger Menu -->
-                <div class="burger-menu my-auto flex lg:hidden">
-                    <div class="icon" onclick="myFunction(this)">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                </div>
-            </div> --}}
-            {{-- ul li --}}
-            {{-- <ul class="my-auto lg:hidden mobile-nav-list">
-                <li class="m-8"><a>Services</a></li>
-                <li class="m-8"><a>Project</a></li>
-                <li class="m-8"><a>About</a></li>
-                <li class="m-8"><a>Account</a></li>
-                <li class="m-8"><a>Log In</a></li>
-                <li class="m-8"><a>Sign Up</a></li>
-                </ul> --}}
-        {{-- </nav> --}}
+        {{-- Mobile Nav-Bar --}}
+        <mobile-nav-bar class="block sm:hidden" home_link="{{route('home')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}"></mobile-nav-bar>
 
 
         <main class="z-1">
