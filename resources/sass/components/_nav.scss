@@ -28,11 +28,12 @@
 /* Burger-Menu */
 #nav-icon {
     @apply w-full relative transform duration-500 mx-auto my-12 h-1.375 ease-in-out cursor-pointer;
-  }
+    -webkit-tap-highlight-color: transparent;
+}
 
 #nav-icon span {
     @apply block absolute h-0.1875 w-1.8125 bg-viridiant-600 left-4 opacity-100 rounded-full transform duration-250 ease-in-out;
-  }
+}
 
 /* Icon */
 
@@ -49,7 +50,7 @@
 }
 
 #nav-icon.open span:nth-child(1) {
-    @apply w-0 left-1/2 top-0.5625;
+    @apply w-0 left-8 top-0.5625;
 }
 
 #nav-icon.open span:nth-child(2) {
@@ -61,7 +62,7 @@
 }
 
 #nav-icon.open span:nth-child(4) {
-    @apply w-0 left-1/2 top-0.5625;
+    @apply w-0 left-8 top-0.5625;
 }
 
 .mobile-nav-list {

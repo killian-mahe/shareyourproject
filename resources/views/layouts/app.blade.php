@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="bg-cultured-200">
+<body class="bg-cultured-300">
     <div id="app">
         {{-- Laptop NavBar --}}
         <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50">
@@ -53,7 +53,7 @@
 
         {{-- Mobile Nav-Bar --}}
 
-        <mobile-nav-bar home_link="{{route('home')}}" logo="{{asset('vendor/courier/logos/png/simple/Logo_viridiant_simple.png')}}">
+        <mobile-nav-bar home_link="{{route('home')}}" logo_text="{{asset('vendor/courier/logos/svg/text/Logo_viridiant_text.svg')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}">
 
         </mobile-nav-bar>
         {{-- <nav class="w-16 px-2 h-full shadow bg-cultured-100 nav-bar flex lg:hidden absolute">

@@ -2904,6 +2904,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2911,7 +2914,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    "logo": String,
+    "logo_simple": String,
+    "logo_text": String,
     "home_link": String
   },
   methods: {
@@ -41032,14 +41036,27 @@ var render = function() {
     "div",
     {
       staticClass:
-        "w-16 shadow h-screen flex flex-col justify-between bg-cultured-300 absolute top-0 lg:hidden"
+        "w-16 shadow h-screen transform ease-in-out duration-250 flex flex-col justify-between bg-cultured-100 absolute top-0 lg:hidden",
+      class: { "w-64": _vm.display }
     },
     [
-      _c("a", { attrs: { href: _vm.home_link } }, [
-        _c("img", {
-          staticClass: "my-4 mx-auto",
-          attrs: { src: _vm.logo, width: "40px", height: "40px" }
-        })
+      _c("div", { staticClass: "flex items-center" }, [
+        _c("a", { attrs: { href: _vm.home_link } }, [
+          _c("img", {
+            staticClass:
+              "mt-6 w-10 h-auto mx-3 transform ease-in-out duration-250",
+            class: { "w-16 h-auto": _vm.display },
+            attrs: { src: _vm.logo_simple }
+          })
+        ]),
+        _vm._v(" "),
+        _c("a", { attrs: { href: _vm.home_link } }, [
+          _c("img", {
+            staticClass: "mt-8 w-0 h-auto transform ease-in-out duration-200",
+            class: { "w-32 h-auto ml-2": _vm.display },
+            attrs: { src: _vm.logo_text }
+          })
+        ])
       ]),
       _vm._v(" "),
       _c(
