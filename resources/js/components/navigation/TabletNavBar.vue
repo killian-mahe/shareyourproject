@@ -11,11 +11,13 @@
             <li>Account</li>
         </ul>
 
-        <div class="absolute bottom-12 mx-auto w-full" id="nav-icon" :class="{'open':display}" @click="toggle">
-            <span class="left-4"></span>
-            <span class="left-4"></span>
-            <span class="left-4"></span>
-            <span class="left-4"></span>
+        <div  id="nav-icon" class="absolute left-4 bottom-12">
+            <div :class="{'open':display}" @click="toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
 
     </div>

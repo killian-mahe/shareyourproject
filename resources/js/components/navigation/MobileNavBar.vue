@@ -1,5 +1,5 @@
 <template>
-    <nav class="w-full shadow bg-cultured-100 z-50 h-16">
+    <nav class="w-screen shadow bg-cultured-100 z-50 h-16">
         <div class="w-full h-full flex justify-around items-center">
             <a :href="home_link" class="h-auto">
                 <img :src="logo_simple" class="w-12">
@@ -7,8 +7,8 @@
             <div class="w-3/5 h-auto">
                 <search-bar></search-bar>
             </div>
-            <div class="h-auto">
-                <div class="relative h-5" id="nav-icon" :class="{'open':display}" @click="toggle">
+            <div id="nav-icon" class="mr-2">
+                <div :class="{'open':display}" @click="toggle">
                     <span></span>
                     <span></span>
                     <span></span>

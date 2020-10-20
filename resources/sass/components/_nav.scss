@@ -26,43 +26,47 @@
 
 
 /* Burger-Menu */
+
 #nav-icon {
-    @apply transform duration-500 w-7 ease-in-out cursor-pointer;
+ @apply w-7 h-6;
+}
+#nav-icon div {
+    @apply transform duration-500 ease-in-out cursor-pointer;
     -webkit-tap-highlight-color: transparent;
 }
 
-#nav-icon span {
-    @apply block absolute h-0.1875 w-1.8125 bg-viridiant-600 opacity-100 rounded-full transform duration-250 ease-in-out;
+#nav-icon div span {
+    @apply block absolute h-0.1875 w-7 left-0 bg-viridiant-600 opacity-100 rounded-full transform duration-250 ease-in-out;
 }
 
 /* Icon */
 
-#nav-icon span:nth-child(1) {
+#nav-icon div span:nth-child(1) {
     @apply top-0;
 }
 
-#nav-icon span:nth-child(2),#nav-icon span:nth-child(3) {
+#nav-icon div span:nth-child(2),#nav-icon div span:nth-child(3) {
     @apply top-0.5625;
 }
 
-#nav-icon span:nth-child(4) {
+#nav-icon div span:nth-child(4) {
     @apply top-1.125;
 }
 
-#nav-icon.open span:nth-child(1) {
-    @apply w-0 left-8 top-0.5625;
+#nav-icon div.open span:nth-child(1) {
+    @apply w-0 left-4 top-0.5625;
 }
 
-#nav-icon.open span:nth-child(2) {
+#nav-icon div.open span:nth-child(2) {
     @apply rotate-45;
 }
 
-#nav-icon.open span:nth-child(3) {
+#nav-icon div.open span:nth-child(3) {
     @apply -rotate-45;
 }
 
-#nav-icon.open span:nth-child(4) {
-    @apply w-0 left-8 top-0.5625;
+#nav-icon div.open span:nth-child(4) {
+    @apply w-0 left-4 top-0.5625;
 }
 
 .tablet-nav-bar-list {

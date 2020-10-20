@@ -3074,6 +3074,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -41125,40 +41127,39 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("nav", { staticClass: "w-full shadow bg-cultured-100 z-50 h-16" }, [
-    _c(
-      "div",
-      { staticClass: "w-full h-full flex justify-around items-center" },
-      [
-        _c("a", { staticClass: "h-auto", attrs: { href: _vm.home_link } }, [
-          _c("img", { staticClass: "w-12", attrs: { src: _vm.logo_simple } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "w-3/5 h-auto" }, [_c("search-bar")], 1),
-        _vm._v(" "),
-        _c("div", { staticClass: "h-auto" }, [
-          _c(
-            "div",
-            {
-              staticClass: "relative h-5",
-              class: { open: _vm.display },
-              attrs: { id: "nav-icon" },
-              on: { click: _vm.toggle }
-            },
-            [
-              _c("span"),
-              _vm._v(" "),
-              _c("span"),
-              _vm._v(" "),
-              _c("span"),
-              _vm._v(" "),
-              _c("span")
-            ]
-          )
-        ])
-      ]
-    )
-  ])
+  return _c(
+    "nav",
+    { staticClass: "w-screen shadow bg-cultured-100 z-50 h-16" },
+    [
+      _c(
+        "div",
+        { staticClass: "w-full h-full flex justify-around items-center" },
+        [
+          _c("a", { staticClass: "h-auto", attrs: { href: _vm.home_link } }, [
+            _c("img", { staticClass: "w-12", attrs: { src: _vm.logo_simple } })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-3/5 h-auto" }, [_c("search-bar")], 1),
+          _vm._v(" "),
+          _c("div", { staticClass: "mr-2", attrs: { id: "nav-icon" } }, [
+            _c(
+              "div",
+              { class: { open: _vm.display }, on: { click: _vm.toggle } },
+              [
+                _c("span"),
+                _vm._v(" "),
+                _c("span"),
+                _vm._v(" "),
+                _c("span"),
+                _vm._v(" "),
+                _c("span")
+              ]
+            )
+          ])
+        ]
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -41491,20 +41492,21 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        {
-          staticClass: "absolute bottom-12 mx-auto w-full",
-          class: { open: _vm.display },
-          attrs: { id: "nav-icon" },
-          on: { click: _vm.toggle }
-        },
+        { staticClass: "absolute left-4 bottom-12", attrs: { id: "nav-icon" } },
         [
-          _c("span", { staticClass: "left-4" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "left-4" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "left-4" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "left-4" })
+          _c(
+            "div",
+            { class: { open: _vm.display }, on: { click: _vm.toggle } },
+            [
+              _c("span"),
+              _vm._v(" "),
+              _c("span"),
+              _vm._v(" "),
+              _c("span"),
+              _vm._v(" "),
+              _c("span")
+            ]
+          )
         ]
       )
     ]
