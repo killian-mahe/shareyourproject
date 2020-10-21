@@ -58,7 +58,7 @@
         <mobile-nav-bar class="block sm:hidden" home_link="{{route('home')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}"></mobile-nav-bar>
 
 
-        <main class="z-1">
+        <main class="z-1 sm:ml-16 lg:ml-0">
 
             @yield('content')
         </main>

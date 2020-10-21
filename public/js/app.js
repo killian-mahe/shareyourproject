@@ -2921,6 +2921,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3051,6 +3059,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -41127,39 +41140,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    { staticClass: "w-screen shadow bg-cultured-100 z-50 h-16" },
-    [
-      _c(
-        "div",
-        { staticClass: "w-full h-full flex justify-around items-center" },
-        [
-          _c("a", { staticClass: "h-auto", attrs: { href: _vm.home_link } }, [
-            _c("img", { staticClass: "w-12", attrs: { src: _vm.logo_simple } })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-3/5 h-auto" }, [_c("search-bar")], 1),
-          _vm._v(" "),
-          _c("div", { staticClass: "mr-2", attrs: { id: "nav-icon" } }, [
-            _c(
-              "div",
-              { class: { open: _vm.display }, on: { click: _vm.toggle } },
-              [
-                _c("span"),
-                _vm._v(" "),
-                _c("span"),
-                _vm._v(" "),
-                _c("span"),
-                _vm._v(" "),
-                _c("span")
-              ]
-            )
-          ])
-        ]
-      )
-    ]
-  )
+  return _c("nav", { staticClass: "w-full h-16 z-50 relative" }, [
+    _c(
+      "div",
+      {
+        staticClass:
+          "z-10 relative shadow bg-cultured-100 w-full h-full flex justify-around items-center"
+      },
+      [
+        _c("a", { staticClass: "h-auto", attrs: { href: _vm.home_link } }, [
+          _c("img", { staticClass: "w-12", attrs: { src: _vm.logo_simple } })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "w-3/5 h-auto" }, [_c("search-bar")], 1),
+        _vm._v(" "),
+        _c("div", { staticClass: "mr-2", attrs: { id: "nav-icon" } }, [
+          _c(
+            "div",
+            { class: { open: _vm.display }, on: { click: _vm.toggle } },
+            [
+              _c("span"),
+              _vm._v(" "),
+              _c("span"),
+              _vm._v(" "),
+              _c("span"),
+              _vm._v(" "),
+              _c("span")
+            ]
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "ul",
+      {
+        staticClass: "mobile-nav-bar-list",
+        class: { "top-16": _vm.display2, "-top-64": !_vm.display2 }
+      },
+      [
+        _c("li", [_vm._v("Services")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Projects")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("About")]),
+        _vm._v(" "),
+        _c("li", [_vm._v("Account")])
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -41448,7 +41477,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        " fixed w-16 h-screen transform ease-in-out duration-250 flex flex-col justify-between bg-gradient-to-t from-cultured-400 via-cultured-100 to-cultured-100 top-0",
+        "z-40 shadow fixed w-16 h-full transform ease-in-out duration-250 flex flex-col justify-between bg-gradient-to-t from-cultured-400 via-cultured-100 to-cultured-100 top-0",
       class: { "w-64": _vm.display }
     },
     [
@@ -41471,12 +41500,22 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c(
+        "div",
+        {
+          staticClass: "w-3/4 h-auto my-8 absolute",
+          class: { "left-8": _vm.display2, "-left-128": !_vm.display2 }
+        },
+        [_c("search-bar")],
+        1
+      ),
+      _vm._v(" "),
+      _c(
         "ul",
         {
           staticClass: "tablet-nav-bar-list",
           class: {
             "text-onyx-800 left-16": _vm.display2,
-            "text-transparent -left-16": !_vm.display2
+            "-left-128": !_vm.display2
           }
         },
         [
@@ -41492,7 +41531,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "absolute left-4 bottom-12", attrs: { id: "nav-icon" } },
+        { staticClass: "absolute left-4 bottom-4", attrs: { id: "nav-icon" } },
         [
           _c(
             "div",

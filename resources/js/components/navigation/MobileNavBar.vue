@@ -1,12 +1,13 @@
 <template>
-    <nav class="w-screen shadow bg-cultured-100 z-50 h-16">
-        <div class="w-full h-full flex justify-around items-center">
+    <nav class="w-full h-16 z-50 relative">
+        <div class="z-10 relative shadow bg-cultured-100 w-full h-full flex justify-around items-center">
             <a :href="home_link" class="h-auto">
                 <img :src="logo_simple" class="w-12">
             </a>
             <div class="w-3/5 h-auto">
                 <search-bar></search-bar>
             </div>
+
             <div id="nav-icon" class="mr-2">
                 <div :class="{'open':display}" @click="toggle">
                     <span></span>
@@ -15,8 +16,15 @@
                     <span></span>
                 </div>
             </div>
-        </div>
 
+
+        </div>
+        <ul class="mobile-nav-bar-list" :class="{'top-16':display2, '-top-64':!display2}">
+            <li>Services</li>
+            <li>Projects</li>
+            <li>About</li>
+            <li>Account</li>
+        </ul>
         <!-- @auth
         @else
 
