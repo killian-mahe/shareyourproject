@@ -67,7 +67,7 @@
             'post_props': Object,
             'auth_user': Object
         },
-        mounted() {
+        beforeMount() {
             this.comments_to_load = this.post.comments_ids.filter(comment_id => !this.comments.map(x => x.id).includes(comment_id));
         },
         methods: {

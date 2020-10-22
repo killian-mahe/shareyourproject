@@ -93,4 +93,6 @@ Route::name('api.')->group(function() {
 
     Route::get('tags/search/{search}', 'SearchController@tags')->where('search', '.*')->name('tags.search');
 
+    Route::post('feed', 'FeedController@load')->name('feed');
+
 });
