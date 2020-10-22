@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Post as PostResource;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class FeedController extends Controller
 {
@@ -11,7 +15,9 @@ class FeedController extends Controller
      */
     public function __construct()
     {
-
+        $this->middleware('auth:api')->only([
+            'load'
+        ]);
     }
 
     /**
@@ -21,7 +27,42 @@ class FeedController extends Controller
      */
     public function index()
     {
-        return view('feed');
+        $posts = new Collection();
+        if (Auth::user()) {
+            $projects_members = Auth::user()->projects;
+            foreach ($projects_members as $project) {
+                $posts = $posts->merge($project->posts()->latest()->limit(3)->get());
+            }
+        }
+
+        return view('feed', ['posts' => $posts]);
+    }
+
+    /**
+     * Loading more posts
+     *
+     * @param \Illuminate\Http\Request $request
+     */
+    public function load(Request $request)
+    {
+        $validatedData = $request->validate([
+            'except' => ['array', 'nullable'],
+        ]);
+
+        $posts = new Collection();
+
+        if ($validatedData['except'] != NULL)
+        {
+
+            $projects_members = Auth::user()->projects;
+            foreach ($projects_members as $project) {
+                $posts = $posts->merge($project->posts()->whereNotIn('id', $validatedData['except'])->latest()->limit(3)->get());
+            }
+
+            $posts = $posts->merge(Post::all()->random(10));
+        }
+
+        return response()->json(PostResource::collection($posts), 200);
     }
 
 }
