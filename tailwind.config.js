@@ -1,7 +1,12 @@
 const { colors } = require('tailwindcss/defaultTheme')
 
 module.exports = {
-    purge: [],
+    purge: {
+        content: [
+            './resources/views/**/*.blade.php',
+            './resources/js/components/**/*.vue'
+		]
+    },
     theme: {
         extend: {
             zIndex: {
