@@ -20,20 +20,20 @@
 
         </div>
         <ul class="mobile-nav-bar-list" :class="{'top-16':display2, '-top-64':!display2}">
-            <li>Services</li>
-            <li>Projects</li>
-            <li>About</li>
-            <li>Account</li>
+            <li class="mobile-nav-bar-list-li">Services</li>
+            <li class="mobile-nav-bar-list-li">Projects</li>
+            <li class="mobile-nav-bar-list-li">About</li>
+            <li class="mobile-nav-bar-list-li">Account</li>
+            <li class="flex justify-end">
+                <!-- @auth
+                @else -->
+                <div class="h-auto space-x-4 inline-block">
+                    <a href="#" class="btn-classic">Sign Up</a>
+                    <a href="#" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
+                </div>
+                <!-- @endauth -->
+            </li>
         </ul>
-        <!-- @auth
-        @else
-
-        <div class="my-auto hidden lg:block">
-            <a href="{{ route("register") }}" class="btn-classic mr-5">Sign Up</a>
-            <a href="{{ route("login") }}" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
-        </div>
-
-        @endauth -->
     </nav>
 </template>
 

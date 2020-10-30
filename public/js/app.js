@@ -3089,6 +3089,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -41179,18 +41188,48 @@ var render = function() {
         class: { "top-16": _vm.display2, "-top-64": !_vm.display2 }
       },
       [
-        _c("li", [_vm._v("Services")]),
+        _c("li", { staticClass: "mobile-nav-bar-list-li" }, [
+          _vm._v("Services")
+        ]),
         _vm._v(" "),
-        _c("li", [_vm._v("Projects")]),
+        _c("li", { staticClass: "mobile-nav-bar-list-li" }, [
+          _vm._v("Projects")
+        ]),
         _vm._v(" "),
-        _c("li", [_vm._v("About")]),
+        _c("li", { staticClass: "mobile-nav-bar-list-li" }, [_vm._v("About")]),
         _vm._v(" "),
-        _c("li", [_vm._v("Account")])
+        _c("li", { staticClass: "mobile-nav-bar-list-li" }, [
+          _vm._v("Account")
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
       ]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "flex justify-end" }, [
+      _c("div", { staticClass: "h-auto space-x-4 inline-block" }, [
+        _c("a", { staticClass: "btn-classic", attrs: { href: "#" } }, [
+          _vm._v("Sign Up")
+        ]),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-viridiant hover:text-cultured-100",
+            attrs: { href: "#" }
+          },
+          [_vm._v("Log In")]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -41502,7 +41541,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "w-3/4 h-auto my-8 absolute",
+          staticClass: "w-3/4 h-auto my-6 absolute",
           class: { "left-8": _vm.display2, "-left-128": !_vm.display2 }
         },
         [_c("search-bar")],
@@ -41513,10 +41552,7 @@ var render = function() {
         "ul",
         {
           staticClass: "tablet-nav-bar-list",
-          class: {
-            "text-onyx-800 left-16": _vm.display2,
-            "-left-128": !_vm.display2
-          }
+          class: { "left-16": _vm.display2, "-left-128": !_vm.display2 }
         },
         [
           _c("li", [_vm._v("Services")]),
@@ -41526,6 +41562,29 @@ var render = function() {
           _c("li", [_vm._v("About")]),
           _vm._v(" "),
           _c("li", [_vm._v("Account")])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "absolute w-40 h-auto space-x-4 inline-block bottom-10 transform duration-250",
+          class: { "left-10": _vm.display2, "-left-128": !_vm.display2 }
+        },
+        [
+          _c("a", { staticClass: "btn-classic", attrs: { href: "#" } }, [
+            _vm._v("Sign Up")
+          ]),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-viridiant hover:text-cultured-100",
+              attrs: { href: "#" }
+            },
+            [_vm._v("Log In")]
+          )
         ]
       ),
       _vm._v(" "),

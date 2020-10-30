@@ -5,16 +5,25 @@
             <a :href="home_link"><img :class="{'w-32 h-auto ml-2':display2}" class="w-0 h-auto transform ease-in-out duration-200" :src="logo_text"></a>
         </div>
 
-        <div class="w-3/4 h-auto my-8 absolute" :class="{'left-8':display2, '-left-128':!display2}">
+        <div class="w-3/4 h-auto my-6 absolute" :class="{'left-8':display2, '-left-128':!display2}">
                 <search-bar></search-bar>
         </div>
 
-        <ul class="tablet-nav-bar-list" :class="{'text-onyx-800 left-16':display2, '-left-128':!display2}">
+        <ul class="tablet-nav-bar-list" :class="{'left-16':display2, '-left-128':!display2}">
             <li>Services</li>
             <li>Projects</li>
             <li>About</li>
             <li>Account</li>
         </ul>
+
+        <!-- @auth
+        @else -->
+        <div class="absolute w-40 h-auto space-x-4 inline-block bottom-10 transform duration-250" :class="{'left-10':display2, '-left-128':!display2}">
+            <a href="#" class="btn-classic">Sign Up</a>
+            <a href="#" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
+        </div>
+        <!-- @endauth -->
+
 
         <div  id="nav-icon" class="absolute left-4 bottom-4">
             <div :class="{'open':display}" @click="toggle">
