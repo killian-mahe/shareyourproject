@@ -16,13 +16,12 @@
             <li>Account</li>
         </ul>
 
-        <!-- @auth
-        @else -->
-        <div class="absolute w-40 h-auto space-x-4 inline-block bottom-12 md:bottom-1/8 transform duration-250" :class="{'left-10':display2, '-left-128':!display2}">
-            <a href="#" class="btn-classic">Sign Up</a>
-            <a href="#" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
+
+        <div v-if='!auth_user' class="absolute w-48 h-auto space-x-6 inline-block bottom-12 md:bottom-1/8 transform duration-250" :class="{'left-10':display2, '-left-128':!display2}">
+            <a href="/register" class="btn-classic ml-1">Sign Up</a>
+            <a href="/login" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
         </div>
-        <!-- @endauth -->
+
 
 
         <div  id="nav-icon" class="absolute left-4 bottom-4">
@@ -50,6 +49,7 @@ export default {
         "logo_simple": String,
         "logo_text": String,
         "home_link": String,
+        "auth_user": Object,
     },
     methods: {
         toggle: function() {

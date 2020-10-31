@@ -2926,9 +2926,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2939,7 +2936,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     "logo_simple": String,
-    "home_link": String
+    "home_link": String,
+    "auth_user": Object
   },
   methods: {
     toggle: function toggle() {
@@ -3097,7 +3095,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3109,7 +3106,8 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     "logo_simple": String,
     "logo_text": String,
-    "home_link": String
+    "home_link": String,
+    "auth_user": Object
   },
   methods: {
     toggle: function toggle() {
@@ -41202,34 +41200,31 @@ var render = function() {
           _vm._v("Account")
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("li", { staticClass: "flex justify-end" }, [
+          !_vm.auth_user
+            ? _c("div", { staticClass: "h-auto space-x-4 inline-block" }, [
+                _c(
+                  "a",
+                  { staticClass: "btn-classic", attrs: { href: "/register" } },
+                  [_vm._v("Sign Up")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-viridiant hover:text-cultured-100",
+                    attrs: { href: "/login" }
+                  },
+                  [_vm._v("Log In")]
+                )
+              ])
+            : _vm._e()
+        ])
       ]
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "flex justify-end" }, [
-      _c("div", { staticClass: "h-auto space-x-4 inline-block" }, [
-        _c("a", { staticClass: "btn-classic", attrs: { href: "#" } }, [
-          _vm._v("Sign Up")
-        ]),
-        _vm._v(" "),
-        _c(
-          "a",
-          {
-            staticClass: "btn btn-viridiant hover:text-cultured-100",
-            attrs: { href: "#" }
-          },
-          [_vm._v("Log In")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -41565,28 +41560,35 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "absolute w-40 h-auto space-x-4 inline-block bottom-12 md:bottom-1/8 transform duration-250",
-          class: { "left-10": _vm.display2, "-left-128": !_vm.display2 }
-        },
-        [
-          _c("a", { staticClass: "btn-classic", attrs: { href: "#" } }, [
-            _vm._v("Sign Up")
-          ]),
-          _vm._v(" "),
-          _c(
-            "a",
+      !_vm.auth_user
+        ? _c(
+            "div",
             {
-              staticClass: "btn btn-viridiant hover:text-cultured-100",
-              attrs: { href: "#" }
+              staticClass:
+                "absolute w-48 h-auto space-x-6 inline-block bottom-12 md:bottom-1/8 transform duration-250",
+              class: { "left-10": _vm.display2, "-left-128": !_vm.display2 }
             },
-            [_vm._v("Log In")]
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "btn-classic ml-1",
+                  attrs: { href: "/register" }
+                },
+                [_vm._v("Sign Up")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-viridiant hover:text-cultured-100",
+                  attrs: { href: "/login" }
+                },
+                [_vm._v("Log In")]
+              )
+            ]
           )
-        ]
-      ),
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",

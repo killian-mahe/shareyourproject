@@ -52,10 +52,10 @@
         </nav>
 
         {{-- Tablet Nav-Bar --}}
-        <tablet-nav-bar class="hidden sm:block lg:hidden" home_link="{{route('home')}}" logo_text="{{asset('vendor/courier/logos/svg/text/Logo_viridiant_text.svg')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}"></tablet-nav-bar>
+        <tablet-nav-bar class="hidden sm:block lg:hidden" home_link="{{route('home')}}" logo_text="{{asset('vendor/courier/logos/svg/text/Logo_viridiant_text.svg')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}" @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></tablet-nav-bar>
 
         {{-- Mobile Nav-Bar --}}
-        <mobile-nav-bar class="block sm:hidden" home_link="{{route('home')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}"></mobile-nav-bar>
+        <mobile-nav-bar class="block sm:hidden" home_link="{{route('home')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}" @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></mobile-nav-bar>
 
 
         <main class="z-1 sm:ml-16 lg:ml-0">

@@ -25,13 +25,10 @@
             <li class="mobile-nav-bar-list-li">About</li>
             <li class="mobile-nav-bar-list-li">Account</li>
             <li class="flex justify-end">
-                <!-- @auth
-                @else -->
-                <div class="h-auto space-x-4 inline-block">
-                    <a href="#" class="btn-classic">Sign Up</a>
-                    <a href="#" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
+                <div v-if='!auth_user' class="h-auto space-x-4 inline-block">
+                    <a href="/register" class="btn-classic">Sign Up</a>
+                    <a href="/login" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
                 </div>
-                <!-- @endauth -->
             </li>
         </ul>
     </nav>
@@ -49,6 +46,7 @@ export default {
     props: {
         "logo_simple": String,
         "home_link": String,
+        "auth_user": Object,
     },
     methods: {
         toggle: function() {
