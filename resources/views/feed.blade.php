@@ -7,6 +7,7 @@
             <div class="text-2xl font-semibold text-gray-800 py-5">
                 Bonjour {{Auth::user()->first_name}} !
             </div>
+            <post-creation></post-creation>
         @endauth
 
         <feed-view :initial_posts='@json(App\Http\Resources\Post::collection($posts))' @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></feed-view>
