@@ -41569,7 +41569,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "absolute w-40 h-auto space-x-4 inline-block bottom-10 transform duration-250",
+            "absolute w-40 h-auto space-x-4 inline-block bottom-12 md:bottom-1/8 transform duration-250",
           class: { "left-10": _vm.display2, "-left-128": !_vm.display2 }
         },
         [

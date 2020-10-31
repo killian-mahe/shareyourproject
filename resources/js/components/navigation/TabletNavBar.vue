@@ -18,7 +18,7 @@
 
         <!-- @auth
         @else -->
-        <div class="absolute w-40 h-auto space-x-4 inline-block bottom-10 transform duration-250" :class="{'left-10':display2, '-left-128':!display2}">
+        <div class="absolute w-40 h-auto space-x-4 inline-block bottom-12 md:bottom-1/8 transform duration-250" :class="{'left-10':display2, '-left-128':!display2}">
             <a href="#" class="btn-classic">Sign Up</a>
             <a href="#" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
         </div>
