@@ -59,10 +59,14 @@ class FeedController extends Controller
                 $posts = $posts->merge($project->posts()->whereNotIn('id', $validatedData['except'])->latest()->limit(3)->get());
             }
 
-            $posts = $posts->merge(Post::all()->random(10));
+            $posts = $posts->merge(Post::all()->whereNotIn('id', $validatedData['except'])->random(10));
         }
 
-        return response()->json(PostResource::collection($posts), 200);
+        if ($posts->count() > 0) {
+            return response()->json(PostResource::collection($posts), 200);
+        } else {
+            return response([], 204);
+        }
     }
 
 }
