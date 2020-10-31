@@ -3,7 +3,7 @@
         <form role="search" class="w-full justify-center">
             <div class="flex items-center relative">
                 <i class="search-glass" data-feather="search"></i>
-                <input autocomplete="off" id="search-submit" @input="refreshLists" type="text" placeholder="Search" v-model="searchQuery" class="search-input placeholder-onyx-300">
+                <input autocomplete="off" @input="refreshLists" type="text" placeholder="Search" v-model="searchQuery" class="search-input placeholder-onyx-300">
             </div>
             <div v-show="focus && searchQuery !== ''"  class="rounded z-10 px-4 py-3 bg-white w-1/4 absolute shadow-lg">
                 <div v-if="users.length > 0">
