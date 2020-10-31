@@ -26,7 +26,8 @@ class User extends JsonResource
             'url' => [
                 'index' => route('users.show', ['user'=>$this->id]),
             ],
-            'profile_picture' => $this->profile_picture()
+            'profile_picture' => $this->profile_picture(),
+            'banner_picture' => $this->banner_picture()
         ];;
     }
 }

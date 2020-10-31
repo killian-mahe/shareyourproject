@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +20,23 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware(['auth'])->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('status', 'verification-link-sent');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/home', 'FeedController@index')->name('home');
 
 Route::resource('posts', 'PostController');
 
@@ -38,7 +55,7 @@ Route::name('projects.')->prefix('projects')->group(function () {
     Route::get('{project}/about', 'ProjectController@about')->name('about');
 });
 
-Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin'])->group(function() {
+Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin', 'verified'])->group(function() {
 
     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
 

@@ -6,10 +6,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Post;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasFactory, HasApiTokens;
 
@@ -109,7 +110,23 @@ class User extends Authenticatable
      */
     public function profile_picture()
     {
-        return asset('vendor/courier/img/default_profile_picture.jpg');
+        if ($this->profile_picture) {
+            return $this->profile_picture;
+        } else {
+            return asset('vendor/courier/img/default_profile_picture.jpg');
+        }
+    }
+
+    /**
+     * Get the user profile picture.
+     */
+    public function banner_picture()
+    {
+        if ($this->banner_picture) {
+            return $this->banner_picture;
+        } else {
+            return asset('vendor/courier/img/default_project_banner.jpg');
+        }
     }
 
     /**

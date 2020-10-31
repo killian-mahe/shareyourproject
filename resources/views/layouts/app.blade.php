@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="bg-cultured-300">
+<body class="bg-cultured-600">
     <div id="app">
         {{-- Laptop NavBar --}}
         <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50">

@@ -2,7 +2,7 @@
     <div v-if="post !== undefined" class="card md:rounded-lg">
         <div class="card-title">
             <a :href="post.url.author" class="w-auto inline-grid">
-                <img class="rounded-full my-auto h-full w-auto hover:shadow-md" src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"/>
+                <img class="rounded-full my-auto h-full w-auto hover:shadow-md" :src="post.author.profile_picture"/>
             </a>
             <div class="flex flex-col ml-3 justify-start w-full">
                 <div class="font-sans font-bold text-base hover:underline"><a :href="post.url.author">{{ post.author.first_name }} {{post.author.last_name}}</a></div>
@@ -67,7 +67,7 @@
             'post_props': Object,
             'auth_user': Object
         },
-        mounted() {
+        beforeMount() {
             this.comments_to_load = this.post.comments_ids.filter(comment_id => !this.comments.map(x => x.id).includes(comment_id));
         },
         methods: {
