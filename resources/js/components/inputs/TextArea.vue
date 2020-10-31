@@ -10,9 +10,10 @@
                 :placeholder="placeholder"
                 v-model="inputValue"
                 :name="name"
+                :rows="rows"
                 v-on:input="$emit('input', $event.target.value)"
             ></textarea>
-            <p :class="{'text-red-500':inputValue.length > max_length}" class="text-gray-600 text-xs italic text-right" >{{inputValue.length}}/{{max_length}}</p>
+            <p v-if='max_length' :class="{'text-red-500':inputValue.length > max_length}" class="text-gray-600 text-xs italic text-right" >{{inputValue.length}}/{{max_length}}</p>
           </div>
       </template>
     </resize-auto>
@@ -33,6 +34,10 @@
             'name': String,
             'label': String,
             'max_length': Number,
+            'rows': {
+                type: Number,
+                default: 2
+            },
         },
         data() {
             return {
