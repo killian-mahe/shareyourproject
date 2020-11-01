@@ -263,6 +263,7 @@ module.exports = {
         borderWidth: ['responsive', 'hover', 'focus'],
         space: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus'],
         borderColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'group-focus'],
+        textColor: ['responsive', 'hover', 'focus', 'group-hover'],
     },
     plugins: [],
   }

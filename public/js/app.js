@@ -2488,12 +2488,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     TextArea: _TextArea_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: {},
+  props: {
+    auth_user: {
+      type: Object,
+      required: true
+    }
+  },
   mounted: function mounted() {
     feather.replace();
   },
@@ -40650,16 +40658,41 @@ var render = function() {
     "div",
     { staticClass: "bg-cultured-100 rounded w-full h-auto px-4 py-2" },
     [
-      _c("text-area", {
-        staticClass: "w-full",
-        attrs: { rows: 1, child_class: "w-full" }
-      }),
+      _c(
+        "div",
+        { staticClass: "flex space-x-4 items-center" },
+        [
+          _c("a", { attrs: { href: "#" } }, [
+            _c("img", {
+              staticClass: "w-12 rounded-full",
+              attrs: {
+                src: _vm.auth_user.profile_picture,
+                alt: "profile_picture"
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("text-area", {
+            staticClass: "w-full",
+            attrs: { rows: 1, child_class: "w-full" }
+          }),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-viridiant my-auto hover:text-cultured-100",
+              attrs: { href: "#" }
+            },
+            [_vm._v("Post")]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("hr", { staticClass: "mb-2" }),
       _vm._v(" "),
       _vm._m(0)
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = [
@@ -40668,48 +40701,45 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-full flex" }, [
-      _c(
-        "span",
-        { staticClass: "w-1/2 cursor-pointer", attrs: { href: "#" } },
-        [
-          _c(
-            "div",
-            {
-              staticClass:
-                "w-full border-r-1 border-onyx-100 flex items-center justify-center space-x-4"
-            },
-            [
-              _c("i", {
-                staticClass: "text-onyx-500",
-                attrs: { "data-feather": "camera" }
-              }),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-onyx-500" }, [_vm._v("Photo")])
-            ]
-          )
-        ]
-      ),
+      _c("span", { staticClass: "w-1/2 cursor-pointer" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-full border-r-1 border-onyx-100 flex items-center justify-center space-x-6"
+          },
+          [
+            _c("i", {
+              staticClass: "text-onyx-500",
+              attrs: { "data-feather": "camera" }
+            }),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-onyx-500" }, [_vm._v("Photo")])
+          ]
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "span",
-        { staticClass: "w-1/2 cursor-pointer", attrs: { href: "#" } },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "w-full flex items-center justify-center space-x-6"
-            },
-            [
-              _c("i", {
-                staticClass: "text-onyx-500",
-                attrs: { "data-feather": "video" }
-              }),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-onyx-500" }, [_vm._v("Vidéo")])
-            ]
-          )
-        ]
-      )
+      _c("span", { staticClass: "w-1/2 cursor-pointer group" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "w-full flex items-center justify-center space-x-6 group"
+          },
+          [
+            _c("i", {
+              staticClass: "text-onyx-500 group-hover:text-viridiant-600",
+              attrs: { "data-feather": "video" }
+            }),
+            _vm._v(" "),
+            _c(
+              "p",
+              { staticClass: "text-onyx-500 group-hover:text-viridiant-600" },
+              [_vm._v("Vidéo")]
+            )
+          ]
+        )
+      ])
     ])
   }
 ]
