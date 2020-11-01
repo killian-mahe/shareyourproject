@@ -31,10 +31,12 @@
             <div class="flex justify-around w-full ">
               <a href="{{route('home')}}"><img class="m-2 " src="{{asset('vendor/courier/logos/svg/fit/Logo_viridiant_fit.svg')}}" width="90px" height="90px"></a>
               <ul class="my-auto hidden lg:flex">
-                <li class="nav-bar-li"><a class="inline-flex">Services</a></li>
-                <li class="nav-bar-li"><a class="inline-flex">Project</a></li>
-                <li class="nav-bar-li"><a class="inline-flex">About</a></li>
-                <li class="nav-bar-li"><a class="inline-flex">Account</a></li>
+                <li class="nav-bar-li"><a class="inline-flex" href="{{route('home')}}"><i data-feather="layers" class="mr-1"></i>@auth My feed @else Feed @endauth</a></li>
+                @auth
+                    <li class="nav-bar-li"><a class="inline-flex" href="#"><i data-feather="grid" class="mr-1"></i>My dashboard</a></li>
+                    <li class="nav-bar-li"><a class="inline-flex" href="#"><i data-feather="message-circle" class="mr-1"></i>My message</a></li>
+                @endauth
+                <li class="nav-bar-li"><a class="inline-flex" href="#"><i data-feather="compass" class="mr-1"></i>Explore</a></li>
               </ul>
               <search-bar class="w-1/4"></search-bar>
 
