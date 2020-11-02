@@ -44,8 +44,8 @@
               @else
 
                 <div class="my-auto hidden lg:block">
-                    <a href="{{ route("register") }}" class="btn-classic mr-5">Sign Up</a>
-                    <a href="{{ route("login") }}" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
+                    <a href="{{ route("register") }}" class="btn-classic mr-5 a-none">Sign Up</a>
+                    <a href="{{ route("login") }}" class="btn btn-viridiant hover:text-cultured-100 a-none">Log In</a>
                 </div>
 
               @endauth
