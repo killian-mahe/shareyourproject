@@ -30321,8 +30321,12 @@ button:focus, input:focus {
 }
 
 .tablet-nav-bar-list li {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tablet-nav-bar-list li a {
+  display: flex;
 }
 
 .mobile-nav-bar-list {
