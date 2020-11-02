@@ -2986,6 +2986,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -41286,19 +41288,43 @@ var render = function() {
         class: { "top-16": _vm.display2, "-top-64": !_vm.display2 }
       },
       [
-        _c("li", { staticClass: "mobile-nav-bar-list-li" }, [
-          _vm._v("Services")
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "mobile-nav-bar-list-li" }, [
-          _vm._v("Projects")
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "mobile-nav-bar-list-li" }, [_vm._v("About")]),
-        _vm._v(" "),
-        _c("li", { staticClass: "mobile-nav-bar-list-li" }, [
-          _vm._v("Account")
-        ]),
+        _c(
+          "li",
+          { staticClass: "mobile-nav-bar-list-li divide-y divide-gray-400" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm.auth_user
+              ? _c("a", { attrs: { href: "#" } }, [
+                  _c("i", {
+                    staticClass: "mr-1",
+                    attrs: { "data-feather": "layout" }
+                  }),
+                  _vm._v("My dashboard")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.auth_user
+              ? _c("a", { attrs: { href: "#" } }, [
+                  _c("i", {
+                    staticClass: "mr-1",
+                    attrs: { "data-feather": "message-circle" }
+                  }),
+                  _vm._v("My message")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.auth_user
+              ? _c("a", { attrs: { href: "#" } }, [
+                  _c("i", {
+                    staticClass: "mr-1",
+                    attrs: { "data-feather": "compass" }
+                  }),
+                  _vm._v("Explore")
+                ])
+              : _vm._e()
+          ]
+        ),
         _vm._v(" "),
         _c("li", { staticClass: "flex justify-end" }, [
           !_vm.auth_user
@@ -41324,7 +41350,17 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "/home" } }, [
+      _c("i", { staticClass: "mr-1", attrs: { "data-feather": "home" } }),
+      _vm._v("My feed")
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -41610,7 +41646,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "z-40 shadow fixed w-16 h-full transform ease-in-out duration-250 flex flex-col justify-between bg-gradient-to-t from-cultured-400 via-cultured-100 to-cultured-100 top-0",
+        "z-40 shadow fixed w-16 h-full transform ease-in-out duration-250 flex flex-col justify-between bg-gradient-to-t from-cultured-600 via-cultured-100 to-cultured-100 top-0",
       class: { "w-64": _vm.display }
     },
     [
@@ -41649,13 +41685,43 @@ var render = function() {
           class: { "left-16": _vm.display2, "-left-128": !_vm.display2 }
         },
         [
-          _c("li", [_vm._v("Services")]),
+          _vm._m(0),
           _vm._v(" "),
-          _c("li", [_vm._v("Projects")]),
+          _c("li", [
+            _vm.auth_user
+              ? _c("a", { attrs: { href: "#" } }, [
+                  _c("i", {
+                    staticClass: "mr-1",
+                    attrs: { "data-feather": "layout" }
+                  }),
+                  _vm._v("My dashboard")
+                ])
+              : _vm._e()
+          ]),
           _vm._v(" "),
-          _c("li", [_vm._v("About")]),
+          _c("li", [
+            _vm.auth_user
+              ? _c("a", { attrs: { href: "#" } }, [
+                  _c("i", {
+                    staticClass: "mr-1",
+                    attrs: { "data-feather": "message-circle" }
+                  }),
+                  _vm._v("My message")
+                ])
+              : _vm._e()
+          ]),
           _vm._v(" "),
-          _c("li", [_vm._v("Account")])
+          _c("li", [
+            _vm.auth_user
+              ? _c("a", { attrs: { href: "#" } }, [
+                  _c("i", {
+                    staticClass: "mr-1",
+                    attrs: { "data-feather": "compass" }
+                  }),
+                  _vm._v("Explore")
+                ])
+              : _vm._e()
+          ])
         ]
       ),
       _vm._v(" "),
@@ -41711,7 +41777,19 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/home" } }, [
+        _c("i", { staticClass: "mr-1", attrs: { "data-feather": "home" } }),
+        _vm._v("My feed")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

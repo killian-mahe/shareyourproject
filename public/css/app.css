@@ -29995,12 +29995,12 @@ button:focus, input:focus {
   align-items: center;
 }
 
-.card-link a {
+.card .card-footer .card-link a {
   display: flex;
   align-items: center;
 }
 
-.card-link svg {
+.card .card-footer .card-link svg {
   height: 1.25rem;
   width: auto;
   display: inline-block;
@@ -30010,7 +30010,7 @@ button:focus, input:focus {
   margin-top: 0.75rem;
 }
 
-.card-tags .tag {
+.card .card-tags .tag {
   --bg-opacity: 1;
   background-color: #e6e7e8;
   background-color: rgba(230, 231, 232, var(--bg-opacity));
@@ -30321,16 +30321,18 @@ button:focus, input:focus {
 }
 
 .tablet-nav-bar-list li {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tablet-nav-bar-list li a {
+  display: flex;
 }
 
 .mobile-nav-bar-list {
+  position: absolute;
   padding-left: 2rem;
   padding-right: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  position: absolute;
   width: 100%;
   --transform-translate-x: 0;
   --transform-translate-y: 0;
@@ -30356,6 +30358,19 @@ button:focus, input:focus {
   color: #1d1f20;
   color: rgba(29, 31, 32, var(--text-opacity));
   text-align: left;
+}
+
+.mobile-nav-bar-list-li a {
+  display: flex;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.mobile-nav-bar-list-li a i {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .category-title {

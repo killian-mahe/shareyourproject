@@ -1,18 +1,17 @@
-
 .search-bar {
     @apply bg-cultured-400 text-onyx-700 border border-onyx-200 rounded-xl py-2 pl-10 pr-2 leading-tight;
-}
 
-.search-bar:focus {
-    @apply bg-cultured-100 border-onyx-500 w-full;
+    &:focus {
+        @apply bg-cultured-100 border-onyx-500 w-full;
+    }
 }
 
 .search-input {
     @apply  appearance-none relative block w-full pl-10 py-2 border border-gray-300 text-onyx-800 rounded-md;
-}
 
-.search-input:focus {
-    @apply outline-none border-viridiant-500 border-2;
+    &:focus {
+        @apply outline-none border-viridiant-500 border-2;
+    }
 }
 
 .search-glass {
