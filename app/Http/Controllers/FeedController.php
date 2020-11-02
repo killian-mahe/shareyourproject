@@ -15,9 +15,7 @@ class FeedController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api')->only([
-            'load'
-        ]);
+
     }
 
     /**
@@ -33,6 +31,8 @@ class FeedController extends Controller
             foreach ($projects_members as $project) {
                 $posts = $posts->merge($project->posts()->latest()->limit(3)->get());
             }
+        } else {
+            $posts = $posts->merge(Post::all()->random(10));
         }
 
         return view('feed', ['posts' => $posts]);
@@ -53,10 +53,13 @@ class FeedController extends Controller
 
         if ($validatedData['except'] != NULL)
         {
+            if (Auth::user()) {
 
-            $projects_members = Auth::user()->projects;
-            foreach ($projects_members as $project) {
-                $posts = $posts->merge($project->posts()->whereNotIn('id', $validatedData['except'])->latest()->limit(3)->get());
+                $projects_members = Auth::user()->projects;
+                foreach ($projects_members as $project) {
+                    $posts = $posts->merge($project->posts()->whereNotIn('id', $validatedData['except'])->latest()->limit(3)->get());
+                }
+
             }
 
             $posts = $posts->merge(Post::all()->whereNotIn('id', $validatedData['except'])->random(10));
