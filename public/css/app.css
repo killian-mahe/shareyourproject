@@ -30165,6 +30165,7 @@ button:focus, input:focus {
 
 .nav-bar-li {
   display: inline-flex;
+  font-weight: 600;
 }
 
 .nav-bar-li a {
@@ -30174,8 +30175,8 @@ button:focus, input:focus {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   position: relative;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
   margin-left: 1.5625rem;
   margin-right: 1.5625rem;
   cursor: pointer;
@@ -30327,6 +30328,7 @@ button:focus, input:focus {
 
 .tablet-nav-bar-list li a {
   display: flex;
+  font-weight: 600;
 }
 
 .mobile-nav-bar-list {
@@ -30366,6 +30368,7 @@ button:focus, input:focus {
   padding-bottom: 0.75rem;
   width: 100%;
   justify-content: center;
+  font-weight: 600;
 }
 
 .mobile-nav-bar-list-li a i {
