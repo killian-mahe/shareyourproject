@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="flex justify-center mt-4 min-h-screen">
-    <div class="w-full md:w-2/3 lg:w-2/5 mx-auto">
+    <div class="w-full md:w-2/3 lg:w-2/3 xl:w-2/5 mx-auto">
         @auth
-            <div class="text-2xl font-semibold text-gray-800 py-5">
+            <div class="text-2xl font-semibold text-gray-800 py-5 pl-5 md:pl-0">
                 Bonjour {{Auth::user()->first_name}} !
             </div>
         @endauth
