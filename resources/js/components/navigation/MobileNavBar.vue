@@ -20,10 +20,12 @@
 
         </div>
         <ul class="mobile-nav-bar-list" :class="{'top-16':display2, '-top-64':!display2}">
-            <li class="mobile-nav-bar-list-li">Services</li>
-            <li class="mobile-nav-bar-list-li">Projects</li>
-            <li class="mobile-nav-bar-list-li">About</li>
-            <li class="mobile-nav-bar-list-li">Account</li>
+            <li class="mobile-nav-bar-list-li divide-y divide-gray-400">
+                <a href="/home"><i data-feather="home" class="mr-1"></i>My feed</a>
+                <a v-if="auth_user" href="#"><i data-feather="layout" class="mr-1"></i>My dashboard</a>
+                <a v-if="auth_user" href="#"><i data-feather="message-circle" class="mr-1"></i>My message</a>
+                <a v-if="auth_user" href="#"><i data-feather="compass" class="mr-1"></i>Explore</a>
+            </li>
             <li class="flex justify-end">
                 <div v-if='!auth_user' class="h-auto space-x-4 inline-block">
                     <a href="/register" class="btn-classic">Sign Up</a>

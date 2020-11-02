@@ -30326,11 +30326,9 @@ button:focus, input:focus {
 }
 
 .mobile-nav-bar-list {
+  position: absolute;
   padding-left: 2rem;
   padding-right: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  position: absolute;
   width: 100%;
   --transform-translate-x: 0;
   --transform-translate-y: 0;
@@ -30356,6 +30354,19 @@ button:focus, input:focus {
   color: #1d1f20;
   color: rgba(29, 31, 32, var(--text-opacity));
   text-align: left;
+}
+
+.mobile-nav-bar-list-li a {
+  display: flex;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.mobile-nav-bar-list-li a i {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .category-title {
