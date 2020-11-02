@@ -1,4 +1,3 @@
-
 button:focus, input:focus {
     @apply outline-none;
 }
@@ -9,63 +8,69 @@ button:focus, input:focus {
 
 .btn-classic {
     @apply whitespace-no-wrap text-base leading-6 font-medium text-gray-500;
-}
 
-.btn-classic:focus {
-    @apply text-gray-900;
-}
+    &:focus {
+        @apply text-gray-900;
+    }
 
-.btn-classic:hover {
-    @apply text-gray-900;
+    &:hover {
+        @apply text-gray-900;
+    }
 }
 
 .btn-viridiant {
     @apply text-cultured-100 bg-viridiant-600 border border-transparent;
+
+    &:hover {
+        @apply bg-viridiant-500;
+    }
 }
 
-.btn-viridiant:hover {
-    @apply bg-viridiant-500;
-}
 
 .btn-viridiant-outline {
     @apply text-viridiant-600 border border-viridiant-600 bg-cultured-100;
+
+    &:hover {
+        @apply bg-viridiant-600 text-cultured-100;
+    }
 }
 
-.btn-viridiant-outline:hover {
-    @apply bg-viridiant-600 text-cultured-100;
-}
 
 .btn-orange-peel {
     @apply text-cultured-100 bg-orange-peel-600 border border-transparent;
+
+    &:hover {
+        @apply bg-orange-peel-500;
+    }
 }
 
-.btn-orange-peel:hover {
-    @apply bg-orange-peel-500;
-}
 
 .btn-orange-peel-outline {
     @apply text-orange-peel-600 border border-orange-peel-600 bg-cultured-100;
+
+    &:hover {
+        @apply bg-orange-peel-600 text-cultured-100;
+    }
 }
 
-.btn-orange-peel-outline:hover {
-    @apply bg-orange-peel-600 text-cultured-100;
-}
 
 .btn-onyx {
     @apply text-cultured-100 bg-onyx-600 border border-transparent;
+
+    &:hover {
+        @apply bg-onyx-500;
+    }
 }
 
-.btn-onyx:hover {
-    @apply bg-onyx-500;
-}
 
 .btn-onyx-outline {
     @apply text-onyx-600 border border-onyx-600 bg-cultured-100;
+
+    &:hover {
+        @apply bg-onyx-600 text-cultured-100;
+    }
 }
 
-.btn-onyx-outline:hover {
-    @apply bg-onyx-600 text-cultured-100;
-}
 
 .btn-smiley {
     @apply px-1 mx-1 w-8 my-auto;

@@ -29995,12 +29995,12 @@ button:focus, input:focus {
   align-items: center;
 }
 
-.card-link a {
+.card .card-footer .card-link a {
   display: flex;
   align-items: center;
 }
 
-.card-link svg {
+.card .card-footer .card-link svg {
   height: 1.25rem;
   width: auto;
   display: inline-block;
@@ -30010,7 +30010,7 @@ button:focus, input:focus {
   margin-top: 0.75rem;
 }
 
-.card-tags .tag {
+.card .card-tags .tag {
   --bg-opacity: 1;
   background-color: #e6e7e8;
   background-color: rgba(230, 231, 232, var(--bg-opacity));
