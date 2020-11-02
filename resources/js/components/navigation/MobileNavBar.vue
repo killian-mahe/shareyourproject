@@ -28,8 +28,8 @@
             </li>
             <li class="flex justify-end">
                 <div v-if='!auth_user' class="h-auto space-x-4 inline-block">
-                    <a href="/register" class="btn-classic">Sign Up</a>
-                    <a href="/login" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
+                    <a href="/register" class="btn-classic a-none">Sign Up</a>
+                    <a href="/login" class="btn btn-viridiant hover:text-cultured-100 a-none">Log In</a>
                 </div>
             </li>
         </ul>

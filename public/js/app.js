@@ -41331,14 +41331,18 @@ var render = function() {
             ? _c("div", { staticClass: "h-auto space-x-4 inline-block" }, [
                 _c(
                   "a",
-                  { staticClass: "btn-classic", attrs: { href: "/register" } },
+                  {
+                    staticClass: "btn-classic a-none",
+                    attrs: { href: "/register" }
+                  },
                   [_vm._v("Sign Up")]
                 ),
                 _vm._v(" "),
                 _c(
                   "a",
                   {
-                    staticClass: "btn btn-viridiant hover:text-cultured-100",
+                    staticClass:
+                      "btn btn-viridiant hover:text-cultured-100 a-none",
                     attrs: { href: "/login" }
                   },
                   [_vm._v("Log In")]
@@ -41737,7 +41741,7 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn-classic ml-1",
+                  staticClass: "btn-classic ml-1 a-none",
                   attrs: { href: "/register" }
                 },
                 [_vm._v("Sign Up")]
@@ -41746,7 +41750,8 @@ var render = function() {
               _c(
                 "a",
                 {
-                  staticClass: "btn btn-viridiant hover:text-cultured-100",
+                  staticClass:
+                    "btn btn-viridiant hover:text-cultured-100 a-none",
                   attrs: { href: "/login" }
                 },
                 [_vm._v("Log In")]

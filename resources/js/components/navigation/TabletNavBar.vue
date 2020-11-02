@@ -18,8 +18,8 @@
 
 
         <div v-if='!auth_user' class="absolute w-48 h-auto space-x-6 inline-block bottom-12 md:bottom-1/8 transform duration-250" :class="{'left-10':display2, '-left-128':!display2}">
-            <a href="/register" class="btn-classic ml-1">Sign Up</a>
-            <a href="/login" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
+            <a href="/register" class="btn-classic ml-1 a-none">Sign Up</a>
+            <a href="/login" class="btn btn-viridiant hover:text-cultured-100 a-none">Log In</a>
         </div>
 
 
