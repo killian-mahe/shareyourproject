@@ -1,12 +1,12 @@
 <template>
     <div class="bg-cultured-100 rounded w-full h-auto px-4 py-2">
         <div class="flex items-center">
-            <span href="#" class="inline-flex w-24 h-auto items-center cursor-pointer group">
+            <span href="#" class="inline-flex w-24 h-auto items-center cursor-pointer text-onyx-500 hover:text-viridiant-600">
                 <img class="w-10 rounded-full" :src="auth_user.profile_picture" alt="profile_picture">
-                <i data-feather="chevron-down" class="text-onyx-500 w-5 h-5 mx-1 group-hover:text-viridiant-600"></i>
+                <i data-feather="chevron-down" class="w-5 h-5 mx-1"></i>
             </span>
             <text-area :rows='1' class="w-full mr-4" child_class="w-full"></text-area>
-            <a href="#" class="btn btn-viridiant my-auto hover:text-cultured-100">Post</a>
+            <a href="#" class="btn btn-viridiant my-auto a-none">Post</a>
         </div>
         <hr class="mb-2">
         <div class="w-full flex">

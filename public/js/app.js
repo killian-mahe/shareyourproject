@@ -40669,7 +40669,7 @@ var render = function() {
             "span",
             {
               staticClass:
-                "inline-flex w-24 h-auto items-center cursor-pointer group",
+                "inline-flex w-24 h-auto items-center cursor-pointer text-onyx-500 hover:text-viridiant-600",
               attrs: { href: "#" }
             },
             [
@@ -40682,8 +40682,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("i", {
-                staticClass:
-                  "text-onyx-500 w-5 h-5 mx-1 group-hover:text-viridiant-600",
+                staticClass: "w-5 h-5 mx-1",
                 attrs: { "data-feather": "chevron-down" }
               })
             ]
@@ -40697,7 +40696,7 @@ var render = function() {
           _c(
             "a",
             {
-              staticClass: "btn btn-viridiant my-auto hover:text-cultured-100",
+              staticClass: "btn btn-viridiant my-auto a-none",
               attrs: { href: "#" }
             },
             [_vm._v("Post")]
