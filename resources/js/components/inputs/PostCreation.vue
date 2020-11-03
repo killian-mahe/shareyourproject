@@ -11,15 +11,15 @@
         <hr class="mb-2">
         <div class="w-full flex">
             <span class="w-1/2 cursor-pointer">
-                <div class="w-full border-r-1 border-onyx-100 flex items-center justify-center space-x-6">
-                    <i data-feather="camera" class="text-onyx-500"></i>
-                    <p class="text-onyx-500">Photo</p>
+                <div class="w-full border-r-1 border-onyx-100 flex items-center justify-center space-x-6 text-onyx-500 hover:text-viridiant-600">
+                    <i data-feather="camera"></i>
+                    <p>Photo</p>
                 </div>
             </span>
-            <span class="w-1/2 cursor-pointer group">
+            <span class="w-1/2 cursor-pointer text-onyx-500 hover:text-viridiant-600">
                 <div class="w-full flex items-center justify-center space-x-6 group">
-                    <i data-feather="video" class="text-onyx-500 group-hover:text-viridiant-600"></i>
-                    <p class="text-onyx-500 group-hover:text-viridiant-600">Vidéo</p>
+                    <i data-feather="video"></i>
+                    <p>Vidéo</p>
                 </div>
             </span>
         </div>

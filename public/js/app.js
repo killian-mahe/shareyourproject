@@ -40723,40 +40723,37 @@ var staticRenderFns = [
           "div",
           {
             staticClass:
-              "w-full border-r-1 border-onyx-100 flex items-center justify-center space-x-6"
+              "w-full border-r-1 border-onyx-100 flex items-center justify-center space-x-6 text-onyx-500 hover:text-viridiant-600"
           },
           [
-            _c("i", {
-              staticClass: "text-onyx-500",
-              attrs: { "data-feather": "camera" }
-            }),
+            _c("i", { attrs: { "data-feather": "camera" } }),
             _vm._v(" "),
-            _c("p", { staticClass: "text-onyx-500" }, [_vm._v("Photo")])
+            _c("p", [_vm._v("Photo")])
           ]
         )
       ]),
       _vm._v(" "),
-      _c("span", { staticClass: "w-1/2 cursor-pointer group" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-full flex items-center justify-center space-x-6 group"
-          },
-          [
-            _c("i", {
-              staticClass: "text-onyx-500 group-hover:text-viridiant-600",
-              attrs: { "data-feather": "video" }
-            }),
-            _vm._v(" "),
-            _c(
-              "p",
-              { staticClass: "text-onyx-500 group-hover:text-viridiant-600" },
-              [_vm._v("Vidéo")]
-            )
-          ]
-        )
-      ])
+      _c(
+        "span",
+        {
+          staticClass:
+            "w-1/2 cursor-pointer text-onyx-500 hover:text-viridiant-600"
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "w-full flex items-center justify-center space-x-6 group"
+            },
+            [
+              _c("i", { attrs: { "data-feather": "video" } }),
+              _vm._v(" "),
+              _c("p", [_vm._v("Vidéo")])
+            ]
+          )
+        ]
+      )
     ])
   }
 ]
