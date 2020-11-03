@@ -2491,6 +2491,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -40660,20 +40663,34 @@ var render = function() {
     [
       _c(
         "div",
-        { staticClass: "flex space-x-4 items-center" },
+        { staticClass: "flex items-center" },
         [
-          _c("a", { attrs: { href: "#" } }, [
-            _c("img", {
-              staticClass: "w-12 rounded-full",
-              attrs: {
-                src: _vm.auth_user.profile_picture,
-                alt: "profile_picture"
-              }
-            })
-          ]),
+          _c(
+            "span",
+            {
+              staticClass:
+                "inline-flex w-24 h-auto items-center cursor-pointer group",
+              attrs: { href: "#" }
+            },
+            [
+              _c("img", {
+                staticClass: "w-10 rounded-full",
+                attrs: {
+                  src: _vm.auth_user.profile_picture,
+                  alt: "profile_picture"
+                }
+              }),
+              _vm._v(" "),
+              _c("i", {
+                staticClass:
+                  "text-onyx-500 w-5 h-5 mx-1 group-hover:text-viridiant-600",
+                attrs: { "data-feather": "chevron-down" }
+              })
+            ]
+          ),
           _vm._v(" "),
           _c("text-area", {
-            staticClass: "w-full",
+            staticClass: "w-full mr-4",
             attrs: { rows: 1, child_class: "w-full" }
           }),
           _vm._v(" "),
