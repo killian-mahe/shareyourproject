@@ -2490,10 +2490,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -40663,14 +40659,13 @@ var render = function() {
     [
       _c(
         "div",
-        { staticClass: "flex items-center" },
+        { staticClass: "flex items-start" },
         [
           _c(
-            "span",
+            "div",
             {
               staticClass:
-                "inline-flex w-24 h-auto items-center cursor-pointer text-onyx-500 hover:text-viridiant-600",
-              attrs: { href: "#" }
+                "inline-flex h-auto items-center cursor-pointer rounded-md  hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-1 px-2"
             },
             [
               _c("img", {
@@ -40682,25 +40677,18 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("i", {
-                staticClass: "w-5 h-5 mx-1",
+                staticClass: "w-5 h-5 ml-1",
                 attrs: { "data-feather": "chevron-down" }
               })
             ]
           ),
           _vm._v(" "),
           _c("text-area", {
-            staticClass: "w-full mr-4",
+            staticClass: "flex-grow ml-1 mr-4",
             attrs: { rows: 1, child_class: "w-full" }
           }),
           _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-viridiant my-auto a-none",
-              attrs: { href: "#" }
-            },
-            [_vm._v("Post")]
-          )
+          _c("div", { staticClass: "btn btn-viridiant" }, [_vm._v("Post")])
         ],
         1
       ),
@@ -40717,40 +40705,27 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-full flex" }, [
-      _c("span", { staticClass: "w-1/2 cursor-pointer" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-full border-r-1 border-onyx-100 flex items-center justify-center space-x-6 text-onyx-500 hover:text-viridiant-600"
-          },
-          [
-            _c("i", { attrs: { "data-feather": "camera" } }),
-            _vm._v(" "),
-            _c("p", [_vm._v("Photo")])
-          ]
-        )
-      ]),
+      _c(
+        "span",
+        {
+          staticClass:
+            "w-1/2 cursor-pointer border-r-1 border-onyx-100 flex items-center justify-center text-onyx-500 hover:text-viridiant-600"
+        },
+        [
+          _c("i", { staticClass: "mr-6", attrs: { "data-feather": "camera" } }),
+          _vm._v("\n            Photo\n        ")
+        ]
+      ),
       _vm._v(" "),
       _c(
         "span",
         {
           staticClass:
-            "w-1/2 cursor-pointer text-onyx-500 hover:text-viridiant-600"
+            "w-1/2 cursor-pointer text-onyx-500 hover:text-viridiant-600 flex items-center justify-center"
         },
         [
-          _c(
-            "div",
-            {
-              staticClass:
-                "w-full flex items-center justify-center space-x-6 group"
-            },
-            [
-              _c("i", { attrs: { "data-feather": "video" } }),
-              _vm._v(" "),
-              _c("p", [_vm._v("Vidéo")])
-            ]
-          )
+          _c("i", { staticClass: "mr-6", attrs: { "data-feather": "video" } }),
+          _vm._v("\n            Vidéo\n        ")
         ]
       )
     ])
@@ -41033,9 +41008,11 @@ var render = function() {
             _c(
               "div",
               [
-                _c("InputLabel", {
-                  attrs: { label: _vm.label, name: _vm.name }
-                }),
+                _vm.label
+                  ? _c("InputLabel", {
+                      attrs: { label: _vm.label, name: _vm.name }
+                    })
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("textarea", {
                   directives: [
