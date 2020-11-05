@@ -34,6 +34,15 @@ class CreatePermissionTables extends Migration
             $table->foreign('role_id')->references('id')->on('roles');
             $table->foreign('permission_id')->references('id')->on('permissions');
         });
+
+        Schema::create('user_role', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('user_id')->references('id')->on('users');
+        });
     }
 
     /**
@@ -43,6 +52,6 @@ class CreatePermissionTables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(['permissions', 'roles', 'permission_role']);
+        Schema::dropIfExists(['permissions', 'roles', 'permission_role', 'user_role']);
     }
 }
