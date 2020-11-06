@@ -37,7 +37,6 @@
                             response.data.forEach(post => {
                                 this.posts.push(post);
                             });
-                            console.log(this.posts);
                         }
                     });
                 }
