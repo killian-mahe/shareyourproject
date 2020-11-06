@@ -6,7 +6,7 @@
                 <i data-feather="chevron-down" class="w-5 h-5 ml-1"></i>
             </div>
             <text-area :rows='1' class="flex-grow ml-1 mr-4" child_class="w-full"></text-area>
-            <div class="btn btn-viridiant">Post</div>
+            <button class="btn btn-viridiant">Post</button>
         </div>
         <div class="card-footer">
             <div class="card-link">

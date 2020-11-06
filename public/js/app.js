@@ -40697,7 +40697,7 @@ var render = function() {
           attrs: { rows: 1, child_class: "w-full" }
         }),
         _vm._v(" "),
-        _c("div", { staticClass: "btn btn-viridiant" }, [_vm._v("Post")])
+        _c("button", { staticClass: "btn btn-viridiant" }, [_vm._v("Post")])
       ],
       1
     ),
