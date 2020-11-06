@@ -16,17 +16,7 @@ class PostTest extends TestCase
      */
     public function testCreatePostWithAuthenticatedUser()
     {
-        $user = User::factory()->create();
 
-        $response = $this->actingAs($user)
-                         ->post('/posts', ['content' => 'It\'s a test']);
-
-        $response->assertStatus(200);
-
-        $response = $this->actingAs($user)
-                         ->post('/posts');
-
-        $response->assertStatus(302);
     }
 
         /**
@@ -36,14 +26,6 @@ class PostTest extends TestCase
      */
     public function testCreatePostWithoutAuthenticatedUser()
     {
-        $user = User::factory()->create();
-
-        $response = $this->postJson('/posts', ['content' => 'It\'s a test']);
-
-        $response->assertStatus(401);
-
-        $response = $this->postJson('/posts');
-
-        $response->assertStatus(401);
+        
     }
 }
