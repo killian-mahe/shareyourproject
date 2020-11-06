@@ -115,4 +115,12 @@ class Project extends Model
             return asset('vendor/courier/img/default_project_banner.jpg');
         }
     }
+
+    /**
+     * Get the roles of the project
+     */
+    public function roles()
+    {
+        return $this->hasMany('App\Models\Role');
+    }
 }

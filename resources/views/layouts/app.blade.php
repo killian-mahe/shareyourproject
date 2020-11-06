@@ -26,65 +26,50 @@
 
 <body class="bg-cultured-600">
     <div id="app">
-        {{-- NavBar --}}
-        <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50">
+        {{-- Laptop NavBar --}}
+        <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50 fixed h-16">
             <div class="flex justify-around w-full ">
-              <a href="{{route('home')}}"><img class="m-2 " src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="90px" height="90px"></a>
+              <a href="{{route('home')}}"><img class="m-2 " src="{{asset('vendor/courier/logos/svg/fit/Logo_viridiant_fit.svg')}}" width="90px" height="90px"></a>
               <ul class="my-auto hidden lg:flex">
-                <li class="nav-bar-li"><a class="inline-flex">Services</a></li>
-                <li class="nav-bar-li"><a class="inline-flex">Project</a></li>
-                <li class="nav-bar-li"><a class="inline-flex">About</a></li>
-                <li class="nav-bar-li"><a class="inline-flex">Account</a></li>
+                <li class="nav-bar-li"><a class="inline-flex" href="{{route('home')}}"><i data-feather="home" class="mr-1"></i>@auth My feed @else Feed @endauth</a></li>
+                @auth
+                    <li class="nav-bar-li"><a class="inline-flex" href="#"><i data-feather="layout" class="mr-1"></i>My dashboard</a></li>
+                    <li class="nav-bar-li"><a class="inline-flex" href="#"><i data-feather="message-circle" class="mr-1"></i>My message</a></li>
+                @endauth
+                <li class="nav-bar-li"><a class="inline-flex" href="#"><i data-feather="compass" class="mr-1"></i>Explore</a></li>
               </ul>
-              <search-bar></search-bar>
+              <search-bar class="w-1/4"></search-bar>
 
-              @auth
-              @else
+            @auth
 
-                <div class="my-auto hidden lg:block">
-                    <a href="{{ route("register") }}" class="btn-classic mr-5">Sign Up</a>
-                    <a href="{{ route("login") }}" class="btn btn-viridiant hover:text-cultured-100">Log In</a>
-                </div>
-
-              @endauth
-
-            </div>
-        </nav>
-        <nav class="w-full px-2 shadow-lg bg-cultured-100 nav-bar flex lg:hidden">
-            <div class="flex justify-around w-full ">
-              <a href="{{route('home')}}"><img class="my-2" src="{{asset('vendor/courier/logos/png/fit/Logo_viridiant_fit.png')}}" width="80px" height="80px"></a>
-              <div class="my-auto w-1/2">
-                <form role="search" class="w-full justify-center flex">
-                    <div class="w-40 sm:w-56 md:w-full flex justify-center relative items-center">
-                      <i class="search-glass" data-feather="search"></i></button>
-                      <input class="search-input placeholder-onyx-300" autocomplete="off" id="search-submit" type="text" placeholder="Search">
-                    </div>
+            <div class="my-auto hidden lg:block">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn-classic mr-5 a-none">Log out</button>
                 </form>
-              </div>
-              <!-- Burger Menu -->
-              <div class="burger-menu my-auto flex lg:hidden">
-                <div class="icon" onclick="myFunction(this)">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-              </div>
             </div>
-            <!-- ul li -->
-            {{-- <ul class="my-auto lg:hidden mobile-nav-list">
-                <li class="m-8"><a>Services</a></li>
-                <li class="m-8"><a>Project</a></li>
-                <li class="m-8"><a>About</a></li>
-                <li class="m-8"><a>Account</a></li>
-                <li class="m-8"><a>Log In</a></li>
-                <li class="m-8"><a>Sign Up</a></li>
-              </ul> --}}
+
+            @else
+
+            <div class="my-auto hidden lg:block">
+                <a href="{{ route("register") }}" class="btn-classic mr-5 a-none">Sign Up</a>
+                <a href="{{ route("login") }}" class="btn btn-viridiant hover:text-cultured-100 a-none">Log In</a>
+            </div>
+
+            @endauth
+
+            </div>
         </nav>
 
-        <main class="z-1">
+        {{-- Tablet Nav-Bar --}}
+        <tablet-nav-bar class="hidden sm:block lg:hidden" home_link="{{route('home')}}" logo_text="{{asset('vendor/courier/logos/svg/text/Logo_viridiant_text.svg')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}" @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></tablet-nav-bar>
+
+        {{-- Mobile Nav-Bar --}}
+        <mobile-nav-bar class="block sm:hidden" home_link="{{route('home')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}" @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></mobile-nav-bar>
+
+
+        <main class="sm:ml-16 lg:ml-0 lg:pt-16">
+
             @yield('content')
         </main>
         {{-- Real-Time Chat --}}
@@ -110,8 +95,5 @@
 <script src="https://unpkg.com/feather-icons"></script>
 <script>
     feather.replace()
-    function myFunction(h) {
-        h.classList.toggle("open");
-    }
 </script>
 </html>

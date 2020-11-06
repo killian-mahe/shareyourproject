@@ -50,7 +50,7 @@ class ProjectController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required', 'max:255'],
-            'description' => ['required ', 'min:200'],
+            'description' => ['required ', 'min:10', 'max:200'],
             'collaborators' => ['array', 'exists:users,id'],
             'badges' => ['array', 'exists:technologies,id'],
             'tags' => ['array'],
@@ -90,6 +90,8 @@ class ProjectController extends Controller
             }
             $project->tags()->attach($tags);
         }
+
+        return redirect()->route('projects.show', ['project' => $project->id]);
     }
 
     /**
