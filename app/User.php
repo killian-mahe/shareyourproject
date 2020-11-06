@@ -137,4 +137,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->liked_posts->contains($post);
     }
+
+    /**
+     * The role that belongs to the user
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Model\Role');
+    }
 }

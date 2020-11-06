@@ -40,15 +40,23 @@
               </ul>
               <search-bar class="w-1/4"></search-bar>
 
-              @auth
-              @else
+            @auth
 
-                <div class="my-auto hidden lg:block">
-                    <a href="{{ route("register") }}" class="btn-classic mr-5 a-none">Sign Up</a>
-                    <a href="{{ route("login") }}" class="btn btn-viridiant hover:text-cultured-100 a-none">Log In</a>
-                </div>
+            <div class="my-auto hidden lg:block">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn-classic mr-5 a-none">Log out</button>
+                </form>
+            </div>
 
-              @endauth
+            @else
+
+            <div class="my-auto hidden lg:block">
+                <a href="{{ route("register") }}" class="btn-classic mr-5 a-none">Sign Up</a>
+                <a href="{{ route("login") }}" class="btn btn-viridiant hover:text-cultured-100 a-none">Log In</a>
+            </div>
+
+            @endauth
 
             </div>
         </nav>
