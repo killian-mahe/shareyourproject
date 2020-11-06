@@ -2490,6 +2490,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -40662,81 +40665,86 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "bg-cultured-100 rounded w-full h-auto px-4 py-2" },
-    [
-      _c(
-        "div",
-        { staticClass: "flex items-start" },
-        [
-          _c(
-            "div",
-            {
-              staticClass:
-                "inline-flex h-auto items-center cursor-pointer rounded-md  hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-1 px-2"
-            },
-            [
-              _c("img", {
-                staticClass: "w-10 rounded-full",
-                attrs: {
-                  src: _vm.auth_user.profile_picture,
-                  alt: "profile_picture"
-                }
-              }),
-              _vm._v(" "),
-              _c("i", {
-                staticClass: "w-5 h-5 ml-1",
-                attrs: { "data-feather": "chevron-down" }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("text-area", {
-            staticClass: "flex-grow ml-1 mr-4",
-            attrs: { rows: 1, child_class: "w-full" }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "btn btn-viridiant" }, [_vm._v("Post")])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("hr", { staticClass: "mb-2" }),
-      _vm._v(" "),
-      _vm._m(0)
-    ]
-  )
+  return _c("div", { staticClass: "card rounded w-full h-auto py-2" }, [
+    _c(
+      "div",
+      { staticClass: "flex items-start" },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "inline-flex h-auto items-center cursor-pointer rounded-md  hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-1 px-2"
+          },
+          [
+            _c("img", {
+              staticClass: "w-10 rounded-full",
+              attrs: {
+                src: _vm.auth_user.profile_picture,
+                alt: "profile_picture"
+              }
+            }),
+            _vm._v(" "),
+            _c("i", {
+              staticClass: "w-5 h-5 ml-1",
+              attrs: { "data-feather": "chevron-down" }
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("text-area", {
+          staticClass: "flex-grow ml-1 mr-4",
+          attrs: { rows: 1, child_class: "w-full" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "btn btn-viridiant" }, [_vm._v("Post")])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full flex" }, [
-      _c(
-        "span",
-        {
-          staticClass:
-            "w-1/2 cursor-pointer border-r-1 border-onyx-100 flex items-center justify-center text-onyx-500 hover:text-viridiant-600"
-        },
-        [
-          _c("i", { staticClass: "mr-6", attrs: { "data-feather": "camera" } }),
-          _vm._v("\n            Photo\n        ")
-        ]
-      ),
+    return _c("div", { staticClass: "card-footer" }, [
+      _c("div", { staticClass: "card-link" }, [
+        _c(
+          "span",
+          {
+            staticClass: "cursor-pointer text-onyx-500 hover:text-viridiant-600"
+          },
+          [
+            _c("i", { attrs: { "data-feather": "camera" } }),
+            _vm._v(" "),
+            _c("span", { staticClass: "mr-1 hidden md:inline" }, [
+              _vm._v("Photo")
+            ])
+          ]
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "span",
-        {
-          staticClass:
-            "w-1/2 cursor-pointer text-onyx-500 hover:text-viridiant-600 flex items-center justify-center"
-        },
-        [
-          _c("i", { staticClass: "mr-6", attrs: { "data-feather": "video" } }),
-          _vm._v("\n            Vidéo\n        ")
-        ]
-      )
+      _c("div", { staticClass: "card-link" }, [
+        _c(
+          "span",
+          {
+            staticClass: "cursor-pointer text-onyx-500 hover:text-viridiant-600"
+          },
+          [
+            _c("i", {
+              staticClass: "mr-2",
+              attrs: { "data-feather": "video" }
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "mr-1 hidden md:inline" }, [
+              _vm._v("Video")
+            ])
+          ]
+        )
+      ])
     ])
   }
 ]

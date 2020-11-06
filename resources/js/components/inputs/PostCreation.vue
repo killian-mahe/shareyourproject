@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-cultured-100 rounded w-full h-auto px-4 py-2">
+    <div class="card rounded w-full h-auto py-2">
         <div class="flex items-start">
             <div class="inline-flex h-auto items-center cursor-pointer rounded-md  hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-1 px-2">
                 <img class="w-10 rounded-full" :src="auth_user.profile_picture" alt="profile_picture">
@@ -8,16 +8,19 @@
             <text-area :rows='1' class="flex-grow ml-1 mr-4" child_class="w-full"></text-area>
             <div class="btn btn-viridiant">Post</div>
         </div>
-        <hr class="mb-2">
-        <div class="w-full flex">
-            <span class="w-1/2 cursor-pointer border-r-1 border-onyx-100 flex items-center justify-center text-onyx-500 hover:text-viridiant-600">
-                <i data-feather="camera" class="mr-6"></i>
-                Photo
-            </span>
-            <span class="w-1/2 cursor-pointer text-onyx-500 hover:text-viridiant-600 flex items-center justify-center">
-                <i data-feather="video" class="mr-6"></i>
-                Vidéo
-            </span>
+        <div class="card-footer">
+            <div class="card-link">
+                <span class="cursor-pointer text-onyx-500 hover:text-viridiant-600">
+                    <i data-feather="camera"></i>
+                    <span class="mr-1 hidden md:inline">Photo</span>
+                </span>
+            </div>
+            <div class="card-link">
+                <span class="cursor-pointer text-onyx-500 hover:text-viridiant-600">
+                    <i data-feather="video" class="mr-2"></i>
+                    <span class="mr-1 hidden md:inline">Video</span>
+                </span>
+            </div>
         </div>
     </div>
 </template>
