@@ -1,5 +1,5 @@
 <template>
-    <div v-if="post !== undefined" class="card md:rounded-lg" :class="{'shadow-md mb-6': !reshared_post, 'border border-gray-400': reshared_post}">
+    <div v-if="post !== undefined" class="card md:rounded-lg" :class="{'shadow-md mb-6': !reshared_post, 'border border-gray-400 hover:bg-cultured-300': reshared_post}">
         <div class="card-title">
             <a :href="post.url.author" class="w-auto inline-grid">
                 <img class="rounded-full my-auto h-full w-auto hover:shadow-md" :src="post.author.profile_picture"/>
