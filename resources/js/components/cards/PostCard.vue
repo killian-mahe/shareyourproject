@@ -1,5 +1,5 @@
 <template>
-    <div v-if="post !== undefined" class="card md:rounded-lg">
+    <div v-if="post !== undefined" class="card md:rounded-lg" :class="{'shadow-md mb-6': !reshared_post, 'border border-gray-400 hover:bg-cultured-300': reshared_post}">
         <div class="card-title">
             <a :href="post.url.author" class="w-auto inline-grid">
                 <img class="rounded-full my-auto h-full w-auto hover:shadow-md" :src="post.author.profile_picture"/>
@@ -11,17 +11,13 @@
         </div>
 
         <div class="card-body md:text-lg">
-            <p class="mb-4 leading-5 font-normal text-onyx-600">
+            <p v-if="!post.reshared_post" class="mb-4 leading-5 font-normal text-onyx-600">
                 {{ post.content }}
             </p>
-            <img class="max-w-full rounded" src="https://cdn.pixabay.com/photo/2016/08/10/18/04/eat-1583954_1280.jpg"/>
-            <div class="card-tags">
-                <span class="tag">Work</span>
-                <span class="tag">Team</span>
-            </div>
+            <post-card v-if="post.reshared_post" :post_props="post.reshared_post" :auth_user="auth_user" :reshared_post="true"></post-card>
         </div>
 
-        <div class="card-footer">
+        <div class="card-footer" v-if="!reshared_post">
             <div class="card-link">
                 <span v-if="post.liked" @click="like(false)" class="cursor-pointer text-red-600 fill-current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="true" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="ml-1 hidden md:inline">Liked</span></span>
                 <span v-else @click="like(true)" class="cursor-pointer hover:text-red-600 fill-current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="ml-1 hidden md:inline">I like</span></span>
@@ -65,7 +61,8 @@
         },
         props: {
             'post_props': Object,
-            'auth_user': Object
+            'auth_user': Object,
+            'reshared_post': false
         },
         beforeMount() {
             this.comments_to_load = this.post.comments_ids.filter(comment_id => !this.comments.map(x => x.id).includes(comment_id));
