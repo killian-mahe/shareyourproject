@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
+use App\Models\Project;
 use App\Models\Post;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -143,6 +144,28 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function roles()
     {
-        return $this->belongsToMany('App\Model\Role');
+        return $this->belongsToMany('App\Models\Role');
+    }
+
+    /**
+     * If the user as the permission in the project
+     * @param String $permission_string
+     * @param App\Models\Project $project
+     *
+     * @return bool
+     */
+    public function has_permission(String $permission_string, Project $project)
+    {
+        $roles = $this->roles()->where('project_id', $project->id)->get();
+
+        foreach ($roles as $role) {
+            $permissions = json_decode($role->permissions, true);
+
+            if (array_key_exists($permission_string, $permissions) && $permissions[$permission_string]) {
+                return true;
+            }
+
+        }
+        return false;
     }
 }
