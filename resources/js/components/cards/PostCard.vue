@@ -11,8 +11,7 @@
         </div>
 
         <div class="card-body md:text-lg">
-            <p v-if="!post.reshared_post" class="mb-4 leading-5 font-normal text-onyx-600">
-                {{ post.content }}
+            <p v-if="!post.reshared_post" class="mb-4 leading-5 font-normal text-onyx-600" v-html="post.formated_content">
             </p>
             <post-card v-if="post.reshared_post" :post_props="post.reshared_post" :auth_user="auth_user" :reshared_post="true"></post-card>
         </div>

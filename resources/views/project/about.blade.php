@@ -9,9 +9,9 @@
         </div>
         </div>
 
-        <div class="px-8 pb-8 pt-4 text-justify">
-            {{$project->description}}
-        </div>
+        <p class="px-8 pb-8 pt-4 text-justify ">
+            {!! $project->formatedDescription !!}
+        </p>
     </div>
 
 
