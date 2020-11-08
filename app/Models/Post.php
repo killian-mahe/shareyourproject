@@ -63,4 +63,14 @@ class Post extends Model
     {
         return $this->hasMany('App\Models\Comment');
     }
+
+    /**
+     * Get the HTML formated project description
+     * @param string $value
+     * @return string
+     */
+    public function getFormatedContentAttribute()
+    {
+        return nl2br($this->content);
+    }
 }

@@ -93,6 +93,16 @@ class Project extends Model
     }
 
     /**
+     * Get the HTML formated project description
+     * @param string $value
+     * @return string
+     */
+    public function getFormatedDescriptionAttribute()
+    {
+        return nl2br($this->description);
+    }
+
+    /**
      * Get project picture
      */
     public function profile_picture()
