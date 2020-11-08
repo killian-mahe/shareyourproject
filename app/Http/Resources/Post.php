@@ -20,6 +20,7 @@ class Post extends JsonResource
         return [
             'id' => $this->id,
             'content' => $this->content,
+            'formated_content' => $this->formatedContent,
             'author' => new UserResource($this->author),
             'project_id' => $this->project_id,
             'url' => [
