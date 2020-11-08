@@ -4,7 +4,7 @@
             <a :href="post.url.author" class="w-auto inline-grid">
                 <img class="rounded-full my-auto h-full w-auto hover:shadow-md" :src="post.author.profile_picture"/>
             </a>
-            <div class="flex flex-col ml-3 justify-start w-full">
+            <div class="flex flex-col ml-3 justify-start">
                 <div class="font-sans font-bold text-base hover:underline"><a :href="post.url.author">{{ post.author.first_name }} {{post.author.last_name}}</a></div>
                 <span class="font-sans italic text-base">{{ post.author.title }}</span>
             </div>
