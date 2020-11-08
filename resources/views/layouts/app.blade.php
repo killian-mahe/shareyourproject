@@ -30,7 +30,7 @@
         <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50 fixed h-16">
             <div class="flex justify-around w-full ">
               <a href="{{route('home')}}"><img class="m-2 " src="{{asset('vendor/courier/logos/svg/fit/Logo_viridiant_fit.svg')}}" width="90px" height="90px"></a>
-              <ul class="my-auto hidden lg:flex">
+              <ul class="my-auto hidden lg:flex space-x-4">
                 <li class="nav-bar-li"><a class="inline-flex" href="{{route('home')}}"><i data-feather="home" class="mr-1"></i>@auth My feed @else Feed @endauth</a></li>
                 @auth
                     <li class="nav-bar-li"><a class="inline-flex" href="#"><i data-feather="layout" class="mr-1"></i>My dashboard</a></li>
@@ -45,7 +45,7 @@
             <div class="my-auto hidden lg:block">
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn-classic mr-5 a-none">Log out</button>
+                    <button type="submit" class="btn-classic mx-2 a-none">Log out</button>
                 </form>
             </div>
 

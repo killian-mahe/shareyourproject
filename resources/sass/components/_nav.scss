@@ -6,7 +6,7 @@
     @apply inline-flex font-semibold;
 
     a {
-        @apply text-onyx-600 py-1 relative my-1 mx-1.5625 cursor-pointer;
+        @apply text-onyx-600 py-1 relative my-1 cursor-pointer;
 
         &:hover {
             @apply transition duration-900;
