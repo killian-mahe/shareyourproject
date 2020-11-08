@@ -73,4 +73,20 @@ class Post extends Model
     {
         return nl2br($this->content);
     }
+
+    /**
+     * Get the images that belongs to the post
+     */
+    public function images()
+    {
+        return $this->hasMany('App\Models\Image');
+    }
+
+    /**
+     * Get the videos that belongs to the post
+     */
+    public function videos()
+    {
+        return $this->hasMany('App\Models\Video');
+    }
 }
