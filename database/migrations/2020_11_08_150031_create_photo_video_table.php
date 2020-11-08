@@ -16,33 +16,17 @@ class CreatePhotoVideoTable extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('url', 200)->nullable(false);
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts');
             $table->timestamps();
         });
 
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->string('url', 200)->nullable(false);
+            $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts');
             $table->timestamps();
-        });
-
-        Schema::create('image_post', function (Blueprint $table) {
-            $table->id();
-
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('image_id');
-
-            $table->foreign('post_id')->references('id')->on('posts');
-            $table->foreign('image_id')->references('id')->on('images');
-        });
-
-        Schema::create('post_video', function (Blueprint $table) {
-            $table->id();
-
-            $table->unsignedBigInteger('post_id');
-            $table->unsignedBigInteger('video_id');
-
-            $table->foreign('post_id')->references('id')->on('posts');
-            $table->foreign('video_id')->references('id')->on('videos');
         });
     }
 
@@ -53,8 +37,6 @@ class CreatePhotoVideoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images_post');
-        Schema::dropIfExists('post_video');
         Schema::dropIfExists('images');
         Schema::dropIfExists('videos');
     }
