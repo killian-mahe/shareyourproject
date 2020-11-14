@@ -1,7 +1,7 @@
 <template>
     <div class="modal-mask">
         <div class="modal-wrapper">
-            <div class="modal-container">
+            <div :class="'modal-container ' + containerWidth">
 
                 <div class="modal-header">
                 <slot name="header">
@@ -35,6 +35,31 @@ export default {
         }
     },
     props: {
+        size: {
+            type: String,
+            default: "md"
+        }
+    },
+    computed: {
+        containerWidth: function() {
+            console.log(this.size)
+            switch (this.size) {
+                case "xl":
+                    return "w-3/4"
+
+                case "lg":
+                    return "w-1/2"
+
+                case "md":
+                    return "w-1/3"
+
+                case "sm":
+                    return "w-1/4"
+
+                default:
+                    return "w-1/3"
+            }
+        }
     },
     methods: {
     }
