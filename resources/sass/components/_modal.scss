@@ -1,0 +1,18 @@
+.modal-mask {
+    @apply fixed z-50 top-0 left-0 w-full h-full table;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease;
+
+    .modal-wrapper {
+        @apply table-cell;
+        vertical-align: middle;
+    }
+
+    .modal-container {
+        @apply bg-cultured-200 rounded-md shadow-md px-8 py-8 mx-auto;
+        transition: all 0.3s ease;
+    }
+}
+
+
+
