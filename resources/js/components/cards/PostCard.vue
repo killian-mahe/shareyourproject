@@ -102,7 +102,6 @@
         methods: {
             copy: function() {
                 var copyText = document.querySelector("#copy_link");
-                console.log(copyText);
                 copyText.select();
                 document.execCommand("copy");
                 this.copied_var = "Copied !";
