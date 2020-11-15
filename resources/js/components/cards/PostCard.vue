@@ -48,9 +48,15 @@
                 </div>
             </template>
             <template v-slot:body>
-                <div class="my-4 flex w-full items-center">
-                    <svg @click='copy' class="feather feather-copy text-onyx-600 cursor-pointer mr-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    <input id="copy_link" disabled class="select-all w-full appearance-none block bg-gray-200 px-4 py-2 border border-gray-300 text-onyx-800 rounded-md" type="text" value="lllliiiinnnnkkk in description">
+                <div class="my-4 flex w-full items-center relative">
+                    <svg @mouseover="hover_copy_icon = true" @mouseleave="hover_copy_icon = false" @click='copy' class="feather feather-copy text-onyx-600 cursor-pointer mr-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <div v-if='hover_copy_icon' class="absolute mx-2 top-10 -left-8">
+                        <div class="bg-black text-white text-xs rounded py-1 px-4 right-0 bottom-full">
+                            {{copied_var}}
+                            <svg class="absolute text-black h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+                        </div>
+                    </div>
+                    <input id="copy_link" readonly class="select-all w-full appearance-none block bg-gray-200 px-4 py-2 border border-gray-300 text-onyx-800 rounded-md" type="text" :value="'/posts/'+ post.id">
                 </div>
             </template>
             <template v-slot:footer><div></div></template>
@@ -78,6 +84,8 @@
                 first_comment : false,
                 newCommentContent: "",
                 on_share: false,
+                hover_copy_icon: false,
+                copied_var: "Click to copy",
             }
         },
         props: {
@@ -97,6 +105,7 @@
                 console.log(copyText);
                 copyText.select();
                 document.execCommand("copy");
+                this.copied_var = "Copied !";
             },
             like: function(like) {
                 if (like == true) {
