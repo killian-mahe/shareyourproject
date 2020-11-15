@@ -1,0 +1,67 @@
+<template>
+    <div class="modal-mask">
+        <div class="modal-wrapper">
+            <div :class="'modal-container ' + containerWidth">
+
+                <div class="modal-header">
+                <slot name="header">
+                    default header
+                </slot>
+                </div>
+
+                <div class="modal-body">
+                <slot name="body">
+                    default body
+                </slot>
+                </div>
+
+                <div class="modal-footer">
+                <slot name="footer">
+                    default footer
+                    <button class="float-right" @click="$emit('close')">
+                    OK
+                    </button>
+                </slot>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+        }
+    },
+    props: {
+        size: {
+            type: String,
+            default: "md"
+        }
+    },
+    computed: {
+        containerWidth: function() {
+            console.log(this.size)
+            switch (this.size) {
+                case "xl":
+                    return "w-3/4"
+
+                case "lg":
+                    return "w-1/2"
+
+                case "md":
+                    return "w-1/3"
+
+                case "sm":
+                    return "w-1/4"
+
+                default:
+                    return "w-1/3"
+            }
+        }
+    },
+    methods: {
+    }
+}
+</script>
