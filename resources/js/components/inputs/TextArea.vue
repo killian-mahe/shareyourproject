@@ -1,7 +1,7 @@
 <template>
     <resize-auto>
       <template v-slot:default="{resize}">
-          <div>
+          <div @click="$emit('click')">
             <InputLabel v-if="label" :label="label"  :name="name" />
             <textarea
                 class="appearance-none bg-white text-gray-700 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none"

@@ -6,6 +6,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use \App\Http\Resources\User as UserResource;
 use \App\Http\Resources\Comment as CommentResource;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends JsonResource
 {
@@ -17,12 +18,18 @@ class Post extends JsonResource
      */
     public function toArray($request)
     {
+        $images_url = [];
+        foreach ($this->images as $image) {
+            $images_url[] = Storage::url($image->url);
+        }
+
         return [
             'id' => $this->id,
             'content' => $this->content,
             'formated_content' => $this->formatedContent,
             'author' => new UserResource($this->author),
             'project_id' => $this->project_id,
+            'images_url' => $images_url,
             'url' => [
                 'author' => route('users.show', ['user'=>$this->author_id]),
             ],
