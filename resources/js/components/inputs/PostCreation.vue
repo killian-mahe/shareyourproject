@@ -122,7 +122,9 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then(response => {
-                    console.log(response);
+                    if (response.status == 201) {
+                        document.location.href = '/posts/'+response.data.id;
+                    }
                 })
             }
         }
