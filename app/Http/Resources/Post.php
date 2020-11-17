@@ -32,6 +32,7 @@ class Post extends JsonResource
             'images_url' => $images_url,
             'url' => [
                 'author' => route('users.show', ['user'=>$this->author_id]),
+                'post' => route('posts.show', ['post'=>$this->id])
             ],
             'reshared_post' => $this->shared_post_id ? new Post(\App\Models\Post::where('id', $this->shared_post_id)->first()) : false,
             'liked' => Auth::user() ? Auth::user()->does_it_like($this->resource) : false,

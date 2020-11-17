@@ -56,7 +56,7 @@
                             <svg class="absolute text-black h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
                         </div>
                     </div>
-                    <input id="copy_link" readonly class="select-all w-full appearance-none block bg-gray-200 px-4 py-2 border border-gray-300 text-onyx-800 rounded-md" type="text" :value="'/posts/'+ post.id">
+                    <input id="copy_link" readonly class="select-all w-full appearance-none block bg-gray-200 px-4 py-2 border border-gray-300 text-onyx-800 rounded-md" type="text" :value="post.url.post">
                 </div>
             </template>
             <template v-slot:footer><div></div></template>
