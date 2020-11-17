@@ -89,4 +89,12 @@ class Post extends Model
     {
         return $this->hasMany('App\Models\Video');
     }
+
+    /**
+     * Reshare a post
+     */
+    public function reshare_post(int $id)
+    {
+        $this->shared_post_id = $id;
+    }
 }

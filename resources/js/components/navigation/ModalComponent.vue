@@ -52,22 +52,21 @@ export default {
     },
     computed: {
         containerWidth: function() {
-            console.log(this.size)
             switch (this.size) {
                 case "xl":
-                    return "w-3/4"
+                    return "w-7/8 sm:w-4/5 md:w-3/4"
 
                 case "lg":
-                    return "w-1/2"
+                    return "w-7/8 sm:w-3/4 md:w-1/2"
 
                 case "md":
-                    return "w-1/3"
+                    return "w-7/8 md:w-2/3 lg:w-1/2 w-1/3"
 
                 case "sm":
-                    return "w-1/4"
+                    return "w-7/8 sm:1/2 md:w-1/3"
 
                 default:
-                    return "w-1/3"
+                    return "w-7/8 w-1/3"
             }
         }
     },
