@@ -1,6 +1,6 @@
 <template>
     <div class="w-full">
-    <div class="card rounded shadow-md w-full h-auto py-2" v-show="!show_modal">
+    <div class="card rounded shadow-md w-full h-auto py-2" v-show="!show_modal && !only_modal">
         <div class="flex items-start">
             <div class="inline-flex h-auto items-center cursor-pointer rounded-md  hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-1 px-2">
                 <img class="w-10 rounded-full" :src="auth_user.profile_picture" alt="profile_picture">
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <modal-component v-if="show_modal" size="md">
+    <modal-component v-if="show_modal || only_modal" size="sm">
         <template v-slot:header>
             <div class="border-b pb-3 flex justify-between items-center">
                 <h1 class="font-semibold text-onyx-500 text-xl">Create a new post</h1>
@@ -51,13 +51,15 @@
                         ></textarea>
                     </template>
                 </resize-auto>
+                <post-card v-if="reshare_post" :post_props="reshare_post" :auth_user="auth_user" :reshared_post="true"></post-card>
                 <img v-if="previewFileUrl" :src="previewFileUrl" alt="" class="my-2 rounded-md hover:">
-                <input id="pictures_input" ref="picture" @change="previewFile" type="file" name="pictures" hidden>
+                <input v-if="enableExtraContent" id="pictures_input" ref="picture" @change="previewFile" type="file" name="pictures" hidden>
             </div>
         </template>
         <template v-slot:footer>
             <div class="w-full flex justify-between items-center mt-2">
-                <span @click="selectFile"><svg class="feather feather-image hover:bg-onyx-100 p-2 w-10 h-10 rounded-full cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>
+                <span v-if="enableExtraContent" @click="selectFile"><svg class="feather feather-image hover:bg-onyx-100 p-2 w-10 h-10 rounded-full cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>
+                <span v-else><svg class="feather feather-image hover:bg-onyx-100 p-2 w-10 h-10 rounded-full cursor-not-allowed" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>
                 <button class="btn btn-viridiant-outline" @click="createPost">Publish</button>
             </div>
         </template>
@@ -76,6 +78,18 @@
             ModalComponent,
         },
         props: {
+            only_modal: {
+                type: Boolean,
+                default: false
+            },
+            enableExtraContent: {
+                type: Boolean,
+                default: true
+            },
+            reshare_post: {
+                type: Object,
+                default: null
+            },
             auth_user: {
                 type : Object,
                 required : true,
@@ -83,7 +97,7 @@
         },
         data() {
             return {
-                show_modal: true,
+                show_modal: false,
                 previewFileUrl: "",
                 content: ""
             }
@@ -101,6 +115,7 @@
             closeModal: function() {
                 this.show_modal = false;
                 this.previewFileUrl = "";
+                this.$emit('close');
             },
             selectFile: function() {
                 document.getElementById('pictures_input').click()
@@ -110,11 +125,16 @@
                 this.previewFileUrl = URL.createObjectURL(file);
             },
             createPost: function() {
-                let file = this.$refs.picture.files[0];
 
                 let formData = new FormData();
 
-                if (file) formData.append('image', file);
+                if (this.enableExtraContent) {
+                    let file = this.$refs.picture.files[0];
+                    if (file) formData.append('image', file);
+                }
+
+                if (this.reshare_post) formData.append('reshare', this.reshare_post.id);
+
                 formData.append('content', this.content);
 
                 axios.post('/api/posts', formData, {
@@ -122,6 +142,7 @@
                         'Content-Type': 'multipart/form-data'
                     }
                 }).then(response => {
+                    console.log(response)
                     if (response.status == 201) {
                         document.location.href = '/posts/'+response.data.id;
                     }
