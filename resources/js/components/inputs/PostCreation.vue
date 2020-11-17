@@ -114,7 +114,7 @@
 
                 let formData = new FormData();
 
-                formData.append('file', file);
+                if (file) formData.append('image', file);
                 formData.append('content', this.content);
 
                 axios.post('/api/posts', formData, {
