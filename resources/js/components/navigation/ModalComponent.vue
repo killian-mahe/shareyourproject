@@ -40,6 +40,16 @@ export default {
             default: "md"
         }
     },
+    mounted() {
+        let body = document.getElementsByTagName("body").item(0);
+        body.classList.add('overflow-hidden');
+        body.classList.remove('overflow-auto');
+    },
+    beforeDestroy() {
+        let body = document.getElementsByTagName("body").item(0);
+        body.classList.add('overflow-auto');
+        body.classList.remove('overflow-hidden');
+    },
     computed: {
         containerWidth: function() {
             console.log(this.size)

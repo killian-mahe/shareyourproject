@@ -64,6 +64,8 @@ Route::name('api.')->group(function() {
             return json_encode(['ok' => true]);
         })->middleware('auth:api')->name('unlike');
 
+        Route::post('posts', 'PostController@store')->name('store');
+
     });
 
     Route::name('comment.')->group(function() {
