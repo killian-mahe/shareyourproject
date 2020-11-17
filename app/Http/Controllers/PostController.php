@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Project;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Post as PostResource;
 
 class PostController extends Controller
 {
@@ -53,6 +55,7 @@ class PostController extends Controller
     {
         $validatedData = $request->validate([
             'content' => ['required', 'max:255'],
+            'image' => ['image'],
             'project' => ['nullable', 'numeric', 'exists:projects,id']
         ]);
 
@@ -68,6 +71,17 @@ class PostController extends Controller
         }
 
         $post->save();
+
+        if (array_key_exists('image', $validatedData))
+        {
+            $path = $request->file('image')->store('public/images');
+
+            $image = new Image;
+            $image->url = $path;
+            $post->images()->save($image);
+        }
+
+        return response()->json(new PostResource($post), 200);
     }
 
     /**
