@@ -54,12 +54,18 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'content' => ['required', 'max:255'],
+            'content' => ['nullable', 'required_without:reshare', 'max:255'],
+            'reshare' => ['numeric', 'exists:posts,id'],
             'image' => ['image'],
             'project' => ['nullable', 'numeric', 'exists:projects,id']
         ]);
 
         $post = new Post;
+
+        if (array_key_exists('reshare', $validatedData))
+        {
+            $post->reshare_post($validatedData['reshare']);
+        }
         $post->content = $validatedData['content'];
 
         $post->author()->associate(Auth::user());
@@ -69,7 +75,6 @@ class PostController extends Controller
             $project  = Project::where('id', $validatedData['project'])->first();
             $post->project()->associate($project);
         }
-
         $post->save();
 
         if (array_key_exists('image', $validatedData))
