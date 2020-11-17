@@ -11,7 +11,7 @@
         </div>
 
         <div class="card-body md:text-lg">
-            <p v-if="!post.reshared_post" class="mb-4 leading-5 font-normal text-onyx-600" v-html="post.formated_content">
+            <p class="mb-4 leading-5 font-normal text-onyx-600" v-html="post.formated_content">
             </p>
             <post-card v-if="post.reshared_post" :post_props="post.reshared_post" :auth_user="auth_user" :reshared_post="true"></post-card>
         </div>
@@ -40,7 +40,7 @@
             <button v-if="comments_to_load.length > 0" class="btn-classic w-full font-sans text-sm" @click="addComments">Load more comments</button>
         </div>
 
-        <modal-component v-if='on_share'>
+        <!-- <modal-component v-if='on_share'>
             <template v-slot:header>
                 <div class="border-b pb-3 flex justify-between items-center">
                     <h1 class="font-semibold text-onyx-600 text-xl">Share it !</h1>
@@ -59,9 +59,14 @@
                     <input id="copy_link" readonly class="select-all w-full appearance-none block bg-gray-200 px-4 py-2 border border-gray-300 text-onyx-800 rounded-md" type="text" :value="post.url.post">
                 </div>
             </template>
-            <template v-slot:footer><div></div></template>
-
-        </modal-component>
+            <template v-slot:footer>
+                <div class="w-full flex justify-between items-center mt-2">
+                    <span @click="selectFile"><svg class="feather feather-image hover:bg-onyx-100 p-2 w-10 h-10 rounded-full" :class="{'cursor-pointer': enableExtraContent, 'cursor-not-allowed': !enableExtraContent}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>
+                    <button class="btn btn-viridiant-outline" @click="createPost">Publish</button>
+                </div>
+            </template>
+        </modal-component> -->
+        <post-creation v-if="on_share" @close="on_share=false" :auth_user="auth_user" :reshare_post="post.reshared_post ? post.reshared_post : post" :only_modal="true" :enableExtraContent="false"></post-creation>
     </div>
 </template>
 
@@ -69,12 +74,14 @@
     import CommentComponent from '../posts/CommentComponent.vue';
     import TextArea from '../inputs/TextArea.vue';
     import ModalComponent from '../navigation/ModalComponent.vue';
+    import PostCreation from '../inputs/PostCreation.vue';
 
     export default {
         components: {
             CommentComponent,
             TextArea,
             ModalComponent,
+            PostCreation
         },
         data() {
             return {
