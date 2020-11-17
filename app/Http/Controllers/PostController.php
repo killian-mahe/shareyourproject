@@ -81,7 +81,7 @@ class PostController extends Controller
             $post->images()->save($image);
         }
 
-        return response()->json(new PostResource($post), 200);
+        return response()->json(new PostResource($post), 201);
     }
 
     /**
