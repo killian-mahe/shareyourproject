@@ -1,11 +1,11 @@
 <template>
     <div class="my-auto" @focusin="focus = true" v-click-outside="onClickOutside">
-        <form role="search" class="w-full justify-center">
+        <form role="search" class="w-full justify-center relative">
             <div class="flex items-center relative">
                 <i class="search-glass" data-feather="search"></i>
                 <input autocomplete="off" @input="refreshLists" type="text" placeholder="Search" v-model="searchQuery" class="search-input placeholder-onyx-300">
             </div>
-            <div v-show="focus && searchQuery !== ''"  class="rounded z-10 px-4 py-3 bg-white w-1/4 absolute shadow-lg">
+            <div v-show="focus && searchQuery !== ''"  class="rounded z-10 px-4 py-3 bg-white inset-x-0 absolute shadow-lg">
                 <div v-if="users.length > 0">
                     <span class="leading-4 font-medium">Users</span>
                     <hr class="mb-1">
