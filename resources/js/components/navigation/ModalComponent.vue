@@ -60,10 +60,10 @@ export default {
                     return "w-7/8 sm:w-3/4 md:w-1/2"
 
                 case "md":
-                    return "w-7/8 md:w-2/3 lg:w-1/2 w-1/3"
+                    return "w-7/8 md:w-2/3 lg:w-1/2 xl:w-1/3"
 
                 case "sm":
-                    return "w-7/8 sm:1/2 md:w-1/3"
+                    return "w-7/8 sm:1/2 md:w-1/3 lg:w-1/4"
 
                 default:
                     return "w-7/8 w-1/3"
