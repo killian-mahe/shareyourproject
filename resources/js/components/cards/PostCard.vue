@@ -5,7 +5,7 @@
                 <img class="rounded-full my-auto h-full w-auto hover:shadow-md" :src="post.author.profile_picture"/>
             </a>
             <div class="flex flex-col ml-3 justify-start">
-                <div class="font-sans font-bold text-base hover:underline"><a :href="post.url.author">{{ post.author.first_name }} {{post.author.last_name}}</a></div>
+                    <div><a class="font-bold" :href="post.url.author">{{ post.author.first_name }} {{post.author.last_name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
                 <span class="font-sans italic text-base">{{ post.author.title }}</span>
             </div>
         </div>
@@ -75,6 +75,7 @@
     import TextArea from '../inputs/TextArea.vue';
     import ModalComponent from '../navigation/ModalComponent.vue';
     import PostCreation from '../inputs/PostCreation.vue';
+    import moment from 'moment';
 
     export default {
         components: {
@@ -105,6 +106,11 @@
         },
         mounted() {
             feather.replace();
+        },
+        computed: {
+            timeSinceCreation: function() {
+                return moment(this.post.created_at).fromNow();
+            }
         },
         methods: {
             copy: function() {
