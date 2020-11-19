@@ -31,27 +31,28 @@
             <div class="flex justify-around w-full ">
               <a href="{{route('home')}}"><img class="m-2 " src="{{asset('vendor/courier/logos/svg/fit/Logo_viridiant_fit.svg')}}" width="90px" height="90px"></a>
               <ul class="my-auto hidden lg:flex space-x-4">
-                <li class="nav-bar-li"><a class="inline-flex" href="{{route('home')}}"><i data-feather="home" class="mr-1"></i>@auth My feed @else Feed @endauth</a></li>
+                <li class="nav-bar-li"><a class="inline-flex a-none" href="{{route('home')}}"><i data-feather="home" class="mr-1"></i>@auth My feed @else Feed @endauth</a></li>
                 @auth
-                    <li class="nav-bar-li"><a class="inline-flex" href="#"><i data-feather="layout" class="mr-1"></i>My dashboard</a></li>
-                    <li class="nav-bar-li"><a class="inline-flex" href="#"><i data-feather="message-circle" class="mr-1"></i>My message</a></li>
+                    <li class="nav-bar-li"><a class="inline-flex a-none" href="#"><i data-feather="layout" class="mr-1"></i>My dashboard</a></li>
+                    <li class="nav-bar-li"><a class="inline-flex a-none" href="#"><i data-feather="message-circle" class="mr-1"></i>My message</a></li>
                 @endauth
-                <li class="nav-bar-li"><a class="inline-flex" href="#"><i data-feather="compass" class="mr-1"></i>Explore</a></li>
+                <li class="nav-bar-li"><a class="inline-flex a-none" href="#"><i data-feather="compass" class="mr-1"></i>Explore</a></li>
               </ul>
               <search-bar class="w-1/4"></search-bar>
 
             @auth
 
-            <div class="my-auto hidden lg:block">
-                <form action="{{ route('logout') }}" method="POST">
+            <div class="my-auto">
+                {{-- <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="btn-classic mx-2 a-none">Log out</button>
-                </form>
+                </form> --}}
+                <personal-menu :auth_user='@json(new \App\Http\Resources\User(Auth::user()))'></personal-menu>
             </div>
 
             @else
 
-            <div class="my-auto hidden lg:block">
+            <div class="my-auto">
                 <a href="{{ route("register") }}" class="btn-classic mr-5 a-none">Sign Up</a>
                 <a href="{{ route("login") }}" class="btn btn-viridiant hover:text-cultured-100 a-none">Log In</a>
             </div>
