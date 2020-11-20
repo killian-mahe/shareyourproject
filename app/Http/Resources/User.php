@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\Project;
 
 class User extends JsonResource
 {
@@ -23,11 +24,13 @@ class User extends JsonResource
             'updated_at' => $this->updated_at,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'full_name' => $this->fullname,
             'url' => [
                 'index' => route('users.show', ['user'=>$this->id]),
             ],
             'profile_picture' => $this->profile_picture(),
-            'banner_picture' => $this->banner_picture()
+            'banner_picture' => $this->banner_picture(),
+            'owned_projects' => Project::collection($this->owned_project),
         ];;
     }
 }

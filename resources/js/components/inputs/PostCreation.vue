@@ -1,10 +1,21 @@
 <template>
     <div class="w-full">
     <div class="card rounded shadow-md w-full h-auto py-2" v-show="!show_modal && !only_modal">
-        <div class="flex items-start">
-            <div class="inline-flex h-auto items-center cursor-pointer rounded-md  hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-1 px-2">
+        <div class="flex items-start relative">
+            <div @click="onUserSelect" class="inline-flex h-auto items-center cursor-pointer rounded-md  hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-1 px-2">
                 <img class="w-10 rounded-full" :src="auth_user.profile_picture" alt="profile_picture">
                 <i data-feather="chevron-down" class="w-5 h-5 ml-1"></i>
+            </div>
+            <div v-show="show_select" class="flex-col space-y-1 flex left-0 top-12 absolute bg-cultured-100 border rounded-md border-gray-300 py-1 px-2">
+                <div @click="onAuthorSelected(null)" class="cursor-pointer justify-start inline-flex items-center space-x-3 hover:bg-cultured-400 py-1 px-2 rounded-md">
+                    <img class="w-10 rounded-full" :src="auth_user.profile_picture" alt="profile_picture">
+                    <span>{{auth_user.full_name}}</span>
+                </div>
+                <div v-for="project in auth_user.owned_projects" :key="project.id" @click="onAuthorSelected(project.id)" class="cursor-pointer inline-flex items-center justify-start space-x-3 hover:bg-cultured-400  py-1 px-2 rounded-md">
+                    <img class="w-10 rounded-full" :src="project.profile_picture" alt="project_profile_picture">
+                    <span>{{project.name}}</span>
+                </div>
+                <input ref="author" type="text" name="author" hidden>
             </div>
             <text-area :rows='1' class="flex-grow ml-1 mr-4" child_class="w-full" @click="openModal"></text-area>
             <button class="btn btn-viridiant" @click="openModal">Post</button>
@@ -102,16 +113,30 @@
             return {
                 show_modal: false,
                 previewFileUrl: "",
-                content: ""
+                content: "",
+                show_select: false,
             }
         },
         mounted() {
+            console.log(this.auth_user.owned_projects);
             feather.replace();
         },
         computed: {
 
         },
         methods: {
+            onAuthorSelected: function (id) {
+                this.$refs.author.value = id;
+                this.show_select = false;
+            },
+            onUserSelect: function() {
+                if (this.show_select) {
+                    this.show_select = false;
+                } else {
+                    this.show_select = true;
+                }
+
+            },
             openModal: function() {
                 this.show_modal = true;
             },
@@ -141,6 +166,8 @@
                 }
 
                 if (this.reshare_post) formData.append('reshare', this.reshare_post.id);
+
+                if (this.$refs.author.value) formData.append('project', this.$refs.author.value)
 
                 formData.append('content', this.content);
 
