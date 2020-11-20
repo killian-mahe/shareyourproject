@@ -14,6 +14,15 @@
             <p class="mb-4 leading-5 font-normal text-onyx-600" v-html="post.formated_content">
             </p>
             <post-card v-if="post.reshared_post" :post_props="post.reshared_post" :auth_user="auth_user" :reshared_post="true"></post-card>
+
+            <swiper class="swiper" :options="swiperOption">
+                <swiper-slide v-for="image in post.images_url" :key="image" class="text-center bg-red-400">
+                    <img :src="image" alt="post_image">
+                </swiper-slide>
+                <div class="swiper-button-prev" slot="button-prev"></div>
+                <div class="swiper-button-next" slot="button-next"></div>
+            </swiper>
+
         </div>
 
         <div class="card-footer" v-if="!reshared_post">
@@ -40,7 +49,7 @@
             <button v-if="comments_to_load.length > 0" class="btn-classic w-full font-sans text-sm" @click="addComments">Load more comments</button>
         </div>
 
-        <!-- <modal-component v-if='on_share'>
+        <modal-component v-if='on_share'>
             <template v-slot:header>
                 <div class="border-b pb-3 flex justify-between items-center">
                     <h1 class="font-semibold text-onyx-600 text-xl">Share it !</h1>
@@ -65,7 +74,7 @@
                     <button class="btn btn-viridiant-outline" @click="createPost">Publish</button>
                 </div>
             </template>
-        </modal-component> -->
+        </modal-component>
         <post-creation v-if="on_share" @close="on_share=false" :auth_user="auth_user" :reshare_post="post.reshared_post ? post.reshared_post : post" :only_modal="true" :enableExtraContent="false"></post-creation>
     </div>
 </template>
@@ -75,6 +84,7 @@
     import TextArea from '../inputs/TextArea.vue';
     import ModalComponent from '../navigation/ModalComponent.vue';
     import PostCreation from '../inputs/PostCreation.vue';
+    import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
     import moment from 'moment';
 
     export default {
@@ -82,7 +92,12 @@
             CommentComponent,
             TextArea,
             ModalComponent,
-            PostCreation
+            PostCreation,
+            Swiper,
+            SwiperSlide,
+        },
+        directives: {
+            swiper: directive,
         },
         data() {
             return {
@@ -94,6 +109,15 @@
                 on_share: false,
                 hover_copy_icon: false,
                 copied_var: "Click to copy",
+
+                swiperOption: {
+                    autoHeight: true, //enable auto height
+                    spaceBetween: 20,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                },
             }
         },
         props: {
@@ -174,3 +198,18 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+
+  .swiper {
+    height: auto;
+    .swiper-slide {
+      height: 300px;
+      line-height: 300px;
+      &:nth-child(2n) {
+        height: 500px;
+        line-height: 500px;
+      }
+    }
+  }
+</style>
