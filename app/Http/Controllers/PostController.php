@@ -54,10 +54,11 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'content' => ['nullable', 'required_without:reshare', 'max:255'],
+            'content' => ['nullable', 'required_without_all:reshare', 'max:255'],
+            'project' => ['nullable', 'numeric', 'exists:projects,id'],
             'reshare' => ['numeric', 'exists:posts,id'],
-            'image' => ['image'],
-            'project' => ['nullable', 'numeric', 'exists:projects,id']
+            'image' => ['array', 'max:3'],
+            'image.*' => ['image', 'max:1500']
         ]);
 
         $post = new Post;
@@ -77,13 +78,18 @@ class PostController extends Controller
         }
         $post->save();
 
+
         if (array_key_exists('image', $validatedData))
         {
-            $path = $request->file('image')->store('public/images');
 
-            $image = new Image;
-            $image->url = $path;
-            $post->images()->save($image);
+            foreach($request->file('image') as $file)
+            {
+                $path = $file->store('public/images');
+
+                $image = new Image;
+                $image->url = $path;
+                $post->images()->save($image);
+            }
         }
 
         return response()->json(new PostResource($post), 201);
