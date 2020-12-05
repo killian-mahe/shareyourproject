@@ -52,9 +52,11 @@
                     </template>
                 </resize-auto>
                 <post-card v-if="reshare_post" :post_props="reshare_post" :auth_user="auth_user" :reshared_post="true"></post-card>
-                <div v-if="previewFileUrl" class="relative my-2">
-                    <svg @click="removeImage" class="feather feather-x transition-colors ease-in-out duration-75 absolute top-2 right-2 text-cultured-500 bg-onyx-500 hover:bg-onyx-700 p-1 w-8 h-8 rounded-full cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    <img :src="previewFileUrl" alt="" class="rounded-md w-full">
+                <div v-if="files.length > 0">
+                    <div v-for="(file, index) in files" :key="'file_'+index" class="relative my-2">
+                        <svg @click="removeImage(index)" class="feather feather-x transition-colors ease-in-out duration-75 absolute top-2 right-2 text-cultured-500 bg-onyx-500 hover:bg-onyx-700 p-1 w-8 h-8 rounded-full cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        <img :src="file.url" alt="" class="rounded-md w-full">
+                    </div>
                 </div>
                 <input v-if="enableExtraContent" id="pictures_input" ref="picture" @change="previewFile" type="file" name="pictures" hidden>
             </div>
@@ -101,8 +103,8 @@
         data() {
             return {
                 show_modal: false,
-                previewFileUrl: "",
-                content: ""
+                content: "",
+                files: []
             }
         },
         mounted() {
@@ -123,21 +125,27 @@
             selectFile: function() {
                 document.getElementById('pictures_input').click()
             },
-            removeImage: function() {
-                this.$refs.picture.value = null;
-                this.previewFileUrl = "";
+            removeImage: function(index) {
+                if (index <= this.files.length) {
+                    this.files.splice(index, 1);
+                }
             },
             previewFile: function(event) {
                 let file = event.target.files[0];
-                this.previewFileUrl = URL.createObjectURL(file);
+                console.log(file);
+                this.files.push({
+                    'file': file,
+                    'url': URL.createObjectURL(file)
+                });
             },
             createPost: function() {
 
                 let formData = new FormData();
 
                 if (this.enableExtraContent) {
-                    let file = this.$refs.picture.files[0];
-                    if (file) formData.append('image', file);
+                    this.files.forEach(file => {
+                        formData.append('image', file);
+                    });
                 }
 
                 if (this.reshare_post) formData.append('reshare', this.reshare_post.id);
