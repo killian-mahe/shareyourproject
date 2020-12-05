@@ -132,9 +132,8 @@
             },
             previewFile: function(event) {
                 let file = event.target.files[0];
-                console.log(file);
                 this.files.push({
-                    'file': file,
+                    'content': file,
                     'url': URL.createObjectURL(file)
                 });
             },
@@ -143,8 +142,8 @@
                 let formData = new FormData();
 
                 if (this.enableExtraContent) {
-                    this.files.forEach(file => {
-                        formData.append('image', file);
+                    this.files.forEach((file, index) => {
+                        formData.append(`image[${index}]`, file.content);
                     });
                 }
 
