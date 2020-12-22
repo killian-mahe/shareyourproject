@@ -1,5 +1,3 @@
-// import style (>= Swiper 6.x)
-import 'swiper/swiper-bundle.css';
 
 
 /**
