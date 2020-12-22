@@ -3,11 +3,11 @@ button:focus, input:focus {
 }
 
 .btn {
-    @apply whitespace-no-wrap inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-onyx-500 transition ease-in-out duration-150;
+    @apply whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-onyx-500 transition ease-in-out duration-150;
 }
 
 .btn-classic {
-    @apply whitespace-no-wrap text-base leading-6 font-medium text-gray-500;
+    @apply whitespace-nowrap text-base leading-6 font-medium text-gray-500;
 
     &:focus {
         @apply text-gray-900;
