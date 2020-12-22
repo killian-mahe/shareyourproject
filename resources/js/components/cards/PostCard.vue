@@ -10,19 +10,26 @@
             </div>
         </div>
 
-        <div class="card-body md:text-lg">
+        <div class="card-body sm:px-0 md:text-lg">
             <p class="mb-4 leading-5 font-normal text-onyx-600" v-html="post.formated_content">
             </p>
             <post-card v-if="post.reshared_post" :post_props="post.reshared_post" :auth_user="auth_user" :reshared_post="true"></post-card>
-
-            <swiper class="swiper" :options="swiperOption">
-                <swiper-slide v-for="image in post.images_url" :key="image" class="text-center bg-red-400">
-                    <img :src="image" alt="post_image">
-                </swiper-slide>
-                <div class="swiper-button-prev" slot="button-prev"></div>
-                <div class="swiper-button-next" slot="button-next"></div>
-            </swiper>
-
+            <div v-if="post.images_url.length > 0">
+                <div v-if="post.images_url.length == 1" class="h-1/2">
+                    <img :src="post.images_url[0]" class="w-full object-cover h-120" alt="">
+                </div>
+                <div v-if="post.images_url.length == 2" class="flex">
+                    <img :src="post.images_url[0]" class="w-1/2 object-cover h-120 pr-0.5" alt="">
+                    <img :src="post.images_url[1]" class="w-1/2 object-cover h-120 pl-0.5" alt="">
+                </div>
+                <div v-if="post.images_url.length == 3" class="flex">
+                    <img :src="post.images_url[0]" class="w-1/2 object-cover h-120 pr-0.5" alt="">
+                    <div class="flex flex-col w-1/2 h-120">
+                        <img :src="post.images_url[1]" class="object-cover h-half pb-0.5 pl-0.5" alt="">
+                        <img :src="post.images_url[2]" class="object-cover h-half pt-0.5 pl-0.5" alt="">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="card-footer" v-if="!reshared_post">
@@ -84,7 +91,7 @@
     import TextArea from '../inputs/TextArea.vue';
     import ModalComponent from '../navigation/ModalComponent.vue';
     import PostCreation from '../inputs/PostCreation.vue';
-    import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+    import CarouselList from '../lists/CarouselList.vue';
     import moment from 'moment';
 
     export default {
@@ -93,11 +100,7 @@
             TextArea,
             ModalComponent,
             PostCreation,
-            Swiper,
-            SwiperSlide,
-        },
-        directives: {
-            swiper: directive,
+            CarouselList
         },
         data() {
             return {
@@ -109,15 +112,6 @@
                 on_share: false,
                 hover_copy_icon: false,
                 copied_var: "Click to copy",
-
-                swiperOption: {
-                    autoHeight: true, //enable auto height
-                    spaceBetween: 20,
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-                },
             }
         },
         props: {
@@ -129,6 +123,7 @@
             this.comments_to_load = this.post.comments_ids.filter(comment_id => !this.comments.map(x => x.id).includes(comment_id));
         },
         mounted() {
+            console.log(this.post);
             feather.replace();
         },
         computed: {
@@ -198,18 +193,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-
-  .swiper {
-    height: auto;
-    .swiper-slide {
-      height: 300px;
-      line-height: 300px;
-      &:nth-child(2n) {
-        height: 500px;
-        line-height: 500px;
-      }
-    }
-  }
-</style>
