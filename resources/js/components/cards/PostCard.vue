@@ -1,11 +1,19 @@
 <template>
     <div v-if="post !== undefined" class="card md:rounded-lg" :class="{'shadow-md mb-6': !reshared_post, 'border border-gray-400 hover:bg-cultured-300': reshared_post}">
-        <div class="card-title">
-            <a :href="post.url.author" class="w-auto inline-grid">
-                <img class="rounded-full my-auto h-full w-auto hover:shadow-md" :src="post.author.profile_picture"/>
+        <div v-if="post.project" class="card-title">
+            <a :href="post.project.url.index" class="w-auto inline-grid">
+                <img class="rounded-full my-auto h-10 w-10 object-cover hover:shadow-md" :src="post.project.profile_picture"/>
             </a>
             <div class="flex flex-col ml-3 justify-start">
-                    <div><a class="font-bold" :href="post.url.author">{{ post.author.first_name }} {{post.author.last_name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
+                <div class="my-auto text-lg"><a class="font-bold" :href="post.project.url.index">{{ post.project.name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
+            </div>
+        </div>
+        <div v-else class="card-title">
+            <a :href="post.url.author" class="w-auto inline-grid">
+                <img class="rounded-full my-auto h-10 w-10 object-cover hover:shadow-md" :src="post.author.profile_picture"/>
+            </a>
+            <div class="flex flex-col ml-3 justify-start">
+                <div><a class="font-bold" :href="post.url.author">{{ post.author.first_name }} {{post.author.last_name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
                 <span class="font-sans italic text-base">{{ post.author.title }}</span>
             </div>
         </div>
