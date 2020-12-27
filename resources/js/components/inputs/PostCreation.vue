@@ -1,7 +1,7 @@
 <template>
     <div class="w-full">
     <div class="card rounded shadow-md w-full h-auto py-2" v-show="!show_modal && !only_modal">
-        <div class="flex items-start relative">
+        <div class="flex items-start relative" v-click-outside="onClickOutside">
             <div @click="onUserSelect" class="inline-flex h-auto items-center cursor-pointer rounded-md hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-3 px-2">
                 <img class="w-10 h-10 rounded-full object-cover" :src="current_author.profile_picture" alt="profile_picture">
                 <i data-feather="chevron-down" class="w-5 h-5 ml-1"></i>
@@ -17,7 +17,7 @@
                 </div>
                 <input ref="author" type="text" name="author" hidden>
             </div>
-            <text-area :rows='1' class="flex-grow ml-1 mr-4" child_class="w-full" @click="openModal"></text-area>
+            <text-area :rows='2' class="flex-grow ml-1 mr-4" child_class="w-full" @click="openModal"></text-area>
             <button class="btn btn-viridiant" @click="openModal">Post</button>
         </div>
         <div class="card-footer">
@@ -88,11 +88,15 @@
     import TextArea from './TextArea.vue';
     import ModalComponent from '../navigation/ModalComponent.vue';
     import ResizeAuto from "../utils/ResizeAuto.vue";
+    import vClickOutside from 'v-click-outside';
 
     export default {
         components: {
             TextArea,
             ModalComponent,
+        },
+        directives: {
+            clickOutside: vClickOutside.directive
         },
         props: {
             only_modal: {
@@ -115,12 +119,13 @@
         data() {
             return {
                 show_modal: false,
+                show_select: false,
                 content: "",
-                files: []
+                files: [],
+                current_author: this.auth_user
             }
         },
         mounted() {
-            console.log(this.auth_user.owned_projects);
             feather.replace();
         },
         computed: {
@@ -162,6 +167,9 @@
                     'content': file,
                     'url': URL.createObjectURL(file)
                 });
+            },
+            onClickOutside : function () {
+                this.show_select = false;
             },
             createPost: function() {
 
