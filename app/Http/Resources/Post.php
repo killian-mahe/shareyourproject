@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
+use \App\Http\Resources\Project as ProjectResource;
 use \App\Http\Resources\User as UserResource;
 use \App\Http\Resources\Comment as CommentResource;
 use Illuminate\Support\Facades\Storage;
@@ -28,7 +29,7 @@ class Post extends JsonResource
             'content' => $this->content,
             'formated_content' => $this->formatedContent,
             'author' => new UserResource($this->author),
-            'project_id' => $this->project_id,
+            'project' => new ProjectResource($this->project),
             'images_url' => $images_url,
             'url' => [
                 'author' => route('users.show', ['user'=>$this->author_id]),
