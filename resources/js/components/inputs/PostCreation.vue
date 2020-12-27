@@ -45,7 +45,7 @@
         <template v-slot:body>
             <div class="mt-4 flex items-center">
                 <img class="w-10 h-10 rounded-full mr-3 inline-block object-cover" :src="current_author.profile_picture" alt="profile_picture">
-                <div class="flex jusitfy-start text-xl">
+                <div class="flex flex-col jusitfy-start text-xl">
                     <span  v-if="current_author.first_name!=null" class="font-medium">{{current_author.first_name}} {{current_author.last_name}}</span>
                     <span  v-else class="font-medium">{{current_author.name}}</span>
                     <span class="text-sm">{{current_author.title}}</span>
