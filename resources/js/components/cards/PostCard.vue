@@ -90,7 +90,7 @@
             </template>
         </modal-component> -->
 
-        <post-modal v-if="open_modal" @close="open_modal = false" :post="post"></post-modal>
+        <post-modal v-if="open_modal" @close="open_modal = false" :post="post" :auth_user="auth_user"></post-modal>
 
         <post-creation v-if="on_share" @close="on_share=false" :auth_user="auth_user" :reshare_post="post.reshared_post ? post.reshared_post : post" :only_modal="true" :enableExtraContent="false"></post-creation>
     </div>
