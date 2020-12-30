@@ -1,19 +1,43 @@
 <template>
     <div v-if="post !== undefined" class="card md:rounded-lg" :class="{'shadow-md mb-6': !reshared_post, 'border border-gray-400 hover:bg-cultured-300': reshared_post}">
-        <div class="card-title">
-            <a :href="post.url.author" class="w-auto inline-grid">
-                <img class="rounded-full my-auto h-full w-auto hover:shadow-md" :src="post.author.profile_picture"/>
+        <div v-if="post.project" class="card-title">
+            <a :href="post.project.url.index" class="w-auto inline-grid">
+                <img class="rounded-full my-auto h-10 w-10 object-cover hover:shadow-md" :src="post.project.profile_picture"/>
             </a>
             <div class="flex flex-col ml-3 justify-start">
-                    <div><a class="font-bold" :href="post.url.author">{{ post.author.first_name }} {{post.author.last_name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
+                <div class="my-auto text-lg"><a class="font-bold" :href="post.project.url.index">{{ post.project.name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
+            </div>
+        </div>
+        <div v-else class="card-title">
+            <a :href="post.url.author" class="w-auto inline-grid">
+                <img class="rounded-full my-auto h-10 w-10 object-cover hover:shadow-md" :src="post.author.profile_picture"/>
+            </a>
+            <div class="flex flex-col ml-3 justify-start">
+                <div><a class="font-bold" :href="post.url.author">{{ post.author.first_name }} {{post.author.last_name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
                 <span class="font-sans italic text-base">{{ post.author.title }}</span>
             </div>
         </div>
 
-        <div class="card-body md:text-lg">
+        <div class="card-body sm:px-0 md:text-lg">
             <p class="mb-4 leading-5 font-normal text-onyx-600" v-html="post.formated_content">
             </p>
             <post-card v-if="post.reshared_post" :post_props="post.reshared_post" :auth_user="auth_user" :reshared_post="true"></post-card>
+            <div v-if="post.images_url.length > 0">
+                <div v-if="post.images_url.length == 1" class="h-1/2">
+                    <img :src="post.images_url[0]" class="w-full object-cover h-120" alt="">
+                </div>
+                <div v-if="post.images_url.length == 2" class="flex">
+                    <img :src="post.images_url[0]" class="w-1/2 object-cover h-120 pr-0.5" alt="">
+                    <img :src="post.images_url[1]" class="w-1/2 object-cover h-120 pl-0.5" alt="">
+                </div>
+                <div v-if="post.images_url.length == 3" class="flex">
+                    <img :src="post.images_url[0]" class="w-1/2 object-cover h-120 pr-0.5" alt="">
+                    <div class="flex flex-col w-1/2 h-120">
+                        <img :src="post.images_url[1]" class="object-cover h-half pb-0.5 pl-0.5" alt="">
+                        <img :src="post.images_url[2]" class="object-cover h-half pt-0.5 pl-0.5" alt="">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="card-footer" v-if="!reshared_post">
@@ -40,7 +64,7 @@
             <button v-if="comments_to_load.length > 0" class="btn-classic w-full font-sans text-sm" @click="addComments">Load more comments</button>
         </div>
 
-        <!-- <modal-component v-if='on_share'>
+        <modal-component v-if='on_share'>
             <template v-slot:header>
                 <div class="border-b pb-3 flex justify-between items-center">
                     <h1 class="font-semibold text-onyx-600 text-xl">Share it !</h1>
@@ -65,7 +89,7 @@
                     <button class="btn btn-viridiant-outline" @click="createPost">Publish</button>
                 </div>
             </template>
-        </modal-component> -->
+        </modal-component>
         <post-creation v-if="on_share" @close="on_share=false" :auth_user="auth_user" :reshare_post="post.reshared_post ? post.reshared_post : post" :only_modal="true" :enableExtraContent="false"></post-creation>
     </div>
 </template>
@@ -75,6 +99,7 @@
     import TextArea from '../inputs/TextArea.vue';
     import ModalComponent from '../navigation/ModalComponent.vue';
     import PostCreation from '../inputs/PostCreation.vue';
+    import CarouselList from '../lists/CarouselList.vue';
     import moment from 'moment';
 
     export default {
@@ -82,7 +107,8 @@
             CommentComponent,
             TextArea,
             ModalComponent,
-            PostCreation
+            PostCreation,
+            CarouselList
         },
         data() {
             return {
@@ -105,6 +131,7 @@
             this.comments_to_load = this.post.comments_ids.filter(comment_id => !this.comments.map(x => x.id).includes(comment_id));
         },
         mounted() {
+            console.log(this.post);
             feather.replace();
         },
         computed: {
