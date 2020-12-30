@@ -73,27 +73,10 @@
 
             @yield('content')
         </main>
-        {{-- Real-Time Chat --}}
-        {{-- <div class="chat-window mx-4">
-            <div class="chat-header">
-                <button class="px-4"><i class="text-cultured-100 w-5" data-feather="user"></i></button>
-                <div class="my-auto flex text-cultured-100">Unknow person</div>
-                <button class="my-auto ml-auto mr-2"><i class="text-cultured-100 w-5" data-feather="minus"></i></button>
-                <button class="my-auto mr-2"><i class="text-cultured-100 w-5" data-feather="x"></i></button>
-            </div>
-            <div class="chat-container"></div>
-            <div class="chat-footer">
-                <div class="w-full h-full flex my-auto">
-                    <input class="chat-input" autocomplete="off" id="message-submit" type="text" placeholder="Type your message...">
-                    <button class="btn-smiley my-auto"><i class="text-cultured-100 w-5" data-feather="smile"></i></button>
-                    <button class="btn-send my-auto"><i class="text-cultured-100 w-4 transform -translate-x-0.25 translate-y-0.25" data-feather="send"></i></button>
-                </div>
-            </div>
-        </div> --}}
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/feather-icons"></script>
+<script src="{{asset('js/jquery-3.5.1.slim.min.js')}}"></script>
+<script src="{{asset('js/feather.js')}}"></script>
 <script>
     feather.replace()
 </script>
