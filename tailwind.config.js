@@ -9,6 +9,9 @@ module.exports = {
     },
     theme: {
         extend: {
+            animation: {
+                'spin-slow': 'spin 3s linear infinite',
+            },
             zIndex: {
                 '1': '1',
             },
