@@ -1,7 +1,7 @@
 <template>
     <div class="modal-mask">
         <div class="modal-wrapper">
-            <div :class="'modal-container ' + containerWidth">
+            <div :class="'modal-container ' + containerWidth" v-click-outside="onClickOutside">
 
                 <div class="modal-header">
                 <slot name="header">
@@ -29,7 +29,12 @@
 </template>
 
 <script>
+import vClickOutside from 'v-click-outside';
+
 export default {
+    directives: {
+        clickOutside: vClickOutside.directive
+    },
     data() {
         return {
         }
@@ -57,7 +62,7 @@ export default {
                     return "w-7/8 sm:w-4/5 md:w-3/4"
 
                 case "lg":
-                    return "w-7/8 sm:w-3/4 md:w-1/2"
+                    return "w-7/8 sm:w-3/4 md:w-5/8"
 
                 case "md":
                     return "w-7/8 md:w-2/3 lg:w-1/2 xl:w-1/3"
@@ -71,6 +76,9 @@ export default {
         }
     },
     methods: {
+        onClickOutside: function() {
+            this.$emit('close');
+        }
     }
 }
 </script>

@@ -22,19 +22,19 @@
             <p class="mb-4 leading-5 font-normal text-onyx-600" v-html="post.formated_content">
             </p>
             <post-card v-if="post.reshared_post" :post_props="post.reshared_post" :auth_user="auth_user" :reshared_post="true"></post-card>
-            <div v-if="post.images_url.length > 0">
+            <div v-if="post.images_url.length > 0" @click="open_modal = true">
                 <div v-if="post.images_url.length == 1" class="h-1/2">
-                    <img :src="post.images_url[0]" class="w-full object-cover h-120" alt="">
+                    <img :src="post.images_url[0]" class="w-full object-cover h-120 cursor-pointer" alt="">
                 </div>
                 <div v-if="post.images_url.length == 2" class="flex">
-                    <img :src="post.images_url[0]" class="w-1/2 object-cover h-120 pr-0.5" alt="">
-                    <img :src="post.images_url[1]" class="w-1/2 object-cover h-120 pl-0.5" alt="">
+                    <img :src="post.images_url[0]" class="w-1/2 object-cover h-120 pr-0.5 cursor-pointer" alt="">
+                    <img :src="post.images_url[1]" class="w-1/2 object-cover h-120 pl-0.5 cursor-pointer" alt="">
                 </div>
                 <div v-if="post.images_url.length == 3" class="flex">
-                    <img :src="post.images_url[0]" class="w-1/2 object-cover h-120 pr-0.5" alt="">
+                    <img :src="post.images_url[0]" class="w-1/2 object-cover h-120 pr-0.5 cursor-pointer" alt="">
                     <div class="flex flex-col w-1/2 h-120">
-                        <img :src="post.images_url[1]" class="object-cover h-half pb-0.5 pl-0.5" alt="">
-                        <img :src="post.images_url[2]" class="object-cover h-half pt-0.5 pl-0.5" alt="">
+                        <img :src="post.images_url[1]" class="object-cover h-half pb-0.5 pl-0.5 cursor-pointer" alt="">
+                        <img :src="post.images_url[2]" class="object-cover h-half pt-0.5 pl-0.5 cursor-pointer" alt="">
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
             <button v-if="comments_to_load.length > 0" class="btn-classic w-full font-sans text-sm" @click="addComments">Load more comments</button>
         </div>
 
-        <modal-component v-if='on_share'>
+        <!-- <modal-component v-if='on_share'>
             <template v-slot:header>
                 <div class="border-b pb-3 flex justify-between items-center">
                     <h1 class="font-semibold text-onyx-600 text-xl">Share it !</h1>
@@ -85,11 +85,18 @@
             </template>
             <template v-slot:footer>
                 <div class="w-full flex justify-between items-center mt-2">
-                    <span @click="selectFile"><svg class="feather feather-image hover:bg-onyx-100 p-2 w-10 h-10 rounded-full" :class="{'cursor-pointer': enableExtraContent, 'cursor-not-allowed': !enableExtraContent}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>
                     <button class="btn btn-viridiant-outline" @click="createPost">Publish</button>
                 </div>
             </template>
-        </modal-component>
+        </modal-component> -->
+
+        <post-modal v-if="open_modal"
+        @close="open_modal = false"
+        @like="like(true)"
+        @unlike="like(false)"
+        :post="post"
+        :auth_user="auth_user"></post-modal>
+
         <post-creation v-if="on_share" @close="on_share=false" :auth_user="auth_user" :reshare_post="post.reshared_post ? post.reshared_post : post" :only_modal="true" :enableExtraContent="false"></post-creation>
     </div>
 </template>
@@ -100,6 +107,7 @@
     import ModalComponent from '../navigation/ModalComponent.vue';
     import PostCreation from '../inputs/PostCreation.vue';
     import CarouselList from '../lists/CarouselList.vue';
+    import PostModal from '../posts/PostModal.vue';
     import moment from 'moment';
 
     export default {
@@ -108,7 +116,8 @@
             TextArea,
             ModalComponent,
             PostCreation,
-            CarouselList
+            CarouselList,
+            PostModal
         },
         data() {
             return {
@@ -118,6 +127,7 @@
                 first_comment : false,
                 newCommentContent: "",
                 on_share: false,
+                open_modal: false,
                 hover_copy_icon: false,
                 copied_var: "Click to copy",
             }
@@ -131,7 +141,6 @@
             this.comments_to_load = this.post.comments_ids.filter(comment_id => !this.comments.map(x => x.id).includes(comment_id));
         },
         mounted() {
-            console.log(this.post);
             feather.replace();
         },
         computed: {
@@ -148,6 +157,7 @@
             },
             like: function(like) {
                 if (like == true) {
+                    console.log("like");
                     axios.get('/api/posts/'+this.post.id+'/like')
                         .then(response => {
                             if (response.status === 200) this.post.liked = true;
@@ -156,6 +166,7 @@
 
                         })
                 } else {
+                    console.log('unlike');
                     axios.get('/api/posts/'+this.post.id+'/unlike')
                         .then(response => {
                             if (response.status === 200) this.post.liked = false;
