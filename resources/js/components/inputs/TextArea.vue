@@ -11,7 +11,6 @@
                 v-model="inputValue"
                 :name="name"
                 :rows="rows"
-                v-on:input="$emit('input', $event.target.value)"
             ></textarea>
             <p v-if='max_length' :class="{'text-red-500':inputValue.length > max_length}" class="text-gray-600 text-xs italic text-right" >{{inputValue.length}}/{{max_length}}</p>
           </div>
@@ -39,11 +38,6 @@
                 default: 2
             },
         },
-        data() {
-            return {
-                inputValue: this.value
-            }
-        },
         computed: {
             classIntern: function() {
                 if (this.inputValue.length > this.max_length) {
@@ -52,8 +46,17 @@
                 else {
                     return this.child_class + " focus:border-viridiant-600";
                 }
+            },
+            inputValue: {
+                get() {
+                    return this.value;
+                },
+                set(val) {
+                    this.$emit('input', val);
+                },
             }
         }
     };
 
 </script>
+

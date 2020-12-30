@@ -204,6 +204,7 @@
                 }).then(response => {
                     if (response.status === 201) {
                         this.comments.push(response.data);
+                        this.newCommentContent = "";
                     }
                 }).catch(error => {
 
