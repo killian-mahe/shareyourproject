@@ -90,7 +90,12 @@
             </template>
         </modal-component> -->
 
-        <post-modal v-if="open_modal" @close="open_modal = false" :post="post" :auth_user="auth_user"></post-modal>
+        <post-modal v-if="open_modal"
+        @close="open_modal = false"
+        @like="like(true)"
+        @unlike="like(false)"
+        :post="post"
+        :auth_user="auth_user"></post-modal>
 
         <post-creation v-if="on_share" @close="on_share=false" :auth_user="auth_user" :reshare_post="post.reshared_post ? post.reshared_post : post" :only_modal="true" :enableExtraContent="false"></post-creation>
     </div>
@@ -152,6 +157,7 @@
             },
             like: function(like) {
                 if (like == true) {
+                    console.log("like");
                     axios.get('/api/posts/'+this.post.id+'/like')
                         .then(response => {
                             if (response.status === 200) this.post.liked = true;
@@ -160,6 +166,7 @@
 
                         })
                 } else {
+                    console.log('unlike');
                     axios.get('/api/posts/'+this.post.id+'/unlike')
                         .then(response => {
                             if (response.status === 200) this.post.liked = false;
