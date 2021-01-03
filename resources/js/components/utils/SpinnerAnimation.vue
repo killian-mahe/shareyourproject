@@ -1,5 +1,5 @@
 <template>
-    <img class="animate-spin h-10 w-10" :src="link" :alt="alt">
+    <img class="spinner" :src="link" :alt="alt">
 </template>
 <script>
     export default {
@@ -9,3 +9,9 @@
         }
     }
 </script>
+
+<style>
+.spinner {
+    @apply animate-spin h-10 w-10;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <span @click="$emit('click')" class="italic hover:underline cursor-pointer"><a v-bind:href="link">#{{label}}</a></span>
+    <span @click="$emit('click')" class="tag"><a v-bind:href="link">#{{label}}</a></span>
 </template>
 
 <script>
@@ -7,9 +7,12 @@
         props: {
             'label': String,
             'link': String
-        },
-        mounted() {
-            console.log('Component mounted.')
         }
     }
 </script>
+
+<style>
+.tag {
+    @apply italic hover:underline cursor-pointer;
+}
+</style>
