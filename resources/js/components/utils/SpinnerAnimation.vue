@@ -1,16 +1,18 @@
 <template>
-    <img class="spinner" :src="link" :alt="alt">
+    <img class="spinner" :src="link" alt="loading">
 </template>
 <script>
     export default {
         props: {
-            'link': String,
-            'alt' : "loading"
+            link: {
+                type: String,
+                required: true
+            }
         }
     }
 </script>
 
-<style>
+<style scoped>
 .spinner {
     @apply animate-spin h-10 w-10;
 }

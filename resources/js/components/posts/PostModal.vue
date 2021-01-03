@@ -7,18 +7,18 @@
             <template v-slot:body>
                 <div class="h-160 flex flex-col lg:flex-row">
                     <!-- Carousel -->
-                    <div class="w-full lg:w-3/4 h-120 lg:h-auto bg-gray-800 rounded-md relative">
+                    <div class="carousel">
 
                         <!-- Left button -->
-                        <span class="top-1/2 left-0 absolute">
-                            <svg @click="prev()" xmlns="http://www.w3.org/2000/svg" class="feather feather-chevron-left carousel-button" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        <span class="carousel-button left-0">
+                            <svg @click="prev()" xmlns="http://www.w3.org/2000/svg" class="feather feather-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
                         </span>
 
                         <img :src="post.images_url[index]" class="carousel-image" alt="currentImage">
 
                         <!-- Right button -->
-                        <span class="top-1/2 absolute right-0">
-                            <svg @click="next()" xmlns="http://www.w3.org/2000/svg" class="feather feather-chevron-right carousel-button" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        <span class="carousel-button right-0">
+                            <svg @click="next()" xmlns="http://www.w3.org/2000/svg" class="feather feather-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </span>
 
                         <!-- Indicator -->
@@ -55,16 +55,16 @@
                                 </div>
 
                                 <!-- Like button -->
-                                <span v-if="post.liked" class="text-red-600 fill-current">
-                                    <svg @click="$emit('unlike')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="feather feather-heart h-5 w-auto inline-block cursor-pointer" fill="true" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <span v-if="post.liked" class="text-red-600 like-button">
+                                    <svg @click="$emit('unlike')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="feather feather-heart" fill="true" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                                 </span>
-                                <span class="hover:text-red-600 fill-current" v-else>
-                                    <svg @click="$emit('like')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="feather feather-heart h-5 w-auto inline-block cursor-pointer" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <span class="hover:text-red-600 like-button" v-else>
+                                    <svg @click="$emit('like')" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="feather feather-heart" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                                 </span>
                             </div>
 
                             <!-- Post text content -->
-                            <div class="py-2 border-b-1 text-sm">{{post.content}}</div>
+                            <div class="post-content">{{post.content}}</div>
                         </div>
                     </div>
                 </div>
@@ -111,13 +111,33 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.carousel {
+    @apply w-full lg:w-3/4 h-120 lg:h-auto bg-gray-800 rounded-md relative;
+}
+
 .carousel-button {
+    @apply absolute top-1/2;
+}
+
+.carousel-button svg{
     @apply w-10 h-auto text-cultured-800 hover:text-cultured-400 cursor-pointer select-none;
 }
 
 .carousel-image {
     @apply max-h-full max-w-full object-contain object-center m-auto h-full;
+}
+
+.post-content {
+    @apply py-2 border-b-1 text-sm;
+}
+
+.like-button {
+    @apply fill-current;
+}
+
+.like-button svg {
+    @apply h-5 w-auto inline-block cursor-pointer;
 }
 </style>
 

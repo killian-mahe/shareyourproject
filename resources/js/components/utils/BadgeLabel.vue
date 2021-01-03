@@ -5,13 +5,19 @@
 <script>
     export default {
         props: {
-            'label': String,
-            'link': String
+            label: {
+                type: String,
+                required: true
+            },
+            link: {
+                type: String,
+                required: true
+            }
         }
     }
 </script>
 
-<style>
+<style scoped>
 .badge {
     @apply rounded-full px-2 pb-1 pt-0.25 text-xs font-semibold bg-onyx-200 lowercase;
 }

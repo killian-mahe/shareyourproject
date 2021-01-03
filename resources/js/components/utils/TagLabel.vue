@@ -5,13 +5,19 @@
 <script>
     export default {
         props: {
-            'label': String,
-            'link': String
+            label: {
+                type: String,
+                required: true
+            },
+            link: {
+                type: String,
+                required: true
+            }
         }
     }
 </script>
 
-<style>
+<style scoped>
 .tag {
     @apply italic hover:underline cursor-pointer;
 }
