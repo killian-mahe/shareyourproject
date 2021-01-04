@@ -1,11 +1,17 @@
 <template>
     <div class="my-auto" @focusin="focus = true" v-click-outside="onClickOutside">
         <form role="search" class="w-full justify-center relative">
+
+            <!-- Search input -->
             <div class="flex items-center relative">
                 <i class="search-glass" data-feather="search"></i>
                 <input autocomplete="off" @input="refreshLists" type="text" placeholder="Search" v-model="searchQuery" class="search-input placeholder-onyx-300">
             </div>
+
+            <!-- Search results -->
             <div v-show="focus && searchQuery !== ''"  class="rounded z-10 px-4 py-3 bg-white inset-x-0 absolute shadow-lg">
+
+                <!-- Users -->
                 <div v-if="users.length > 0">
                     <span class="leading-4 font-medium">Users</span>
                     <hr class="mb-1">
@@ -17,6 +23,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                     </a>
                 </div>
+
+                <!-- Pojects -->
                 <div v-if="projects.length > 0">
                     <span class="leading-4 font-medium">Projects</span>
                     <hr class="mb-1">
@@ -28,6 +36,8 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
                     </a>
                 </div>
+
+                
                 <span v-if="users.length === 0 && projects.length === 0" class="italic">No result</span>
             </div>
         </form>
@@ -43,11 +53,32 @@
         },
         data() {
             return {
-                focus: false,
-                projects: [],
-                users: [],
+                focus: {
+                    type: Boolean,
+                    default: false
+                },
+                projects: {
+                    type: Array,
+                    default: function ()
+                    {
+                        return [];
+                    }
+                },
+                users: {
+                    type: Array,
+                    default: function ()
+                    {
+                        return [];
+                    }
+                },
                 searchQuery: "",
-                x: null
+                x: {
+                    type: Object,
+                    default: function ()
+                    {
+                        return {};
+                    }
+                }
             }
         },
         mounted() {

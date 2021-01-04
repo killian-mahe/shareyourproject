@@ -1,13 +1,17 @@
 <template>
     <nav class="w-full h-16 z-50 relative">
         <div class="z-10 relative shadow bg-cultured-100 w-full h-full flex justify-around items-center">
+            <!-- Logo -->
             <a :href="home_link" class="h-auto">
                 <img :src="logo_simple" class="w-12">
             </a>
+
+            <!-- Search Bar -->
             <div class="w-3/5 h-auto">
                 <search-bar></search-bar>
             </div>
 
+            <!-- Navigation icon -->
             <div id="nav-icon" class="mr-2">
                 <div :class="{'open':display}" @click="toggle">
                     <span></span>
@@ -16,9 +20,9 @@
                     <span></span>
                 </div>
             </div>
-
-
         </div>
+
+        <!-- Links -->
         <ul class="mobile-nav-bar-list" :class="{'top-16':display2, '-top-64':!display2}">
             <li class="mobile-nav-bar-list-li divide-y divide-gray-400">
                 <a href="/home"><i data-feather="home" class="mr-1"></i>My feed</a>
@@ -46,9 +50,18 @@ export default {
         }
     },
     props: {
-        "logo_simple": String,
-        "home_link": String,
-        "auth_user": Object,
+        logo_simple: {
+            type: String, // Logo link
+            required: true
+        },
+        home_link: {
+            type: String, // Home path
+            required: true
+        },
+        auth_user: {
+            type: Object, // Authenticated user
+            required: false
+        }
     },
     methods: {
         toggle: function() {
