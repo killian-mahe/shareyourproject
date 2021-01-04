@@ -25,11 +25,16 @@
             return {
                 currentImg : {
                     type: Object,
-                    default: {}
+                    default: function ()
+                    {
+                        return {};
+                    }
                 },
                 images: {
                     type: Array,
-                    default: []
+                    default: function() {
+                        return [];
+                    }
                 }
             }
         },
@@ -38,14 +43,12 @@
         mounted() {
             this.images = this.$refs.images.children;
             this.currentImg = this.images[0];
-            console.log(this.images);
+
             if (this.images.length > 1) {
                 for (let index = 0; index < this.images.length; index++) {
                     if (index) this.images.item(index).classList.toggle("hidden");
                 }
             }
-        },
-        methods: {
-        },
+        }
     }
 </script>

@@ -17,8 +17,18 @@
             }
         },
         props: {
-            'initial_posts': Array,
-            'auth_user': Object,
+            initial_posts: {
+                type: Array,
+                default: function() {
+                    return [];
+                }
+            },
+            auth_user: {
+                type: Object,
+                default: function() {
+                    return {};
+                }
+            }
         },
         mounted() {
             this.scroll();
