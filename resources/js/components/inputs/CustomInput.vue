@@ -1,6 +1,9 @@
 <template>
     <div>
+        <!-- Label -->
         <InputLabel :label="label"  :name="name" />
+
+        <!-- Input -->
         <div class="flex items-center relative">
             <input :class="{'border-red-500': error, 'pr-10': icon && right, 'pl-12': icon && !right}"
                     :name="name"
@@ -18,6 +21,8 @@
                 :data-feather="icon"
                 class="absolute right-3 block"></i>
         </div>
+
+        <!-- Indications -->
         <p v-if="error" class="text-red-500 text-xs italic">{{ error }}</p>
         <p v-if="indication" class="text-gray-600 text-xs italic">{{ indication }}</p>
     </div>
@@ -30,16 +35,46 @@
             InputLabel,
         },
         props: {
-            'label': String,
-            'type': String,
-            'placeholder': String,
-            'error': String,
-            'indication': String,
-            'name': String,
-            'value': String,
-            'icon': String,
-            'right': Boolean,
-            'autocomplete': Boolean
+            label: {
+                type: String,
+                default: ""
+            },
+            type: {
+                type: String,
+                default: ""
+            },
+            placeholder: {
+                type: String,
+                default: ""
+            },
+            error: {
+                type: String,
+                default: ""
+            },
+            indication: {
+                type: String,
+                default: ""
+            },
+            name: {
+                type: String,
+                default: ""
+            },
+            value: {
+                type: String,
+                default: ""
+            },
+            icon: {
+                type: String,
+                default: ""
+            },
+            right: {
+                type: Boolean,
+                default: false
+            },
+            autocomplete: {
+                type: Boolean,
+                default : false
+            }
         },
         mounted() {
             feather.replace();

@@ -7,8 +7,14 @@
 <script>
     export default {
         props: {
-            'label': String,
-            'name': String
+            label: {
+                type: String,
+                required: true
+            },
+            name: {
+                type: String,
+                default: ""
+            }
         },
         mounted() {
         }
