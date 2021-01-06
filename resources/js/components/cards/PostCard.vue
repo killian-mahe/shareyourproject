@@ -21,6 +21,12 @@
         <div class="card-body sm:px-0 md:text-lg pt-5">
             <p class="mb-4 leading-5 font-normal text-onyx-600 md:px-4" v-html="post.formated_content">
             </p>
+
+            <!-- Tags -->
+            <div class="space-x-1 md:px-4">
+                <tag-label v-for="tag in post.tags" :key="'tag_'+tag.name" :label="tag.name" link="#"></tag-label>
+            </div>
+
             <post-card v-if="post.reshared_post" :post_props="post.reshared_post" :auth_user="auth_user" :reshared_post="true"></post-card>
             <div v-if="post.images_url.length > 0" @click="open_modal = true">
                 <div v-if="post.images_url.length == 1" class="h-1/2">
@@ -40,7 +46,7 @@
             </div>
 
             <!-- Post stats -->
-            <div class="flex my-2 justify-end" v-if="!reshared_post">
+            <div class="flex mt-1 mb-2 justify-end" v-if="!reshared_post">
                 <!-- Comments -->
                 <span class="text-sm text-onyx-400">{{post.stats.comments_number}} comments</span>
             </div>

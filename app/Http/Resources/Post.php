@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use \App\Http\Resources\Project as ProjectResource;
 use \App\Http\Resources\User as UserResource;
 use \App\Http\Resources\Comment as CommentResource;
+use \App\Http\Resources\Tag as TagResource;
 use Illuminate\Support\Facades\Storage;
 
 class Post extends JsonResource
@@ -31,6 +32,7 @@ class Post extends JsonResource
             'author' => new UserResource($this->author),
             'project' => new ProjectResource($this->project),
             'images_url' => $images_url,
+            'tags' => TagResource::collection($this->tags),
             'url' => [
                 'author' => route('users.show', ['user'=>$this->author_id]),
                 'post' => route('posts.show', ['post'=>$this->id])
