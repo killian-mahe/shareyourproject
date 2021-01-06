@@ -39,6 +39,10 @@ class Post extends JsonResource
             'liked' => Auth::user() ? Auth::user()->does_it_like($this->resource) : false,
             'comments_overview' => CommentResource::collection($this->comments->slice(0, 2)),
             'comments_ids' => $this->comments->pluck('id'),
+            'stats'=> [
+                'comments_number' => $this->comments->count(),
+                'likes_number' => $this->liking_users->count()
+            ],
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
