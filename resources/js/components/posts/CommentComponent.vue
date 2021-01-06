@@ -6,7 +6,7 @@
         <div class="comment">
             <!-- Author name -->
             <div class="mb-1">
-                <span class="leading-4 text-sm font-medium block">{{comment.author.first_name}} {{comment.author.last_name}}</span>
+                <span class="leading-4 text-sm font-medium block">{{comment.author.first_name}} {{comment.author.last_name}}  • <span class="text-xs font-light">{{timeSinceCreation}}</span></span>
             </div>
 
             <!-- Comment content -->
@@ -26,7 +26,8 @@
 </template>
 
 <script>
-import VClamp from 'vue-clamp';
+    import VClamp from 'vue-clamp';
+    import moment from 'moment';
 
     export default {
         components: {
@@ -39,7 +40,10 @@ import VClamp from 'vue-clamp';
         props: {
             comment: Object
         },
-        mounted() {
+        computed: {
+            timeSinceCreation: function() {
+                return moment(this.comment.created_at).fromNow();
+            }
         }
     }
 </script>
