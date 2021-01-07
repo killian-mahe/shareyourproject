@@ -18,9 +18,15 @@
             </div>
         </div>
 
-        <div class="card-body sm:px-0 md:text-lg">
-            <p class="mb-4 leading-5 font-normal text-onyx-600" v-html="post.formated_content">
+        <div class="card-body sm:px-0 md:text-lg pt-5">
+            <p class="mb-4 leading-5 font-normal text-onyx-600 md:px-4" v-html="post.formated_content">
             </p>
+
+            <!-- Tags -->
+            <div class="space-x-1 md:px-4">
+                <tag-label v-for="tag in post.tags" :key="'tag_'+tag.name" :label="tag.name" link="#"></tag-label>
+            </div>
+
             <post-card v-if="post.reshared_post" :post_props="post.reshared_post" :auth_user="auth_user" :reshared_post="true"></post-card>
             <div v-if="post.images_url.length > 0" @click="open_modal = true">
                 <div v-if="post.images_url.length == 1" class="h-1/2">
@@ -38,12 +44,18 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Post stats -->
+            <div class="flex mt-1 mb-2 justify-end" v-if="!reshared_post">
+                <!-- Comments -->
+                <span class="text-sm text-onyx-400">{{post.stats.comments_number}} comments</span>
+            </div>
         </div>
 
         <div class="card-footer" v-if="!reshared_post">
             <div class="card-link">
-                <span v-if="post.liked" @click="like(false)" class="cursor-pointer text-red-600 fill-current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="true" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="ml-1 hidden md:inline">Liked</span></span>
-                <span v-else @click="like(true)" class="cursor-pointer hover:text-red-600 fill-current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="ml-1 hidden md:inline">I like</span></span>
+                <span v-if="post.liked" @click="like(false)" class="cursor-pointer text-red-600 fill-current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="true" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="ml-1 hidden md:inline text-sm font-medium">{{post.stats.likes_number}}</span></span>
+                <span v-else @click="like(true)" class="cursor-pointer hover:text-red-600 fill-current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="ml-1 hidden md:inline text-sm font-medium">{{post.stats.likes_number}}</span></span>
             </div>
             <div class="card-link">
                 <span class="hover:text-orange-peel-400 cursor-pointer" @click="first_comment = true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span class="ml-1 hidden md:inline">Comment</span></span>
@@ -166,19 +178,24 @@
             },
             like: function(like) {
                 if (like == true) {
-                    console.log("like");
                     axios.get('/api/posts/'+this.post.id+'/like')
                         .then(response => {
-                            if (response.status === 200) this.post.liked = true;
+                            if (response.status === 200) {
+                                this.post.liked = true;
+                                this.post.stats.likes_number += 1;
+                            }
                         })
                         .catch(error => {
 
                         })
                 } else {
-                    console.log('unlike');
                     axios.get('/api/posts/'+this.post.id+'/unlike')
                         .then(response => {
-                            if (response.status === 200) this.post.liked = false;
+                            if (response.status === 200)
+                            {
+                                this.post.liked = false;
+                                this.post.stats.likes_number -= 1;
+                            }
                         })
                         .catch(error => {
 
@@ -214,6 +231,7 @@
                     if (response.status === 201) {
                         this.comments.push(response.data);
                         this.newCommentContent = "";
+                        this.post.stats.comments_number += 1;
                     }
                 }).catch(error => {
 

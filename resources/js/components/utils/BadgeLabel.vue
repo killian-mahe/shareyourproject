@@ -1,15 +1,11 @@
 <template>
-    <span @click="$emit('click')" class="badge"><a :href="link">{{label}}</a></span>
+    <span @click="$emit('click')" class="badge">{{label}}</span>
 </template>
 
 <script>
     export default {
         props: {
             label: {
-                type: String,
-                required: true
-            },
-            link: {
                 type: String,
                 required: true
             }
