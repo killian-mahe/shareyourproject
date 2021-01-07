@@ -149,7 +149,7 @@
             },
             orderedComments: function() {
                 return this.comments.sort((a, b) => {
-                    if (a.created_at < b.created_at) {
+                    if (a.created_at > b.created_at) {
                         return -1;
                     } else {
                         return 1;

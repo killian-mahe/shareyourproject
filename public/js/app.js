@@ -2199,7 +2199,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     orderedComments: function orderedComments() {
       return this.comments.sort(function (a, b) {
-        if (a.created_at < b.created_at) {
+        if (a.created_at > b.created_at) {
           return -1;
         } else {
           return 1;
