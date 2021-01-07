@@ -1,12 +1,16 @@
 <template>
     <div v-if="post !== undefined" class="card md:rounded-lg" :class="{'shadow-md mb-6': !reshared_post, 'border border-gray-400 hover:bg-cultured-300': reshared_post}">
         <div v-if="post.project" class="card-title">
-            <a :href="post.project.url.index" class="w-auto inline-grid">
-                <img class="rounded-full my-auto h-10 w-10 object-cover hover:shadow-md" :src="post.project.profile_picture"/>
-            </a>
-            <div class="flex flex-col ml-3 justify-start">
-                <div class="my-auto text-lg"><a class="font-bold" :href="post.project.url.index">{{ post.project.name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
+            <div>
+                <a :href="post.project.url.index" class="w-auto inline-grid">
+                    <img class="rounded-full my-auto h-10 w-10 object-cover hover:shadow-md" :src="post.project.profile_picture"/>
+                </a>
+                <div class="flex flex-col ml-3 justify-start">
+                    <div class="my-auto text-lg"><a class="font-bold" :href="post.project.url.index">{{ post.project.name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
+                </div>
             </div>
+            
+            <span></span>
         </div>
         <div v-else class="card-title">
             <a :href="post.url.author" class="w-auto inline-grid">
@@ -76,7 +80,7 @@
             <button v-if="comments_to_load.length > 0" class="btn-classic w-full font-sans text-sm" @click="addComments">Load more comments</button>
         </div>
 
-        <!-- <modal-component v-if='on_share'>
+        <modal-component v-if='on_share'>
             <template v-slot:header>
                 <div class="border-b pb-3 flex justify-between items-center">
                     <h1 class="font-semibold text-onyx-600 text-xl">Share it !</h1>
@@ -100,7 +104,7 @@
                     <button class="btn btn-viridiant-outline" @click="createPost">Publish</button>
                 </div>
             </template>
-        </modal-component> -->
+        </modal-component>
 
         <post-modal v-if="open_modal"
         @close="open_modal = false"
