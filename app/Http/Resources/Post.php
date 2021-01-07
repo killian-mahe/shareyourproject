@@ -37,7 +37,7 @@ class Post extends JsonResource
             ],
             'reshared_post' => $this->shared_post_id ? new Post(\App\Models\Post::where('id', $this->shared_post_id)->first()) : false,
             'liked' => Auth::user() ? Auth::user()->does_it_like($this->resource) : false,
-            'comments_overview' => CommentResource::collection($this->comments()->latest()->take(2)),
+            'comments_overview' => CommentResource::collection($this->comments()->latest()->take(2)->get()),
             'comments_ids' => $this->comments->pluck('id'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
