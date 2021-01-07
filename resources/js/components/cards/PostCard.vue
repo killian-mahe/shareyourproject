@@ -72,7 +72,7 @@
                 <text-area class="w-full" child_class="w-full pr-10 overflow-y-hidden resize-none" placeholder="Write a comment..." v-model="newCommentContent"></text-area>
                 <svg class="feather feather-send absolute right-4 top-4 cursor-pointer" @click="writeComment" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </div>
-            <comment-component v-for="comment in post.comments_overview" :key="comment.id" :comment="comment" class="mb-3"></comment-component>
+            <comment-component v-for="comment in orderedComments" :key="comment.id" :comment="comment" class="mb-3"></comment-component>
             <button v-if="comments_to_load.length > 0" class="btn-classic w-full font-sans text-sm" @click="addComments">Load more comments</button>
         </div>
 
@@ -158,6 +158,15 @@
         computed: {
             timeSinceCreation: function() {
                 return moment(this.post.created_at).fromNow();
+            },
+            orderedComments: function() {
+                return this.comments.sort((a, b) => {
+                    if (a.created_at > b.created_at) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                })
             }
         },
         methods: {
