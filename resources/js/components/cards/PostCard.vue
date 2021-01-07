@@ -1,12 +1,22 @@
 <template>
     <div v-if="post !== undefined" class="card md:rounded-lg" :class="{'shadow-md mb-6': !reshared_post, 'border border-gray-400 hover:bg-cultured-300': reshared_post}">
-        <div v-if="post.project" class="card-title">
-            <a :href="post.project.url.index" class="w-auto inline-grid">
-                <img class="rounded-full my-auto h-10 w-10 object-cover hover:shadow-md" :src="post.project.profile_picture"/>
-            </a>
-            <div class="flex flex-col ml-3 justify-start">
-                <div class="my-auto text-lg"><a class="font-bold" :href="post.project.url.index">{{ post.project.name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
+        <div v-if="post.project" class="card-title justify-between">
+            <div class="flex">
+                <a :href="post.project.url.index" class="w-auto inline-grid">
+                    <img class="rounded-full my-auto h-10 w-10 object-cover hover:shadow-md" :src="post.project.profile_picture"/>
+                </a>
+                <div class="flex flex-col ml-3 justify-start">
+                    <div class="my-auto text-lg"><a class="font-bold" :href="post.project.url.index">{{ post.project.name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
+                </div>
             </div>
+
+            <span class="my-auto relative" @click="on_options = !on_options" v-click-outside="onClickOutSideOptions">
+                <svg class="feather feather-more-vertical h-7 w-7 bg-cultured-100 hover:bg-onyx-100 ease-in-out duration-150 p-1 rounded-full cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+
+                <ul class="dropdown-menu right-0" v-if="on_options">
+                    <li class="dropdown-item cursor-pointer" @click="on_send = true">Send</li>
+                </ul>
+            </span>
         </div>
         <div v-else class="card-title">
             <a :href="post.url.author" class="w-auto inline-grid">
@@ -76,31 +86,31 @@
             <button v-if="comments_to_load.length > 0" class="btn-classic w-full font-sans text-sm" @click="addComments">Load more comments</button>
         </div>
 
-        <!-- <modal-component v-if='on_share'>
+        <modal-component v-if='on_send'>
             <template v-slot:header>
                 <div class="border-b pb-3 flex justify-between items-center">
                     <h1 class="font-semibold text-onyx-600 text-xl">Share it !</h1>
-                    <svg class="feather feather-x cursor-pointer text-onyx-600" @click="on_share = false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <svg class="feather feather-x cursor-pointer text-onyx-600" @click="on_send = false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </div>
             </template>
             <template v-slot:body>
-                <div class="my-4 flex w-full items-center relative">
-                    <svg @mouseover="hover_copy_icon = true" @mouseleave="hover_copy_icon = false" @click='copy' class="feather feather-copy text-onyx-600 cursor-pointer mr-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    <div v-if='hover_copy_icon' class="absolute mx-2 top-10 -left-8">
-                        <div class="bg-black text-white text-xs rounded py-1 px-4 right-0 bottom-full">
-                            {{copied_var}}
-                            <svg class="absolute text-black h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+                <div class="my-4 flex w-full items-center">
+                    <div class="relative">
+                        <svg @mouseover="hover_copy_icon = true" @mouseleave="hover_copy_icon = false" @click='copy' class="feather feather-copy text-onyx-600 cursor-pointer mr-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <div v-if='hover_copy_icon' class="absolute mx-2 bottom-full -left-1/2">
+                            <div class="bg-black text-white text-xs rounded py-1 px-2 w-min">
+                                {{copied_var}}
+                                <svg class="absolute text-black h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+                            </div>
                         </div>
                     </div>
                     <input id="copy_link" readonly class="select-all w-full appearance-none block bg-gray-200 px-4 py-2 border border-gray-300 text-onyx-800 rounded-md" type="text" :value="post.url.post">
                 </div>
             </template>
             <template v-slot:footer>
-                <div class="w-full flex justify-between items-center mt-2">
-                    <button class="btn btn-viridiant-outline" @click="createPost">Publish</button>
-                </div>
+                <div></div>
             </template>
-        </modal-component> -->
+        </modal-component>
 
         <post-modal v-if="open_modal"
         @close="open_modal = false"
@@ -120,6 +130,7 @@
     import PostCreation from '../inputs/PostCreation.vue';
     import CarouselList from '../lists/CarouselList.vue';
     import PostModal from '../posts/PostModal.vue';
+    import vClickOutside from 'v-click-outside';
     import moment from 'moment';
 
     export default {
@@ -131,6 +142,9 @@
             CarouselList,
             PostModal
         },
+        directives: {
+            clickOutside: vClickOutside.directive
+        },
         data() {
             return {
                 post: this.post_props,
@@ -139,9 +153,11 @@
                 first_comment : false,
                 newCommentContent: "",
                 on_share: false,
+                on_send: false,
                 open_modal: false,
                 hover_copy_icon: false,
                 copied_var: "Click to copy",
+                on_options: false
             }
         },
         props: {
@@ -236,6 +252,9 @@
                 }).catch(error => {
 
                 })
+            },
+            onClickOutSideOptions: function() {
+                this.on_options = false;
             }
         }
     }
