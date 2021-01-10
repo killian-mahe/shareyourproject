@@ -89,6 +89,7 @@
     import ModalComponent from '../navigation/ModalComponent.vue';
     import ResizeAuto from "../utils/ResizeAuto.vue";
     import vClickOutside from 'v-click-outside';
+    import {API} from '../../api';
 
     export default {
         components: {
