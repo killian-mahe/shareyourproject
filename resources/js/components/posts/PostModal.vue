@@ -77,6 +77,7 @@
 </template>
 
 <script>
+import { Post, User } from '../../models';
 import ModalComponent from '../navigation/ModalComponent.vue';
 
 export default {
@@ -85,11 +86,11 @@ export default {
     },
     props: {
         post: {
-            type: Object,
+            type: Post,
             required: true
         },
         auth_user: {
-            type:Object,
+            type: User,
             required: true
         }
     },

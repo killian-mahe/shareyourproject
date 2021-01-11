@@ -3108,6 +3108,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-click-outside */ "./node_modules/v-click-outside/dist/v-click-outside.umd.js");
 /* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(v_click_outside__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models */ "./resources/js/models.js");
 //
 //
 //
@@ -3149,6 +3150,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -3817,6 +3819,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../models */ "./resources/js/models.js");
 //
 //
 //
@@ -3858,6 +3861,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3867,10 +3871,16 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    "logo_simple": String,
-    "logo_text": String,
-    "home_link": String,
-    "auth_user": Object
+    logo_simple: {
+      type: String
+    },
+    logo_text: {
+      type: String
+    },
+    home_link: {
+      type: String
+    },
+    auth_user: _models__WEBPACK_IMPORTED_MODULE_0__["User"]
   },
   methods: {
     toggle: function toggle() {
@@ -3905,6 +3915,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_clamp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-clamp */ "./node_modules/vue-clamp/Clamp.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models */ "./resources/js/models.js");
 //
 //
 //
@@ -3932,6 +3943,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3942,7 +3954,9 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   props: {
-    comment: Object
+    comment: {
+      type: _models__WEBPACK_IMPORTED_MODULE_2__["Comment"]
+    }
   },
   computed: {
     timeSinceCreation: function timeSinceCreation() {
@@ -3962,7 +3976,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _navigation_ModalComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../navigation/ModalComponent.vue */ "./resources/js/components/navigation/ModalComponent.vue");
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../models */ "./resources/js/models.js");
+/* harmony import */ var _navigation_ModalComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../navigation/ModalComponent.vue */ "./resources/js/components/navigation/ModalComponent.vue");
 //
 //
 //
@@ -4042,17 +4057,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ModalComponent: _navigation_ModalComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ModalComponent: _navigation_ModalComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: {
     post: {
-      type: Object,
+      type: _models__WEBPACK_IMPORTED_MODULE_0__["Post"],
       required: true
     },
     auth_user: {
-      type: Object,
+      type: _models__WEBPACK_IMPORTED_MODULE_0__["User"],
       required: true
     }
   },
@@ -8642,7 +8658,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".expand-btn[data-v-f6e39976] {\n  cursor: pointer;\n  font-weight: 600;\n  font-size: 1rem;\n  line-height: 1.5rem;\n  line-height: 1.5rem;\n  margin-left: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(81, 87, 90, var(--tw-text-opacity));\n}\n.comment[data-v-f6e39976] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));\n  border-bottom-right-radius: 0.6rem;\n  border-bottom-left-radius: 0.6rem;\n  border-top-right-radius: 0.6rem;\n  margin-left: 0.75rem;\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n  width: 100%;\n}\r\n", ""]);
+exports.push([module.i, ".expand-btn[data-v-f6e39976] {\n  cursor: pointer;\n  font-weight: 600;\n  font-size: 1rem;\n  line-height: 1.5rem;\n  line-height: 1.5rem;\n  margin-left: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(81, 87, 90, var(--tw-text-opacity));\n}\n.comment[data-v-f6e39976] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));\n  border-bottom-right-radius: 0.6rem;\n  border-bottom-left-radius: 0.6rem;\n  border-top-right-radius: 0.6rem;\n  margin-left: 0.75rem;\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n  width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -79244,8 +79260,7 @@ webpackContext.id = "./resources/js sync recursive \\.vue$/";
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "API", function() { return API; });
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./models */ "./resources/js/models.js");
 
 var API_URL = "/api";
 /**
@@ -79281,7 +79296,7 @@ var API = {
   /**
    * Search posts and users from a query
    * @param {String} query
-   * @return {Promise}
+   * @return {Promise<Array<User | Project>>}
    */
   search: function search(query) {
     var url = "/search/".concat(query);
@@ -79329,7 +79344,7 @@ var API = {
     /**
      * Load user feed and return loaded posts
      * @param {?Array<Number>} except_ids Post ids that mustn't be loaded
-     * @return {Promise}
+     * @return {Promise<Array<Post>>}
      */
     feed: function feed(except_ids) {
       var url = '/feed';
@@ -79344,6 +79359,7 @@ var API = {
      * @param {?Number} project_author Project author id
      * @param {?Number} reshare Reshared post id
      * @param {?Array<File>} images Post images
+     * @return {Promise<Post>}
      */
     create: function create(content) {
       var project_author = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -79382,7 +79398,7 @@ var API = {
     /**
      * Search users that correspond to the given query string
      * @param {string} query Query string
-     * @return {Promise} Users
+     * @return {Promise<Array<User>>} Users
      */
     search: function search(query) {
       var url = "".concat(this.url, "/search/").concat(query);
@@ -79392,7 +79408,7 @@ var API = {
     /**
      * Get the corresponding user
      * @param {!Number} id User id
-     * @return {Promise} User
+     * @return {Promise<User>} User
      */
     get: function get(id) {
       var url = "".concat(this.url, "/").concat(id);
@@ -79412,7 +79428,7 @@ var API = {
     /**
      * Get a project corresponding to the id passed to the function
      * @param {!Number} id Project id
-     * @return {Promise}
+     * @return {Promise<Project>}
      */
     get: function get(id) {
       var url = "".concat(this.url, "/").concat(id);
@@ -79422,7 +79438,7 @@ var API = {
     /**
      * Get projects corresponding to the ids passed to the function
      * @param {?Array<Number>} projects_ids Project ids to restrieve
-     * @return {Promise}
+     * @return {Promise<Array<Project>>}
      */
     getMany: function getMany() {
       var projects_ids = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -79445,7 +79461,7 @@ var API = {
     /**
      * Search tags that correspond to the given query string
      * @param {string} query Query string
-     * @return {Promise} Tags
+     * @return {Promise<Array<Tag>>} Tags
      */
     search: function search(query) {
       var url = "".concat(this.url, "/search/").concat(query);
@@ -79465,7 +79481,7 @@ var API = {
     /**
      * Search badges that correspond to the given query string
      * @param {string} query Query string
-     * @return {Promise} Badges
+     * @return {Promise<Array<Badge>>} Badges
      */
     search: function search(query) {
       var url = "".concat(this.url, "/search/").concat(query);
@@ -79485,7 +79501,7 @@ var API = {
     /**
      * Get many comments
      * @param {Array<Number>} ids
-     * @return {Promise} Comments
+     * @return {Promise<Array<Comment>>} Comments
      */
     getMany: function getMany(ids) {
       var url = "".concat(this.url, "/get");
@@ -79498,7 +79514,7 @@ var API = {
      * Create a new comment
      * @param {!String} content Comment content
      * @param {!Number} post Post id
-     * @return {Promise} Comment
+     * @return {Promise<Comment>} Comment
      */
     create: function create(content, post) {
       var url = this.url;
@@ -81529,6 +81545,374 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TagLabel_vue_vue_type_template_id_584dbe43_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
+
+
+/***/ }),
+
+/***/ "./resources/js/models.js":
+/*!********************************!*\
+  !*** ./resources/js/models.js ***!
+  \********************************/
+/*! exports provided: Post, User, Project, Comment, Badge, Tag, Technology */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Post", function() { return Post; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "User", function() { return User; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Project", function() { return Project; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Comment", function() { return Comment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Badge", function() { return Badge; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Tag", function() { return Tag; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Technology", function() { return Technology; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ *
+ */
+var Post = function Post() {
+  _classCallCheck(this, Post);
+
+  /**
+   * @type {Number}
+   */
+  this.id;
+  /**
+   * @type {String}
+   */
+
+  this.content;
+  /**
+   * @type {String}
+   */
+
+  this.formated_content;
+  /**
+   * @type {User}
+   */
+
+  this.author;
+  /**
+   * @type {Project}
+   */
+
+  this.project;
+  /**
+   * @type {Array<String>}
+   */
+
+  this.images_url;
+  /**
+   * @type {Array<Tag>}
+   */
+
+  this.tags;
+  /**
+   * @type {Object}
+   */
+
+  this.url = {
+    /**
+     * @member {String}
+     */
+    author: author,
+    post: post
+  };
+  /**
+   * @type {Post | false}
+   */
+
+  this.reshared_post;
+  /**
+   * @type {Boolean}
+   */
+
+  this.liked;
+  /**
+   * @type {Array<Number>}
+   */
+
+  this.comments_overview;
+  /**
+   * @type {Object}
+   */
+
+  this.stats;
+  /**
+   * @type {Date}
+   */
+
+  this.created_at;
+  /**
+   * @type {Date}
+   */
+
+  this.updated_at;
+};
+
+;
+
+var User = function User() {
+  _classCallCheck(this, User);
+
+  /**
+   * @type {Number}
+   */
+  this.id;
+  /**
+   * @type {String}
+   */
+
+  this.username;
+  /**
+   * @type {String}
+   */
+
+  this.email;
+  /**
+   * @type {String}
+   */
+
+  this.title;
+  /**
+   * @type {Date}
+   */
+
+  this.created_at;
+  /**
+   * @type {Date}
+   */
+
+  this.updated_at;
+  /**
+   * @type {String}
+   */
+
+  this.first_name;
+  /**
+   * @type {String}
+   */
+
+  this.last_name;
+  /**
+   * @type {String}
+   */
+
+  this.full_name;
+  /**
+   * @type {Object}
+   */
+
+  this.url = {
+    index: ""
+  };
+  /**
+   * @type {String}
+   */
+
+  this.profile_picture;
+  /**
+   * @type {String}
+   */
+
+  this.banner_picture;
+  /**
+   * @type {Array<Project>}
+   */
+
+  this.owned_projects;
+};
+
+;
+
+var Project = function Project() {
+  _classCallCheck(this, Project);
+
+  /**
+   * @type {Number}
+   */
+  this.id;
+  /**
+   * @type {String}
+   */
+
+  this.description;
+  /**
+   * @type {String}
+   */
+
+  this.formated_description;
+  /**
+   * @type {String}
+   */
+
+  this.name;
+  /**
+   * @type {Boolean}
+   */
+
+  this["public"];
+  /**
+   * @type {Number}
+   */
+
+  this.owner_id;
+  /**
+   * @type {Object}
+   */
+
+  this.url = {
+    index: "",
+    mambers: "",
+    description: ""
+  };
+  /**
+   * @type {Array<Technology>}
+   */
+
+  this.technologies;
+  /**
+   * @type {Array<Number>}
+   */
+
+  this.members_ids;
+  /**
+   * @type {String}
+   */
+
+  this.profile_picture;
+  /**
+   * @type {String}
+   */
+
+  this.banner_picture;
+  /**
+   * @type {Date}
+   */
+
+  this.created_at;
+  /**
+   * @type {Date}
+   */
+
+  this.updated_at;
+};
+
+;
+
+var Comment = function Comment() {
+  _classCallCheck(this, Comment);
+
+  /**
+   * @type {Number}
+   */
+  this.id;
+  /**
+   * @type {String}
+   */
+
+  this.content;
+  /**
+   * @type {User}
+   */
+
+  this.author;
+  /**
+   * @type {Number}
+   */
+
+  this.post_id;
+  /**
+   * @type {Date}
+   */
+
+  this.created_at;
+  /**
+   * @type {Date}
+   */
+
+  this.updated_at;
+};
+
+;
+
+var Badge = function Badge() {
+  _classCallCheck(this, Badge);
+
+  /**
+   * @type {Number}
+   */
+  this.id;
+  /**
+   * @type {String}
+   */
+
+  this.name;
+  /**
+   * @type {String}
+   */
+
+  this.label;
+  /**
+   * @type {Date}
+   */
+
+  this.created_at;
+  /**
+   * @type {Date}
+   */
+
+  this.updated_at;
+};
+
+;
+
+var Tag = function Tag() {
+  _classCallCheck(this, Tag);
+
+  /**
+   * @type {Number}
+   */
+  this.id;
+  /**
+   * @type {String}
+   */
+
+  this.name;
+  /**
+   * @type {Date}
+   */
+
+  this.created_at;
+  /**
+   * @type {Date}
+   */
+
+  this.updated_at;
+};
+
+;
+
+var Technology = function Technology() {
+  _classCallCheck(this, Technology);
+
+  /**
+   * @type {Number}
+   */
+  this.id;
+  /**
+   * @type {String}
+   */
+
+  this.name;
+  /**
+   * @type {String}
+   */
+
+  this.label;
+};
+
+;
 
 
 /***/ }),

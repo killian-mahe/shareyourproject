@@ -43,6 +43,7 @@
     import InputLabel from './InputLabel.vue';
     import vClickOutside from 'v-click-outside';
     import {API} from '../../api';
+    import { User } from '../../models';
 
     export default {
         components: {

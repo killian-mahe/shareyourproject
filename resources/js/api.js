@@ -1,4 +1,4 @@
-import {Post, User} from './models';
+import {Post, Project, User} from './models';
 
 const API_URL = "/api";
 
@@ -34,7 +34,7 @@ let API =  {
     /**
      * Search posts and users from a query
      * @param {String} query
-     * @return {Promise}
+     * @return {Promise<Array<User | Project>>}
      */
     search: function(query) {
         const url = `/search/${query}`;
@@ -59,7 +59,7 @@ let API =  {
         /**
          * Like a post
          * @param {Number} id
-         * @return {Promise<Post>}
+         * @return {Promise}
          */
         like: function(id) {
             const url = `${this.url}/${id}/like`;
@@ -77,7 +77,7 @@ let API =  {
         /**
          * Load user feed and return loaded posts
          * @param {?Array<Number>} except_ids Post ids that mustn't be loaded
-         * @return {Promise}
+         * @return {Promise<Array<Post>>}
          */
         feed: function(except_ids) {
             const url = '/feed';
@@ -89,6 +89,7 @@ let API =  {
          * @param {?Number} project_author Project author id
          * @param {?Number} reshare Reshared post id
          * @param {?Array<File>} images Post images
+         * @return {Promise<Post>}
          */
         create: function(content, project_author = null, reshare = null, images = null) {
             const url = `${this.url}`;
@@ -124,7 +125,7 @@ let API =  {
         /**
          * Search users that correspond to the given query string
          * @param {string} query Query string
-         * @return {Promise} Users
+         * @return {Promise<Array<User>>} Users
          */
         search: function(query) {
             const url = `${this.url}/search/${query}`;
@@ -133,7 +134,7 @@ let API =  {
         /**
          * Get the corresponding user
          * @param {!Number} id User id
-         * @return {Promise} User
+         * @return {Promise<User>} User
          */
         get: function(id) {
             const url = `${this.url}/${id}`;
@@ -151,7 +152,7 @@ let API =  {
         /**
          * Get a project corresponding to the id passed to the function
          * @param {!Number} id Project id
-         * @return {Promise}
+         * @return {Promise<Project>}
          */
         get: function(id) {
             const url = `${this.url}/${id}`;
@@ -160,7 +161,7 @@ let API =  {
         /**
          * Get projects corresponding to the ids passed to the function
          * @param {?Array<Number>} projects_ids Project ids to restrieve
-         * @return {Promise}
+         * @return {Promise<Array<Project>>}
          */
         getMany: function(projects_ids = {}) {
             const url = `${this.url}/get`;
@@ -178,7 +179,7 @@ let API =  {
         /**
          * Search tags that correspond to the given query string
          * @param {string} query Query string
-         * @return {Promise} Tags
+         * @return {Promise<Array<Tag>>} Tags
          */
         search: function(query) {
             const url = `${this.url}/search/${query}`;
@@ -196,7 +197,7 @@ let API =  {
         /**
          * Search badges that correspond to the given query string
          * @param {string} query Query string
-         * @return {Promise} Badges
+         * @return {Promise<Array<Badge>>} Badges
          */
         search: function(query) {
             const url = `${this.url}/search/${query}`;
@@ -214,7 +215,7 @@ let API =  {
         /**
          * Get many comments
          * @param {Array<Number>} ids
-         * @return {Promise} Comments
+         * @return {Promise<Array<Comment>>} Comments
          */
         getMany : function(ids) {
             const url = `${this.url}/get`;
@@ -224,7 +225,7 @@ let API =  {
          * Create a new comment
          * @param {!String} content Comment content
          * @param {!Number} post Post id
-         * @return {Promise} Comment
+         * @return {Promise<Comment>} Comment
          */
         create: function(content, post) {
             const url = this.url;
