@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    
+
     /**
      * The name of the database.
      *
@@ -37,5 +37,15 @@ class Comment extends Model
     public function post()
     {
         return $this->belongsTo('App\Model\Post');
+    }
+
+    /**
+     * Get the HTML formated comment description
+     * @param string $value
+     * @return string
+     */
+    public function getFormatedContentAttribute()
+    {
+        return nl2br($this->content);
     }
 }
