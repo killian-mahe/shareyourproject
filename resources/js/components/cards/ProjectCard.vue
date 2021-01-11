@@ -39,6 +39,8 @@
 </template>
 
 <script>
+    import {API} from '../../api';
+
     export default {
         data() {
             return {
@@ -50,11 +52,8 @@
         },
         mounted() {
             this.project.members_ids.slice(0, 2).forEach(member_id => {
-                axios.get('/api/users/'+member_id).then(member => {
-                    this.members_overview.push(member.data);
-                })
-                .catch(error => {
-
+                API.User.get(member_id).then(user => {
+                    this.members_overview.push(user);
                 });
             });
         }

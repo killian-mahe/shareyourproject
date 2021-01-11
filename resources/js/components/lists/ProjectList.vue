@@ -7,6 +7,8 @@
 
 <script>
     import ProjectCard from '../cards/ProjectCard.vue';
+    import {API} from '../../api';
+
     export default {
         components : {
             ProjectCard,
@@ -26,24 +28,21 @@
         },
         mounted() {
             this.index = this.size;
-            axios.post('/api/projects/get', {
-                projects_ids: this.projects_ids.slice(0, 3)
-            }).then(response => {
-                this.projects = response.data;
-            });
+            API.Project.getMany(this.projects_ids.slice(0, 3)).then(projects => {
+                this.projects = projects;
+            })
             feather.replace();
         },
         methods: {
             addProject: function() {
                 if (this.index < this.projects_ids.length)
                 {
-                    axios.post('/api/projects/get', {
-                        projects_ids: this.projects_ids.slice(this.index, this.index+3)
-                    }).then(response => {
-                        response.data.forEach(data => {
-                            this.projects.push(data);
-                        });
-                    });
+                    API.Project.getMany(this.projects_ids.slice(this.index, this.index+3))
+                                .then(projects => {
+                                    projects.forEach(project => {
+                                        this.projects.push(project);
+                                    });
+                                });
                     this.index += 3;
                 }
             }

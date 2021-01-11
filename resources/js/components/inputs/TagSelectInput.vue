@@ -33,6 +33,7 @@
 <script>
     import InputLabel from './InputLabel.vue';
     import vClickOutside from 'v-click-outside';
+    import {API} from '../../api';
 
     export default {
         components: {
@@ -66,15 +67,10 @@
                 this.x = setTimeout(() => {
                     if (this.$refs.input.value.replace(" ","") === "") { return; }
 
-                    axios.get('/api/tags/search/' + this.$refs.input.value.replace(" ",""))
-                        .then(response => {
-                            if (response.status === 200) {
-                                this.tags = response.data;
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
+                    API.Tag.search(this.$refs.input.value.replace(" ","")).then(tags => {
+                        this.tags = tags;
+                    });
+
                 }, 250);
             },
             onSpace: function() {

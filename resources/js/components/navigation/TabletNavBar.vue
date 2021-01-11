@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import {User} from '../../models';
+
 export default {
     data() {
         return {
@@ -49,10 +51,16 @@ export default {
         }
     },
     props: {
-        "logo_simple": String,
-        "logo_text": String,
-        "home_link": String,
-        "auth_user": Object,
+        logo_simple: {
+            type: String,
+        },
+        logo_text: {
+            type: String,
+        },
+        home_link: {
+            type: String,
+        },
+        auth_user: User
     },
     methods: {
         toggle: function() {

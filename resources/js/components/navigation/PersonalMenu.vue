@@ -43,6 +43,7 @@
 
 <script>
     import vClickOutside from 'v-click-outside';
+    import { API } from '../../api';
 
     export default {
         directives: {
@@ -66,11 +67,9 @@
                 this.show_menu = false;
             },
             logout: function() {
-                axios.post('/logout').then(response => {
-                    if (response.status == 204) {
-                        document.location.href = "/";
-                    }
-                })
+                API.logout().then(response => {
+                    document.location.href = "/";
+                });
             }
         }
     }

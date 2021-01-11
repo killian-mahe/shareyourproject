@@ -28,6 +28,7 @@
 <script>
     import VClamp from 'vue-clamp';
     import moment from 'moment';
+    import {Comment} from '../../models';
 
     export default {
         components: {
@@ -38,7 +39,9 @@
             }
         },
         props: {
-            comment: Object
+            comment: {
+                type: Comment
+            }
         },
         computed: {
             timeSinceCreation: function() {

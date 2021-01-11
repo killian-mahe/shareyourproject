@@ -37,7 +37,7 @@
                     </a>
                 </div>
 
-                
+
                 <span v-if="users.length === 0 && projects.length === 0" class="italic">No result</span>
             </div>
         </form>
@@ -46,6 +46,7 @@
 
 <script>
     import vClickOutside from 'v-click-outside';
+    import { API } from '../../api';
 
     export default {
         directives: {
@@ -93,16 +94,10 @@
 
                 this.x = setTimeout(() => {
                     if (this.searchQuery !== "") {
-                        axios.get('/api/search/'+this.searchQuery)
-                            .then(response => {
-                                if (response.status === 200) {
-                                    this.projects = response.data.projects;
-                                    this.users = response.data.users;
-                                }
-                            })
-                            .catch(error => {
-
-                            })
+                        API.search(this.searchQuery).then(response => {
+                            this.projects = response.projects;
+                            this.users = response.users;
+                        })
                     }
                 }, 250);
             }

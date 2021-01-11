@@ -42,6 +42,8 @@
 <script>
     import InputLabel from './InputLabel.vue';
     import vClickOutside from 'v-click-outside';
+    import {API} from '../../api';
+    import { User } from '../../models';
 
     export default {
         components: {
@@ -79,15 +81,10 @@
                 this.x = setTimeout(() => {
                     if (this.searchQuery === "") { this.users = []; return; }
 
-                    axios.get('/api/users/search/' + this.searchQuery)
-                        .then(response => {
-                            if (response.status === 200) {
-                                this.users = response.data;
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
+                    API.User.search(this.searchQuery).then(users => {
+                        this.users = users;
+                    })
+
                 }, 250);
             },
             addUser : function (user) {

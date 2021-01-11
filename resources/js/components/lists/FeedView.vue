@@ -6,6 +6,7 @@
 
 <script>
     import PostCard from '../cards/PostCard.vue';
+    import {API} from '../../api';
 
     export default {
         components : {
@@ -39,15 +40,10 @@
                 let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
 
                 if (bottomOfWindow) {
-                    axios.post(`/api/feed`, {
-                        except: this.posts.map(post => post.id)
-                    })
-                    .then(response => {
-                        if (response.status === 200) {
-                            response.data.forEach(post => {
-                                this.posts.push(post);
-                            });
-                        }
+                    API.Post.feed(this.posts.map(post => post.id)).then(posts => {
+                        posts.forEach(post => {
+                            this.posts.push(post);
+                        })
                     });
                 }
             };
