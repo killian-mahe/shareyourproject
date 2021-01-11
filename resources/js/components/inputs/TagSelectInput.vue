@@ -67,7 +67,7 @@
                 this.x = setTimeout(() => {
                     if (this.$refs.input.value.replace(" ","") === "") { return; }
 
-                    API.Tags.search(this.$refs.input.value.replace(" ","")).then(tags => {
+                    API.Tag.search(this.$refs.input.value.replace(" ","")).then(tags => {
                         this.tags = tags;
                     });
 

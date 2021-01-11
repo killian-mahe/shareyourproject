@@ -11,6 +11,8 @@
 </template>
 
 <script>
+    import {API} from '../../api';
+
     export default {
         data() {
             return {
@@ -24,14 +26,9 @@
             'right': Number
         },
         mounted() {
-            axios.get('/api/users/'+this.user_id)
-                 .then(response => {
-                     console.log(response);
-                    if (response.status === 200) this.user = response.data;
-                 })
-                 .catch(error => {
-
-                });
+            API.User.get(this.user_id).then(user => {
+                this.user = user;
+            });
         }
     }
 </script>

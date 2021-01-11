@@ -1,13 +1,16 @@
+import { delay } from "lodash";
+
 const API_URL = "/api";
 
 /**
  *
  * @param {String} method
  * @param {String} path
- * @param {Object} [data]
+ * @param {?Object} data
+ * @param {?Object} headers
  * @return {Promise}
  */
-const fetchResource = (method, path, data = {}) => {
+const fetchResource = (method, path, data = {}, headers = {}) => {
     // Build Url
     const url = `${ API_URL }${ path }`;
 
@@ -16,7 +19,8 @@ const fetchResource = (method, path, data = {}) => {
     return window.axios({
         method: method,
         url: url,
-        data: data
+        data: data,
+        headers: headers
     }).then(response => {
         if (response.status >= 200 && response.status < 300) {
             return response.data;
@@ -78,6 +82,35 @@ let API =  {
         feed: function(except_ids) {
             const url = '/feed';
             return fetchResource('post', url, {except: except_ids});
+        },
+        /**
+         * Create a new post
+         * @param {String} content Post content
+         * @param {?Number} project_author Project author id
+         * @param {?Number} reshare Reshared post id
+         * @param {?Array<File>} images Post images
+         */
+        create: function(content, project_author = null, reshare = null, images = null) {
+            const url = `${this.url}`;
+            let formData = new FormData();
+            // Post content
+            formData.append('content', content);
+
+            // Project author (if necessary)
+            if (project_author) formData.append('project', project_author);
+
+            // Post reshared (if necessary)
+            if (reshare) formData.append('reshare', reshare);
+
+            // Post images
+            if (images) {
+                images.forEach((image, index) => {
+                    formData.append(`image[${index}]`, image);
+                });
+            }
+            return fetchResource('post', url, formData, {
+                'Content-Type': 'multipart/form-data'
+            });
         }
     },
     /**
@@ -95,6 +128,15 @@ let API =  {
          */
         search: function(query) {
             const url = `${this.url}/search/${query}`;
+            return fetchResource('get', url);
+        },
+        /**
+         * Get the corresponding user
+         * @param {!Number} id User id
+         * @return {Promise} User
+         */
+        get: function(id) {
+            const url = `${this.url}/${id}`;
             return fetchResource('get', url);
         }
     },
@@ -128,7 +170,7 @@ let API =  {
     /**
      * Tag API wrapper
      */
-    Tags: {
+    Tag: {
         /**
          * Base tag requests url
          */
@@ -141,6 +183,55 @@ let API =  {
         search: function(query) {
             const url = `${this.url}/search/${query}`;
             return fetchResource('get', url);
+        }
+    },
+    /**
+     * Badge API wrapper
+     */
+    Badge: {
+        /**
+         * Base badge requests url
+         */
+        url: '/badges',
+        /**
+         * Search badges that correspond to the given query string
+         * @param {string} query Query string
+         * @return {Promise} Badges
+         */
+        search: function(query) {
+            const url = `${this.url}/search/${query}`;
+            return fetchResource('get', url);
+        }
+    },
+    /**
+     * Comment API wrapper
+     */
+    Comment: {
+        /**
+         * Base comment requests url
+         */
+        url: '/comments',
+        /**
+         * Get many comments
+         * @param {Array<Number>} ids
+         * @return {Promise} Comments
+         */
+        getMany : function(ids) {
+            const url = `${this.url}/get`;
+            return fetchResource('post', url, {comments_ids: ids});
+        },
+        /**
+         * Create a new comment
+         * @param {!String} content Comment content
+         * @param {!Number} post Post id
+         * @return {Promise} Comment
+         */
+        create: function(content, post) {
+            const url = this.url;
+            return fetchResource('post', url, {
+                content: content,
+                post_id: post
+            });
         }
     }
 };

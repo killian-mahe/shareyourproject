@@ -54,6 +54,7 @@
     import InputLabel from './InputLabel.vue';
     import BadgeLabel from '../utils/BadgeLabel.vue';
     import vClickOutside from 'v-click-outside';
+    import {API} from '../../api';
 
     export default {
         components: {
@@ -110,15 +111,10 @@
             updateBadgeList : function () {
                 if (this.searchQuery === "") { this.badges = []; return; }
 
-                axios.get('/api/badges/search/' + this.searchQuery)
-                    .then(response => {
-                        if (response.status === 200) {
-                            this.badges = response.data;
-                        }
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    })
+                API.Badge.search(this.searchQuery)
+                        .then(badges => {
+                            this.badges = badges;
+                        });
             },
             addBadge : function (badge) {
                 if (this.selectedBadges.map(badge => badge.id).includes(badge.id)) return;

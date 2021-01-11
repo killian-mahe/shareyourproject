@@ -200,9 +200,9 @@
                                 this.post.stats.likes_number ++;
                         })
                 } else {
-                    API.Post.like(this.post.id).then(response => {
+                    API.Post.unlike(this.post.id).then(response => {
                         this.post.liked = false;
-                        this.post.likes_number ++;
+                        this.post.stats.likes_number --;
                     });
                 }
             },
@@ -211,35 +211,19 @@
                 {
                     let ids = this.comments_to_load.slice(0, 3);
                     this.comments_to_load = this.comments_to_load.slice(3);
-
-                    axios.post('/api/comments/get', {
-                        comments_ids: ids
-                    })
-                    .then(response => {
-                        if (response.status === 200) {
-                            response.data.forEach(data => {
-                                this.comments.push(data);
-                            });
-                        }
-                    })
-                    .catch(error => {
-
-                    })
+                    API.Comment.getMany(ids).then(comments => {
+                        comments.forEach(comment => {
+                            this.comments.push(comment);
+                        });
+                    });
                 }
             },
             writeComment: function() {
-                axios.post('/api/comments', {
-                    'content': this.newCommentContent,
-                    'post_id': this.post.id
-                }).then(response => {
-                    if (response.status === 201) {
-                        this.comments.push(response.data);
-                        this.newCommentContent = "";
-                        this.post.stats.comments_number += 1;
-                    }
-                }).catch(error => {
-
-                })
+                API.Comment.create(this.newCommentContent, this.post.id).then(comment => {
+                    this.comments.push(comment);
+                    this.newCommentContent = "";
+                    this.post.stats.comments_number ++;
+                });
             },
             onClickOutSideOptions: function() {
                 this.on_options = false;

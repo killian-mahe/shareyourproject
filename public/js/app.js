@@ -1991,6 +1991,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
 //
 //
 //
@@ -2003,6 +2004,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2018,10 +2020,9 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/api/users/' + this.user_id).then(function (response) {
-      console.log(response);
-      if (response.status === 200) _this.user = response.data;
-    })["catch"](function (error) {});
+    _api__WEBPACK_IMPORTED_MODULE_0__["API"].User.get(this.user_id).then(function (user) {
+      _this.user = user;
+    });
   }
 });
 
@@ -2255,9 +2256,9 @@ __webpack_require__.r(__webpack_exports__);
           _this2.post.stats.likes_number++;
         });
       } else {
-        _api__WEBPACK_IMPORTED_MODULE_8__["API"].Post.like(this.post.id).then(function (response) {
+        _api__WEBPACK_IMPORTED_MODULE_8__["API"].Post.unlike(this.post.id).then(function (response) {
           _this2.post.liked = false;
-          _this2.post.likes_number++;
+          _this2.post.stats.likes_number--;
         });
       }
     },
@@ -2267,31 +2268,22 @@ __webpack_require__.r(__webpack_exports__);
       if (this.comments_to_load.length > 0) {
         var ids = this.comments_to_load.slice(0, 3);
         this.comments_to_load = this.comments_to_load.slice(3);
-        axios.post('/api/comments/get', {
-          comments_ids: ids
-        }).then(function (response) {
-          if (response.status === 200) {
-            response.data.forEach(function (data) {
-              _this3.comments.push(data);
-            });
-          }
-        })["catch"](function (error) {});
+        _api__WEBPACK_IMPORTED_MODULE_8__["API"].Comment.getMany(ids).then(function (comments) {
+          comments.forEach(function (comment) {
+            _this3.comments.push(comment);
+          });
+        });
       }
     },
     writeComment: function writeComment() {
       var _this4 = this;
 
-      axios.post('/api/comments', {
-        'content': this.newCommentContent,
-        'post_id': this.post.id
-      }).then(function (response) {
-        if (response.status === 201) {
-          _this4.comments.push(response.data);
+      _api__WEBPACK_IMPORTED_MODULE_8__["API"].Comment.create(this.newCommentContent, this.post.id).then(function (comment) {
+        _this4.comments.push(comment);
 
-          _this4.newCommentContent = "";
-          _this4.post.stats.comments_number += 1;
-        }
-      })["catch"](function (error) {});
+        _this4.newCommentContent = "";
+        _this4.post.stats.comments_number++;
+      });
     },
     onClickOutSideOptions: function onClickOutSideOptions() {
       this.on_options = false;
@@ -2310,6 +2302,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
 //
 //
 //
@@ -2350,6 +2343,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2363,9 +2357,9 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.project.members_ids.slice(0, 2).forEach(function (member_id) {
-      axios.get('/api/users/' + member_id).then(function (member) {
-        _this.members_overview.push(member.data);
-      })["catch"](function (error) {});
+      _api__WEBPACK_IMPORTED_MODULE_0__["API"].User.get(member_id).then(function (user) {
+        _this.members_overview.push(user);
+      });
     });
   }
 });
@@ -2385,6 +2379,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_BadgeLabel_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/BadgeLabel.vue */ "./resources/js/components/utils/BadgeLabel.vue");
 /* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! v-click-outside */ "./node_modules/v-click-outside/dist/v-click-outside.umd.js");
 /* harmony import */ var v_click_outside__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(v_click_outside__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
 //
 //
 //
@@ -2437,6 +2432,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -2501,12 +2497,8 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.get('/api/badges/search/' + this.searchQuery).then(function (response) {
-        if (response.status === 200) {
-          _this.badges = response.data;
-        }
-      })["catch"](function (error) {
-        console.error(error);
+      _api__WEBPACK_IMPORTED_MODULE_3__["API"].Badge.search(this.searchQuery).then(function (badges) {
+        _this.badges = badges;
       });
     },
     addBadge: function addBadge(badge) {
@@ -2853,27 +2845,12 @@ __webpack_require__.r(__webpack_exports__);
       this.show_select = false;
     },
     createPost: function createPost() {
-      var formData = new FormData();
+      var _this$reshare_post;
 
-      if (this.enableExtraContent) {
-        this.files.forEach(function (file, index) {
-          formData.append("image[".concat(index, "]"), file.content);
-        });
-      }
-
-      if (this.reshare_post) formData.append('reshare', this.reshare_post.id);
-      if (this.$refs.author.value) formData.append('project', this.$refs.author.value);
-      formData.append('content', this.content);
-      axios.post('/api/posts', formData, {
-        header: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function (response) {
-        console.log(response);
-
-        if (response.status == 201) {
-          document.location.href = '/posts/' + response.data.id;
-        }
+      _api__WEBPACK_IMPORTED_MODULE_4__["API"].Post.create(this.content, this.$refs.author.value, (_this$reshare_post = this.reshare_post) === null || _this$reshare_post === void 0 ? void 0 : _this$reshare_post.id, this.enableExtraContent ? this.files.map(function (file) {
+        return file.content;
+      }) : null).then(function (post) {
+        document.location.href = '/posts/' + post.id;
       });
     }
   }
@@ -3000,7 +2977,7 @@ __webpack_require__.r(__webpack_exports__);
           return;
         }
 
-        _api__WEBPACK_IMPORTED_MODULE_2__["API"].Tags.search(_this.$refs.input.value.replace(" ", "")).then(function (tags) {
+        _api__WEBPACK_IMPORTED_MODULE_2__["API"].Tag.search(_this.$refs.input.value.replace(" ", "")).then(function (tags) {
           _this.tags = tags;
         });
       }, 250);
@@ -79267,24 +79244,30 @@ webpackContext.id = "./resources/js sync recursive \\.vue$/";
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "API", function() { return API; });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+
 var API_URL = "/api";
 /**
  *
  * @param {String} method
  * @param {String} path
- * @param {Object} [data]
+ * @param {?Object} data
+ * @param {?Object} headers
  * @return {Promise}
  */
 
 var fetchResource = function fetchResource(method, path) {
   var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
   // Build Url
   var url = "".concat(API_URL).concat(path); // Variable which will be used for storing response
 
   return window.axios({
     method: method,
     url: url,
-    data: data
+    data: data,
+    headers: headers
   }).then(function (response) {
     if (response.status >= 200 && response.status < 300) {
       return response.data;
@@ -79353,6 +79336,37 @@ var API = {
       return fetchResource('post', url, {
         except: except_ids
       });
+    },
+
+    /**
+     * Create a new post
+     * @param {String} content Post content
+     * @param {?Number} project_author Project author id
+     * @param {?Number} reshare Reshared post id
+     * @param {?Array<File>} images Post images
+     */
+    create: function create(content) {
+      var project_author = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var reshare = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var images = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var url = "".concat(this.url);
+      var formData = new FormData(); // Post content
+
+      formData.append('content', content); // Project author (if necessary)
+
+      if (project_author) formData.append('project', project_author); // Post reshared (if necessary)
+
+      if (reshare) formData.append('reshare', reshare); // Post images
+
+      if (images) {
+        images.forEach(function (image, index) {
+          formData.append("image[".concat(index, "]"), image);
+        });
+      }
+
+      return fetchResource('post', url, formData, {
+        'Content-Type': 'multipart/form-data'
+      });
     }
   },
 
@@ -79372,6 +79386,16 @@ var API = {
      */
     search: function search(query) {
       var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Get the corresponding user
+     * @param {!Number} id User id
+     * @return {Promise} User
+     */
+    get: function get(id) {
+      var url = "".concat(this.url, "/").concat(id);
       return fetchResource('get', url);
     }
   },
@@ -79412,7 +79436,7 @@ var API = {
   /**
    * Tag API wrapper
    */
-  Tags: {
+  Tag: {
     /**
      * Base tag requests url
      */
@@ -79426,6 +79450,62 @@ var API = {
     search: function search(query) {
       var url = "".concat(this.url, "/search/").concat(query);
       return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Badge API wrapper
+   */
+  Badge: {
+    /**
+     * Base badge requests url
+     */
+    url: '/badges',
+
+    /**
+     * Search badges that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise} Badges
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Comment API wrapper
+   */
+  Comment: {
+    /**
+     * Base comment requests url
+     */
+    url: '/comments',
+
+    /**
+     * Get many comments
+     * @param {Array<Number>} ids
+     * @return {Promise} Comments
+     */
+    getMany: function getMany(ids) {
+      var url = "".concat(this.url, "/get");
+      return fetchResource('post', url, {
+        comments_ids: ids
+      });
+    },
+
+    /**
+     * Create a new comment
+     * @param {!String} content Comment content
+     * @param {!Number} post Post id
+     * @return {Promise} Comment
+     */
+    create: function create(content, post) {
+      var url = this.url;
+      return fetchResource('post', url, {
+        content: content,
+        post_id: post
+      });
     }
   }
 };

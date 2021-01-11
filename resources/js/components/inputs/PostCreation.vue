@@ -174,30 +174,14 @@
             },
             createPost: function() {
 
-                let formData = new FormData();
+                API.Post.create(this.content,
+                                this.$refs.author.value,
+                                this.reshare_post?.id,
+                                this.enableExtraContent ? this.files.map(file => file.content) : null)
+                                .then(post => {
+                                    document.location.href = '/posts/'+post.id;
+                                });
 
-                if (this.enableExtraContent) {
-                    this.files.forEach((file, index) => {
-                        formData.append(`image[${index}]`, file.content);
-                    });
-                }
-
-                if (this.reshare_post) formData.append('reshare', this.reshare_post.id);
-
-                if (this.$refs.author.value) formData.append('project', this.$refs.author.value)
-
-                formData.append('content', this.content);
-
-                axios.post('/api/posts', formData, {
-                    header: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }).then(response => {
-                    console.log(response)
-                    if (response.status == 201) {
-                        document.location.href = '/posts/'+response.data.id;
-                    }
-                })
             }
         }
     }
