@@ -1,4 +1,4 @@
-import { delay } from "lodash";
+import {Post, User} from './models';
 
 const API_URL = "/api";
 
@@ -59,7 +59,7 @@ let API =  {
         /**
          * Like a post
          * @param {Number} id
-         * @return {Promise}
+         * @return {Promise<Post>}
          */
         like: function(id) {
             const url = `${this.url}/${id}/like`;
