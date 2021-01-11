@@ -19,6 +19,7 @@ class Comment extends JsonResource
         return [
             'id' => $this->id,
             'content' => $this->content,
+            'formated_content' => $this->formatedContent,
             'author' => new UserResource($this->author),
             'post_id' => $this->post_id,
             'created_at' => $this->created_at,

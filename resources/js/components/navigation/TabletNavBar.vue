@@ -40,8 +40,6 @@
 </template>
 
 <script>
-import {User} from '../../models';
-
 export default {
     data() {
         return {
@@ -60,7 +58,7 @@ export default {
         home_link: {
             type: String,
         },
-        auth_user: User
+        auth_user: Object
     },
     methods: {
         toggle: function() {

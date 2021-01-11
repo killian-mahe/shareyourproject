@@ -200,6 +200,10 @@ class Comment {
          */
         this.content;
         /**
+         * @type {String}
+         */
+        this.formated_content;
+        /**
          * @type {User}
          */
         this.author;

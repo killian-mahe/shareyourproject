@@ -10,37 +10,24 @@
             </div>
 
             <!-- Comment content -->
-            <span class="text-sm">
-                <!-- Auto-resize component -->
-                <v-clamp autoresize :max-lines="3">
-                    <template slot="default">
-                        {{ comment.content }}
-                    </template>
-                    <template slot="after" slot-scope="expand">
-                        <span v-if="expand.clamped" class="expand-btn" @click="expand.expand()">more</span>
-                    </template>
-                </v-clamp>
+            <span class="text-sm" v-html="comment.formated_content">
             </span>
         </div>
     </div>
 </template>
 
 <script>
-    import VClamp from 'vue-clamp';
     import moment from 'moment';
     import {Comment} from '../../models';
 
     export default {
-        components: {
-            VClamp
-        },
         data() {
             return {
             }
         },
         props: {
             comment: {
-                type: Comment
+                type: Object
             }
         },
         computed: {

@@ -219,11 +219,14 @@
                 }
             },
             writeComment: function() {
+                console.log(this.newCommentContent);
+                /*
                 API.Comment.create(this.newCommentContent, this.post.id).then(comment => {
                     this.comments.push(comment);
                     this.newCommentContent = "";
                     this.post.stats.comments_number ++;
                 });
+                */
             },
             onClickOutSideOptions: function() {
                 this.on_options = false;
