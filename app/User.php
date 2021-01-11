@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Project;
+use App\Models\Settings;
 use App\Models\Post;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -167,5 +168,13 @@ class User extends Authenticatable implements MustVerifyEmail
 
         }
         return false;
+    }
+
+    /**
+     * Get the settings associated with the user.
+     */
+    public function settings()
+    {
+        return $this->hasOne(Settings::class);
     }
 }
