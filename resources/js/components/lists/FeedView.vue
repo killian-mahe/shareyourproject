@@ -52,6 +52,7 @@
                 this.animation.stop();
             },
             scroll () {
+                
                 window.onscroll = () => {
                 let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
 
