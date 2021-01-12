@@ -2095,6 +2095,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+/* harmony import */ var lottie_web__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! lottie-web */ "./node_modules/lottie-web/build/player/lottie.js");
+/* harmony import */ var lottie_web__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(lottie_web__WEBPACK_IMPORTED_MODULE_9__);
 //
 //
 //
@@ -2220,6 +2222,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -2253,7 +2267,10 @@ __webpack_require__.r(__webpack_exports__);
       open_modal: false,
       hover_copy_icon: false,
       copied_var: "Click to copy",
-      on_options: false
+      on_options: false,
+      loadingComments: false,
+      loadingAnimation: null,
+      likeAnimation: null
     };
   },
   props: {
@@ -2272,6 +2289,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     feather.replace();
+    this.loadingAnimation = lottie_web__WEBPACK_IMPORTED_MODULE_9___default.a.loadAnimation({
+      container: this.$refs['loader'],
+      renderer: 'svg',
+      loop: true,
+      autoplay: false,
+      path: './vendor/courier/lottie/loading.json'
+    });
+    this.likeAnimation = lottie_web__WEBPACK_IMPORTED_MODULE_9___default.a.loadAnimation({
+      container: this.$refs['likeIcon'],
+      renderer: 'svg',
+      loop: false,
+      autoplay: false,
+      path: './vendor/courier/lottie/heart.json'
+    });
+
+    if (this.post.liked) {
+      this.likeAnimation.play();
+    }
   },
   computed: {
     timeSinceCreation: function timeSinceCreation() {
@@ -2298,11 +2333,15 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       if (_like == true) {
+        this.likeAnimation.setDirection(1);
+        this.likeAnimation.play();
         _api__WEBPACK_IMPORTED_MODULE_8__["API"].Post.like(this.post.id).then(function (response) {
           _this2.post.liked = true;
           _this2.post.stats.likes_number++;
         });
       } else {
+        this.likeAnimation.setDirection(-1);
+        this.likeAnimation.play();
         _api__WEBPACK_IMPORTED_MODULE_8__["API"].Post.unlike(this.post.id).then(function (response) {
           _this2.post.liked = false;
           _this2.post.stats.likes_number--;
@@ -2313,24 +2352,29 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       if (this.comments_to_load.length > 0) {
+        this.loadingComments = true;
+        this.loadingAnimation.play();
         var ids = this.comments_to_load.slice(0, 3);
         this.comments_to_load = this.comments_to_load.slice(3);
         _api__WEBPACK_IMPORTED_MODULE_8__["API"].Comment.getMany(ids).then(function (comments) {
           comments.forEach(function (comment) {
             _this3.comments.push(comment);
           });
+          _this3.loadingComments = false;
+
+          _this3.loadingAnimation.stop();
         });
       }
     },
     writeComment: function writeComment() {
-      console.log(this.newCommentContent);
-      /*
-      API.Comment.create(this.newCommentContent, this.post.id).then(comment => {
-          this.comments.push(comment);
-          this.newCommentContent = "";
-          this.post.stats.comments_number ++;
+      var _this4 = this;
+
+      _api__WEBPACK_IMPORTED_MODULE_8__["API"].Comment.create(this.newCommentContent, this.post.id).then(function (comment) {
+        _this4.comments.push(comment);
+
+        _this4.newCommentContent = "";
+        _this4.post.stats.comments_number++;
       });
-      */
     },
     onClickOutSideOptions: function onClickOutSideOptions() {
       this.on_options = false;
@@ -77855,7 +77899,7 @@ var render = function() {
                         "span",
                         {
                           staticClass:
-                            "cursor-pointer text-red-600 fill-current",
+                            "cursor-pointer text-red-600 fill-current flex items-center",
                           on: {
                             click: function($event) {
                               return _vm.like(false)
@@ -77863,29 +77907,8 @@ var render = function() {
                           }
                         },
                         [
-                          _c(
-                            "svg",
-                            {
-                              staticClass: "feather feather-heart",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                viewBox: "0 0 24 24",
-                                fill: "true",
-                                stroke: "currentColor",
-                                "stroke-width": "2",
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round"
-                              }
-                            },
-                            [
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                                }
-                              })
-                            ]
-                          ),
+                          _c("span", { ref: "likeIcon" }),
+                          _vm._v(" "),
                           _c(
                             "span",
                             {
@@ -77900,7 +77923,7 @@ var render = function() {
                         "span",
                         {
                           staticClass:
-                            "cursor-pointer hover:text-red-600 fill-current",
+                            "cursor-pointer hover:text-red-600 fill-current flex items-center",
                           on: {
                             click: function($event) {
                               return _vm.like(true)
@@ -77908,29 +77931,8 @@ var render = function() {
                           }
                         },
                         [
-                          _c(
-                            "svg",
-                            {
-                              staticClass: "feather feather-heart",
-                              attrs: {
-                                xmlns: "http://www.w3.org/2000/svg",
-                                viewBox: "0 0 24 24",
-                                fill: "none",
-                                stroke: "currentColor",
-                                "stroke-width": "2",
-                                "stroke-linecap": "round",
-                                "stroke-linejoin": "round"
-                              }
-                            },
-                            [
-                              _c("path", {
-                                attrs: {
-                                  d:
-                                    "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                                }
-                              })
-                            ]
-                          ),
+                          _c("span", { ref: "likeIcon" }),
+                          _vm._v(" "),
                           _c(
                             "span",
                             {
@@ -78131,7 +78133,20 @@ var render = function() {
                         },
                         [_vm._v("Load more comments")]
                       )
-                    : _vm._e()
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.loadingComments,
+                        expression: "loadingComments"
+                      }
+                    ],
+                    ref: "loader",
+                    staticClass: "h-10 my-3"
+                  })
                 ],
                 2
               )

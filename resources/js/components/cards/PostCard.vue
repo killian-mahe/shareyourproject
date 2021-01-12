@@ -64,8 +64,18 @@
 
         <div class="card-footer" v-if="!reshared_post">
             <div class="card-link">
-                <span v-if="post.liked" @click="like(false)" class="cursor-pointer text-red-600 fill-current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="true" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="ml-1 hidden md:inline text-sm font-medium">{{post.stats.likes_number}}</span></span>
-                <span v-else @click="like(true)" class="cursor-pointer hover:text-red-600 fill-current"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg><span class="ml-1 hidden md:inline text-sm font-medium">{{post.stats.likes_number}}</span></span>
+                <!-- Unlike -->
+                <span v-if="post.liked" @click="like(false)" class="cursor-pointer text-red-600 fill-current flex items-center">
+                    <span ref="likeIcon"></span>
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="true" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> -->
+                    <span class="ml-1 hidden md:inline text-sm font-medium">{{post.stats.likes_number}}</span>
+                </span>
+                <!-- Like -->
+                <span v-else @click="like(true)" class="cursor-pointer hover:text-red-600 fill-current flex items-center">
+                    <span ref="likeIcon"></span>
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> -->
+                    <span class="ml-1 hidden md:inline text-sm font-medium">{{post.stats.likes_number}}</span>
+                </span>
             </div>
             <div class="card-link">
                 <span class="hover:text-orange-peel-400 cursor-pointer" @click="first_comment = true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span class="ml-1 hidden md:inline">Comment</span></span>
@@ -84,6 +94,7 @@
             </div>
             <comment-component v-for="comment in orderedComments" :key="comment.id" :comment="comment" class="mb-3"></comment-component>
             <button v-if="comments_to_load.length > 0" class="btn-classic w-full font-sans text-sm" @click="addComments">Load more comments</button>
+            <div v-show="loadingComments" class="h-10 my-3" ref="loader"></div>
         </div>
 
         <modal-component v-if='on_send'>
@@ -133,6 +144,7 @@
     import vClickOutside from 'v-click-outside';
     import moment from 'moment';
     import { API } from '../../api';
+    import lottie from 'lottie-web';
 
     export default {
         components: {
@@ -158,7 +170,10 @@
                 open_modal: false,
                 hover_copy_icon: false,
                 copied_var: "Click to copy",
-                on_options: false
+                on_options: false,
+                loadingComments: false,
+                loadingAnimation: null,
+                likeAnimation: null
             }
         },
         props: {
@@ -171,6 +186,25 @@
         },
         mounted() {
             feather.replace();
+            this.loadingAnimation = lottie.loadAnimation({
+                container: this.$refs['loader'],
+                renderer: 'svg',
+                loop: true,
+                autoplay: false,
+                path: './vendor/courier/lottie/loading.json'
+            });
+
+            this.likeAnimation = lottie.loadAnimation({
+                container: this.$refs['likeIcon'],
+                renderer: 'svg',
+                loop: false,
+                autoplay: false,
+                path: './vendor/courier/lottie/heart.json'
+            });
+
+            if (this.post.liked) {
+                this.likeAnimation.play();
+            }
         },
         computed: {
             timeSinceCreation: function() {
@@ -195,11 +229,15 @@
             },
             like: function(like) {
                 if (like == true) {
+                    this.likeAnimation.setDirection(1);
+                    this.likeAnimation.play();
                     API.Post.like(this.post.id).then(response => {
                                 this.post.liked = true;
                                 this.post.stats.likes_number ++;
                         })
                 } else {
+                    this.likeAnimation.setDirection(-1);
+                    this.likeAnimation.play();
                     API.Post.unlike(this.post.id).then(response => {
                         this.post.liked = false;
                         this.post.stats.likes_number --;
@@ -209,24 +247,25 @@
             addComments: function() {
                 if (this.comments_to_load.length > 0)
                 {
+                    this.loadingComments = true;
+                    this.loadingAnimation.play();
                     let ids = this.comments_to_load.slice(0, 3);
                     this.comments_to_load = this.comments_to_load.slice(3);
                     API.Comment.getMany(ids).then(comments => {
                         comments.forEach(comment => {
                             this.comments.push(comment);
                         });
+                        this.loadingComments = false;
+                        this.loadingAnimation.stop();
                     });
                 }
             },
             writeComment: function() {
-                console.log(this.newCommentContent);
-                /*
                 API.Comment.create(this.newCommentContent, this.post.id).then(comment => {
                     this.comments.push(comment);
                     this.newCommentContent = "";
                     this.post.stats.comments_number ++;
                 });
-                */
             },
             onClickOutSideOptions: function() {
                 this.on_options = false;
