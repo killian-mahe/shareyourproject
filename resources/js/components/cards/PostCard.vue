@@ -191,7 +191,7 @@
                 renderer: 'svg',
                 loop: true,
                 autoplay: false,
-                path: './vendor/courier/lottie/loading.json'
+                path: '/vendor/courier/lottie/loading.json'
             });
 
             this.likeAnimation = lottie.loadAnimation({
@@ -199,7 +199,7 @@
                 renderer: 'svg',
                 loop: false,
                 autoplay: false,
-                path: './vendor/courier/lottie/heart.json'
+                path: '/vendor/courier/lottie/heart.json'
             });
 
             if (this.post.liked) {

@@ -41,7 +41,7 @@
                 renderer: 'svg',
                 loop: true,
                 autoplay: false,
-                path: './vendor/courier/lottie/loading.json'
+                path: '/vendor/courier/lottie/loading.json'
             });
         },
         methods: {
@@ -52,7 +52,7 @@
                 this.animation.stop();
             },
             scroll () {
-                
+
                 window.onscroll = () => {
                 let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
 
