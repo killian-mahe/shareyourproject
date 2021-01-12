@@ -28,6 +28,7 @@
     "dependencies": {
         "autoprefixer": "^10.1.0",
         "feather-icons": "^4.28.0",
+        "lottie-web": "^5.7.5",
         "moment": "^2.29.1",
         "postcss": "^8.2.1",
         "tailwindcss": "^2.0.2",
