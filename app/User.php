@@ -6,7 +6,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Storage;
 use Laravel\Passport\HasApiTokens;
 use App\Models\Project;
 use App\Models\Settings;
@@ -176,5 +175,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function settings()
     {
         return $this->hasOne(Settings::class);
+    }
+
+    /**
+     * Get the followed projects of the user
+     */
+    public function followed_projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_follows', 'follower_id', 'user_id');
     }
 }
