@@ -82,7 +82,7 @@
             </div>
             <div class="card-link">
 
-                <span class="hover:text-viridiant-400 cursor-pointer" @click="on_share=true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span class="ml-1 hidden md:inline">Share</span></span>
+                <span class="hover:text-viridiant-400 cursor-pointer" @click="share()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span class="ml-1 hidden md:inline">Share</span></span>
 
             </div>
         </div>
@@ -177,9 +177,20 @@
             }
         },
         props: {
-            'post_props': Object,
-            'auth_user': Object,
-            'reshared_post': false
+            post_props: {
+                type: Object,
+                required: true,
+                default: () => {return null;}
+            },
+            auth_user: {
+                type: Object,
+                required: false,
+                default: () => {return {};}
+            },
+            reshared_post: {
+                type: Boolean,
+                default: false
+            }
         },
         beforeMount() {
             this.comments_to_load = this.post.comments_ids.filter(comment_id => !this.comments.map(x => x.id).includes(comment_id));
@@ -228,17 +239,20 @@
                 this.copied_var = "Copied !";
             },
             like: function(like) {
+                if (!this.auth_user) return;
                 if (like == true) {
-                    this.likeAnimation.setDirection(1);
-                    this.likeAnimation.play();
+
                     API.Post.like(this.post.id).then(response => {
-                                this.post.liked = true;
-                                this.post.stats.likes_number ++;
-                        })
+                        this.likeAnimation.setDirection(1);
+                        this.likeAnimation.play();
+                        this.post.liked = true;
+                        this.post.stats.likes_number ++;
+                    })
                 } else {
-                    this.likeAnimation.setDirection(-1);
-                    this.likeAnimation.play();
+
                     API.Post.unlike(this.post.id).then(response => {
+                        this.likeAnimation.setDirection(-1);
+                        this.likeAnimation.play();
                         this.post.liked = false;
                         this.post.stats.likes_number --;
                     });
@@ -261,6 +275,7 @@
                 }
             },
             writeComment: function() {
+                if (!this.auth_user) return;
                 API.Comment.create(this.newCommentContent, this.post.id).then(comment => {
                     this.comments.push(comment);
                     this.newCommentContent = "";
@@ -269,6 +284,10 @@
             },
             onClickOutSideOptions: function() {
                 this.on_options = false;
+            },
+            share: function() {
+                if (!this.auth_user) return;
+                this.on_share = true;
             }
         }
     }
