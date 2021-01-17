@@ -3,7 +3,7 @@ button:focus, input:focus {
 }
 
 .btn {
-    @apply whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-onyx-500 transition ease-in-out duration-150;
+    @apply whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md transition ease-in-out duration-150;
 }
 
 .btn-classic {
@@ -78,4 +78,8 @@ button:focus, input:focus {
 
 .btn-send {
     @apply bg-onyx-600 rounded-full h-7 w-7 flex flex-none justify-center items-center;
+}
+
+.btn-follow {
+    @apply whitespace-nowrap inline-flex items-center justify-center pl-4 pr-2 py-2 border border-transparent text-base leading-6 font-medium rounded-md transition-all ease-in-out duration-150;
 }

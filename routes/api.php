@@ -50,6 +50,16 @@ Route::name('api.')->group(function() {
             return ProjectResource::collection($projects);
         })->name('getMany');
 
+        Route::get('projects/{project}/follow', function(Request $request, Project $project) {
+            Auth::user()->followed_projects()->attach($project->id);
+            return json_encode(['ok' => true]);
+        })->middleware('auth:api')->name('follow');
+
+        Route::get('projects/{project}/unfollow', function(Request $request, Project $project) {
+            Auth::user()->followed_projects()->detach($project->id);
+            return json_encode(['ok' => true]);
+        })->middleware('auth:api')->name('unfollow');
+
     });
 
     Route::name('post.')->group(function() {

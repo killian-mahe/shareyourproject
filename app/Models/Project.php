@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Project extends Model
 {
@@ -132,5 +133,13 @@ class Project extends Model
     public function roles()
     {
         return $this->hasMany('App\Models\Role');
+    }
+
+    /**
+     * Get the followers of the project
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'project_follows', 'project_id', 'follower_id');
     }
 }
