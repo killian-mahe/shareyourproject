@@ -16,20 +16,30 @@
 
         <div class="box w-full h-auto mb-6">
             <div class="flex relative justify-center">
-            <img class=" md:rounded-t-md object-cover w-full h-48 shadow" src="{{ $project->banner_picture() }}" alt="test">
-            <img class=" border-4 border-cultured-100 shadow-md object-cover w-40 h-40 rounded-full mx-auto sm:left-8 lg:left-16 -bottom-12 absolute" src="{{ $project->profile_picture() }}" alt="test">
+                <img class=" md:rounded-t-md object-cover w-full h-48 shadow" src="{{ $project->banner_picture() }}" alt="test">
+                <img class=" border-4 border-cultured-100 shadow-md object-cover w-40 h-40 rounded-full mx-auto sm:left-8 lg:left-16 -bottom-12 absolute" src="{{ $project->profile_picture() }}" alt="test">
             </div>
-            <div class="text-center md:text-right font-semibold font-sans text-2xl md:mr-1/7 mt-12 md:my-4">{{$project->name}}</div>
-            <div class="flex py-2 px-4 justify-between">
-                <div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-14 mx-4 pb-4">
+                <div class="text-center md:text-left font-semibold font-sans text-2xl">{{$project->name}}</div>
+                <span class="flex justify-center md:justify-end">
+                    <follow-button :project_id='{{$project->id}}' @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></follow-button>
+                </span>
+                <div class="flex md:justify-start justify-center">
                     <span class="text-sm">An idea from </span>
                     <a href="{{route('users.show', ['user'=>$project->owner_id])}}" class="text-sm hover:underline">{{$project->owner->full_name()}}</a>
                 </div>
-                <div>
+                <div class="flex md:justify-end justify-center">
                     <span class="text-sm italic">Created on </span>
                     <span href="#" class="text-sm">{{$project->created_at}}</span>
                 </div>
             </div>
+
+
+
+            {{-- Follow Button --}}
+
+
             {{-- Adding Tags and Badges --}}
             <div class="tags w-full h-auto bg-yellow-300"></div>
             <div class="badges w-full h-auto bg-indigo-300"></div>
