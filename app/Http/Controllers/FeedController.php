@@ -27,8 +27,8 @@ class FeedController extends Controller
     {
         $posts = new Collection();
         if (Auth::user()) {
-            $projects_members = Auth::user()->projects;
-            foreach ($projects_members as $project) {
+            $followed_projects = Auth::user()->followed_projects;
+            foreach ($followed_projects as $project) {
                 $posts = $posts->merge($project->posts()->latest()->limit(3)->get());
             }
         } else {
@@ -55,14 +55,12 @@ class FeedController extends Controller
         {
             if (Auth::user()) {
 
-                $projects_members = Auth::user()->projects;
-                foreach ($projects_members as $project) {
+                $followed_projects = Auth::user()->followed_projects;
+                foreach ($followed_projects as $project) {
                     $posts = $posts->merge($project->posts()->whereNotIn('id', $validatedData['except'])->latest()->limit(3)->get());
                 }
 
             }
-
-            $posts = $posts->merge(Post::all()->whereNotIn('id', $validatedData['except'])->random(10));
         }
 
         if ($posts->count() > 0) {
