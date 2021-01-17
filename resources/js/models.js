@@ -58,6 +58,10 @@ class Post {
          */
         this.stats;
         /**
+         * @type {Array<Number>}
+         */
+        this.followed_projects;
+        /**
          * @type {Date}
          */
         this.created_at;

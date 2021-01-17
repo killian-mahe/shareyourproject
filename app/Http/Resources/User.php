@@ -31,6 +31,7 @@ class User extends JsonResource
             'profile_picture' => $this->profile_picture(),
             'banner_picture' => $this->banner_picture(),
             'owned_projects' => Project::collection($this->owned_project),
-        ];;
+            'followed_projects' => $this->followed_projects->pluck('id')
+        ];
     }
 }

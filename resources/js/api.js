@@ -11,8 +11,9 @@ const API_URL = "/api";
  * @return {Promise}
  */
 const fetchResource = (method, path, data = {}, headers = {}) => {
-    // Build Url
-    const url = `${ API_URL }${ path }`;
+
+    let url = `${ API_URL }${ path }`;
+    if(path === '/logout') url = path;
 
     // Variable which will be used for storing response
 
@@ -46,7 +47,7 @@ let API =  {
      */
     logout: function() {
         const url = '/logout';
-        return fetchResource('post', 'url');
+        return fetchResource('post', url);
     },
     /**
      * Post API wrapper
@@ -156,6 +157,22 @@ let API =  {
          */
         get: function(id) {
             const url = `${this.url}/${id}`;
+            return fetchResource('get', url);
+        },
+        /**
+         * Make the authenticated user follows the project
+         * @param {Number} id Project id
+         */
+        follow: function(id) {
+            const url = `${this.url}/${id}/follow`;
+            return fetchResource('get', url);
+        },
+        /**
+         * Make the authenticated user unfollows the project
+         * @param {Number} id Project id
+         */
+        unfollow: function(id) {
+            const url = `${this.url}/${id}/unfollow`;
             return fetchResource('get', url);
         },
         /**
