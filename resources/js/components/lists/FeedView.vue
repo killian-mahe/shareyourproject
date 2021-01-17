@@ -30,7 +30,7 @@
             auth_user: {
                 type: Object,
                 default: function() {
-                    return {};
+                    return null;
                 }
             }
         },
