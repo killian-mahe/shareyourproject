@@ -60,10 +60,12 @@
                     this.startLoading();
 
                     API.Post.feed(this.posts.map(post => post.id)).then(posts => {
-                        posts.forEach(post => {
-                            this.posts.push(post);
-                        })
 
+                        if (posts) {
+                            posts.forEach(post => {
+                                this.posts.push(post);
+                            })
+                        }
                         this.stopLoading();
                     });
                 }
