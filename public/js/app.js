@@ -3285,6 +3285,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3322,6 +3329,14 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(val) {
         this.$emit('input', val);
       }
+    }
+  },
+  methods: {
+    send: function send() {
+      this.$emit('send');
+    },
+    newline: function newline() {
+      this.inputValue = "".concat(this.inputValue, "\n");
     }
   }
 });
@@ -78268,6 +78283,7 @@ var render = function() {
                                 "w-full pr-10 overflow-y-hidden resize-none",
                               placeholder: "Write a comment..."
                             },
+                            on: { send: _vm.writeComment },
                             model: {
                               value: _vm.newCommentContent,
                               callback: function($$v) {
@@ -79972,6 +79988,79 @@ var render = function() {
                         _vm.inputValue = $event.target.value
                       },
                       resize
+                    ],
+                    focus: function($event) {
+                      return _vm.$emit("focus")
+                    },
+                    blur: function($event) {
+                      return _vm.$emit("blur")
+                    },
+                    keydown: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      if (
+                        $event.ctrlKey ||
+                        $event.shiftKey ||
+                        $event.altKey ||
+                        $event.metaKey
+                      ) {
+                        return null
+                      }
+                      $event.preventDefault()
+                    },
+                    keyup: [
+                      function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        if (
+                          $event.ctrlKey ||
+                          $event.shiftKey ||
+                          $event.altKey ||
+                          $event.metaKey
+                        ) {
+                          return null
+                        }
+                        return _vm.send($event)
+                      },
+                      function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        if (!$event.ctrlKey) {
+                          return null
+                        }
+                        if (
+                          $event.shiftKey ||
+                          $event.altKey ||
+                          $event.metaKey
+                        ) {
+                          return null
+                        }
+                        return _vm.newline($event)
+                      }
                     ]
                   }
                 }),

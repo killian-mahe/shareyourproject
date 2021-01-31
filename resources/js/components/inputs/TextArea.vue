@@ -7,6 +7,13 @@
                 class="appearance-none bg-white text-gray-700 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none"
                 :class="classIntern"
                 @input="resize"
+                @focus="$emit('focus')"
+                @blur="$emit('blur')"
+
+                @keydown.enter.exact.prevent
+                @keyup.enter.exact="send"
+                @keyup.ctrl.enter.exact="newline"
+
                 :placeholder="placeholder"
                 v-model="inputValue"
                 :name="name"
@@ -55,7 +62,15 @@
                     this.$emit('input', val);
                 },
             }
-        }
+        },
+        methods: {
+            send: function() {
+                this.$emit('send');
+            },
+            newline: function() {
+                this.inputValue = `${this.inputValue}\n`
+            }
+        },
     };
 
 </script>
