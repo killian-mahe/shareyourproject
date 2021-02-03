@@ -6,7 +6,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-const { default: Echo } = require('laravel-echo');
+//const { default: Echo } = require('laravel-echo');
 
 require('./bootstrap');
 
@@ -31,8 +31,4 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 
 const app = new Vue({
     el: '#app',
-});
-
-Echo.listen('projects.10').listen('PostCreated', (e) => {
-    console.log(e);
 });
