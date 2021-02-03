@@ -16,13 +16,32 @@
     <div class="w-full md:w-2/3 lg:w-1/2 mx-4">
         <div class="box w-full h-auto p-6">
             <div class="font-semibold text-xl border-b pb-3 w-full mb-4">Public Profile</div>
-            <div class="card-body">
-                <div class="flex">
-                    <custom-input class="w-1/2 px-3" name="email" label="First name" type="first_name" placeholder="jane.doe@shareyourproject.fr" value="user.first_name()"></custom-input>
-                    <custom-input class="w-1/2 px-3" name="email" label="Last name" type="last_name" placeholder="jane.doe@shareyourproject.fr" value="user.last_name()"></custom-input>
+            <div class="px-3 py-3">
+                {{-- First Name / Last Name --}}
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <custom-input class="w-full" name="email" label="First name" type="first_name" placeholder="jane.doe@shareyourproject.fr" value="user.first_name()"></custom-input>
+                        <custom-input class="w-full" name="email" label="Last name" type="last_name" placeholder="jane.doe@shareyourproject.fr" value="user.last_name()"></custom-input>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <div class="flex relative items-center justify-center">
+                            <img class="rounded-full w-36 h-36" src="https://randomwordgenerator.com/img/picture-generator/57e7d4414d51a814f1dc8460962e33791c3ad6e04e50744172287cd09e49cd_640.jpg">
+                            <div class="group absolute flex items-center justify-center">
+                                <span class="bg-onyx-900 rounded-full opacity-0 w-36 h-36 group-hover:opacity-50 transform duration-200 ease-in-out cursor-pointer"></span>
+                                <i class="text-cultured-100 h-5 w-5 opacity-50 absolute group-hover:opacity-100 transform duration-200 ease-in-out cursor-pointer" data-feather="edit-3"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <span class="text-gray-600 text-xs italic mx-3">Your name may appear around ShareYourProject where you contribute or are mentioned. You can change it at any time.</span>
-                <textarea label="Bio" name="bio" placeholder="user's bio" rows="2" class="appearance-none bg-white text-gray-700 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none w-full focus:border-viridiant-600 my-4"></textarea>
+                <span class="text-gray-600 text-xs italic w-1/2">Your name may appear around ShareYourProject where you contribute or are mentioned. You can change it at any time.</span>
+                {{-- Company --}}
+                <custom-input class="w-full" name="company" label="Company" type="company" placeholder="Tesla Inc."></custom-input>
+                {{-- Bio --}}
+                <text-area label="Bio" name="bio" placeholder="Tell us a little bit about yourself" rows="2" child_class="w-full"></text-area>
+                {{-- Links --}}
+                <custom-input class="w-full" name="link1" label="Links" type="link1" placeholder="jane.doe@facebook.fr"></custom-input>
+                <custom-input class="w-full" name="link2" type="link2" placeholder="jane.doe@shareyourparthouse.fr"></custom-input>
+                <custom-input class="w-full" name="link3" type="link3" placeholder="jane.doe@lovelove.fr"></custom-input>
             </div>
         </div>
     </div>
