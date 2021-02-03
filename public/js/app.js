@@ -3082,8 +3082,7 @@ __webpack_require__.r(__webpack_exports__);
 
       _api__WEBPACK_IMPORTED_MODULE_4__["API"].Post.create(this.content, this.$refs.author.value, (_this$reshare_post = this.reshare_post) === null || _this$reshare_post === void 0 ? void 0 : _this$reshare_post.id, this.enableExtraContent ? this.files.map(function (file) {
         return file.content;
-      }) : null).then(function (post) {
-        document.location.href = '/posts/' + post.id;
+      }) : null).then(function (post) {//document.location.href = '/posts/'+post.id;
       });
     }
   }
@@ -100474,6 +100473,9 @@ var API = {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+var _require = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js"),
+    Echo = _require["default"];
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -100498,6 +100500,9 @@ files.keys().map(function (key) {
 
 var app = new Vue({
   el: '#app'
+});
+Echo.listen('projects.10').listen('PostCreated', function (e) {
+  console.log(e);
 });
 
 /***/ }),
@@ -100547,7 +100552,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "1f0848b597972bd4637c",
   cluster: "eu",
-  forceTLS: true
+  forceTLS: false
 });
 
 /***/ }),

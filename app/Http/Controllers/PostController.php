@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCreated;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Image;
@@ -91,6 +92,8 @@ class PostController extends Controller
                 $post->images()->save($image);
             }
         }
+
+        broadcast(new PostCreated($post));
 
         return response()->json(new PostResource($post), 201);
     }

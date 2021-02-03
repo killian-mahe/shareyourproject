@@ -179,7 +179,7 @@
                                 this.reshare_post?.id,
                                 this.enableExtraContent ? this.files.map(file => file.content) : null)
                                 .then(post => {
-                                    document.location.href = '/posts/'+post.id;
+                                    //document.location.href = '/posts/'+post.id;
                                 });
 
             }
