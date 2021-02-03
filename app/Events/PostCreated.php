@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Http\Resources\Post as ResourcesPost;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -40,11 +41,16 @@ class PostCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        if ($this->post->project != NULL)
-        {
-            return new PrivateChannel('projects.'.$this->post->project->id);
-        }
+        return new PrivateChannel('projects.'.$this->post->project->id);
+    }
 
-        return [];
+    /**
+     * Get the data to broadcast
+     *
+     * @return App\Http\Resources\Post
+     */
+    public function broadcastWith()
+    {
+        return (new ResourcesPost($this->post))->resolve();
     }
 }

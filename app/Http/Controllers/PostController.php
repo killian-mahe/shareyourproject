@@ -93,7 +93,7 @@ class PostController extends Controller
             }
         }
 
-        broadcast(new PostCreated($post));
+        if ($post->project != NULL) broadcast(new PostCreated($post));
 
         return response()->json(new PostResource($post), 201);
     }
