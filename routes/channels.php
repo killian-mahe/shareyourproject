@@ -19,7 +19,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 });
 
 Broadcast::channel('projects.{id}', function($user, $id) {
-    return Project::findOrNew($id)->members->contains(function ($value, $key) use ($id) {
-        $value->id == $id;
+    return Project::findOrNew($id)->members->contains(function ($member, $key) use ($user) {
+        return $member->id == $user->id;
     });
 });
