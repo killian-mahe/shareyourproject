@@ -9,6 +9,8 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\Post as PostResource;
+use App\Notifications\PostCreated as NotificationsPostCreated;
+use App\User;
 
 class PostController extends Controller
 {
@@ -93,7 +95,11 @@ class PostController extends Controller
             }
         }
 
-        if ($post->project != NULL) broadcast(new PostCreated($post));
+        if ($post->project != NULL) {
+            foreach ($post->project->members as $member) {
+                $member->notify(new NotificationsPostCreated($post));
+            }
+        }
 
         return response()->json(new PostResource($post), 201);
     }
