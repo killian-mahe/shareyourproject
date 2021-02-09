@@ -1,6 +1,6 @@
 <template>
     <div class="w-full">
-    <div class="card rounded shadow-md w-full h-auto py-2" v-show="!show_modal && !only_modal">
+    <div class="card rounded shadow-md w-full h-auto py-2">
         <div class="flex items-start relative" v-click-outside="onClickOutside">
             <div @click="onUserSelect" class="inline-flex h-auto items-center cursor-pointer rounded-md hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-3 px-2">
                 <img class="w-10 h-10 rounded-full object-cover" :src="current_author.profile_picture" alt="profile_picture">
@@ -19,20 +19,6 @@
             </div>
             <text-area :rows='2' class="flex-grow ml-1 mr-4" child_class="w-full" @click="openModal"></text-area>
             <button class="btn btn-viridiant" @click="openModal">Post</button>
-        </div>
-        <div class="card-footer">
-            <div class="card-link">
-                <span class="cursor-pointer text-onyx-500 hover:text-viridiant-600">
-                    <i data-feather="camera"></i>
-                    <span class="mr-1 hidden md:inline">Photo</span>
-                </span>
-            </div>
-            <div class="card-link">
-                <span class="cursor-pointer text-onyx-500 hover:text-viridiant-600">
-                    <i data-feather="video" class="mr-2"></i>
-                    <span class="mr-1 hidden md:inline">Video</span>
-                </span>
-            </div>
         </div>
     </div>
     <modal-component v-if="show_modal || only_modal" size="md">
