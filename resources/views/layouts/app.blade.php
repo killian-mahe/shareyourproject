@@ -46,7 +46,7 @@
                 <notification-view
                     :auth_user='@json(new \App\Http\Resources\User(Auth::user()))'
                     :projects='@json(Auth::user()->projects->pluck('id'))'
-                    :initial_notifications='@json(Auth::user()->notifications->take(5))'
+                    :initial_notifications='@json(Auth::user()->notifications->take(5)->pluck('data'))'
                     ></notification-view>
                 <personal-menu :auth_user='@json(new \App\Http\Resources\User(Auth::user()))'></personal-menu>
             </div>

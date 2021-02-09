@@ -52,13 +52,10 @@ export default {
     mounted() {
         if (this.notifications.length > 0) this.newNotifications = true;
 
-
+        console.log(this.notifications)
         Echo.private(`App.User.${this.auth_user.id}`).notification((notification) => {
-            this.notifications.unshift({
-                created_at: notification.created_at,
-                data: notification,
-                type: notification.type
-            })
+            console.log(notification)
+            this.notifications.unshift(notification)
             this.unreadNotifications = true;
         });
     }

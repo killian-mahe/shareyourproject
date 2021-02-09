@@ -2102,13 +2102,23 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
+  data: function data() {
+    return {
+      text: this.notification.text
+    };
+  },
   computed: {
     time: function time() {
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(this.notification.created_at).fromNow();
     }
   },
   mounted: function mounted() {
-    console.log(this.notification);
+    var _this = this;
+
+    console.log(this.notification.created_at);
+    this.notification.tags.forEach(function (tag) {
+      _this.text = _this.text.replace(/{}/, "<strong>" + tag + "</strong>");
+    });
   }
 });
 
@@ -3984,12 +3994,11 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     if (this.notifications.length > 0) this.newNotifications = true;
+    console.log(this.notifications);
     Echo["private"]("App.User.".concat(this.auth_user.id)).notification(function (notification) {
-      _this.notifications.unshift({
-        created_at: notification.created_at,
-        data: notification,
-        type: notification.type
-      });
+      console.log(notification);
+
+      _this.notifications.unshift(notification);
 
       _this.unreadNotifications = true;
     });
@@ -84161,32 +84170,25 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "wrapper" }, [
-    _vm.notification.type === "App\\Notifications\\PostCreated"
-      ? _c(
-          "a",
-          {
-            staticClass: "a-none flex items-center space-x-2",
-            attrs: { href: _vm.notification.data.url }
-          },
-          [
-            _c("img", {
-              staticClass: "w-12 h-12 rounded-full",
-              attrs: {
-                src: _vm.notification.data.picture,
-                alt: "picture_event"
-              }
-            }),
-            _vm._v(" "),
-            _c("h2", [
-              _c("b", [_vm._v(_vm._s(_vm.notification.data.author))]),
-              _vm._v(" a posté dans "),
-              _c("b", [_vm._v(_vm._s(_vm.notification.data.project_name))]),
-              _vm._v(". "),
-              _c("span", { staticClass: "text-xs" }, [_vm._v(_vm._s(_vm.time))])
-            ])
-          ]
-        )
-      : _vm._e()
+    _c(
+      "a",
+      {
+        staticClass: "a-none flex items-center space-x-2",
+        attrs: { href: _vm.notification.url }
+      },
+      [
+        _c("img", {
+          staticClass: "w-12 h-12 rounded-full",
+          attrs: { src: _vm.notification.picture, alt: "picture_event" }
+        }),
+        _vm._v(" "),
+        _c("h2", [
+          _c("span", { domProps: { innerHTML: _vm._s(_vm.text) } }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-xs" }, [_vm._v(_vm._s(_vm.time))])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = []

@@ -59,10 +59,13 @@ class PostCreated extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'author' => $this->post->author->fullname,
+            'text' => "{} has created a new post in {}",
+            "tags" => [
+                $this->post->author->fullname,
+                $this->post->project->name
+            ],
+            "created_at" => Carbon::now(),
             'picture' => $this->post->project->profile_picture(),
-            'project_name' => $this->post->project->name,
-            'created_at' => Carbon::now(),
             'url' => route('posts.show', ['post'=>$this->post->id])
         ]);
     }
@@ -76,9 +79,13 @@ class PostCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            'author' => $this->post->author->fullname,
+            'text' => "{} has created a new post in {}",
+            "tags" => [
+                $this->post->author->fullname,
+                $this->post->project->name
+            ],
+            'created_at' => Carbon::now(),
             'picture' => $this->post->project->profile_picture(),
-            'project_name' => $this->post->project->name,
             'url' => route('posts.show', ['post'=>$this->post->id])
         ];
     }
