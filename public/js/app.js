@@ -3029,20 +3029,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -9042,7 +9028,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".wrapper[data-v-9e36ec5e] {\n  padding: 0.5rem;\n  width: 24rem;\n}\n.wrapper[data-v-9e36ec5e]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));\n}\n.wrapper[data-v-9e36ec5e] {\n  border-radius: 0.125rem;\n  cursor: pointer;\n}\n\n", ""]);
+exports.push([module.i, ".wrapper[data-v-9e36ec5e] {\n  padding: 0.5rem;\n  width: 24rem;\n}\n.wrapper[data-v-9e36ec5e]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));\n}\n.wrapper[data-v-9e36ec5e] {\n  border-radius: 0.125rem;\n  cursor: pointer;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -9080,7 +9066,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".wrapper[data-v-2819e720] {\n  position: relative;\n}\n#notif-icon[data-v-2819e720]:hover {\n  cursor: pointer;\n  fill: black;\n}\n#notif-number[data-v-2819e720] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(239, 68, 68, var(--tw-bg-opacity));\n  border-radius: 9999px;\n  font-weight: 500;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n  position: absolute;\n  top: 0px;\n  right: 0px;\n  height: 0.5rem;\n  width: 0.5rem;\n}\n.notification-list[data-v-2819e720] {\n  position: absolute;\n  right: 0px;\n  top: 2.5rem;\n}\n.notification-list[data-v-2819e720] > :not([hidden]) ~ :not([hidden]) {\n  --tw-divide-y-reverse: 0;\n  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));\n  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));\n}\n.notification-list[data-v-2819e720] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));\n  padding: 0.5rem;\n  border-radius: 0.375rem;\n  border-width: 1px;\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n", ""]);
+exports.push([module.i, ".wrapper[data-v-2819e720] {\n  position: relative;\n}\n#notif-icon[data-v-2819e720]:hover {\n  cursor: pointer;\n  fill: black;\n}\n#notif-number[data-v-2819e720] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(239, 68, 68, var(--tw-bg-opacity));\n  border-radius: 9999px;\n  font-weight: 500;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n  position: absolute;\n  top: 0px;\n  right: 0px;\n  height: 0.5rem;\n  width: 0.5rem;\n}\n.notification-list[data-v-2819e720] {\n  position: absolute;\n  right: 0px;\n  top: 2.5rem;\n}\n.notification-list[data-v-2819e720] > :not([hidden]) ~ :not([hidden]) {\n  --tw-divide-y-reverse: 0;\n  border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));\n  border-bottom-width: calc(1px * var(--tw-divide-y-reverse));\n}\n.notification-list[data-v-2819e720] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));\n  padding: 0.5rem;\n  border-radius: 0.375rem;\n  border-width: 1px;\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\r\n", ""]);
 
 // exports
 
@@ -85515,80 +85501,93 @@ var render = function() {
     "div",
     { staticClass: "w-full" },
     [
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: !_vm.show_modal && !_vm.only_modal,
-              expression: "!show_modal && !only_modal"
-            }
-          ],
-          staticClass: "card rounded shadow-md w-full h-auto py-2"
-        },
-        [
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "click-outside",
-                  rawName: "v-click-outside",
-                  value: _vm.onClickOutside,
-                  expression: "onClickOutside"
-                }
-              ],
-              staticClass: "flex items-start relative"
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "inline-flex h-auto items-center cursor-pointer rounded-md hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-3 px-2",
-                  on: { click: _vm.onUserSelect }
-                },
-                [
-                  _c("img", {
-                    staticClass: "w-10 h-10 rounded-full object-cover",
-                    attrs: {
-                      src: _vm.current_author.profile_picture,
-                      alt: "profile_picture"
+      _c("div", { staticClass: "card rounded shadow-md w-full h-auto py-2" }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "click-outside",
+                rawName: "v-click-outside",
+                value: _vm.onClickOutside,
+                expression: "onClickOutside"
+              }
+            ],
+            staticClass: "flex items-start relative"
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "inline-flex h-auto items-center cursor-pointer rounded-md hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-3 px-2",
+                on: { click: _vm.onUserSelect }
+              },
+              [
+                _c("img", {
+                  staticClass: "w-10 h-10 rounded-full object-cover",
+                  attrs: {
+                    src: _vm.current_author.profile_picture,
+                    alt: "profile_picture"
+                  }
+                }),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "w-5 h-5 ml-1",
+                  attrs: { "data-feather": "chevron-down" }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.show_select,
+                    expression: "show_select"
+                  }
+                ],
+                staticClass:
+                  "flex-col space-y-1 flex left-0 top-14 absolute bg-cultured-100 border rounded-md border-gray-300 py-2 px-2 text-sm shadow"
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "cursor-pointer justify-start inline-flex items-center space-x-3 hover:bg-cultured-400 py-1 px-2 rounded-md",
+                    on: {
+                      click: function($event) {
+                        return _vm.onAuthorSelected(_vm.auth_user)
+                      }
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("i", {
-                    staticClass: "w-5 h-5 ml-1",
-                    attrs: { "data-feather": "chevron-down" }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.show_select,
-                      expression: "show_select"
-                    }
-                  ],
-                  staticClass:
-                    "flex-col space-y-1 flex left-0 top-14 absolute bg-cultured-100 border rounded-md border-gray-300 py-2 px-2 text-sm shadow"
-                },
-                [
-                  _c(
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "w-8 h-8 rounded-full object-cover",
+                      attrs: {
+                        src: _vm.auth_user.profile_picture,
+                        alt: "profile_picture"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(_vm.auth_user.full_name))])
+                  ]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.auth_user.owned_projects, function(project) {
+                  return _c(
                     "div",
                     {
+                      key: "project_" + project.id,
                       staticClass:
-                        "cursor-pointer justify-start inline-flex items-center space-x-3 hover:bg-cultured-400 py-1 px-2 rounded-md",
+                        "cursor-pointer inline-flex items-center justify-start space-x-3 hover:bg-cultured-400  py-1 px-2 rounded-md",
                       on: {
                         click: function($event) {
-                          return _vm.onAuthorSelected(_vm.auth_user)
+                          return _vm.onAuthorSelected(project)
                         }
                       }
                     },
@@ -85596,71 +85595,42 @@ var render = function() {
                       _c("img", {
                         staticClass: "w-8 h-8 rounded-full object-cover",
                         attrs: {
-                          src: _vm.auth_user.profile_picture,
-                          alt: "profile_picture"
+                          src: project.profile_picture,
+                          alt: "project_profile_picture"
                         }
                       }),
                       _vm._v(" "),
-                      _c("span", [_vm._v(_vm._s(_vm.auth_user.full_name))])
+                      _c("span", [_vm._v(_vm._s(project.name))])
                     ]
-                  ),
-                  _vm._v(" "),
-                  _vm._l(_vm.auth_user.owned_projects, function(project) {
-                    return _c(
-                      "div",
-                      {
-                        key: "project_" + project.id,
-                        staticClass:
-                          "cursor-pointer inline-flex items-center justify-start space-x-3 hover:bg-cultured-400  py-1 px-2 rounded-md",
-                        on: {
-                          click: function($event) {
-                            return _vm.onAuthorSelected(project)
-                          }
-                        }
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "w-8 h-8 rounded-full object-cover",
-                          attrs: {
-                            src: project.profile_picture,
-                            alt: "project_profile_picture"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", [_vm._v(_vm._s(project.name))])
-                      ]
-                    )
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    ref: "author",
-                    attrs: { type: "text", name: "author", hidden: "" }
-                  })
-                ],
-                2
-              ),
-              _vm._v(" "),
-              _c("text-area", {
-                staticClass: "flex-grow ml-1 mr-4",
-                attrs: { rows: 2, child_class: "w-full" },
+                  )
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  ref: "author",
+                  attrs: { type: "text", name: "author", hidden: "" }
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("text-area", {
+              staticClass: "flex-grow ml-1 mr-4",
+              attrs: { rows: 2, child_class: "w-full" },
+              on: { click: _vm.openModal }
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-viridiant",
                 on: { click: _vm.openModal }
-              }),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-viridiant",
-                  on: { click: _vm.openModal }
-                },
-                [_vm._v("Post")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm._m(0)
-        ]
-      ),
+              },
+              [_vm._v("Post")]
+            )
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
       _vm.show_modal || _vm.only_modal
         ? _c("modal-component", {
@@ -86015,49 +85985,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-footer" }, [
-      _c("div", { staticClass: "card-link" }, [
-        _c(
-          "span",
-          {
-            staticClass: "cursor-pointer text-onyx-500 hover:text-viridiant-600"
-          },
-          [
-            _c("i", { attrs: { "data-feather": "camera" } }),
-            _vm._v(" "),
-            _c("span", { staticClass: "mr-1 hidden md:inline" }, [
-              _vm._v("Photo")
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-link" }, [
-        _c(
-          "span",
-          {
-            staticClass: "cursor-pointer text-onyx-500 hover:text-viridiant-600"
-          },
-          [
-            _c("i", {
-              staticClass: "mr-2",
-              attrs: { "data-feather": "video" }
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "mr-1 hidden md:inline" }, [
-              _vm._v("Video")
-            ])
-          ]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
