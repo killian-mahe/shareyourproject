@@ -42,11 +42,12 @@
 
             @auth
 
-            <div class="my-auto">
-                {{-- <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn-classic mx-2 a-none">Log out</button>
-                </form> --}}
+            <div class="my-auto flex space-x-6 items-center">
+                <notification-view
+                    :auth_user='@json(new \App\Http\Resources\User(Auth::user()))'
+                    :projects='@json(Auth::user()->projects->pluck('id'))'
+                    :initial_notifications='@json(Auth::user()->notifications->take(5)->pluck('data'))'
+                    ></notification-view>
                 <personal-menu :auth_user='@json(new \App\Http\Resources\User(Auth::user()))'></personal-menu>
             </div>
 
