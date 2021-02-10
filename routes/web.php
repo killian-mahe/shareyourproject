@@ -50,6 +50,20 @@ Route::resource('comments', 'CommentController')->only([
     'store', 'update', 'destroy'
 ]);
 
+Route::name('users.settings.')->prefix('users')->group(function () {
+    Route::get('{user}/settings/profile', function() {
+        return view('user.edit.profile');
+    })->name('profile');
+
+    Route::get('{user}/settings/account', function() {
+        return view('user.edit.account');
+    })->name('account');
+
+    Route::get('{user}/settings/notif', function() {
+        return view('user.edit.notif');
+    })->name('notif');
+});
+
 Route::name('projects.')->prefix('projects')->group(function () {
     Route::get('{project}/members', 'ProjectController@members')->name('members');
     Route::get('{project}/about', 'ProjectController@about')->name('about');
