@@ -4299,6 +4299,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models */ "./resources/js/models.js");
+/* harmony import */ var clamp_js_main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! clamp-js-main */ "./node_modules/clamp-js-main/clamp.js");
+/* harmony import */ var clamp_js_main__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(clamp_js_main__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -4317,9 +4319,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {},
   data: function data() {
     return {};
   },
@@ -4332,6 +4336,12 @@ __webpack_require__.r(__webpack_exports__);
     timeSinceCreation: function timeSinceCreation() {
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(this.comment.created_at).fromNow();
     }
+  },
+  mounted: function mounted() {
+    console.log(clamp_js_main__WEBPACK_IMPORTED_MODULE_2___default.a);
+    console.log(clamp_js_main__WEBPACK_IMPORTED_MODULE_2___default()(this.$refs.content, {
+      clamp: 1
+    }));
   }
 });
 
@@ -8997,6 +9007,292 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/clamp-js-main/clamp.js":
+/*!*********************************************!*\
+  !*** ./node_modules/clamp-js-main/clamp.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * Clamp.js 0.11.5
+ *
+ * Now Maintained by Josh English http://joshengish.com
+ * Joseph Schmitt http://joe.sh
+ * Released under the WTFPL license
+ * http://sam.zoy.org/wtfpl/
+ */
+
+(function(root, factory) {
+  if (true) {
+    // AMD
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+}(this, function() {
+  /**
+   * Clamps a text node.
+   * @param {HTMLElement} element. Element containing the text node to clamp.
+   * @param {Object} options. Options to pass to the clamper.
+   */
+  function clamp(element, options) {
+    options = options || {};
+
+    var self = this,
+      win = window,
+      opt = {
+        clamp: options.clamp || 2,
+        useNativeClamp: typeof(options.useNativeClamp) != 'undefined' ? options.useNativeClamp : true,
+        splitOnChars: options.splitOnChars || ['.', '-', '–', '—', ' '], //Split on sentences (periods), hypens, en-dashes, em-dashes, and words (spaces).
+        animate: options.animate || false,
+        truncationChar: options.truncationChar || '…',
+        truncationHTML: options.truncationHTML
+      },
+
+      sty = element.style,
+      originalText = element.innerHTML,
+
+      supportsNativeClamp = typeof(element.style.webkitLineClamp) != 'undefined',
+      clampValue = opt.clamp,
+      isCSSValue = clampValue.indexOf && (clampValue.indexOf('px') > -1 || clampValue.indexOf('em') > -1),
+      truncationHTMLContainer;
+
+    if (opt.truncationHTML) {
+      truncationHTMLContainer = document.createElement('span');
+      truncationHTMLContainer.innerHTML = opt.truncationHTML;
+    }
+
+
+    // UTILITY FUNCTIONS __________________________________________________________
+
+    /**
+     * Return the current style for an element.
+     * @param {HTMLElement} elem The element to compute.
+     * @param {string} prop The style property.
+     * @returns {number}
+     */
+    function computeStyle(elem, prop) {
+      if (!win.getComputedStyle) {
+        win.getComputedStyle = function(el, pseudo) {
+          this.el = el;
+          this.getPropertyValue = function(prop) {
+            var re = /(\-([a-z]){1})/g;
+            if (prop == 'float') prop = 'styleFloat';
+            if (re.test(prop)) {
+              prop = prop.replace(re, function() {
+                return arguments[2].toUpperCase();
+              });
+            }
+            return el.currentStyle && el.currentStyle[prop] ? el.currentStyle[prop] : null;
+          };
+          return this;
+        };
+      }
+
+      return win.getComputedStyle(elem, null).getPropertyValue(prop);
+    }
+
+    /**
+     * Returns the maximum number of lines of text that should be rendered based
+     * on the current height of the element and the line-height of the text.
+     */
+    function getMaxLines(height) {
+      var availHeight = height || element.clientHeight,
+        lineHeight = getLineHeight(element);
+
+      return Math.max(Math.floor(availHeight / lineHeight), 0);
+    }
+
+    /**
+     * Returns the maximum height a given element should have based on the line-
+     * height of the text and the given clamp value.
+     */
+    function getMaxHeight(clmp) {
+      var lineHeight = getLineHeight(element);
+      // console.log(lineHeight * clmp);
+      return lineHeight * clmp;
+    }
+
+    /**
+     * Returns the line-height of an element as an integer.
+     */
+    function getLineHeight(elem) {
+      var lh = computeStyle(elem, 'line-height');
+      if (lh == 'normal') {
+        // Normal line heights vary from browser to browser. The spec recommends
+        // a value between 1.0 and 1.2 of the font size. Using 1.1 to split the diff.
+        lh = parseInt(computeStyle(elem, 'font-size')) * 1.187;
+      }
+      return Math.ceil(parseFloat(lh));
+    }
+
+
+    // MEAT AND POTATOES (MMMM, POTATOES...) ______________________________________
+    var splitOnChars = opt.splitOnChars.slice(0),
+      splitChar = splitOnChars[0],
+      chunks,
+      lastChunk;
+
+    /**
+     * Gets an element's last child. That may be another node or a node's contents.
+     */
+    function getLastChild(elem) {
+      if (!elem.lastChild) {
+        return;
+      }
+      //Current element has children, need to go deeper and get last child as a text node
+      if (elem.lastChild.childNodes && elem.lastChild.childNodes.length > 0) {
+        return getLastChild(Array.prototype.slice.call(elem.childNodes).pop());
+      }
+      //This is the absolute last child, a text node, but something's wrong with it. Remove it and keep trying
+      else if (!elem.lastChild || !elem.lastChild.nodeValue || elem.lastChild.nodeValue === '' || elem.lastChild.nodeValue == opt.truncationChar) {
+        elem.lastChild.parentNode.removeChild(elem.lastChild);
+        return getLastChild(element);
+      }
+      //This is the last child we want, return it
+      else {
+        return elem.lastChild;
+      }
+    }
+
+    /**
+     * Removes one character at a time from the text until its width or
+     * height is beneath the passed-in max param.
+     */
+    function truncate(target, maxHeight) {
+      if (!target || !maxHeight) {
+        return;
+      }
+
+      /**
+       * Resets global variables.
+       */
+      function reset() {
+        splitOnChars = opt.splitOnChars.slice(0);
+        splitChar = splitOnChars[0];
+        chunks = null;
+        lastChunk = null;
+      }
+      // console.log(splitOnChars);
+
+      var nodeValue = target.nodeValue.replace(opt.truncationChar, '');
+
+      //Grab the next chunks
+      if (!chunks) {
+        //If there are more characters to try, grab the next one
+        if (splitOnChars.length > 0) {
+          splitChar = splitOnChars.shift();
+        }
+        //No characters to chunk by. Go character-by-character
+        else {
+          splitChar = '';
+        }
+
+        chunks = nodeValue.split(splitChar);
+      }
+
+      //If there are chunks left to remove, remove the last one and see if
+      // the nodeValue fits.
+      if (chunks.length > 1) {
+        // console.log('chunks', chunks);
+        lastChunk = chunks.pop();
+        // console.log('lastChunk', lastChunk);
+        applyEllipsis(target, chunks.join(splitChar));
+      }
+      //No more chunks can be removed using this character
+      else {
+        chunks = null;
+      }
+
+      //Insert the custom HTML before the truncation character
+      if (truncationHTMLContainer) {
+        target.nodeValue = target.nodeValue.replace(opt.truncationChar, '');
+        element.innerHTML = target.nodeValue + ' ' + truncationHTMLContainer.innerHTML + opt.truncationChar;
+      }
+
+      //Search produced valid chunks
+      if (chunks) {
+        //It fits
+        if (element.clientHeight <= maxHeight) {
+          // console.log(element.clientHeight, maxHeight);
+          //There's still more characters to try splitting on, not quite done yet
+          if (splitOnChars.length >= 0 && splitChar !== '') {
+            applyEllipsis(target, chunks.join(splitChar) + splitChar + lastChunk);
+            chunks = null;
+          }
+          //Finished!
+          else {
+            return element.innerHTML;
+          }
+        }
+      }
+      //No valid chunks produced
+      else {
+        //No valid chunks even when splitting by letter, time to move
+        //on to the next node
+        if (splitChar === '') {
+          applyEllipsis(target, '');
+          target = getLastChild(element);
+
+          reset();
+        }
+      }
+
+      //If you get here it means still too big, let's keep truncating
+      if (opt.animate) {
+        setTimeout(function() {
+          truncate(target, maxHeight);
+        }, opt.animate === true ? 10 : opt.animate);
+      } else {
+        return truncate(target, maxHeight);
+      }
+    }
+
+    function applyEllipsis(elem, str) {
+      elem.nodeValue = str + opt.truncationChar;
+    }
+
+
+    // CONSTRUCTOR ________________________________________________________________
+
+    if (clampValue == 'auto') {
+      clampValue = getMaxLines();
+    } else if (isCSSValue) {
+      clampValue = getMaxLines(parseInt(clampValue));
+    }
+
+    var clampedText;
+    if (supportsNativeClamp && opt.useNativeClamp) {
+      sty.overflow = 'hidden';
+      sty.textOverflow = 'ellipsis';
+      sty.webkitBoxOrient = 'vertical';
+      sty.display = '-webkit-box';
+      sty.webkitLineClamp = clampValue;
+
+      if (isCSSValue) {
+        sty.height = opt.clamp + 'px';
+      }
+    } else {
+      var height = getMaxHeight(clampValue);
+      if (height < element.clientHeight) {
+        clampedText = truncate(getLastChild(element), height);
+      }
+    }
+
+    return {
+      'original': originalText,
+      'clamped': clampedText
+    };
+  }
+
+  return clamp;
+}));
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/posts/PostModal.vue?vue&type=style&index=0&id=4dff5e96&lang=scss&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/posts/PostModal.vue?vue&type=style&index=0&id=4dff5e96&lang=scss&scoped=true& ***!
@@ -9085,7 +9381,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".expand-btn[data-v-f6e39976] {\n  cursor: pointer;\n  font-weight: 600;\n  font-size: 1rem;\n  line-height: 1.5rem;\n  line-height: 1.5rem;\n  margin-left: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(81, 87, 90, var(--tw-text-opacity));\n}\n.comment[data-v-f6e39976] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));\n  border-bottom-right-radius: 0.6rem;\n  border-bottom-left-radius: 0.6rem;\n  border-top-right-radius: 0.6rem;\n  margin-left: 0.75rem;\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n  width: 100%;\n}\r\n", ""]);
+exports.push([module.i, ".expand-btn[data-v-f6e39976] {\n  cursor: pointer;\n  font-weight: 600;\n  font-size: 1rem;\n  line-height: 1.5rem;\n  line-height: 1.5rem;\n  margin-left: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(81, 87, 90, var(--tw-text-opacity));\n}\n.comment[data-v-f6e39976] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));\n  border-bottom-right-radius: 0.6rem;\n  border-bottom-left-radius: 0.6rem;\n  border-top-right-radius: 0.6rem;\n  margin-left: 0.75rem;\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n  padding-left: 0.75rem;\n  padding-right: 0.75rem;\n  width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -87789,6 +88085,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("span", {
+        ref: "content",
         staticClass: "text-sm",
         domProps: { innerHTML: _vm._s(_vm.comment.formated_content) }
       })

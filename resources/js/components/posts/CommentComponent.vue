@@ -10,7 +10,7 @@
             </div>
 
             <!-- Comment content -->
-            <span class="text-sm" v-html="comment.formated_content">
+            <span ref="content" class="text-sm" v-html="comment.formated_content">
             </span>
         </div>
     </div>
@@ -19,8 +19,11 @@
 <script>
     import moment from 'moment';
     import {Comment} from '../../models';
+    import $clamp from 'clamp-js-main'
 
     export default {
+        components: {
+        },
         data() {
             return {
             }
@@ -34,6 +37,10 @@
             timeSinceCreation: function() {
                 return moment(this.comment.created_at).fromNow();
             }
+        },
+        mounted() {
+            console.log($clamp)
+            console.log($clamp(this.$refs.content, {clamp:1}))
         }
     }
 </script>
