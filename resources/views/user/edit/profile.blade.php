@@ -5,11 +5,11 @@
     {{-- Main Content --}}
     <div class="w-full">
         <div class="box w-full h-auto p-3 md:p-6">
-            <div class="font-semibold text-xl border-b pb-3 w-full mb-4 ml-2">Public Profile</div>
+            <div class="font-semibold text-xl border-b pb-3 w-full mb-4 ml-2">Public Profile Settings</div>
             <div class="px-2 py-2 md:px-3 md:py-3">
                 {{-- First Name / Last Name --}}
                 <div class="w-full flex items-center space-x-3 md:space-x-8 space-x-3">
-                    <div class="w-1/2 md:w-full xl:w-1/2 space-y-2">
+                    <div class="w-1/2 md:w-full xl:w-1/2 space-y-6">
                         <custom-input class="w-full" name="email" label="First name" type="text" placeholder="Jan" value="user.first_name()"></custom-input>
                         <custom-input class="w-full" name="email" label="Last name" type="text" placeholder="Doe" value="user.last_name()"></custom-input>
                     </div>
@@ -31,17 +31,19 @@
                 <text-area class="mt-8" label="Bio" name="bio" placeholder="Tell us a little bit about yourself" rows="2" child_class="w-full" max_length="800"></text-area>
 
                 {{-- Links --}}
-                <div class="w-full flex items-center space-x-4 mt-4">
-                    <i class="text-onyx-800 h-5 w-5 cursor-pointer" data-feather="facebook"></i>
-                    <custom-input class="w-full" name="link1" type="url" placeholder="ex: jane.doe@facebook.fr"></custom-input>
-                </div>
-                <div class="w-full flex items-center space-x-4">
-                    <i class="text-onyx-800 h-5 w-5 cursor-pointer" data-feather="linkedin"></i>
-                    <custom-input class="w-full" name="link2" type="url" placeholder="ex: jane.doe@linkedin.fr"></custom-input>
-                </div>
-                <div class="w-full flex items-center space-x-4">
-                    <i class="text-onyx-800 h-5 w-5 cursor-pointer" data-feather="github"></i>
-                    <custom-input class="w-full" name="link3" type="url" placeholder="ex: jane.doe@github.fr"></custom-input>
+                <div class="w-full flex-none space-y-2">
+                    <div class="w-full flex items-center space-x-4 mt-4">
+                        <i class="text-onyx-800 h-5 w-5 cursor-pointer" data-feather="facebook"></i>
+                        <custom-input class="w-full" name="link1" type="url" placeholder="ex: jane.doe@facebook.fr"></custom-input>
+                    </div>
+                    <div class="w-full flex items-center space-x-4">
+                        <i class="text-onyx-800 h-5 w-5 cursor-pointer" data-feather="linkedin"></i>
+                        <custom-input class="w-full" name="link2" type="url" placeholder="ex: jane.doe@linkedin.fr"></custom-input>
+                    </div>
+                    <div class="w-full flex items-center space-x-4">
+                        <i class="text-onyx-800 h-5 w-5 cursor-pointer" data-feather="github"></i>
+                        <custom-input class="w-full" name="link3" type="url" placeholder="ex: jane.doe@github.fr"></custom-input>
+                    </div>
                 </div>
             </div>
         </div>
