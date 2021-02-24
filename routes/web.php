@@ -43,7 +43,7 @@ Route::resource('posts', 'PostController');
 Route::resource('projects', 'ProjectController');
 
 Route::resource('users', 'UserController')->except([
-    'create', 'store'
+    'create', 'store', 'edit'
 ]);
 
 Route::resource('comments', 'CommentController')->only([
