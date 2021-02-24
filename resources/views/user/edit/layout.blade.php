@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="w-auto md:w-auto lg:w-1/2 md:mx-4">
+    <div class="w-auto md:w-auto lg:w-2/3 md:mx-4">
         @yield('main')
     </div>
     <div class="hidden xl:block lg:w-1/6 xl:w-1/8"></div>
