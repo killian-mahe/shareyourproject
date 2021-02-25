@@ -10,22 +10,29 @@
             </div>
 
             <!-- Comment content -->
-            <span ref="content" class="text-sm" v-html="comment.formated_content">
-            </span>
+            <div ref="content" class="text-sm content overflow-hidden" v-html="comment.formated_content" :class="{'max-h-8': !expand}">
+
+            </div>
+            <div v-if="overflow" class="absolute right-2 bottom-1 cursor-pointer hover:underline text-sm text-onyx-700" @click="on_expand">
+                ...read more
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     import moment from 'moment';
-    import {Comment} from '../../models';
-    import $clamp from 'clamp-js-main'
 
     export default {
         components: {
         },
         data() {
             return {
+                overflow: {
+                    type: Boolean,
+                    default: false
+                },
+                expand: false
             }
         },
         props: {
@@ -39,8 +46,14 @@
             }
         },
         mounted() {
-            console.log($clamp)
-            console.log($clamp(this.$refs.content, {clamp:1}))
+            let el = this.$refs.content
+            this.overflow = el.clientWidth < el.scrollWidth || el.clientHeight < el.scrollHeight;
+        },
+        methods: {
+            on_expand() {
+                this.overflow = false;
+                this.expand = true;
+            }
         }
     }
 </script>
@@ -51,6 +64,7 @@
 }
 
 .comment {
-    @apply rounded-b-xl rounded-tr-xl ml-3 bg-gray-200 w-full px-3 py-2;
+    @apply rounded-b-xl rounded-tr-xl ml-3 bg-gray-200 w-full px-3 py-2 relative;
 }
+
 </style>
