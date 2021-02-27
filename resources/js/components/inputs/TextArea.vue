@@ -15,11 +15,11 @@
                 @keyup.ctrl.enter.exact="newline"
 
                 :placeholder="placeholder"
-                v-model="inputValue"
+                v-model="input_value"
                 :name="name"
                 :rows="rows"
             ></textarea>
-            <p v-if='max_length' :class="{'text-red-500':inputValue.length > max_length}" class="text-gray-600 text-xs italic text-right" >{{inputValue.length}}/{{max_length}}</p>
+            <p v-if='max_length' :class="{'text-red-500':intern_value.length > max_length}" class="text-gray-600 text-xs italic text-right" >{{intern_value.length}}/{{max_length}}</p>
           </div>
       </template>
     </resize-auto>
@@ -45,21 +45,31 @@
                 default: 2
             },
         },
+        data() {
+            return {
+                intern_value: this.value
+            }
+        },
+        mounted() {
+            console.log("intern_value :"+this.intern_value)
+        },
         computed: {
             classIntern: function() {
-                if (this.inputValue.length > this.max_length) {
+                if (this.input_value.length > this.max_length) {
                     return this.child_class + " focus:border-red-500 border-red-500";
                 }
                 else {
                     return this.child_class + " focus:border-viridiant-600";
                 }
             },
-            inputValue: {
+            input_value: {
                 get() {
                     return this.value;
                 },
                 set(val) {
                     this.$emit('input', val);
+                    this.intern_value = val;
+                    console.log("intern_value :"+this.intern_value)
                 },
             }
         },
@@ -68,7 +78,7 @@
                 this.$emit('send');
             },
             newline: function() {
-                this.inputValue = `${this.inputValue}\n`
+                this.inputValue = `${this.inputValue}\n`;
             }
         },
     };
