@@ -10,7 +10,7 @@
             </div>
 
             <!-- Comment content -->
-            <div ref="content" class="text-sm content overflow-hidden" v-html="comment.formated_content" :class="{'max-h-8': !expand}">
+            <div ref="content" class="text-sm content overflow-hidden" v-html="comment.formated_content" :class="{'max-h-4': !expand}">
 
             </div>
             <div v-if="overflow" class="absolute right-2 bottom-1 cursor-pointer hover:underline text-sm text-onyx-700" @click="on_expand">
