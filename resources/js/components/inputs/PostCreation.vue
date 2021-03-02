@@ -142,7 +142,8 @@
             },
             closeModal: function() {
                 this.show_modal = false;
-                this.previewFileUrl = "";
+                this.files = [];
+                this.errors= [];
                 this.$emit('close');
             },
             selectFile: function() {
@@ -165,12 +166,14 @@
             },
             createPost: function() {
 
+                this.errors = [];
+
                 API.Post.create(this.content,
                                 this.$refs.author.value,
                                 this.reshare_post?.id,
                                 this.enableExtraContent ? this.files.map(file => file.content) : null)
                                 .then(post => {
-                                    // document.location.href = '/posts/'+post.id;
+                                    document.location.href = '/posts/'+post.id;
                                 }).catch(api_error => {
 
                                     Object.values(api_error.response.data.errors).forEach(error => {
