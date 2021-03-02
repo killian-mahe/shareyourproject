@@ -65,6 +65,9 @@
                 <span v-else><svg class="feather feather-image hover:bg-onyx-100 p-2 w-10 h-10 rounded-full bg-cultured-100 cursor-not-allowed transition-colors ease-in-out duration-150" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>
                 <button class="btn btn-viridiant-outline" @click="createPost">Publish</button>
             </div>
+            <ul>
+                <li v-for="(error, index) in errors" :key="'error_'+index">{{ error }}</li>
+            </ul>
         </template>
     </modal-component>
     </div>
@@ -109,7 +112,8 @@
                 show_select: false,
                 content: "",
                 files: [],
-                current_author: this.auth_user
+                current_author: this.auth_user,
+                errors: []
             }
         },
         mounted() {
@@ -165,7 +169,10 @@
                                 this.reshare_post?.id,
                                 this.enableExtraContent ? this.files.map(file => file.content) : null)
                                 .then(post => {
-                                    //document.location.href = '/posts/'+post.id;
+                                    // document.location.href = '/posts/'+post.id;
+                                }).catch(api_error => {
+                                    console.log(api_error.response.data.errors)
+                                    // this.errors = error.response.data.errors.values
                                 });
 
             }
