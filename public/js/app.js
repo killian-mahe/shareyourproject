@@ -3032,6 +3032,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -3117,13 +3118,16 @@ __webpack_require__.r(__webpack_exports__);
       this.show_select = false;
     },
     createPost: function createPost() {
-      var _this$reshare_post;
+      var _this$reshare_post,
+          _this = this;
 
       _api__WEBPACK_IMPORTED_MODULE_4__["API"].Post.create(this.content, this.$refs.author.value, (_this$reshare_post = this.reshare_post) === null || _this$reshare_post === void 0 ? void 0 : _this$reshare_post.id, this.enableExtraContent ? this.files.map(function (file) {
         return file.content;
       }) : null).then(function (post) {// document.location.href = '/posts/'+post.id;
       })["catch"](function (api_error) {
-        console.log(api_error.response.data.errors); // this.errors = error.response.data.errors.values
+        Object.values(api_error.response.data.errors).forEach(function (error) {
+          _this.errors = _this.errors.concat(error);
+        });
       });
     }
   }
@@ -85996,15 +86000,21 @@ var render = function() {
                         ]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "ul",
-                        _vm._l(_vm.errors, function(error, index) {
-                          return _c("li", { key: "error_" + index }, [
-                            _vm._v(_vm._s(error))
-                          ])
-                        }),
-                        0
-                      )
+                      _vm.errors.length > 0
+                        ? _c(
+                            "ul",
+                            {
+                              staticClass:
+                                "mt-2 bg-red-50 rounded-md p-2 border border-red-300 text-red-400"
+                            },
+                            _vm._l(_vm.errors, function(error, index) {
+                              return _c("li", { key: "error_" + index }, [
+                                _vm._v(_vm._s(error))
+                              ])
+                            }),
+                            0
+                          )
+                        : _vm._e()
                     ]
                   },
                   proxy: true
@@ -86012,7 +86022,7 @@ var render = function() {
               ],
               null,
               false,
-              443500803
+              1958397866
             )
           })
         : _vm._e()
