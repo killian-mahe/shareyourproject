@@ -35,7 +35,7 @@ class FeedController extends Controller
             $posts = $posts->merge(Post::all()->random(10));
         }
 
-        return view('feed', ['posts' => $posts]);
+        return view('feed', ['posts' => $posts->sortByDesc('created_at')]);
     }
 
     /**
@@ -64,7 +64,7 @@ class FeedController extends Controller
         }
 
         if ($posts->count() > 0) {
-            return response()->json(PostResource::collection($posts), 200);
+            return response()->json(PostResource::collection($posts->sortByDesc('created_at')), 200);
         } else {
             return response([], 204);
         }
