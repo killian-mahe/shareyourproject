@@ -26,7 +26,7 @@
 @if ($posts->count() > 0)
     <h2 class="font-semibold text-xl my-5 ml-3">Posts</h2>
 
-    @foreach ($user->posts as $post)
+    @foreach ($user->posts()->orderByDesc('created_at')->get() as $post)
 
         @include('components.post')
 
