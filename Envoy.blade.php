@@ -37,5 +37,5 @@ optimization
     {{ $php_path }} artisan config:cache
     {{ $php_path }} artisan route:cache
     {{ $php_path }} artisan view:cache
-    {{ $php_path }} artisan up
+    {{ $php_path }} artisan up -n
 @endtask
