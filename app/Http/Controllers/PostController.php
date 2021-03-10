@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCreated;
 use App\Models\Post;
 use App\Models\Project;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\Post as PostResource;
+use App\Notifications\PostCreated as NotificationsPostCreated;
+use App\User;
 
 class PostController extends Controller
 {
@@ -89,6 +92,12 @@ class PostController extends Controller
                 $image = new Image;
                 $image->url = $path;
                 $post->images()->save($image);
+            }
+        }
+
+        if ($post->project != NULL) {
+            foreach ($post->project->members as $member) {
+                $member->notify(new NotificationsPostCreated($post));
             }
         }
 

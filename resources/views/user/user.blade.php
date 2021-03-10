@@ -4,7 +4,7 @@
 
 <div class="box p-5">
 
-    <h2 class="category-title">Who he is ?</h2>
+    <h2 class="category-title">Who am I ?</h2>
     <span class="font-light text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac eros vitae nisl ultrices laoreet.
         Donec id mi ut arcu iaculis rhoncus eu sollicitudin dolor. Nulla ultricies arcu sed nisi convallis tincidunt.
         Nullam a dui enim. Donec ac est eget mauris gravida maximus. Nulla eu dolor et sem porta ullamcorper.
@@ -26,7 +26,7 @@
 @if ($posts->count() > 0)
     <h2 class="font-semibold text-xl my-5 ml-3">Posts</h2>
 
-    @foreach ($user->posts as $post)
+    @foreach ($user->posts()->orderByDesc('created_at')->get() as $post)
 
         @include('components.post')
 

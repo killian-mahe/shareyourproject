@@ -70,6 +70,7 @@ class ProjectController extends Controller
 
         if ($request->exists('collaborators')) {
             $project->members()->attach($validatedData['collaborators']);
+            $project->members()->attach(Auth::user()->id);
         }
 
         if ($request->exists('badges')) {

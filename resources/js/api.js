@@ -23,6 +23,7 @@ const fetchResource = (method, path, data = {}, headers = {}) => {
         data: data,
         headers: headers
     }).then(response => {
+        console.log(response)
         if (response.status >= 200 && response.status < 300) {
             return response.data;
         } else {
