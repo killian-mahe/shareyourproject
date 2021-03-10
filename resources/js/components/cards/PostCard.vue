@@ -86,7 +86,7 @@
 
             </div>
         </div>
-        <div v-if="post.comments_overview.length > 0 || first_comment" class="p-5 mb-2 border-t-0.0625 border-onyx-100">
+        <div v-if="(post.comments_overview.length > 0 || first_comment) && !reshared_post" class="p-5 mb-2 border-t-0.0625 border-onyx-100">
             <div v-if="auth_user != null" class="mb-3 flex relative items-start">
                 <img :src="auth_user.profile_picture" class="h-12 w-12 rounded-full mr-3" alt="profile_picture">
                 <text-area class="w-full" child_class="w-full pr-10 overflow-y-hidden resize-none" placeholder="Write a comment..." @send="writeComment" v-model="newCommentContent"></text-area>
