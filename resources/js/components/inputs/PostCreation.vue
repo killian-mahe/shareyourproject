@@ -1,6 +1,6 @@
 <template>
     <div class="w-full">
-    <div class="card rounded shadow-md w-full h-auto py-2">
+    <div class="card rounded shadow-md w-full h-auto py-2" v-if="!only_modal">
         <div class="flex items-start relative" v-click-outside="onClickOutside">
             <div @click="onUserSelect" class="inline-flex h-auto items-center cursor-pointer rounded-md hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-3 px-2">
                 <img class="w-10 h-10 rounded-full object-cover" :src="current_author.profile_picture" alt="profile_picture">
