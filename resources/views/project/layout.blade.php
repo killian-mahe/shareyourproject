@@ -2,17 +2,17 @@
 
 @section('content')
 
-<div class="flex justify-center mt-4 min-h-screen">
+<div class="block lg:flex justify-center mt-4 min-h-screen">
 
-    <div class="hidden md:block md:w-1/3 md:ml-4 lg:w-1/4 xl:w-1/6">
-        <div class="box w-full h-auto mb-4 flex flex-col flex-none py-2 p-5 mt-48">
+    <div class="block w-auto md:mx-4 lg:w-1/4 xl:w-1/6">
+        <div class="box w-full h-auto mb-4 flex lg:flex-col flex-none py-2 p-5 md:mt-4 justify-center lg:mt-48 md:space-x-8 lg:space-x-0">
             <a class="py-2 px-6" href="{{route('projects.show', ['project'=>$project->id])}}">Publications</a>
             <a class="py-2 px-6" href="{{route('projects.members', ['project'=>$project->id])}}">Members</a>
             <a class="py-2 px-6" href="{{route('projects.about', ['project'=>$project->id])}}">About</a>
         </div>
     </div>
 
-    <div class="w-full md:w-2/3 lg:w-1/2 mx-4">
+    <div class="w-auto md:w-auto lg:w-2/3 md:mx-4">
 
         <div class="box w-full h-auto mb-6">
             <div class="flex relative justify-center">

@@ -50,7 +50,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit', ['user' => $user]);
+        return view('user.edit.profile', ['user' => $user]);
     }
 
     /**
