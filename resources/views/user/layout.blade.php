@@ -14,7 +14,7 @@
         {{--  --}}
     </div>
 
-    <div class="w-full md:w-2/3 lg:w-1/2 mx-4">
+    <div class="w-full md:w-2/3 lg:w-1/2 md:mx-4">
 
         <div class="box w-full h-auto mb-3 pb-4">
             <div class="flex relative justify-center">
