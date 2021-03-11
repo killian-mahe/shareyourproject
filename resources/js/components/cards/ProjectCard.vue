@@ -1,5 +1,5 @@
 <template>
-    <div v-if="project" class="bg-cultured-100 shadow md:rounded-lg flex mb-3 border-b-8 border-viridiant-600 min-h-14">
+    <div v-if="project" class="bg-cultured-100 shadow md:rounded-lg flex mb-3 border-b-8 border-viridiant-600 min-h-10">
         <img class="w-1/4 md:rounded-tl-md object-cover" :src="project.profile_picture" alt="project_picture">
         <div class="p-3 flex flex-col justify-between w-full">
             <div>
