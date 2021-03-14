@@ -2,8 +2,15 @@
     @apply font-semibold mb-2 text-xl;
 }
 
-a:hover:not(.a-none) {
-    @apply text-viridiant-600 underline;
+a:not(.a-none) {
+
+    &:hover{
+        @apply text-viridiant-600 underline;
+    }
+
+    &.active{
+        @apply text-viridiant-600;
+    }
 }
 
 .box {
