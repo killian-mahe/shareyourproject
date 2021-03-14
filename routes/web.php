@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -51,16 +52,16 @@ Route::resource('comments', 'CommentController')->only([
 ]);
 
 Route::name('users.settings.')->prefix('users')->group(function () {
-    Route::get('{user}/settings/profile', function() {
-        return view('user.edit.profile');
+    Route::get('{user}/settings/profile', function(User $user) {
+        return view('user.edit.profile', ['user' => $user]);
     })->name('profile');
 
-    Route::get('{user}/settings/account', function() {
-        return view('user.edit.account');
+    Route::get('{user}/settings/account', function(User $user) {
+        return view('user.edit.account', ['user' => $user]);
     })->name('account');
 
-    Route::get('{user}/settings/notif', function() {
-        return view('user.edit.notif');
+    Route::get('{user}/settings/notif', function(User $user) {
+        return view('user.edit.notif', ['user' => $user]);
     })->name('notif');
 });
 
