@@ -1,12 +1,13 @@
 <template>
     <div v-if="post !== undefined" class="card md:rounded-lg" :class="{'shadow-md mb-6': !reshared_post, 'border border-gray-400 hover:bg-cultured-300': reshared_post}">
         <div v-if="post.project" class="card-title justify-between">
-            <div class="flex">
+            <div class="flex items-center">
                 <a :href="post.project.url.index" class="w-auto inline-grid">
-                    <img class="rounded-full my-auto h-10 w-10 object-cover hover:shadow-md" :src="post.project.profile_picture"/>
+                    <img class="rounded-full my-auto h-12 w-12 object-cover hover:shadow-md" :src="post.project.profile_picture"/>
                 </a>
                 <div class="flex flex-col ml-3 justify-start">
-                    <div class="my-auto text-lg"><a class="font-bold" :href="post.project.url.index">{{ post.project.name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
+                    <a class="font-semibold leading-tight" :href="post.project.url.index">{{ post.project.name}}</a>
+                    <span class="text-xs font-light leading-tight">{{timeSinceCreation}}</span>
                 </div>
             </div>
 
@@ -18,18 +19,29 @@
                 </ul>
             </span>
         </div>
-        <div v-else class="card-title">
-            <a :href="post.url.author" class="w-auto inline-grid">
-                <img class="rounded-full my-auto h-10 w-10 object-cover hover:shadow-md" :src="post.author.profile_picture"/>
-            </a>
-            <div class="flex flex-col ml-3 justify-start">
-                <div><a class="font-bold" :href="post.url.author">{{ post.author.first_name }} {{post.author.last_name}}</a> • <span class="text-sm font-light">{{timeSinceCreation}}</span></div>
-                <span class="font-sans italic text-base">{{ post.author.title }}</span>
+        <div v-else class="card-title justify-between">
+            <div class="flex items-center">
+                <a :href="post.url.author" class="w-auto inline-grid">
+                    <img class="rounded-full my-auto h-12 w-12 object-cover hover:shadow-md" :src="post.author.profile_picture"/>
+                </a>
+                <div class="flex flex-col ml-3 justify-start">
+                    <a class="font-semibold leading-tight" :href="post.url.author">{{ post.author.first_name }} {{post.author.last_name}}</a>
+                    <span class="text-xs font-light leading-tight">{{timeSinceCreation}}</span>
+                    <span class="text-xs font-light leading-tight">{{ post.author.title }}</span>
+                </div>
             </div>
+
+            <span class="my-auto relative" @click="on_options = !on_options" v-click-outside="onClickOutSideOptions">
+                <svg class="feather feather-more-vertical h-7 w-7 bg-cultured-100 hover:bg-onyx-100 ease-in-out duration-150 p-1 rounded-full cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+
+                <ul class="dropdown-menu right-0" v-if="on_options">
+                    <li class="dropdown-item cursor-pointer" @click="on_send = true">Send</li>
+                </ul>
+            </span>
         </div>
 
         <div class="card-body sm:px-0 md:text-lg pt-5">
-            <p class="mb-4 leading-5 font-normal text-onyx-600 md:px-4" v-html="post.formated_content">
+            <p class="mb-4 leading-5 text-sm lg:text-base font-normal text-onyx-600 md:px-4" v-html="post.formated_content">
             </p>
 
             <!-- Tags -->
