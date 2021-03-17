@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -60,9 +61,80 @@ class UserController extends Controller
      * @param  App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function updateProfile(Request $request, User $user)
     {
-        //
+        if (Auth::user()->id != $user->id) abort(403);
+
+        $validatedData = $request->validate([
+            'first_name' => ['required', 'string'],
+            'last_name' => ['required', 'string'],
+            'title' => ['nullable', 'string'],
+            'bio' => ['nullable', 'string', 'max:255']
+        ]);
+
+        $user = Auth::user();
+        $user->first_name = $validatedData['first_name'];
+        $user->last_name = $validatedData['last_name'];
+        $user->title = $validatedData['title'];
+        if ($validatedData['bio']) $user->bio = $validatedData['bio'];
+
+        $user->save();
+
+        return view('user.edit.profile', ['user' => $user]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function updateAccount(Request $request, User $user)
+    {
+        if (Auth::user()->id != $user->id) abort(403);
+
+        $validatedData = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['nullable', 'string', 'confirmed'],
+            'pseudo' => ['required', 'string']
+        ]);
+
+        if ($user->email != $validatedData['email']) {
+            if (User::where('email', $validatedData['email'])->exists()) {
+                $validatedData = $request->validate([
+                    'email' => ['required', 'email', 'unique:users,email']
+                ]);
+            }
+        }
+
+        if ($user->username != $validatedData['pseudo']) {
+            if (User::where('username', $validatedData['pseudo'])->exists()) {
+                $validatedData = $request->validate([
+                    'pseudo' => ['required', 'string', 'unique:users,username']
+                ]);
+            }
+        }
+
+        $user->email = $validatedData['email'];
+        $user->password = Hash::make($validatedData['password']);
+        $user->username = $validatedData['pseudo'];
+
+        $user->save();
+
+        return view('user.edit.account', ['user' => $user]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function updateNotif(Request $request, User $user)
+    {
+        if (Auth::user()->id != $user->id) abort(403);
     }
 
     /**

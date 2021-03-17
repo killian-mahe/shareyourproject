@@ -44,7 +44,7 @@ Route::resource('posts', 'PostController');
 Route::resource('projects', 'ProjectController');
 
 Route::resource('users', 'UserController')->except([
-    'create', 'store', 'edit'
+    'create', 'store', 'edit', 'update'
 ]);
 
 Route::resource('comments', 'CommentController')->only([
@@ -63,6 +63,10 @@ Route::name('users.settings.')->prefix('users')->group(function () {
     Route::get('{user}/settings/notif', function(User $user) {
         return view('user.edit.notif', ['user' => $user]);
     })->name('notif');
+
+    Route::put('{user}/settings/profile', 'UserController@updateProfile');
+    Route::put('{user}/settings/account', 'UserController@updateAccount');
+    Route::put('{user}/settings/notif', 'UserController@updateNotif');
 });
 
 Route::name('projects.')->prefix('projects')->group(function () {
