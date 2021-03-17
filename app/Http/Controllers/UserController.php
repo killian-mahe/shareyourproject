@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -92,6 +93,36 @@ class UserController extends Controller
     public function updateAccount(Request $request, User $user)
     {
         if (Auth::user()->id != $user->id) abort(403);
+
+        $validatedData = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['nullable', 'string', 'confirmed'],
+            'pseudo' => ['required', 'string']
+        ]);
+
+        if ($user->email != $validatedData['email']) {
+            if (User::where('email', $validatedData['email'])->exists()) {
+                $validatedData = $request->validate([
+                    'email' => ['required', 'email', 'unique:users,email']
+                ]);
+            }
+        }
+
+        if ($user->username != $validatedData['pseudo']) {
+            if (User::where('username', $validatedData['pseudo'])->exists()) {
+                $validatedData = $request->validate([
+                    'pseudo' => ['required', 'string', 'unique:users,username']
+                ]);
+            }
+        }
+
+        $user->email = $validatedData['email'];
+        $user->password = Hash::make($validatedData['password']);
+        $user->username = $validatedData['pseudo'];
+
+        $user->save();
+
+        return view('user.edit.account', ['user' => $user]);
     }
 
     /**
