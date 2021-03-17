@@ -26,7 +26,7 @@
                             <a :href="auth_user.url.index">My profile</a>
                         </li>
                         <li class="flex items-center my-1">
-                            <a href="/">Settings</a>
+                            <a :href="auth_user.url.settings">Settings</a>
                         </li>
                     </ul>
                 </li>
