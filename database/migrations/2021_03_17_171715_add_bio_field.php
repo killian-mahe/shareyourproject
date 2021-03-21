@@ -14,7 +14,7 @@ class AddBioField extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('bio')->default("");
+            $table->text('bio')->nullable();
         });
     }
 
