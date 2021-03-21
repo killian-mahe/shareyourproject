@@ -15,7 +15,7 @@ deploy
 @task('deploy')
     cd {{ $project_path }}
     {{ $php_path }} artisan down -n
-    git pull origin master
+    git pull origin production
 
     {{ $php_path }} {{ $composer_path }} install --optimize-autoloader --no-dev
 
