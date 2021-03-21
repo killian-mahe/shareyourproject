@@ -9,10 +9,7 @@
 @servers(['production' => 'u102593862@access847528813.webspace-data.io'])
 
 @story('deploy', ['on' => 'production'])
-git
-composer
-artisan
-optimization
+deploy
 @endstory
 
 @task('deploy')
@@ -20,13 +17,11 @@ optimization
     {{ $php_path }} artisan down -n
     git pull origin master
 
-    cd {{ $project_path }}
     {{ $php_path }} {{ $composer_path }} install --optimize-autoloader --no-dev
 
-    cd {{ $project_path }}
-    {{ $php_path }} artisan migrate -n -vv
+    {{ $php_path }} artisan migrate -n -vv --force
 
-    cd {{ $project_path }}
+
     {{ $php_path }} artisan config:cache -n -vv
     {{ $php_path }} artisan route:cache -n -vv
     {{ $php_path }} artisan view:cache -n -vv
