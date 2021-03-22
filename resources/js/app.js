@@ -19,7 +19,7 @@ window.Vue = require('vue');
 import { createApp } from 'vue'
 import router from './router'
 import store from './store'
-import App from './components/AppView'
+import App from './views/AppView'
 
 
 const app = createApp(App)
