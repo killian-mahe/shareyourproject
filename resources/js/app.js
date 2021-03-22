@@ -27,9 +27,10 @@ window.Vue = require('vue');
  */
 
 import { createApp } from 'vue'
-
+import router from './router'
 import App from './components/AppView'
 
-console.log(App)
+
 const app = createApp(App)
+app.user(router);
 app.mount('#app');
