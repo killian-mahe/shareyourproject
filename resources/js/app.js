@@ -24,7 +24,7 @@ import App from './views/AppView'
 
 const app = createApp(App)
 
-app.user(router);
+app.use(router);
 app.use(store);
 
 app.mount('#app');
