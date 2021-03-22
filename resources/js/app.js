@@ -6,19 +6,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-//const { default: Echo } = require('laravel-echo');
-
 require('./bootstrap');
 
 window.Vue = require('vue');
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,9 +18,13 @@ window.Vue = require('vue');
 
 import { createApp } from 'vue'
 import router from './router'
+import store from './store'
 import App from './components/AppView'
 
 
 const app = createApp(App)
+
 app.user(router);
+app.use(store);
+
 app.mount('#app');
