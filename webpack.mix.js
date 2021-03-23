@@ -1,6 +1,5 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
-const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -20,22 +19,31 @@ mix.js('resources/js/app.js', 'public/js')
         processCssUrls: false,
         postCss: [tailwindcss('./tailwind.config.js')],
     })
-    .webpackConfig({
-        module: {
-            rules: [
-                {
-                    test: /\.tsx?$/,
-                    loader: 'ts-loader',
-                    options: {
-                      appendTsSuffixTo: [/\.vue$/],
+    .webpackConfig(webpack => {
+        return {
+            plugins: [
+                new webpack.DefinePlugin({
+                    __VUE_OPTIONS_API__ : true,
+                    __VUE_PROD_DEVTOOLS__ : false
+                })
+            ],
+            module: {
+                rules: [
+                    {
+                        test: /\.tsx?$/,
+                        loader: 'ts-loader',
+                        options: {
+                        appendTsSuffixTo: [/\.vue$/],
+                        },
+                        exclude: /node_modules/,
                     },
-                    exclude: /node_modules/,
-                  },
-            ]
-        },
-        resolve: {
-            extensions: ["*", ".js", ".jsx", ".vue", ".ts", ".tsx"]
+                ]
+            },
+            resolve: {
+                extensions: ["*", ".js", ".jsx", ".vue", ".ts", ".tsx"]
+            }
         }
     });
+
 
 mix.disableNotifications();
