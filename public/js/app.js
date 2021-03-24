@@ -2975,18 +2975,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    img_width: {
-      type: String // required: true
-
+    'img_path': {
+      type: String,
+      required: true
     },
-    img_heigth: {
-      type: String // required: true
-
+    'img_height': {
+      type: String,
+      required: true
     },
-    'img_path': String,
-    'rounded': false
+    'img_radius': {
+      type: String,
+      "default": "none"
+    }
   },
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      styleObject: {
+        borderRadius: "none",
+        height: this.img_height
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.border_radius;
+  },
+  computed: {
+    border_radius: function border_radius() {
+      switch (this.img_radius) {
+        case "none":
+          this.styleObject.borderRadius = "0";
+          break;
+
+        case "sm":
+          this.styleObject.borderRadius = "0.125rem";
+          break;
+
+        case "md":
+          this.styleObject.borderRadius = "0.375rem";
+          break;
+
+        case "lg":
+          this.styleObject.borderRadius = "0.5rem";
+          break;
+
+        case "full":
+          this.styleObject.borderRadius = "9999px";
+          break;
+
+        default:
+          console.log("An error oppear with your image radius");
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -85669,20 +85709,22 @@ var render = function() {
     { staticClass: "flex relative items-center justify-center" },
     [
       _c("img", {
-        class: { "rounded-full": _vm.rounded },
-        style: { heigth: _vm.img_heigth, width: _vm.img_width },
+        staticClass: "w-full object-cover",
+        style: _vm.styleObject,
         attrs: { src: _vm.img_path }
       }),
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "group absolute flex items-center justify-center" },
+        {
+          staticClass:
+            "group absolute w-full h-full flex items-center justify-center"
+        },
         [
           _c("span", {
             staticClass:
-              "bg-onyx-900 opacity-0 group-hover:opacity-50 transform duration-200 ease-in-out cursor-pointer",
-            class: { "rounded-full": _vm.rounded },
-            style: { heigth: _vm.img_heigth, width: _vm.img_width }
+              "w-full h-full bg-onyx-900 opacity-0 group-hover:opacity-50 transform duration-200 ease-in-out cursor-pointer",
+            style: _vm.styleObject
           }),
           _vm._v(" "),
           _c("i", {
