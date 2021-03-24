@@ -17,42 +17,11 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except([
-            'index', 'show', 'search'
+        $this->middleware('auth:api')->except([
+            'search'
         ]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('user.list');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        return view('user.user', ['user' => $user]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        return view('user.edit.profile', ['user' => $user]);
-    }
 
     /**
      * Update the specified resource in storage.

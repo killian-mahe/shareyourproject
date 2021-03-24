@@ -19,33 +19,10 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except([
-            'index', 'show', 'store'
-        ]);
 
         $this->middleware('auth:api')->only([
             'store'
         ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('post.list');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('post.create');
     }
 
     /**
@@ -102,40 +79,6 @@ class PostController extends Controller
         }
 
         return response()->json(new PostResource($post), 201);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        return view('post.post', ['post' => $post]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        return view('post.edit', ['post' => $post]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
     }
 
     /**

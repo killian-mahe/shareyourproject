@@ -8,5 +8,8 @@
         "jsx": "preserve",
         "moduleResolution": "node"
     },
-    "include": ["./resources/js/**/*"]
+    "include": [
+        "./resources/js/**/*",
+        "./resources/js/components/**/*"
+    ]
 }
