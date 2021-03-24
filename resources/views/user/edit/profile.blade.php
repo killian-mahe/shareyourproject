@@ -22,7 +22,9 @@
                                 <i class="text-cultured-100 h-5 w-5 opacity-0 absolute group-hover:opacity-100 transform duration-200 ease-in-out cursor-pointer" data-feather="edit-3"></i>
                             </div>
                         </div> --}}
-                        <picture-input img_width="100%" img_heigth="100%" img_path="https://randomwordgenerator.com/img/picture-generator/57e7d4414d51a814f1dc8460962e33791c3ad6e04e50744172287cd09e49cd_640.jpg" ></picture-input>
+                        <div class="w-full h-full">
+                            <picture-input img_radius="full" img_height="12rem" img_path="https://randomwordgenerator.com/img/picture-generator/57e7d4414d51a814f1dc8460962e33791c3ad6e04e50744172287cd09e49cd_640.jpg"></picture-input>
+                        </div>
                     </div>
                 </div>
                 <span class="text-gray-600 text-xs italic w-1/2">Your name may appear around ShareYourProject where you contribute or are mentioned. You can change it at any time.</span>
