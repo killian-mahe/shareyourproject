@@ -1,5 +1,13 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-const routes = [] as RouteRecordRaw[]
+import HomeView from '../views/HomeView'
+
+const routes = [
+    {
+        path: '/feed',
+        name: 'feed',
+        component: HomeView
+    }
+]
 
 export default createRouter({
     history: createWebHashHistory(),
