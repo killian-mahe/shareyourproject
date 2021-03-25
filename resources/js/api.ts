@@ -1,4 +1,5 @@
 import {Post, Project, User} from './models';
+import { AxiosRequestConfig } from 'axios'
 
 const API_URL = "/api";
 
@@ -10,7 +11,7 @@ const API_URL = "/api";
  * @param {?Object} headers
  * @return {Promise}
  */
-const fetchResource = (method, path, data = {}, headers = {}) => {
+const fetchResource = (method: string, path: string, data = {}, headers = {}) => {
 
     let url = `${ API_URL }${ path }`;
     if(path === '/logout') url = path;
@@ -22,8 +23,8 @@ const fetchResource = (method, path, data = {}, headers = {}) => {
         url: url,
         data: data,
         headers: headers
-    }).then(response => {
-        console.log(response)
+    } as AxiosRequestConfig).then(response => {
+
         if (response.status >= 200 && response.status < 300) {
             return response.data;
         } else {
@@ -32,13 +33,13 @@ const fetchResource = (method, path, data = {}, headers = {}) => {
     })
 }
 
-let API =  {
+let API = {
     /**
      * Search posts and users from a query
      * @param {String} query
      * @return {Promise<Array<User | Project>>}
      */
-    search: function(query) {
+    search: function(query: string) : Promise<Array<User | Project>>{
         const url = `/search/${query}`;
         return fetchResource('get', url);
     },
@@ -49,6 +50,14 @@ let API =  {
     logout: function() {
         const url = '/logout';
         return fetchResource('post', url);
+    },
+    /**
+     * Login the user
+     * @return {Promise<User>}
+     */
+    login: function(credentials: string) : Promise<User> {
+        const url = '/login';
+        return fetchResource('post', url, credentials);
     },
     /**
      * Post API wrapper
@@ -63,7 +72,7 @@ let API =  {
          * @param {Number} id
          * @return {Promise}
          */
-        like: function(id) {
+        like: function(id: number) {
             const url = `${this.url}/${id}/like`;
             return fetchResource('get', url);
         },
@@ -72,7 +81,7 @@ let API =  {
          * @param {Number} id
          * @return {Promise}
          */
-        unlike: function(id) {
+        unlike: function(id: number) {
             const url = `${this.url}/${id}/unlike`;
             return fetchResource('get', url);
         },
@@ -81,7 +90,7 @@ let API =  {
          * @param {?Array<Number>} except_ids Post ids that mustn't be loaded
          * @return {Promise<Array<Post>>}
          */
-        feed: function(except_ids) {
+        feed: function(except_ids: Array<number>) : Promise<Array<Post>>{
             const url = '/feed';
             return fetchResource('post', url, {except: except_ids});
         },
@@ -93,17 +102,17 @@ let API =  {
          * @param {?Array<File>} images Post images
          * @return {Promise<Post>}
          */
-        create: function(content, project_author = null, reshare = null, images = null) {
+        create: function(content: string, project_author : number | null = null, reshare : number | null = null, images: Array<File> | null = null) : Promise<Post> {
             const url = `${this.url}`;
             let formData = new FormData();
             // Post content
             formData.append('content', content);
 
             // Project author (if necessary)
-            if (project_author) formData.append('project', project_author);
+            if (project_author) formData.append('project', String(project_author));
 
             // Post reshared (if necessary)
-            if (reshare) formData.append('reshare', reshare);
+            if (reshare) formData.append('reshare', String(reshare));
 
             // Post images
             if (images) {
@@ -129,7 +138,7 @@ let API =  {
          * @param {string} query Query string
          * @return {Promise<Array<User>>} Users
          */
-        search: function(query) {
+        search: function(query: string) : Promise<Array<User>>{
             const url = `${this.url}/search/${query}`;
             return fetchResource('get', url);
         },
@@ -138,7 +147,7 @@ let API =  {
          * @param {!Number} id User id
          * @return {Promise<User>} User
          */
-        get: function(id) {
+        get: function(id: string) : Promise<User> {
             const url = `${this.url}/${id}`;
             return fetchResource('get', url);
         }
@@ -156,7 +165,7 @@ let API =  {
          * @param {!Number} id Project id
          * @return {Promise<Project>}
          */
-        get: function(id) {
+        get: function(id: number) : Promise<Project> {
             const url = `${this.url}/${id}`;
             return fetchResource('get', url);
         },
@@ -164,7 +173,7 @@ let API =  {
          * Make the authenticated user follows the project
          * @param {Number} id Project id
          */
-        follow: function(id) {
+        follow: function(id: number) {
             const url = `${this.url}/${id}/follow`;
             return fetchResource('get', url);
         },
@@ -172,7 +181,7 @@ let API =  {
          * Make the authenticated user unfollows the project
          * @param {Number} id Project id
          */
-        unfollow: function(id) {
+        unfollow: function(id :number) {
             const url = `${this.url}/${id}/unfollow`;
             return fetchResource('get', url);
         },
@@ -181,7 +190,7 @@ let API =  {
          * @param {?Array<Number>} projects_ids Project ids to restrieve
          * @return {Promise<Array<Project>>}
          */
-        getMany: function(projects_ids = {}) {
+        getMany: function(projects_ids: Array<number> = []) : Promise<Array<Project>> {
             const url = `${this.url}/get`;
             return fetchResource('post', url, {projects_ids: projects_ids});
         }
@@ -199,7 +208,7 @@ let API =  {
          * @param {string} query Query string
          * @return {Promise<Array<Tag>>} Tags
          */
-        search: function(query) {
+        search: function(query: string) : Promise<Array<Tag>> {
             const url = `${this.url}/search/${query}`;
             return fetchResource('get', url);
         }
@@ -217,7 +226,7 @@ let API =  {
          * @param {string} query Query string
          * @return {Promise<Array<Badge>>} Badges
          */
-        search: function(query) {
+        search: function(query: string) {
             const url = `${this.url}/search/${query}`;
             return fetchResource('get', url);
         }
@@ -235,7 +244,7 @@ let API =  {
          * @param {Array<Number>} ids
          * @return {Promise<Array<Comment>>} Comments
          */
-        getMany : function(ids) {
+        getMany : function(ids: Array<number>) {
             const url = `${this.url}/get`;
             return fetchResource('post', url, {comments_ids: ids});
         },
@@ -245,7 +254,7 @@ let API =  {
          * @param {!Number} post Post id
          * @return {Promise<Comment>} Comment
          */
-        create: function(content, post) {
+        create: function(content: string, post: number) {
             const url = this.url;
             return fetchResource('post', url, {
                 content: content,

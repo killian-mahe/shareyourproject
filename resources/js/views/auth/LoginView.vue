@@ -7,27 +7,47 @@
             <form class="w-full" method="POST" action="#">
 
                 <div class="flex flex-wrap -mx-3 mb-6">
-                    <CustomInput class="w-full px-3" name="email" label="E-mail" type="email" placeholder="jane.doe@shareyourproject.fr" value=""></CustomInput>
+                    <CustomInput
+                    v-model="form.email"
+                    class="w-full px-3" name="email" label="E-mail" type="email" placeholder="jane.doe@shareyourproject.fr"></CustomInput>
                 </div>
 
                 <div class="flex flex-wrap -mx-3 mb-6">
-                    <CustomInput class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************"></CustomInput>
+                    <CustomInput
+                    v-model="form.password"
+                    class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************"></CustomInput>
                 </div>
 
                 <i class="block mb-3 text-sm">No account yet ? <router-link class="font-medium" :to="{name: 'register'}">Register</router-link></i>
 
-                <button type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Log In</button>
+                <button v-on:submit.prevent="onSubmit" type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Log In</button>
             </form>
         </div>
     </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { API } from '../../api'
 import CustomInput from '../../components/inputs/CustomInput.vue'
 
 export default defineComponent({
     components: {
         CustomInput
+    },
+    data() {
+        return {
+            form: {
+                email: "",
+                password: ""
+            }
+        }
+    },
+    methods: {
+        onSubmit() {
+            API.login(this.form).then((response: any) => {
+                console.log(response);
+            });
+        }
     }
 })
 </script>

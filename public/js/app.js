@@ -16560,12 +16560,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/inputs/CustomInput.vue */ "./resources/js/components/inputs/CustomInput.vue");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+/* harmony import */ var _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/inputs/CustomInput.vue */ "./resources/js/components/inputs/CustomInput.vue");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   components: {
-    CustomInput: _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_1__.default
+    CustomInput: _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_2__.default
+  },
+  data: function data() {
+    return {
+      form: {
+        email: "",
+        password: ""
+      }
+    };
+  },
+  methods: {
+    onSubmit: function onSubmit() {
+      _api__WEBPACK_IMPORTED_MODULE_1__.API.login(this.form).then(function (response) {
+        console.log(response);
+      });
+    }
   }
 }));
 
@@ -16591,6 +16608,244 @@ __webpack_require__.r(__webpack_exports__);
     CustomInput: _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_1__.default
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/models.ts":
+/*!********************************!*\
+  !*** ./resources/js/models.ts ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Post": () => (/* binding */ Post),
+/* harmony export */   "PostLinks": () => (/* binding */ PostLinks),
+/* harmony export */   "User": () => (/* binding */ User),
+/* harmony export */   "UserLinks": () => (/* binding */ UserLinks)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var PostLinks = function PostLinks(author, post) {
+  _classCallCheck(this, PostLinks);
+
+  this.author = author;
+  this.post = post;
+};
+
+var Post = function Post(id, content, formated_content, author, project, images_url, tags, url, reshared_post, liked, comments_overview, stats, followed_projects, created_at, updated_at) {
+  _classCallCheck(this, Post);
+
+  this.id = id;
+  this.content = content;
+  this.formated_content = formated_content;
+  this.author = author;
+  this.project = project;
+  this.images_url = images_url;
+  this.tags = tags;
+  this.url = url;
+  this.reshared_post = reshared_post;
+  this.liked = liked;
+  this.comments_overview = comments_overview;
+  this.stats = stats;
+  this.followed_projects = followed_projects;
+  this.created_at = created_at;
+  this.updated_at = updated_at;
+};
+
+;
+
+var UserLinks = function UserLinks(index) {
+  _classCallCheck(this, UserLinks);
+
+  this.index = index;
+};
+
+var User = function User(id, username, firstname, lastname, email, title, fullname, url, profilePicture, bannerPicture, ownedProjects, created_at, updated_at) {
+  _classCallCheck(this, User);
+
+  this.id = id;
+  this.username = username;
+  this.email = email;
+  this.title = title;
+  this.created_at = created_at;
+  this.updated_at = updated_at;
+  this.firstname = firstname;
+  this.lastname = lastname;
+  this.fullname = fullname;
+  this.url = url;
+  this.profilePicture = profilePicture;
+  this.bannerPicture = bannerPicture;
+  this.ownedProjects = ownedProjects;
+};
+
+;
+
+var Project = function Project() {
+  _classCallCheck(this, Project);
+};
+
+;
+
+var Tag = function Tag() {
+  _classCallCheck(this, Tag);
+};
+
+; // class Project {
+//     constructor() {
+//         /**
+//          * @type {Number}
+//          */
+//         this.id;
+//         /**
+//          * @type {String}
+//          */
+//         this.description;
+//         /**
+//          * @type {String}
+//          */
+//         this.formated_description;
+//         /**
+//          * @type {String}
+//          */
+//         this.name;
+//         /**
+//          * @type {Boolean}
+//          */
+//         this.public;
+//         /**
+//          * @type {Number}
+//          */
+//         this.owner_id;
+//         /**
+//          * @type {Object}
+//          */
+//         this.url = {
+//             index: "",
+//             mambers: "",
+//             description: ""
+//         };
+//         /**
+//          * @type {Array<Technology>}
+//          */
+//         this.technologies;
+//         /**
+//          * @type {Array<Number>}
+//          */
+//         this.members_ids;
+//         /**
+//          * @type {String}
+//          */
+//         this.profile_picture;
+//         /**
+//          * @type {String}
+//          */
+//         this.banner_picture;
+//         /**
+//          * @type {Date}
+//          */
+//         this.created_at;
+//         /**
+//          * @type {Date}
+//          */
+//         this.updated_at;
+//     }
+// };
+// class Comment {
+//     constructor() {
+//         /**
+//          * @type {Number}
+//          */
+//         this.id;
+//         /**
+//          * @type {String}
+//          */
+//         this.content;
+//         /**
+//          * @type {String}
+//          */
+//         this.formated_content;
+//         /**
+//          * @type {User}
+//          */
+//         this.author;
+//         /**
+//          * @type {Number}
+//          */
+//         this.post_id;
+//         /**
+//          * @type {Date}
+//          */
+//         this.created_at;
+//         /**
+//          * @type {Date}
+//          */
+//         this.updated_at;
+//     }
+// };
+// class Badge {
+//     constructor() {
+//         /**
+//          * @type {Number}
+//          */
+//         this.id;
+//         /**
+//          * @type {String}
+//          */
+//         this.name;
+//         /**
+//          * @type {String}
+//          */
+//         this.label;
+//         /**
+//          * @type {Date}
+//          */
+//         this.created_at;
+//         /**
+//          * @type {Date}
+//          */
+//         this.updated_at;
+//     }
+// };
+// class Tag {
+//     constructor() {
+//         /**
+//          * @type {Number}
+//          */
+//         this.id;
+//         /**
+//          * @type {String}
+//          */
+//         this.name;
+//         /**
+//          * @type {Date}
+//          */
+//         this.created_at;
+//         /**
+//          * @type {Date}
+//          */
+//         this.updated_at;
+//     }
+// };
+// class Technology {
+//     constructor() {
+//         /**
+//          * @type {Number}
+//          */
+//         this.id;
+//         /**
+//          * @type {String}
+//          */
+//         this.name;
+//         /**
+//          * @type {String}
+//          */
+//         this.label;
+//     }
+// };
+
+
 
 /***/ }),
 
@@ -16969,13 +17224,6 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Register");
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  type: "submit",
-  "class": "my-4 btn btn-viridiant hover:text-cultured-100"
-}, "Log In", -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_CustomInput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CustomInput");
 
@@ -16988,19 +17236,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["src"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomInput, {
+    modelValue: _ctx.form.email,
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.form.email = $event;
+    }),
     "class": "w-full px-3",
     name: "email",
     label: "E-mail",
     type: "email",
-    placeholder: "jane.doe@shareyourproject.fr",
-    value: ""
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomInput, {
+    placeholder: "jane.doe@shareyourproject.fr"
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomInput, {
+    modelValue: _ctx.form.password,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return _ctx.form.password = $event;
+    }),
     "class": "w-full px-3 mb-6 md:mb-0",
     name: "password",
     label: "Password",
     type: "password",
     placeholder: "******************"
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }, null, 8
+  /* PROPS */
+  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     "class": "font-medium",
     to: {
       name: 'register'
@@ -17012,7 +17271,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), _hoisted_11])])]);
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return _ctx.onSubmit && _ctx.onSubmit.apply(_ctx, arguments);
+    }, ["prevent"])),
+    type: "submit",
+    "class": "my-4 btn btn-viridiant hover:text-cultured-100"
+  }, "Log In", 32
+  /* HYDRATE_EVENTS */
+  )])])]);
 }
 
 /***/ }),
@@ -17135,6 +17402,315 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "******************"
   })]), _hoisted_10, _hoisted_11])])]);
 }
+
+/***/ }),
+
+/***/ "./resources/js/api.js":
+/*!*****************************!*\
+  !*** ./resources/js/api.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "API": () => (/* binding */ API)
+/* harmony export */ });
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./models */ "./resources/js/models.ts");
+
+var API_URL = "/api";
+/**
+ *
+ * @param {String} method
+ * @param {String} path
+ * @param {?Object} data
+ * @param {?Object} headers
+ * @return {Promise}
+ */
+
+var fetchResource = function fetchResource(method, path) {
+  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+  var url = "".concat(API_URL).concat(path);
+  if (path === '/logout') url = path; // Variable which will be used for storing response
+
+  return window.axios({
+    method: method,
+    url: url,
+    data: data,
+    headers: headers
+  }).then(function (response) {
+    console.log(response);
+
+    if (response.status >= 200 && response.status < 300) {
+      return response.data;
+    } else {
+      throw response;
+    }
+  });
+};
+
+var API = {
+  /**
+   * Search posts and users from a query
+   * @param {String} query
+   * @return {Promise<Array<User | Project>>}
+   */
+  search: function search(query) {
+    var url = "/search/".concat(query);
+    return fetchResource('get', url);
+  },
+
+  /**
+   * Logout the user
+   * @return {Promise}
+   */
+  logout: function logout() {
+    var url = '/logout';
+    return fetchResource('post', url);
+  },
+
+  /**
+   * Login the user
+   * @return {Promise}
+   */
+  login: function login(credentials) {
+    var url = '/login';
+    return fetchResource('post', url, credentials);
+  },
+
+  /**
+   * Post API wrapper
+   */
+  Post: {
+    /**
+     * Base post requests url
+     */
+    url: '/posts',
+
+    /**
+     * Like a post
+     * @param {Number} id
+     * @return {Promise}
+     */
+    like: function like(id) {
+      var url = "".concat(this.url, "/").concat(id, "/like");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Unike a post
+     * @param {Number} id
+     * @return {Promise}
+     */
+    unlike: function unlike(id) {
+      var url = "".concat(this.url, "/").concat(id, "/unlike");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Load user feed and return loaded posts
+     * @param {?Array<Number>} except_ids Post ids that mustn't be loaded
+     * @return {Promise<Array<Post>>}
+     */
+    feed: function feed(except_ids) {
+      var url = '/feed';
+      return fetchResource('post', url, {
+        except: except_ids
+      });
+    },
+
+    /**
+     * Create a new post
+     * @param {String} content Post content
+     * @param {?Number} project_author Project author id
+     * @param {?Number} reshare Reshared post id
+     * @param {?Array<File>} images Post images
+     * @return {Promise<Post>}
+     */
+    create: function create(content) {
+      var project_author = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var reshare = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var images = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var url = "".concat(this.url);
+      var formData = new FormData(); // Post content
+
+      formData.append('content', content); // Project author (if necessary)
+
+      if (project_author) formData.append('project', project_author); // Post reshared (if necessary)
+
+      if (reshare) formData.append('reshare', reshare); // Post images
+
+      if (images) {
+        images.forEach(function (image, index) {
+          formData.append("image[".concat(index, "]"), image);
+        });
+      }
+
+      return fetchResource('post', url, formData, {
+        'Content-Type': 'multipart/form-data'
+      });
+    }
+  },
+
+  /**
+   * User API wrapper
+   */
+  User: {
+    /**
+     * Base user request url
+     */
+    url: '/users',
+
+    /**
+     * Search users that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<User>>} Users
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Get the corresponding user
+     * @param {!Number} id User id
+     * @return {Promise<User>} User
+     */
+    get: function get(id) {
+      var url = "".concat(this.url, "/").concat(id);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Project API wrapper
+   */
+  Project: {
+    /**
+     * Base project requests url
+     */
+    url: '/projects',
+
+    /**
+     * Get a project corresponding to the id passed to the function
+     * @param {!Number} id Project id
+     * @return {Promise<Project>}
+     */
+    get: function get(id) {
+      var url = "".concat(this.url, "/").concat(id);
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Make the authenticated user follows the project
+     * @param {Number} id Project id
+     */
+    follow: function follow(id) {
+      var url = "".concat(this.url, "/").concat(id, "/follow");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Make the authenticated user unfollows the project
+     * @param {Number} id Project id
+     */
+    unfollow: function unfollow(id) {
+      var url = "".concat(this.url, "/").concat(id, "/unfollow");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Get projects corresponding to the ids passed to the function
+     * @param {?Array<Number>} projects_ids Project ids to restrieve
+     * @return {Promise<Array<Project>>}
+     */
+    getMany: function getMany() {
+      var projects_ids = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var url = "".concat(this.url, "/get");
+      return fetchResource('post', url, {
+        projects_ids: projects_ids
+      });
+    }
+  },
+
+  /**
+   * Tag API wrapper
+   */
+  Tag: {
+    /**
+     * Base tag requests url
+     */
+    url: '/tags',
+
+    /**
+     * Search tags that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<Tag>>} Tags
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Badge API wrapper
+   */
+  Badge: {
+    /**
+     * Base badge requests url
+     */
+    url: '/badges',
+
+    /**
+     * Search badges that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<Badge>>} Badges
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Comment API wrapper
+   */
+  Comment: {
+    /**
+     * Base comment requests url
+     */
+    url: '/comments',
+
+    /**
+     * Get many comments
+     * @param {Array<Number>} ids
+     * @return {Promise<Array<Comment>>} Comments
+     */
+    getMany: function getMany(ids) {
+      var url = "".concat(this.url, "/get");
+      return fetchResource('post', url, {
+        comments_ids: ids
+      });
+    },
+
+    /**
+     * Create a new comment
+     * @param {!String} content Comment content
+     * @param {!Number} post Post id
+     * @return {Promise<Comment>} Comment
+     */
+    create: function create(content, post) {
+      var url = this.url;
+      return fetchResource('post', url, {
+        content: content,
+        post_id: post
+      });
+    }
+  }
+};
+
 
 /***/ }),
 
