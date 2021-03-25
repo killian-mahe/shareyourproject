@@ -44,7 +44,7 @@ export default defineComponent({
     },
     methods: {
         onSubmit() {
-            API.login(this.form).then((response: any) => {
+            API.login(this.form).then(response => {
                 console.log(response);
             });
         }

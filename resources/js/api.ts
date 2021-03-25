@@ -55,7 +55,7 @@ let API = {
      * Login the user
      * @return {Promise<User>}
      */
-    login: function(credentials: string) : Promise<User> {
+    login: function(credentials: object) : Promise<User> {
         const url = '/login';
         return fetchResource('post', url, credentials);
     },
