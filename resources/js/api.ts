@@ -1,4 +1,4 @@
-import {Post, Project, User} from './models';
+import {Post, Project, User, Tag} from './models';
 import { AxiosRequestConfig } from 'axios'
 
 const API_URL = "/api";

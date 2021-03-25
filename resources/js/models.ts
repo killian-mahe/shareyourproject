@@ -1,3 +1,5 @@
+import { idText, isThisTypeNode } from "typescript";
+
 class PostLinks {
     author: string;
     post: string;
@@ -5,6 +7,18 @@ class PostLinks {
     constructor(author: string, post: string) {
         this.author = author;
         this.post = post;
+    }
+}
+
+class ProjectLinks {
+    index: string;
+    members: string;
+    description: string;
+
+    constructor(index: string, members: string, description: string) {
+        this.index = index;
+        this.members = members;
+        this.description = description;
     }
 }
 
@@ -90,172 +104,99 @@ class User {
     }
 };
 
-class Project {
-
-};
-
 class Tag {
+    id: number;
+    name: string;
+    created_at: Date;
+    updated_at: Date;
 
+    constructor(id: number, name: string, created_at: Date, updated_at: Date) {
+        this.id = id;
+        this.name = name;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
 };
 
-// class Project {
-//     constructor() {
+class Project {
+    id: number;
+    description: string;
+    formated_description: string;
+    name: string;
+    is_public: boolean;
+    owner_id: number;
+    url: ProjectLinks;
+    technologies: Array<Technology>;
+    members_ids: Array<Number>;
+    profile_picture: string;
+    banner_picture: string;
+    created_at: Date;
+    updated_at: Date;
 
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.description;
-//         /**
-//          * @type {String}
-//          */
-//         this.formated_description;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {Boolean}
-//          */
-//         this.public;
-//         /**
-//          * @type {Number}
-//          */
-//         this.owner_id;
-//         /**
-//          * @type {Object}
-//          */
-//         this.url = {
-//             index: "",
-//             mambers: "",
-//             description: ""
-//         };
-//         /**
-//          * @type {Array<Technology>}
-//          */
-//         this.technologies;
-//         /**
-//          * @type {Array<Number>}
-//          */
-//         this.members_ids;
-//         /**
-//          * @type {String}
-//          */
-//         this.profile_picture;
-//         /**
-//          * @type {String}
-//          */
-//         this.banner_picture;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
+    constructor(id: number, description: string, formated_description: string, name: string, is_public: boolean, owner_id: number, url: ProjectLinks, technologies: Array<Technology>, members_ids: Array<Number>, profile_picture: string, banner_picture: string, created_at: Date, updated_at: Date) {
+        this.id = id;
+        this.description = description;
+        this.formated_description = formated_description;
+        this.name = name;
+        this.is_public = is_public;
+        this.owner_id = owner_id;
+        this.url = url;
+        this.technologies = technologies;
+        this.members_ids = members_ids;
+        this.profile_picture = profile_picture;
+        this.banner_picture = banner_picture;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+}
 
-// class Comment {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.content;
-//         /**
-//          * @type {String}
-//          */
-//         this.formated_content;
-//         /**
-//          * @type {User}
-//          */
-//         this.author;
-//         /**
-//          * @type {Number}
-//          */
-//         this.post_id;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
+class Comment {
+    id: number;
+    content: string;
+    formated_content: string;
+    author: User;
+    post_id: number;
+    created_at: Date;
+    updated_at: Date;
 
-// class Badge {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {String}
-//          */
-//         this.label;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
+    constructor(id: number, content:string, formated_content: string, author: User, post_id: number, created_at: Date, updated_at: Date) {
+        this.id = id;
+        this.content = content;
+        this.formated_content = formated_content;
+        this.author = author;
+        this.post_id = post_id;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+};
 
-// class Tag {
-//     constructor() {
+class Badge {
+    id: number;
+    name: string;
+    label: string;
+    created_at: Date;
+    updated_at: Date;
 
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
+    constructor(id: number, name: string, label: string, created_at: Date, updated_at: Date) {
+        this.id = id;
+        this.name = name;
+        this.label = label;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
+};
 
-// class Technology {
-//     constructor() {
+class Technology {
+    id: number;
+    name: string;
+    label: string;
 
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {String}
-//          */
-//         this.label;
-//     }
-// };
+    constructor(id: number, name: string, label: string) {
+        this.id = id;
+        this.name = name;
+        this.label = label;
+    }
+};
 
-export {Post, PostLinks, User, UserLinks};
+
+export {Post, PostLinks, User, UserLinks, Technology, Badge, Project, Tag};

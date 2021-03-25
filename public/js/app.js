@@ -12660,9 +12660,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "withKeys": () => (/* binding */ withKeys),
 /* harmony export */   "withModifiers": () => (/* binding */ withModifiers)
 /* harmony export */ });
-/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 /* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
-/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 
 
 
@@ -12805,7 +12804,7 @@ function autoPrefix(style, rawName) {
     if (cached) {
         return cached;
     }
-    let name = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)(rawName);
+    let name = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.camelize)(rawName);
     if (name !== 'filter' && name in style) {
         return (prefixCache[rawName] = name);
     }
@@ -13438,7 +13437,7 @@ const TransitionGroupImpl = {
             });
         });
         return () => {
-            const rawProps = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__.toRaw)(props);
+            const rawProps = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.toRaw)(props);
             const cssTransitionProps = resolveTransitionProps(rawProps);
             const tag = rawProps.tag || _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.Fragment;
             prevChildren = children;
@@ -16560,7 +16559,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/api.ts");
 /* harmony import */ var _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/inputs/CustomInput.vue */ "./resources/js/components/inputs/CustomInput.vue");
 
 
@@ -16611,241 +16610,349 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/models.ts":
-/*!********************************!*\
-  !*** ./resources/js/models.ts ***!
-  \********************************/
+/***/ "./resources/js/api.ts":
+/*!*****************************!*\
+  !*** ./resources/js/api.ts ***!
+  \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Post": () => (/* binding */ Post),
-/* harmony export */   "PostLinks": () => (/* binding */ PostLinks),
-/* harmony export */   "User": () => (/* binding */ User),
-/* harmony export */   "UserLinks": () => (/* binding */ UserLinks)
+/* harmony export */   "API": () => (/* binding */ API)
 /* harmony export */ });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var API_URL = "/api";
+/**
+ *
+ * @param {String} method
+ * @param {String} path
+ * @param {?Object} data
+ * @param {?Object} headers
+ * @return {Promise}
+ */
 
-var PostLinks = function PostLinks(author, post) {
-  _classCallCheck(this, PostLinks);
+var fetchResource = function fetchResource(method, path) {
+  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+  var url = "".concat(API_URL).concat(path);
+  if (path === '/logout') url = path; // Variable which will be used for storing response
 
-  this.author = author;
-  this.post = post;
+  return window.axios({
+    method: method,
+    url: url,
+    data: data,
+    headers: headers
+  }).then(function (response) {
+    if (response.status >= 200 && response.status < 300) {
+      return response.data;
+    } else {
+      throw response;
+    }
+  });
 };
 
-var Post = function Post(id, content, formated_content, author, project, images_url, tags, url, reshared_post, liked, comments_overview, stats, followed_projects, created_at, updated_at) {
-  _classCallCheck(this, Post);
+var API = {
+  /**
+   * Search posts and users from a query
+   * @param {String} query
+   * @return {Promise<Array<User | Project>>}
+   */
+  search: function search(query) {
+    var url = "/search/".concat(query);
+    return fetchResource('get', url);
+  },
 
-  this.id = id;
-  this.content = content;
-  this.formated_content = formated_content;
-  this.author = author;
-  this.project = project;
-  this.images_url = images_url;
-  this.tags = tags;
-  this.url = url;
-  this.reshared_post = reshared_post;
-  this.liked = liked;
-  this.comments_overview = comments_overview;
-  this.stats = stats;
-  this.followed_projects = followed_projects;
-  this.created_at = created_at;
-  this.updated_at = updated_at;
+  /**
+   * Logout the user
+   * @return {Promise}
+   */
+  logout: function logout() {
+    var url = '/logout';
+    return fetchResource('post', url);
+  },
+
+  /**
+   * Login the user
+   * @return {Promise<User>}
+   */
+  login: function login(credentials) {
+    var url = '/login';
+    return fetchResource('post', url, credentials);
+  },
+
+  /**
+   * Post API wrapper
+   */
+  Post: {
+    /**
+     * Base post requests url
+     */
+    url: '/posts',
+
+    /**
+     * Like a post
+     * @param {Number} id
+     * @return {Promise}
+     */
+    like: function like(id) {
+      var url = "".concat(this.url, "/").concat(id, "/like");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Unike a post
+     * @param {Number} id
+     * @return {Promise}
+     */
+    unlike: function unlike(id) {
+      var url = "".concat(this.url, "/").concat(id, "/unlike");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Load user feed and return loaded posts
+     * @param {?Array<Number>} except_ids Post ids that mustn't be loaded
+     * @return {Promise<Array<Post>>}
+     */
+    feed: function feed(except_ids) {
+      var url = '/feed';
+      return fetchResource('post', url, {
+        except: except_ids
+      });
+    },
+
+    /**
+     * Create a new post
+     * @param {String} content Post content
+     * @param {?Number} project_author Project author id
+     * @param {?Number} reshare Reshared post id
+     * @param {?Array<File>} images Post images
+     * @return {Promise<Post>}
+     */
+    create: function create(content) {
+      var project_author = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var reshare = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var images = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var url = "".concat(this.url);
+      var formData = new FormData(); // Post content
+
+      formData.append('content', content); // Project author (if necessary)
+
+      if (project_author) formData.append('project', String(project_author)); // Post reshared (if necessary)
+
+      if (reshare) formData.append('reshare', String(reshare)); // Post images
+
+      if (images) {
+        images.forEach(function (image, index) {
+          formData.append("image[".concat(index, "]"), image);
+        });
+      }
+
+      return fetchResource('post', url, formData, {
+        'Content-Type': 'multipart/form-data'
+      });
+    }
+  },
+
+  /**
+   * User API wrapper
+   */
+  User: {
+    /**
+     * Base user request url
+     */
+    url: '/users',
+
+    /**
+     * Search users that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<User>>} Users
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Get the corresponding user
+     * @param {!Number} id User id
+     * @return {Promise<User>} User
+     */
+    get: function get(id) {
+      var url = "".concat(this.url, "/").concat(id);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Project API wrapper
+   */
+  Project: {
+    /**
+     * Base project requests url
+     */
+    url: '/projects',
+
+    /**
+     * Get a project corresponding to the id passed to the function
+     * @param {!Number} id Project id
+     * @return {Promise<Project>}
+     */
+    get: function get(id) {
+      var url = "".concat(this.url, "/").concat(id);
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Make the authenticated user follows the project
+     * @param {Number} id Project id
+     */
+    follow: function follow(id) {
+      var url = "".concat(this.url, "/").concat(id, "/follow");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Make the authenticated user unfollows the project
+     * @param {Number} id Project id
+     */
+    unfollow: function unfollow(id) {
+      var url = "".concat(this.url, "/").concat(id, "/unfollow");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Get projects corresponding to the ids passed to the function
+     * @param {?Array<Number>} projects_ids Project ids to restrieve
+     * @return {Promise<Array<Project>>}
+     */
+    getMany: function getMany() {
+      var projects_ids = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var url = "".concat(this.url, "/get");
+      return fetchResource('post', url, {
+        projects_ids: projects_ids
+      });
+    }
+  },
+
+  /**
+   * Tag API wrapper
+   */
+  Tag: {
+    /**
+     * Base tag requests url
+     */
+    url: '/tags',
+
+    /**
+     * Search tags that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<Tag>>} Tags
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Badge API wrapper
+   */
+  Badge: {
+    /**
+     * Base badge requests url
+     */
+    url: '/badges',
+
+    /**
+     * Search badges that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<Badge>>} Badges
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Comment API wrapper
+   */
+  Comment: {
+    /**
+     * Base comment requests url
+     */
+    url: '/comments',
+
+    /**
+     * Get many comments
+     * @param {Array<Number>} ids
+     * @return {Promise<Array<Comment>>} Comments
+     */
+    getMany: function getMany(ids) {
+      var url = "".concat(this.url, "/get");
+      return fetchResource('post', url, {
+        comments_ids: ids
+      });
+    },
+
+    /**
+     * Create a new comment
+     * @param {!String} content Comment content
+     * @param {!Number} post Post id
+     * @return {Promise<Comment>} Comment
+     */
+    create: function create(content, post) {
+      var url = this.url;
+      return fetchResource('post', url, {
+        content: content,
+        post_id: post
+      });
+    }
+  }
 };
 
-;
 
-var UserLinks = function UserLinks(index) {
-  _classCallCheck(this, UserLinks);
+/***/ }),
 
-  this.index = index;
-};
+/***/ "./resources/js/bootstrap.ts":
+/*!***********************************!*\
+  !*** ./resources/js/bootstrap.ts ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-var User = function User(id, username, firstname, lastname, email, title, fullname, url, profilePicture, bannerPicture, ownedProjects, created_at, updated_at) {
-  _classCallCheck(this, User);
-
-  this.id = id;
-  this.username = username;
-  this.email = email;
-  this.title = title;
-  this.created_at = created_at;
-  this.updated_at = updated_at;
-  this.firstname = firstname;
-  this.lastname = lastname;
-  this.fullname = fullname;
-  this.url = url;
-  this.profilePicture = profilePicture;
-  this.bannerPicture = bannerPicture;
-  this.ownedProjects = ownedProjects;
-};
-
-;
-
-var Project = function Project() {
-  _classCallCheck(this, Project);
-};
-
-;
-
-var Tag = function Tag() {
-  _classCallCheck(this, Tag);
-};
-
-; // class Project {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.description;
-//         /**
-//          * @type {String}
-//          */
-//         this.formated_description;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {Boolean}
-//          */
-//         this.public;
-//         /**
-//          * @type {Number}
-//          */
-//         this.owner_id;
-//         /**
-//          * @type {Object}
-//          */
-//         this.url = {
-//             index: "",
-//             mambers: "",
-//             description: ""
-//         };
-//         /**
-//          * @type {Array<Technology>}
-//          */
-//         this.technologies;
-//         /**
-//          * @type {Array<Number>}
-//          */
-//         this.members_ids;
-//         /**
-//          * @type {String}
-//          */
-//         this.profile_picture;
-//         /**
-//          * @type {String}
-//          */
-//         this.banner_picture;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
-// class Comment {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.content;
-//         /**
-//          * @type {String}
-//          */
-//         this.formated_content;
-//         /**
-//          * @type {User}
-//          */
-//         this.author;
-//         /**
-//          * @type {Number}
-//          */
-//         this.post_id;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
-// class Badge {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {String}
-//          */
-//         this.label;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
-// class Tag {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
-// class Technology {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {String}
-//          */
-//         this.label;
-//     }
-// };
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var pusher_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+/* harmony import */ var pusher_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pusher_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/**
+ * We'll load the axios HTTP library which allows us to easily issue requests
+ * to our Laravel back-end. This library automatically handles sending the
+ * CSRF token as a header based on the value of the "XSRF" token cookie.
+ */
 
 
+
+window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+window.axios = (axios__WEBPACK_IMPORTED_MODULE_0___default());
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Accept'] = 'application/json';
+/**
+ * Echo exposes an expressive API for subscribing to channels and listening
+ * for events that are broadcast by Laravel. Echo and event broadcasting
+ * allows your team to easily build robust real-time web applications.
+ */
+
+window.Pusher = new (pusher_js__WEBPACK_IMPORTED_MODULE_1___default())( false || "");
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__.default({
+  broadcaster: 'pusher',
+  key: "",
+  cluster: "mt1",
+  forceTLS: false
+});
 
 /***/ }),
 
@@ -17468,315 +17575,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
-/***/ "./resources/js/api.js":
-/*!*****************************!*\
-  !*** ./resources/js/api.js ***!
-  \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "API": () => (/* binding */ API)
-/* harmony export */ });
-/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./models */ "./resources/js/models.ts");
-
-var API_URL = "/api";
-/**
- *
- * @param {String} method
- * @param {String} path
- * @param {?Object} data
- * @param {?Object} headers
- * @return {Promise}
- */
-
-var fetchResource = function fetchResource(method, path) {
-  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
-  var url = "".concat(API_URL).concat(path);
-  if (path === '/logout') url = path; // Variable which will be used for storing response
-
-  return window.axios({
-    method: method,
-    url: url,
-    data: data,
-    headers: headers
-  }).then(function (response) {
-    console.log(response);
-
-    if (response.status >= 200 && response.status < 300) {
-      return response.data;
-    } else {
-      throw response;
-    }
-  });
-};
-
-var API = {
-  /**
-   * Search posts and users from a query
-   * @param {String} query
-   * @return {Promise<Array<User | Project>>}
-   */
-  search: function search(query) {
-    var url = "/search/".concat(query);
-    return fetchResource('get', url);
-  },
-
-  /**
-   * Logout the user
-   * @return {Promise}
-   */
-  logout: function logout() {
-    var url = '/logout';
-    return fetchResource('post', url);
-  },
-
-  /**
-   * Login the user
-   * @return {Promise}
-   */
-  login: function login(credentials) {
-    var url = '/login';
-    return fetchResource('post', url, credentials);
-  },
-
-  /**
-   * Post API wrapper
-   */
-  Post: {
-    /**
-     * Base post requests url
-     */
-    url: '/posts',
-
-    /**
-     * Like a post
-     * @param {Number} id
-     * @return {Promise}
-     */
-    like: function like(id) {
-      var url = "".concat(this.url, "/").concat(id, "/like");
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Unike a post
-     * @param {Number} id
-     * @return {Promise}
-     */
-    unlike: function unlike(id) {
-      var url = "".concat(this.url, "/").concat(id, "/unlike");
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Load user feed and return loaded posts
-     * @param {?Array<Number>} except_ids Post ids that mustn't be loaded
-     * @return {Promise<Array<Post>>}
-     */
-    feed: function feed(except_ids) {
-      var url = '/feed';
-      return fetchResource('post', url, {
-        except: except_ids
-      });
-    },
-
-    /**
-     * Create a new post
-     * @param {String} content Post content
-     * @param {?Number} project_author Project author id
-     * @param {?Number} reshare Reshared post id
-     * @param {?Array<File>} images Post images
-     * @return {Promise<Post>}
-     */
-    create: function create(content) {
-      var project_author = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var reshare = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var images = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var url = "".concat(this.url);
-      var formData = new FormData(); // Post content
-
-      formData.append('content', content); // Project author (if necessary)
-
-      if (project_author) formData.append('project', project_author); // Post reshared (if necessary)
-
-      if (reshare) formData.append('reshare', reshare); // Post images
-
-      if (images) {
-        images.forEach(function (image, index) {
-          formData.append("image[".concat(index, "]"), image);
-        });
-      }
-
-      return fetchResource('post', url, formData, {
-        'Content-Type': 'multipart/form-data'
-      });
-    }
-  },
-
-  /**
-   * User API wrapper
-   */
-  User: {
-    /**
-     * Base user request url
-     */
-    url: '/users',
-
-    /**
-     * Search users that correspond to the given query string
-     * @param {string} query Query string
-     * @return {Promise<Array<User>>} Users
-     */
-    search: function search(query) {
-      var url = "".concat(this.url, "/search/").concat(query);
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Get the corresponding user
-     * @param {!Number} id User id
-     * @return {Promise<User>} User
-     */
-    get: function get(id) {
-      var url = "".concat(this.url, "/").concat(id);
-      return fetchResource('get', url);
-    }
-  },
-
-  /**
-   * Project API wrapper
-   */
-  Project: {
-    /**
-     * Base project requests url
-     */
-    url: '/projects',
-
-    /**
-     * Get a project corresponding to the id passed to the function
-     * @param {!Number} id Project id
-     * @return {Promise<Project>}
-     */
-    get: function get(id) {
-      var url = "".concat(this.url, "/").concat(id);
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Make the authenticated user follows the project
-     * @param {Number} id Project id
-     */
-    follow: function follow(id) {
-      var url = "".concat(this.url, "/").concat(id, "/follow");
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Make the authenticated user unfollows the project
-     * @param {Number} id Project id
-     */
-    unfollow: function unfollow(id) {
-      var url = "".concat(this.url, "/").concat(id, "/unfollow");
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Get projects corresponding to the ids passed to the function
-     * @param {?Array<Number>} projects_ids Project ids to restrieve
-     * @return {Promise<Array<Project>>}
-     */
-    getMany: function getMany() {
-      var projects_ids = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var url = "".concat(this.url, "/get");
-      return fetchResource('post', url, {
-        projects_ids: projects_ids
-      });
-    }
-  },
-
-  /**
-   * Tag API wrapper
-   */
-  Tag: {
-    /**
-     * Base tag requests url
-     */
-    url: '/tags',
-
-    /**
-     * Search tags that correspond to the given query string
-     * @param {string} query Query string
-     * @return {Promise<Array<Tag>>} Tags
-     */
-    search: function search(query) {
-      var url = "".concat(this.url, "/search/").concat(query);
-      return fetchResource('get', url);
-    }
-  },
-
-  /**
-   * Badge API wrapper
-   */
-  Badge: {
-    /**
-     * Base badge requests url
-     */
-    url: '/badges',
-
-    /**
-     * Search badges that correspond to the given query string
-     * @param {string} query Query string
-     * @return {Promise<Array<Badge>>} Badges
-     */
-    search: function search(query) {
-      var url = "".concat(this.url, "/search/").concat(query);
-      return fetchResource('get', url);
-    }
-  },
-
-  /**
-   * Comment API wrapper
-   */
-  Comment: {
-    /**
-     * Base comment requests url
-     */
-    url: '/comments',
-
-    /**
-     * Get many comments
-     * @param {Array<Number>} ids
-     * @return {Promise<Array<Comment>>} Comments
-     */
-    getMany: function getMany(ids) {
-      var url = "".concat(this.url, "/get");
-      return fetchResource('post', url, {
-        comments_ids: ids
-      });
-    },
-
-    /**
-     * Create a new comment
-     * @param {!String} content Comment content
-     * @param {!Number} post Post id
-     * @return {Promise<Comment>} Comment
-     */
-    create: function create(content, post) {
-      var url = this.url;
-      return fetchResource('post', url, {
-        content: content,
-        post_id: post
-      });
-    }
-  }
-};
-
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -17794,7 +17592,7 @@ __webpack_require__.r(__webpack_exports__);
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.ts");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /**
@@ -17811,42 +17609,6 @@ var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)(_views_AppView__WEBPACK
 app.use(_router__WEBPACK_IMPORTED_MODULE_1__.default);
 app.use(_store__WEBPACK_IMPORTED_MODULE_2__.default);
 app.mount('#app');
-
-/***/ }),
-
-/***/ "./resources/js/bootstrap.js":
-/*!***********************************!*\
-  !*** ./resources/js/bootstrap.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
-window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['Accept'] = 'application/json';
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-
-window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
-window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
-  broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
-  forceTLS: false
-});
 
 /***/ }),
 
@@ -45159,9 +44921,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "compile": () => (/* binding */ compileToFunction)
 /* harmony export */ });
 /* harmony import */ var _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/runtime-dom */ "./node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js");
-/* harmony import */ var _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/runtime-dom */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
-/* harmony import */ var _vue_compiler_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vue/compiler-dom */ "./node_modules/@vue/compiler-dom/dist/compiler-dom.esm-bundler.js");
-/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
+/* harmony import */ var _vue_compiler_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/compiler-dom */ "./node_modules/@vue/compiler-dom/dist/compiler-dom.esm-bundler.js");
+/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 
 
 
@@ -45170,7 +44931,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function initDev() {
     {
-        (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__.initCustomFormatter)();
+        (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.initCustomFormatter)();
     }
 }
 
@@ -45180,13 +44941,13 @@ if ((true)) {
 }
 const compileCache = Object.create(null);
 function compileToFunction(template, options) {
-    if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(template)) {
+    if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_2__.isString)(template)) {
         if (template.nodeType) {
             template = template.innerHTML;
         }
         else {
-            ( true) && (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__.warn)(`invalid template option: `, template);
-            return _vue_shared__WEBPACK_IMPORTED_MODULE_1__.NOOP;
+            ( true) && (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.warn)(`invalid template option: `, template);
+            return _vue_shared__WEBPACK_IMPORTED_MODULE_2__.NOOP;
         }
     }
     const key = template;
@@ -45197,7 +44958,7 @@ function compileToFunction(template, options) {
     if (template[0] === '#') {
         const el = document.querySelector(template);
         if (( true) && !el) {
-            (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__.warn)(`Template element not found or is empty: ${template}`);
+            (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.warn)(`Template element not found or is empty: ${template}`);
         }
         // __UNSAFE__
         // Reason: potential execution of JS expressions in in-DOM template.
@@ -45205,14 +44966,14 @@ function compileToFunction(template, options) {
         // by the server, the template should not contain any user data.
         template = el ? el.innerHTML : ``;
     }
-    const { code } = (0,_vue_compiler_dom__WEBPACK_IMPORTED_MODULE_3__.compile)(template, (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)({
+    const { code } = (0,_vue_compiler_dom__WEBPACK_IMPORTED_MODULE_1__.compile)(template, (0,_vue_shared__WEBPACK_IMPORTED_MODULE_2__.extend)({
         hoistStatic: true,
         onError(err) {
             if ((true)) {
                 const message = `Template compilation error: ${err.message}`;
                 const codeFrame = err.loc &&
-                    (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.generateCodeFrame)(template, err.loc.start.offset, err.loc.end.offset);
-                (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__.warn)(codeFrame ? `${message}\n${codeFrame}` : message);
+                    (0,_vue_shared__WEBPACK_IMPORTED_MODULE_2__.generateCodeFrame)(template, err.loc.start.offset, err.loc.end.offset);
+                (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.warn)(codeFrame ? `${message}\n${codeFrame}` : message);
             }
             else {}
         }
@@ -45225,7 +44986,7 @@ function compileToFunction(template, options) {
     render._rc = true;
     return (compileCache[key] = render);
 }
-(0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__.registerRuntimeCompiler)(compileToFunction);
+(0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.registerRuntimeCompiler)(compileToFunction);
 
 
 
@@ -46515,6 +46276,18 @@ var index = {
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	
