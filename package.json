@@ -23,7 +23,8 @@
         "sass-loader": "^8.0.0",
         "stylelint-config-recommended": "^3.0.0",
         "vue": "^3.0.8",
-        "vue-loader": "^16.1.2"
+        "vue-loader": "^16.1.2",
+        "vue-property-decorator": "^9.1.2"
     },
     "dependencies": {
         "autoprefixer": "^10.2.5",
