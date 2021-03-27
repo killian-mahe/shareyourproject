@@ -34,6 +34,7 @@ class LoginController extends Controller
         // return 'Hello !';
         if ($this->attemptLogin($request))
         {
+            $request->session()->regenerate();
             return response()->json(Auth::user(), 200);
         }
 

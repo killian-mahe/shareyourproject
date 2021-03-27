@@ -52,7 +52,7 @@ export default defineComponent({
                     console.log(user);
                 })
 
-            await ((window as any).axios as AxiosStatic).get('/api/test', {withCredentials: true}).then(response => {
+            await ((window as any).axios as AxiosStatic).post('/api/test').then(response => {
                 console.log(response);
             })
         }

@@ -13331,9 +13331,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 5:
                 _context.next = 7;
-                return window.axios.get('/api/test', {
-                  withCredentials: true
-                }).then(function (response) {
+                return window.axios.post('/api/test').then(function (response) {
                   console.log(response);
                 });
 
