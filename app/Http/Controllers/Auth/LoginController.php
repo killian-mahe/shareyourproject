@@ -20,21 +20,47 @@ class LoginController extends Controller
     */
 
     /**
-     * Handle an authentication attempt.
+     * Create a new controller instance.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function authenticate(Request $request)
+    public function __construct()
     {
-        $credentials = $request->only('email', 'password');
+        // $this->middleware('guest')->except('logout');
+    }
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            return response()->json('OK', 200);
+    public function login(Request $request)
+    {
+        // return 'Hello !';
+        if ($this->attemptLogin($request))
+        {
+            return response()->json(Auth::user(), 200);
         }
 
-        return response()->json('ERROR', 200);
+        return response()->json('ERROR', 202);
+    }
+
+    /**
+     * Attempt to log the user into the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    protected function attemptLogin(Request $request)
+    {
+        return Auth::guard()->attempt(
+            $this->credentials($request), $request->filled('remember')
+        );
+    }
+
+    /**
+     * Get the needed authorization credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
+    {
+        return $request->only('email', 'password');
     }
 }

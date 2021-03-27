@@ -14,7 +14,7 @@ const API_URL = "/api";
 const fetchResource = (method: string, path: string, data = {}, headers = {}) => {
 
     let url = `${ API_URL }${ path }`;
-    if(path === '/logout') url = path;
+    if(path === '/logout' || path === '/login') url = path;
 
     // Variable which will be used for storing response
 

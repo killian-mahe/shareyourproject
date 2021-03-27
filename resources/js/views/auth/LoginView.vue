@@ -8,13 +8,13 @@
 
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <CustomInput
-                    @input="onInput"
-                    class="w-full px-3" name="email" label="E-mail" type="email" value="Hello" placeholder="jane.doe@shareyourproject.fr"></CustomInput>
+                    v-model="form.email"
+                    class="w-full px-3" name="email" label="E-mail" type="email" placeholder="jane.doe@shareyourproject.fr"></CustomInput>
                 </div>
 
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <CustomInput
-
+                    v-model="form.password"
                     class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************"></CustomInput>
                 </div>
 
@@ -26,6 +26,7 @@
     </div>
 </template>
 <script lang="ts">
+import { AxiosStatic } from 'axios'
 import { defineComponent } from 'vue'
 import { API } from '../../api'
 import CustomInput from '../../components/inputs/CustomInput.vue'
@@ -36,7 +37,6 @@ export default defineComponent({
     },
     data() {
         return {
-            email: "",
             form: {
                 email: "",
                 password: ""
@@ -44,17 +44,17 @@ export default defineComponent({
         }
     },
     methods: {
-        onInput(input: string) {
-            console.log("start")
-            console.log(input)
-            console.log("end")
-        },
-        onSubmit(event: Event) {
+        async onSubmit(event: Event) {
             event.preventDefault()
-            console.log(this.form)
-            API.login(this.form).then(response => {
+            await ((window as any).axios as AxiosStatic).get('/sanctum/csrf-cookie');
+
+            await API.login(this.form).then(user => {
+                    console.log(user);
+                })
+
+            await ((window as any).axios as AxiosStatic).get('/api/test', {withCredentials: true}).then(response => {
                 console.log(response);
-            });
+            })
         }
     }
 })
