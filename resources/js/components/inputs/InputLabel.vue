@@ -4,32 +4,21 @@
     </label>
 </template>
 
-
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
+import { defineComponent } from 'vue'
 
-@Component({})
-export default class InputLabel extends Vue {
-
-}
+export default defineComponent({
+    props: {
+            label: {
+                type: String,
+                required: true
+            },
+            name: {
+                type: String,
+                default: ""
+            }
+        },
+        mounted() {
+        }
+})
 </script>
-
-// <script lang="ts">
-// import { defineComponent } from 'vue'
-
-// export default defineComponent({
-//     props: {
-//             label: {
-//                 type: String,
-//                 required: true
-//             },
-//             name: {
-//                 type: String,
-//                 default: ""
-//             }
-//         },
-//         mounted() {
-//         }
-// })
-// </script>

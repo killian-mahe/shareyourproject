@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import {Post, Project, User} from './models';
-import { AxiosPromise, AxiosRequestConfig } from 'axios'
-=======
 import {Post, Project, User, Tag} from './models';
-import { AxiosRequestConfig } from 'axios'
->>>>>>> 9e39ec3ee694de7959285dd319b2be97635e04ab
+import { AxiosPromise, AxiosRequestConfig } from 'axios'
 
 const API_URL = "/api";
 
