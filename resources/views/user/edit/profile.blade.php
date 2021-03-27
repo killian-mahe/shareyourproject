@@ -15,12 +15,15 @@
                     </div>
                     {{-- Profile Picture --}}
                     <div class=" w-1/2 md:w-1/4 md:flex-none md:mx-8 lg:w-1/3 xl:w-1/2 flex items-center justify-center">
-                        <div class="flex relative items-center justify-center">
-                            <img class="rounded-full  w-32 h-32 md:w-36 md:h-36" src="https://randomwordgenerator.com/img/picture-generator/57e7d4414d51a814f1dc8460962e33791c3ad6e04e50744172287cd09e49cd_640.jpg">
+                        {{-- <div class="flex relative items-center justify-center">
+                            <img class="rounded-full w-32 h-32 md:w-36 md:h-36" src="https://randomwordgenerator.com/img/picture-generator/57e7d4414d51a814f1dc8460962e33791c3ad6e04e50744172287cd09e49cd_640.jpg">
                             <div class="group absolute flex items-center justify-center">
-                                <span class="bg-onyx-900 rounded-full opacity-0 w-36 h-36 group-hover:opacity-50 transform duration-200 ease-in-out cursor-pointer"></span>
+                                <span class="bg-onyx-900 rounded-full opacity-0 w-32 h-32 md:w-36 md:h-36 group-hover:opacity-50 transform duration-200 ease-in-out cursor-pointer"></span>
                                 <i class="text-cultured-100 h-5 w-5 opacity-0 absolute group-hover:opacity-100 transform duration-200 ease-in-out cursor-pointer" data-feather="edit-3"></i>
                             </div>
+                        </div> --}}
+                        <div class="w-full h-full">
+                            <picture-input img_radius="full" img_height="12rem" img_path="https://randomwordgenerator.com/img/picture-generator/57e7d4414d51a814f1dc8460962e33791c3ad6e04e50744172287cd09e49cd_640.jpg"></picture-input>
                         </div>
                     </div>
                 </div>
