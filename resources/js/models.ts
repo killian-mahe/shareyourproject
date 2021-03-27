@@ -258,4 +258,4 @@ class Tag {
 //     }
 // };
 
-export {Post, PostLinks, User, UserLinks};
+export {Post, PostLinks, User, UserLinks, Project};

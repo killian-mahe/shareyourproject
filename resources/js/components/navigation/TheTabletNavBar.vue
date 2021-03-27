@@ -15,9 +15,9 @@
         <!-- Links -->
         <ul class="tablet-nav-bar-list" :class="{'left-16':display2, '-left-128':!display2}">
             <li><router-link :to="{name: 'feed'}"><i data-feather="home" class="mr-1"></i>My feed</router-link></li>
-            <li><router-link v-if="auth_user" :to="{name: '#'}"><i data-feather="layout" class="mr-1"></i>My dashboard</router-link></li>
-            <li><router-link v-if="auth_user" :to="{name: '#'}"><i data-feather="message-circle" class="mr-1"></i>My message</router-link></li>
-            <li><router-link v-if="auth_user" :to="{name: '#'}"><i data-feather="compass" class="mr-1"></i>Explore</router-link></li>
+            <li><router-link v-if="auth_user" to="#"><i data-feather="layout" class="mr-1"></i>My dashboard</router-link></li>
+            <li><router-link v-if="auth_user" to="#"><i data-feather="message-circle" class="mr-1"></i>My message</router-link></li>
+            <li><router-link v-if="auth_user" to="#"><i data-feather="compass" class="mr-1"></i>Explore</router-link></li>
         </ul>
 
         <!-- Login/register buttons -->

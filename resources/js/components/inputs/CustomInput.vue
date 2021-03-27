@@ -13,7 +13,7 @@
                     :placeholder="placeholder"
                     :value="value"
                     :autocomplete="_autocmoplete"
-                    v-on:input="$emit('input', $event.target.value)">
+                    @input="onInput">
             <i v-if="icon !== '' && right == false"
                 :data-feather="icon"
                 class="absolute left-3 block"></i>
@@ -41,6 +41,7 @@ export default defineComponent({
             type: String,
             default: ""
         },
+
         type: {
             type: String,
             default: ""
@@ -86,6 +87,11 @@ export default defineComponent({
                 return "on";
             }
             return "off";
+        }
+    },
+    methods: {
+        onInput(obj: any) {
+            console.log(obj)
         }
     }
 })

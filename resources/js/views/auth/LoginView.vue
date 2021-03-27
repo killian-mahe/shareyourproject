@@ -8,19 +8,19 @@
 
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <CustomInput
-                    v-model="form.email"
-                    class="w-full px-3" name="email" label="E-mail" type="email" placeholder="jane.doe@shareyourproject.fr"></CustomInput>
+                    @input="onInput"
+                    class="w-full px-3" name="email" label="E-mail" type="email" value="Hello" placeholder="jane.doe@shareyourproject.fr"></CustomInput>
                 </div>
 
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <CustomInput
-                    v-model="form.password"
+
                     class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************"></CustomInput>
                 </div>
 
                 <i class="block mb-3 text-sm">No account yet ? <router-link class="font-medium" :to="{name: 'register'}">Register</router-link></i>
 
-                <button v-on:submit.prevent="onSubmit" type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Log In</button>
+                <button v-on:click="onSubmit($event)" type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Log In</button>
             </form>
         </div>
     </div>
@@ -36,6 +36,7 @@ export default defineComponent({
     },
     data() {
         return {
+            email: "",
             form: {
                 email: "",
                 password: ""
@@ -43,7 +44,14 @@ export default defineComponent({
         }
     },
     methods: {
-        onSubmit() {
+        onInput(input: string) {
+            console.log("start")
+            console.log(input)
+            console.log("end")
+        },
+        onSubmit(event: Event) {
+            event.preventDefault()
+            console.log(this.form)
             API.login(this.form).then(response => {
                 console.log(response);
             });

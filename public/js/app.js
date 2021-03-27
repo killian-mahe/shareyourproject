@@ -16437,6 +16437,11 @@ __webpack_require__.r(__webpack_exports__);
 
       return "off";
     }
+  },
+  methods: {
+    onInput: function onInput(obj) {
+      console.log(obj);
+    }
   }
 }));
 
@@ -16560,7 +16565,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/api.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/api.ts");
 /* harmony import */ var _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/inputs/CustomInput.vue */ "./resources/js/components/inputs/CustomInput.vue");
 
 
@@ -16571,6 +16576,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      email: "",
       form: {
         email: "",
         password: ""
@@ -16578,7 +16584,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    onSubmit: function onSubmit() {
+    onInput: function onInput(input) {
+      console.log("start");
+      console.log(input);
+      console.log("end");
+    },
+    onSubmit: function onSubmit(event) {
+      event.preventDefault();
+      console.log(this.form);
       _api__WEBPACK_IMPORTED_MODULE_1__.API.login(this.form).then(function (response) {
         console.log(response);
       });
@@ -16611,240 +16624,307 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/models.ts":
-/*!********************************!*\
-  !*** ./resources/js/models.ts ***!
-  \********************************/
+/***/ "./resources/js/api.ts":
+/*!*****************************!*\
+  !*** ./resources/js/api.ts ***!
+  \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Post": () => (/* binding */ Post),
-/* harmony export */   "PostLinks": () => (/* binding */ PostLinks),
-/* harmony export */   "User": () => (/* binding */ User),
-/* harmony export */   "UserLinks": () => (/* binding */ UserLinks)
+/* harmony export */   "API": () => (/* binding */ API)
 /* harmony export */ });
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var API_URL = "/api";
+/**
+ *
+ * @param {String} method
+ * @param {String} path
+ * @param {?Object} data
+ * @param {?Object} headers
+ * @return {Promise}
+ */
 
-var PostLinks = function PostLinks(author, post) {
-  _classCallCheck(this, PostLinks);
+var fetchResource = function fetchResource(method, path) {
+  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+  var url = "".concat(API_URL).concat(path);
+  if (path === '/logout') url = path; // Variable which will be used for storing response
 
-  this.author = author;
-  this.post = post;
+  return window.axios({
+    method: method,
+    url: url,
+    data: data,
+    headers: headers
+  }).then(function (response) {
+    if (response.status >= 200 && response.status < 300) {
+      return response.data;
+    } else {
+      throw response;
+    }
+  });
 };
 
-var Post = function Post(id, content, formated_content, author, project, images_url, tags, url, reshared_post, liked, comments_overview, stats, followed_projects, created_at, updated_at) {
-  _classCallCheck(this, Post);
+var API = {
+  /**
+   * Search posts and users from a query
+   * @param {String} query
+   * @return {Promise<Array<User | Project>>}
+   */
+  search: function search(query) {
+    var url = "/search/".concat(query);
+    return fetchResource('get', url);
+  },
 
-  this.id = id;
-  this.content = content;
-  this.formated_content = formated_content;
-  this.author = author;
-  this.project = project;
-  this.images_url = images_url;
-  this.tags = tags;
-  this.url = url;
-  this.reshared_post = reshared_post;
-  this.liked = liked;
-  this.comments_overview = comments_overview;
-  this.stats = stats;
-  this.followed_projects = followed_projects;
-  this.created_at = created_at;
-  this.updated_at = updated_at;
+  /**
+   * Logout the user
+   * @return {Promise}
+   */
+  logout: function logout() {
+    var url = '/logout';
+    return fetchResource('post', url);
+  },
+
+  /**
+   * Login the user
+   * @return {Promise<User>}
+   */
+  login: function login(credentials) {
+    var url = '/login';
+    return fetchResource('post', url, credentials);
+  },
+
+  /**
+   * Post API wrapper
+   */
+  Post: {
+    /**
+     * Base post requests url
+     */
+    url: '/posts',
+
+    /**
+     * Like a post
+     * @param {Number} id
+     * @return {Promise}
+     */
+    like: function like(id) {
+      var url = "".concat(this.url, "/").concat(id, "/like");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Unike a post
+     * @param {Number} id
+     * @return {Promise}
+     */
+    unlike: function unlike(id) {
+      var url = "".concat(this.url, "/").concat(id, "/unlike");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Load user feed and return loaded posts
+     * @param {?Array<Number>} except_ids Post ids that mustn't be loaded
+     * @return {Promise<Array<Post>>}
+     */
+    feed: function feed(except_ids) {
+      var url = '/feed';
+      return fetchResource('post', url, {
+        except: except_ids
+      });
+    },
+
+    /**
+     * Create a new post
+     * @param {String} content Post content
+     * @param {?Number} project_author Project author id
+     * @param {?Number} reshare Reshared post id
+     * @param {?Array<File>} images Post images
+     * @return {Promise<Post>}
+     */
+    create: function create(content) {
+      var project_author = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var reshare = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var images = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var url = "".concat(this.url);
+      var formData = new FormData(); // Post content
+
+      formData.append('content', content); // Project author (if necessary)
+
+      if (project_author) formData.append('project', String(project_author)); // Post reshared (if necessary)
+
+      if (reshare) formData.append('reshare', String(reshare)); // Post images
+
+      if (images) {
+        images.forEach(function (image, index) {
+          formData.append("image[".concat(index, "]"), image);
+        });
+      }
+
+      return fetchResource('post', url, formData, {
+        'Content-Type': 'multipart/form-data'
+      });
+    }
+  },
+
+  /**
+   * User API wrapper
+   */
+  User: {
+    /**
+     * Base user request url
+     */
+    url: '/users',
+
+    /**
+     * Search users that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<User>>} Users
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Get the corresponding user
+     * @param {!Number} id User id
+     * @return {Promise<User>} User
+     */
+    get: function get(id) {
+      var url = "".concat(this.url, "/").concat(id);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Project API wrapper
+   */
+  Project: {
+    /**
+     * Base project requests url
+     */
+    url: '/projects',
+
+    /**
+     * Get a project corresponding to the id passed to the function
+     * @param {!Number} id Project id
+     * @return {Promise<Project>}
+     */
+    get: function get(id) {
+      var url = "".concat(this.url, "/").concat(id);
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Make the authenticated user follows the project
+     * @param {Number} id Project id
+     */
+    follow: function follow(id) {
+      var url = "".concat(this.url, "/").concat(id, "/follow");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Make the authenticated user unfollows the project
+     * @param {Number} id Project id
+     */
+    unfollow: function unfollow(id) {
+      var url = "".concat(this.url, "/").concat(id, "/unfollow");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Get projects corresponding to the ids passed to the function
+     * @param {?Array<Number>} projects_ids Project ids to restrieve
+     * @return {Promise<Array<Project>>}
+     */
+    getMany: function getMany() {
+      var projects_ids = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var url = "".concat(this.url, "/get");
+      return fetchResource('post', url, {
+        projects_ids: projects_ids
+      });
+    }
+  },
+
+  /**
+   * Tag API wrapper
+   */
+  Tag: {
+    /**
+     * Base tag requests url
+     */
+    url: '/tags'
+    /**
+     * Search tags that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<Tag>>} Tags
+     */
+    // search: function(query: string) : Promise<Array<Tag>> {
+    //     const url = `${this.url}/search/${query}`;
+    //     return fetchResource('get', url);
+    // }
+
+  },
+
+  /**
+   * Badge API wrapper
+   */
+  Badge: {
+    /**
+     * Base badge requests url
+     */
+    url: '/badges',
+
+    /**
+     * Search badges that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<Badge>>} Badges
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Comment API wrapper
+   */
+  Comment: {
+    /**
+     * Base comment requests url
+     */
+    url: '/comments',
+
+    /**
+     * Get many comments
+     * @param {Array<Number>} ids
+     * @return {Promise<Array<Comment>>} Comments
+     */
+    getMany: function getMany(ids) {
+      var url = "".concat(this.url, "/get");
+      return fetchResource('post', url, {
+        comments_ids: ids
+      });
+    },
+
+    /**
+     * Create a new comment
+     * @param {!String} content Comment content
+     * @param {!Number} post Post id
+     * @return {Promise<Comment>} Comment
+     */
+    create: function create(content, post) {
+      var url = this.url;
+      return fetchResource('post', url, {
+        content: content,
+        post_id: post
+      });
+    }
+  }
 };
-
-;
-
-var UserLinks = function UserLinks(index) {
-  _classCallCheck(this, UserLinks);
-
-  this.index = index;
-};
-
-var User = function User(id, username, firstname, lastname, email, title, fullname, url, profilePicture, bannerPicture, ownedProjects, created_at, updated_at) {
-  _classCallCheck(this, User);
-
-  this.id = id;
-  this.username = username;
-  this.email = email;
-  this.title = title;
-  this.created_at = created_at;
-  this.updated_at = updated_at;
-  this.firstname = firstname;
-  this.lastname = lastname;
-  this.fullname = fullname;
-  this.url = url;
-  this.profilePicture = profilePicture;
-  this.bannerPicture = bannerPicture;
-  this.ownedProjects = ownedProjects;
-};
-
-;
-
-var Project = function Project() {
-  _classCallCheck(this, Project);
-};
-
-;
-
-var Tag = function Tag() {
-  _classCallCheck(this, Tag);
-};
-
-; // class Project {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.description;
-//         /**
-//          * @type {String}
-//          */
-//         this.formated_description;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {Boolean}
-//          */
-//         this.public;
-//         /**
-//          * @type {Number}
-//          */
-//         this.owner_id;
-//         /**
-//          * @type {Object}
-//          */
-//         this.url = {
-//             index: "",
-//             mambers: "",
-//             description: ""
-//         };
-//         /**
-//          * @type {Array<Technology>}
-//          */
-//         this.technologies;
-//         /**
-//          * @type {Array<Number>}
-//          */
-//         this.members_ids;
-//         /**
-//          * @type {String}
-//          */
-//         this.profile_picture;
-//         /**
-//          * @type {String}
-//          */
-//         this.banner_picture;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
-// class Comment {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.content;
-//         /**
-//          * @type {String}
-//          */
-//         this.formated_content;
-//         /**
-//          * @type {User}
-//          */
-//         this.author;
-//         /**
-//          * @type {Number}
-//          */
-//         this.post_id;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
-// class Badge {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {String}
-//          */
-//         this.label;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
-// class Tag {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {Date}
-//          */
-//         this.created_at;
-//         /**
-//          * @type {Date}
-//          */
-//         this.updated_at;
-//     }
-// };
-// class Technology {
-//     constructor() {
-//         /**
-//          * @type {Number}
-//          */
-//         this.id;
-//         /**
-//          * @type {String}
-//          */
-//         this.name;
-//         /**
-//          * @type {String}
-//          */
-//         this.label;
-//     }
-// };
-
 
 
 /***/ }),
@@ -16951,8 +17031,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: _ctx.placeholder,
     value: _ctx.value,
     autocomplete: _ctx._autocmoplete,
-    onInput: _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.$emit('input', $event.target.value);
+    onInput: _cache[1] || (_cache[1] = function () {
+      return _ctx.onInput && _ctx.onInput.apply(_ctx, arguments);
     })
   }, null, 42
   /* CLASS, PROPS, HYDRATE_EVENTS */
@@ -17020,80 +17100,70 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "flex justify-around w-full "
 };
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-  "class": "m-2 ",
-  src: "{{asset('vendor/courier/logos/svg/fit/Logo_viridiant_fit.svg')}}",
-  width: "90px",
-  height: "90px"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_4 = {
+var _hoisted_3 = {
   "class": "my-auto hidden lg:flex space-x-4"
 };
-var _hoisted_5 = {
+var _hoisted_4 = {
   "class": "nav-bar-li"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "data-feather": "home",
   "class": "mr-1"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Feed");
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Feed");
 
-var _hoisted_8 = {
+var _hoisted_7 = {
   key: 0,
   "class": "nav-bar-li"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "data-feather": "layout",
   "class": "mr-1"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("My dashboard");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("My dashboard");
 
-var _hoisted_11 = {
+var _hoisted_10 = {
   key: 1,
   "class": "nav-bar-li"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "data-feather": "message-circle",
   "class": "mr-1"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("My message");
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("My message");
 
-var _hoisted_14 = {
+var _hoisted_13 = {
   "class": "nav-bar-li"
 };
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
   "data-feather": "compass",
   "class": "mr-1"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Explore");
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Explore");
 
-var _hoisted_17 = {
+var _hoisted_16 = {
   "class": "my-auto"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Sign Up");
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Sign Up");
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Log In");
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Log In");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
@@ -17106,69 +17176,70 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_3];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+        "class": "m-2 ",
+        src: 'vendor/courier/logos/svg/fit/Logo_viridiant_fit.svg',
+        width: "90",
+        height: "90"
+      }, null, 8
+      /* PROPS */
+      , ["src"])];
     }),
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
       name: 'feed'
     },
     "class": "inline-flex a-none"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_6, _hoisted_7];
+      return [_hoisted_5, _hoisted_6];
     }),
     _: 1
     /* STABLE */
 
-  })]), _ctx.isAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  })]), _ctx.isAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     "class": "inline-flex a-none",
-    to: {
-      name: '#'
-    }
+    to: "#"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_9, _hoisted_10];
+      return [_hoisted_8, _hoisted_9];
     }),
     _: 1
     /* STABLE */
 
-  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.isAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.isAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("li", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     "class": "inline-flex a-none",
-    to: {
-      name: '#'
-    }
+    to: "#"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_12, _hoisted_13];
+      return [_hoisted_11, _hoisted_12];
     }),
     _: 1
     /* STABLE */
 
-  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     "class": "inline-flex a-none",
-    to: {
-      name: '#'
-    }
+    to: "#"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_15, _hoisted_16];
+      return [_hoisted_14, _hoisted_15];
     }),
     _: 1
     /* STABLE */
 
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_search_bar, {
     "class": "w-1/4"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @auth\n\n        <div class=\"my-auto flex space-x-6 items-center\">\n            <notification-view\n                :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'\n                :projects='@json(Auth::user()->projects->pluck('id'))'\n                :initial_notifications='@json(Auth::user()->notifications->take(5)->pluck('data'))'\n                ></notification-view>\n            <personal-menu :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'></personal-menu>\n        </div>\n\n        @else "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @auth\n\n        <div class=\"my-auto flex space-x-6 items-center\">\n            <notification-view\n                :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'\n                :projects='@json(Auth::user()->projects->pluck('id'))'\n                :initial_notifications='@json(Auth::user()->notifications->take(5)->pluck('data'))'\n                ></notification-view>\n            <personal-menu :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'></personal-menu>\n        </div>\n\n        @else "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
       name: 'register'
     },
     "class": "btn-classic mr-5 a-none"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_18];
+      return [_hoisted_17];
     }),
     _: 1
     /* STABLE */
@@ -17180,7 +17251,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "btn btn-viridiant hover:text-cultured-100 a-none"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_19];
+      return [_hoisted_18];
     }),
     _: 1
     /* STABLE */
@@ -17299,30 +17370,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["src"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomInput, {
-    modelValue: _ctx.form.email,
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.form.email = $event;
-    }),
+    onInput: _ctx.onInput,
     "class": "w-full px-3",
     name: "email",
     label: "E-mail",
     type: "email",
+    value: "Hello",
     placeholder: "jane.doe@shareyourproject.fr"
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomInput, {
-    modelValue: _ctx.form.password,
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return _ctx.form.password = $event;
-    }),
+  , ["onInput"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomInput, {
     "class": "w-full px-3 mb-6 md:mb-0",
     name: "password",
     label: "Password",
     type: "password",
     placeholder: "******************"
-  }, null, 8
-  /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     "class": "font-medium",
     to: {
       name: 'register'
@@ -17335,14 +17398,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return _ctx.onSubmit && _ctx.onSubmit.apply(_ctx, arguments);
-    }, ["prevent"])),
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.onSubmit($event);
+    }),
     type: "submit",
     "class": "my-4 btn btn-viridiant hover:text-cultured-100"
-  }, "Log In", 32
-  /* HYDRATE_EVENTS */
-  )])])]);
+  }, "Log In")])])]);
 }
 
 /***/ }),
@@ -17396,17 +17457,15 @@ var _hoisted_8 = {
 var _hoisted_9 = {
   "class": "flex flex-wrap -mx-3 mb-6"
 };
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", {
+var _hoisted_10 = {
   "class": "block mb-3 text-sm"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Already have an account ? "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
-  "class": "font-medium",
-  href: "{{route('login')}}"
-}, "Log In")], -1
-/* HOISTED */
-);
+};
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Already have an account ? ");
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Log In");
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   type: "submit",
   "class": "my-4 btn btn-viridiant hover:text-cultured-100"
 }, "Sign Up", -1
@@ -17415,6 +17474,8 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_CustomInput = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CustomInput");
+
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
     "class": "hidden md:block w-auto h-full bg-blur-3",
@@ -17463,317 +17524,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     label: "Confirm Password",
     type: "password",
     placeholder: "******************"
-  })]), _hoisted_10, _hoisted_11])])]);
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    "class": "font-medium",
+    to: {
+      name: 'login'
+    }
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_12];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]), _hoisted_13])])]);
 }
-
-/***/ }),
-
-/***/ "./resources/js/api.js":
-/*!*****************************!*\
-  !*** ./resources/js/api.js ***!
-  \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "API": () => (/* binding */ API)
-/* harmony export */ });
-/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./models */ "./resources/js/models.ts");
-
-var API_URL = "/api";
-/**
- *
- * @param {String} method
- * @param {String} path
- * @param {?Object} data
- * @param {?Object} headers
- * @return {Promise}
- */
-
-var fetchResource = function fetchResource(method, path) {
-  var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-  var headers = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
-  var url = "".concat(API_URL).concat(path);
-  if (path === '/logout') url = path; // Variable which will be used for storing response
-
-  return window.axios({
-    method: method,
-    url: url,
-    data: data,
-    headers: headers
-  }).then(function (response) {
-    console.log(response);
-
-    if (response.status >= 200 && response.status < 300) {
-      return response.data;
-    } else {
-      throw response;
-    }
-  });
-};
-
-var API = {
-  /**
-   * Search posts and users from a query
-   * @param {String} query
-   * @return {Promise<Array<User | Project>>}
-   */
-  search: function search(query) {
-    var url = "/search/".concat(query);
-    return fetchResource('get', url);
-  },
-
-  /**
-   * Logout the user
-   * @return {Promise}
-   */
-  logout: function logout() {
-    var url = '/logout';
-    return fetchResource('post', url);
-  },
-
-  /**
-   * Login the user
-   * @return {Promise}
-   */
-  login: function login(credentials) {
-    var url = '/login';
-    return fetchResource('post', url, credentials);
-  },
-
-  /**
-   * Post API wrapper
-   */
-  Post: {
-    /**
-     * Base post requests url
-     */
-    url: '/posts',
-
-    /**
-     * Like a post
-     * @param {Number} id
-     * @return {Promise}
-     */
-    like: function like(id) {
-      var url = "".concat(this.url, "/").concat(id, "/like");
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Unike a post
-     * @param {Number} id
-     * @return {Promise}
-     */
-    unlike: function unlike(id) {
-      var url = "".concat(this.url, "/").concat(id, "/unlike");
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Load user feed and return loaded posts
-     * @param {?Array<Number>} except_ids Post ids that mustn't be loaded
-     * @return {Promise<Array<Post>>}
-     */
-    feed: function feed(except_ids) {
-      var url = '/feed';
-      return fetchResource('post', url, {
-        except: except_ids
-      });
-    },
-
-    /**
-     * Create a new post
-     * @param {String} content Post content
-     * @param {?Number} project_author Project author id
-     * @param {?Number} reshare Reshared post id
-     * @param {?Array<File>} images Post images
-     * @return {Promise<Post>}
-     */
-    create: function create(content) {
-      var project_author = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var reshare = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var images = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var url = "".concat(this.url);
-      var formData = new FormData(); // Post content
-
-      formData.append('content', content); // Project author (if necessary)
-
-      if (project_author) formData.append('project', project_author); // Post reshared (if necessary)
-
-      if (reshare) formData.append('reshare', reshare); // Post images
-
-      if (images) {
-        images.forEach(function (image, index) {
-          formData.append("image[".concat(index, "]"), image);
-        });
-      }
-
-      return fetchResource('post', url, formData, {
-        'Content-Type': 'multipart/form-data'
-      });
-    }
-  },
-
-  /**
-   * User API wrapper
-   */
-  User: {
-    /**
-     * Base user request url
-     */
-    url: '/users',
-
-    /**
-     * Search users that correspond to the given query string
-     * @param {string} query Query string
-     * @return {Promise<Array<User>>} Users
-     */
-    search: function search(query) {
-      var url = "".concat(this.url, "/search/").concat(query);
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Get the corresponding user
-     * @param {!Number} id User id
-     * @return {Promise<User>} User
-     */
-    get: function get(id) {
-      var url = "".concat(this.url, "/").concat(id);
-      return fetchResource('get', url);
-    }
-  },
-
-  /**
-   * Project API wrapper
-   */
-  Project: {
-    /**
-     * Base project requests url
-     */
-    url: '/projects',
-
-    /**
-     * Get a project corresponding to the id passed to the function
-     * @param {!Number} id Project id
-     * @return {Promise<Project>}
-     */
-    get: function get(id) {
-      var url = "".concat(this.url, "/").concat(id);
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Make the authenticated user follows the project
-     * @param {Number} id Project id
-     */
-    follow: function follow(id) {
-      var url = "".concat(this.url, "/").concat(id, "/follow");
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Make the authenticated user unfollows the project
-     * @param {Number} id Project id
-     */
-    unfollow: function unfollow(id) {
-      var url = "".concat(this.url, "/").concat(id, "/unfollow");
-      return fetchResource('get', url);
-    },
-
-    /**
-     * Get projects corresponding to the ids passed to the function
-     * @param {?Array<Number>} projects_ids Project ids to restrieve
-     * @return {Promise<Array<Project>>}
-     */
-    getMany: function getMany() {
-      var projects_ids = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var url = "".concat(this.url, "/get");
-      return fetchResource('post', url, {
-        projects_ids: projects_ids
-      });
-    }
-  },
-
-  /**
-   * Tag API wrapper
-   */
-  Tag: {
-    /**
-     * Base tag requests url
-     */
-    url: '/tags',
-
-    /**
-     * Search tags that correspond to the given query string
-     * @param {string} query Query string
-     * @return {Promise<Array<Tag>>} Tags
-     */
-    search: function search(query) {
-      var url = "".concat(this.url, "/search/").concat(query);
-      return fetchResource('get', url);
-    }
-  },
-
-  /**
-   * Badge API wrapper
-   */
-  Badge: {
-    /**
-     * Base badge requests url
-     */
-    url: '/badges',
-
-    /**
-     * Search badges that correspond to the given query string
-     * @param {string} query Query string
-     * @return {Promise<Array<Badge>>} Badges
-     */
-    search: function search(query) {
-      var url = "".concat(this.url, "/search/").concat(query);
-      return fetchResource('get', url);
-    }
-  },
-
-  /**
-   * Comment API wrapper
-   */
-  Comment: {
-    /**
-     * Base comment requests url
-     */
-    url: '/comments',
-
-    /**
-     * Get many comments
-     * @param {Array<Number>} ids
-     * @return {Promise<Array<Comment>>} Comments
-     */
-    getMany: function getMany(ids) {
-      var url = "".concat(this.url, "/get");
-      return fetchResource('post', url, {
-        comments_ids: ids
-      });
-    },
-
-    /**
-     * Create a new comment
-     * @param {!String} content Comment content
-     * @param {!Number} post Post id
-     * @return {Promise<Comment>} Comment
-     */
-    create: function create(content, post) {
-      var url = this.url;
-      return fetchResource('post', url, {
-        content: content,
-        post_id: post
-      });
-    }
-  }
-};
-
 
 /***/ }),
 
@@ -17823,14 +17587,14 @@ app.mount('#app');
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
-window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js").default;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.headers.common['Accept'] = 'application/json';
 /**
@@ -17839,12 +17603,11 @@ window.axios.defaults.headers.common['Accept'] = 'application/json';
  * allows your team to easily build robust real-time web applications.
  */
 
-
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
+  key: "1f0848b597972bd4637c",
+  cluster: "eu",
   forceTLS: false
 });
 
