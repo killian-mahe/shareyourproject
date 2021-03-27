@@ -12660,9 +12660,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "withKeys": () => (/* binding */ withKeys),
 /* harmony export */   "withModifiers": () => (/* binding */ withModifiers)
 /* harmony export */ });
-/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 /* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
-/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 
 
 
@@ -12805,7 +12804,7 @@ function autoPrefix(style, rawName) {
     if (cached) {
         return cached;
     }
-    let name = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)(rawName);
+    let name = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.camelize)(rawName);
     if (name !== 'filter' && name in style) {
         return (prefixCache[rawName] = name);
     }
@@ -13438,7 +13437,7 @@ const TransitionGroupImpl = {
             });
         });
         return () => {
-            const rawProps = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__.toRaw)(props);
+            const rawProps = (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.toRaw)(props);
             const cssTransitionProps = resolveTransitionProps(rawProps);
             const tag = rawProps.tag || _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.Fragment;
             prevChildren = children;
@@ -16712,6 +16711,49 @@ var API = {
       var url = "".concat(this.url, "/").concat(id, "/like");
       return fetchResource('get', url);
     },
+<<<<<<< HEAD
+
+    /**
+     * Unike a post
+     * @param {Number} id
+     * @return {Promise}
+     */
+    unlike: function unlike(id) {
+      var url = "".concat(this.url, "/").concat(id, "/unlike");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Load user feed and return loaded posts
+     * @param {?Array<Number>} except_ids Post ids that mustn't be loaded
+     * @return {Promise<Array<Post>>}
+     */
+    feed: function feed(except_ids) {
+      var url = '/feed';
+      return fetchResource('post', url, {
+        except: except_ids
+      });
+    },
+
+    /**
+     * Create a new post
+     * @param {String} content Post content
+     * @param {?Number} project_author Project author id
+     * @param {?Number} reshare Reshared post id
+     * @param {?Array<File>} images Post images
+     * @return {Promise<Post>}
+     */
+    create: function create(content) {
+      var project_author = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var reshare = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var images = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+      var url = "".concat(this.url);
+      var formData = new FormData(); // Post content
+
+      formData.append('content', content); // Project author (if necessary)
+
+      if (project_author) formData.append('project', String(project_author)); // Post reshared (if necessary)
+=======
 
     /**
      * Unike a post
@@ -16761,6 +16803,222 @@ var API = {
           formData.append("image[".concat(index, "]"), image);
         });
       }
+
+      return fetchResource('post', url, formData, {
+        'Content-Type': 'multipart/form-data'
+      });
+    }
+  },
+
+  /**
+   * User API wrapper
+   */
+  User: {
+    /**
+     * Base user request url
+     */
+    url: '/users',
+
+    /**
+     * Search users that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<User>>} Users
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Get the corresponding user
+     * @param {!Number} id User id
+     * @return {Promise<User>} User
+     */
+    get: function get(id) {
+      var url = "".concat(this.url, "/").concat(id);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Project API wrapper
+   */
+  Project: {
+    /**
+     * Base project requests url
+     */
+    url: '/projects',
+
+    /**
+     * Get a project corresponding to the id passed to the function
+     * @param {!Number} id Project id
+     * @return {Promise<Project>}
+     */
+    get: function get(id) {
+      var url = "".concat(this.url, "/").concat(id);
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Make the authenticated user follows the project
+     * @param {Number} id Project id
+     */
+    follow: function follow(id) {
+      var url = "".concat(this.url, "/").concat(id, "/follow");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Make the authenticated user unfollows the project
+     * @param {Number} id Project id
+     */
+    unfollow: function unfollow(id) {
+      var url = "".concat(this.url, "/").concat(id, "/unfollow");
+      return fetchResource('get', url);
+    },
+
+    /**
+     * Get projects corresponding to the ids passed to the function
+     * @param {?Array<Number>} projects_ids Project ids to restrieve
+     * @return {Promise<Array<Project>>}
+     */
+    getMany: function getMany() {
+      var projects_ids = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+      var url = "".concat(this.url, "/get");
+      return fetchResource('post', url, {
+        projects_ids: projects_ids
+      });
+    }
+  },
+
+  /**
+   * Tag API wrapper
+   */
+  Tag: {
+    /**
+     * Base tag requests url
+     */
+    url: '/tags',
+
+    /**
+     * Search tags that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<Tag>>} Tags
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Badge API wrapper
+   */
+  Badge: {
+    /**
+     * Base badge requests url
+     */
+    url: '/badges',
+
+    /**
+     * Search badges that correspond to the given query string
+     * @param {string} query Query string
+     * @return {Promise<Array<Badge>>} Badges
+     */
+    search: function search(query) {
+      var url = "".concat(this.url, "/search/").concat(query);
+      return fetchResource('get', url);
+    }
+  },
+
+  /**
+   * Comment API wrapper
+   */
+  Comment: {
+    /**
+     * Base comment requests url
+     */
+    url: '/comments',
+
+    /**
+     * Get many comments
+     * @param {Array<Number>} ids
+     * @return {Promise<Array<Comment>>} Comments
+     */
+    getMany: function getMany(ids) {
+      var url = "".concat(this.url, "/get");
+      return fetchResource('post', url, {
+        comments_ids: ids
+      });
+    },
+
+    /**
+     * Create a new comment
+     * @param {!String} content Comment content
+     * @param {!Number} post Post id
+     * @return {Promise<Comment>} Comment
+     */
+    create: function create(content, post) {
+      var url = this.url;
+      return fetchResource('post', url, {
+        content: content,
+        post_id: post
+      });
+    }
+  }
+};
+
+
+/***/ }),
+
+/***/ "./resources/js/bootstrap.ts":
+/*!***********************************!*\
+  !*** ./resources/js/bootstrap.ts ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var pusher_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
+/* harmony import */ var pusher_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pusher_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var laravel_echo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-echo */ "./node_modules/laravel-echo/dist/echo.js");
+/**
+ * We'll load the axios HTTP library which allows us to easily issue requests
+ * to our Laravel back-end. This library automatically handles sending the
+ * CSRF token as a header based on the value of the "XSRF" token cookie.
+ */
+
+>>>>>>> 9e39ec3ee694de7959285dd319b2be97635e04ab
+
+      if (reshare) formData.append('reshare', String(reshare)); // Post images
+
+<<<<<<< HEAD
+      if (images) {
+        images.forEach(function (image, index) {
+          formData.append("image[".concat(index, "]"), image);
+        });
+      }
+=======
+window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+window.axios = (axios__WEBPACK_IMPORTED_MODULE_0___default());
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Accept'] = 'application/json';
+/**
+ * Echo exposes an expressive API for subscribing to channels and listening
+ * for events that are broadcast by Laravel. Echo and event broadcasting
+ * allows your team to easily build robust real-time web applications.
+ */
+
+window.Pusher = new (pusher_js__WEBPACK_IMPORTED_MODULE_1___default())( false || "");
+window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_2__.default({
+  broadcaster: 'pusher',
+  key: "",
+  cluster: "mt1",
+  forceTLS: false
+});
+>>>>>>> 9e39ec3ee694de7959285dd319b2be97635e04ab
 
       return fetchResource('post', url, formData, {
         'Content-Type': 'multipart/form-data'
@@ -17524,6 +17782,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     label: "Confirm Password",
     type: "password",
     placeholder: "******************"
+<<<<<<< HEAD
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("i", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     "class": "font-medium",
     to: {
@@ -17537,6 +17796,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })]), _hoisted_13])])]);
+=======
+  })]), _hoisted_10, _hoisted_11])])]);
+>>>>>>> 9e39ec3ee694de7959285dd319b2be97635e04ab
 }
 
 /***/ }),
@@ -17558,7 +17820,7 @@ __webpack_require__.r(__webpack_exports__);
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.ts");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /**
@@ -17578,6 +17840,7 @@ app.mount('#app');
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -17613,6 +17876,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
 
 /***/ }),
 
+=======
+>>>>>>> 9e39ec3ee694de7959285dd319b2be97635e04ab
 /***/ "./resources/js/router/index.js":
 /*!**************************************!*\
   !*** ./resources/js/router/index.js ***!
@@ -44922,9 +45187,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "compile": () => (/* binding */ compileToFunction)
 /* harmony export */ });
 /* harmony import */ var _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/runtime-dom */ "./node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js");
-/* harmony import */ var _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/runtime-dom */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
-/* harmony import */ var _vue_compiler_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vue/compiler-dom */ "./node_modules/@vue/compiler-dom/dist/compiler-dom.esm-bundler.js");
-/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
+/* harmony import */ var _vue_compiler_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/compiler-dom */ "./node_modules/@vue/compiler-dom/dist/compiler-dom.esm-bundler.js");
+/* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 
 
 
@@ -44933,7 +45197,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function initDev() {
     {
-        (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__.initCustomFormatter)();
+        (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.initCustomFormatter)();
     }
 }
 
@@ -44943,13 +45207,13 @@ if ((true)) {
 }
 const compileCache = Object.create(null);
 function compileToFunction(template, options) {
-    if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(template)) {
+    if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_2__.isString)(template)) {
         if (template.nodeType) {
             template = template.innerHTML;
         }
         else {
-            ( true) && (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__.warn)(`invalid template option: `, template);
-            return _vue_shared__WEBPACK_IMPORTED_MODULE_1__.NOOP;
+            ( true) && (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.warn)(`invalid template option: `, template);
+            return _vue_shared__WEBPACK_IMPORTED_MODULE_2__.NOOP;
         }
     }
     const key = template;
@@ -44960,7 +45224,7 @@ function compileToFunction(template, options) {
     if (template[0] === '#') {
         const el = document.querySelector(template);
         if (( true) && !el) {
-            (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__.warn)(`Template element not found or is empty: ${template}`);
+            (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.warn)(`Template element not found or is empty: ${template}`);
         }
         // __UNSAFE__
         // Reason: potential execution of JS expressions in in-DOM template.
@@ -44968,14 +45232,14 @@ function compileToFunction(template, options) {
         // by the server, the template should not contain any user data.
         template = el ? el.innerHTML : ``;
     }
-    const { code } = (0,_vue_compiler_dom__WEBPACK_IMPORTED_MODULE_3__.compile)(template, (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)({
+    const { code } = (0,_vue_compiler_dom__WEBPACK_IMPORTED_MODULE_1__.compile)(template, (0,_vue_shared__WEBPACK_IMPORTED_MODULE_2__.extend)({
         hoistStatic: true,
         onError(err) {
             if ((true)) {
                 const message = `Template compilation error: ${err.message}`;
                 const codeFrame = err.loc &&
-                    (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.generateCodeFrame)(template, err.loc.start.offset, err.loc.end.offset);
-                (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__.warn)(codeFrame ? `${message}\n${codeFrame}` : message);
+                    (0,_vue_shared__WEBPACK_IMPORTED_MODULE_2__.generateCodeFrame)(template, err.loc.start.offset, err.loc.end.offset);
+                (0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.warn)(codeFrame ? `${message}\n${codeFrame}` : message);
             }
             else {}
         }
@@ -44988,7 +45252,7 @@ function compileToFunction(template, options) {
     render._rc = true;
     return (compileCache[key] = render);
 }
-(0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_2__.registerRuntimeCompiler)(compileToFunction);
+(0,_vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.registerRuntimeCompiler)(compileToFunction);
 
 
 
@@ -46278,6 +46542,18 @@ var index = {
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
 /******/ 		};
 /******/ 	})();
 /******/ 	
