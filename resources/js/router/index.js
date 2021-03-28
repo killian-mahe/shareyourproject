@@ -18,7 +18,12 @@ const routes = [
         path: '/register',
         name: 'register',
         component: RegisterView
-    }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: RegisterView
+    },
 ]
 
 export default createRouter({
