@@ -13287,20 +13287,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../api */ "./resources/js/api.ts");
-/* harmony import */ var _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/inputs/CustomInput.vue */ "./resources/js/components/inputs/CustomInput.vue");
+/* harmony import */ var _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/inputs/CustomInput.vue */ "./resources/js/components/inputs/CustomInput.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
   components: {
-    CustomInput: _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_3__.default
+    CustomInput: _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_2__.default
   },
   data: function data() {
     return {
@@ -13310,7 +13316,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     };
   },
-  methods: {
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)({
+    isAuthenticated: 'isAuthenticated'
+  })),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapActions)({
+    signIn: 'signIn'
+  })), {}, {
     onSubmit: function onSubmit(event) {
       var _this = this;
 
@@ -13321,18 +13332,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 event.preventDefault();
                 _context.next = 3;
-                return window.axios.get('/sanctum/csrf-cookie');
+                return _this.signIn(_this.form);
 
               case 3:
                 _context.next = 5;
-                return _api__WEBPACK_IMPORTED_MODULE_2__.API.login(_this.form).then(function (user) {
-                  console.log(user);
-                });
+                return _this.isAuthenticated;
 
               case 5:
-                _context.next = 7;
-                return window.axios.post('/api/test').then(function (response) {
-                  console.log(response);
+                if (!_context.sent) {
+                  _context.next = 7;
+                  break;
+                }
+
+                _this.$router.push({
+                  name: 'register'
                 });
 
               case 7:
@@ -13343,7 +13356,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     }
-  }
+  })
 }));
 
 /***/ }),
@@ -13711,7 +13724,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// initial state
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../api */ "./resources/js/api.ts");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+ // initial state
+
 var state = {
   authUser: undefined
 }; // getters
@@ -13719,12 +13742,55 @@ var state = {
 var getters = {
   isAuthenticated: function isAuthenticated(state) {
     return !!state.authUser;
+  },
+  user: function user(state) {
+    return state.authUser;
   }
 }; // actions
 
-var actions = {}; // mutations
+var actions = {
+  signIn: function signIn(_ref, credentials) {
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var dispatch;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              dispatch = _ref.dispatch;
+              _context.next = 3;
+              return window.axios.get('/sanctum/csrf-cookie');
 
-var mutations = {};
+            case 3:
+              _context.next = 5;
+              return _api__WEBPACK_IMPORTED_MODULE_1__.API.login(credentials);
+
+            case 5:
+              return _context.abrupt("return", dispatch('me'));
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  me: function me(_ref2) {
+    var commit = _ref2.commit;
+    return window.axios.get('/api/user').then(function (response) {
+      commit('SET_USER', response.data);
+    })["catch"](function () {
+      commit('SET_USER', null);
+    });
+  }
+}; // mutations
+
+var mutations = {
+  SET_USER: function SET_USER(state, user) {
+    console.log(user);
+    state.authUser = user;
+  }
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: state,
   getters: getters,
@@ -14327,9 +14393,11 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bun
 
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)(_views_AppView__WEBPACK_IMPORTED_MODULE_3__.default);
-app.use(_router__WEBPACK_IMPORTED_MODULE_1__.default);
-app.use(_store__WEBPACK_IMPORTED_MODULE_2__.default);
-app.mount('#app');
+_store__WEBPACK_IMPORTED_MODULE_2__.default.dispatch('me').then(function () {
+  app.use(_router__WEBPACK_IMPORTED_MODULE_1__.default);
+  app.use(_store__WEBPACK_IMPORTED_MODULE_2__.default);
+  app.mount('#app');
+});
 
 /***/ }),
 

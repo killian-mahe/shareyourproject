@@ -23,7 +23,7 @@ use App\Http\Resources\Comment as CommentResource;
 
 // Route::post('login', 'Auth\LoginController@authenticate')->name('api.login');
 
-Route::middleware('auth:sanctum')->get('/test', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 

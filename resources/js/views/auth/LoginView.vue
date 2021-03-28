@@ -25,11 +25,11 @@
         </div>
     </div>
 </template>
+
 <script lang="ts">
-import { AxiosStatic } from 'axios'
 import { defineComponent } from 'vue'
-import { API } from '../../api'
 import CustomInput from '../../components/inputs/CustomInput.vue'
+import { mapActions, mapGetters } from 'vuex'
 
 export default defineComponent({
     components: {
@@ -43,20 +43,24 @@ export default defineComponent({
             }
         }
     },
+    computed: {
+        ...mapGetters({
+            isAuthenticated: 'isAuthenticated'
+        })
+    },
     methods: {
+        ...mapActions({
+            signIn: 'signIn'
+        }),
         async onSubmit(event: Event) {
-            event.preventDefault()
-            await ((window as any).axios as AxiosStatic).get('/sanctum/csrf-cookie');
+            event.preventDefault();
 
-            await API.login(this.form).then(user => {
-                    console.log(user);
-                })
+            await this.signIn(this.form);
 
-            await ((window as any).axios as AxiosStatic).post('/api/test').then(response => {
-                console.log(response);
-            })
+            if (await this.isAuthenticated) {
+                this.$router.push({name: 'register'});
+            }
         }
     }
 })
 </script>
-
