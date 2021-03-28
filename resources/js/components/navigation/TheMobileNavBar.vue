@@ -26,9 +26,9 @@
         <ul class="mobile-nav-bar-list" :class="{'top-16':display2, '-top-64':!display2}">
             <li class="mobile-nav-bar-list-li divide-y divide-gray-400">
                 <router-link :to="{name: 'feed'}"><i data-feather="home" class="mr-1"></i>My feed</router-link>
-                <router-link v-if="auth_user" :to="{name: '#'}"><i data-feather="layout" class="mr-1"></i>My dashboard</router-link>
-                <router-link v-if="auth_user" :to="{name: '#'}"><i data-feather="message-circle" class="mr-1"></i>My message</router-link>
-                <router-link v-if="auth_user" :to="{name: '#'}"><i data-feather="compass" class="mr-1"></i>Explore</router-link>
+                <router-link v-if="auth_user" to="#"><i data-feather="layout" class="mr-1"></i>My dashboard</router-link>
+                <router-link v-if="auth_user" to="#"><i data-feather="message-circle" class="mr-1"></i>My message</router-link>
+                <router-link v-if="auth_user" to="#"><i data-feather="compass" class="mr-1"></i>Explore</router-link>
             </li>
             <li class="flex justify-end">
                 <div v-if='!auth_user' class="h-auto space-x-4 inline-block">

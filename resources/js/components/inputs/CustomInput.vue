@@ -11,9 +11,9 @@
                     :id="name"
                     :type="type"
                     :placeholder="placeholder"
-                    :value="value"
+                    :value="modelValue"
                     :autocomplete="_autocmoplete"
-                    v-on:input="$emit('input', $event.target.value)">
+                    @input="onInput">
             <i v-if="icon !== '' && right == false"
                 :data-feather="icon"
                 class="absolute left-3 block"></i>
@@ -36,11 +36,13 @@ export default defineComponent({
     components: {
         InputLabel,
     },
+    emits: ['update:modelValue'],
     props: {
         label: {
             type: String,
             default: ""
         },
+
         type: {
             type: String,
             default: ""
@@ -61,7 +63,7 @@ export default defineComponent({
             type: String,
             default: ""
         },
-        value: {
+        modelValue: {
             type: String,
             default: ""
         },
@@ -86,6 +88,11 @@ export default defineComponent({
                 return "on";
             }
             return "off";
+        }
+    },
+    methods: {
+        onInput(event: InputEvent) {
+            this.$emit('update:modelValue', (event.target as HTMLInputElement).value)
         }
     }
 })

@@ -20,12 +20,13 @@
                     <CustomInput class="w-full md:w-1/2 px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************" indication="Make it as long and as crazy as you'd like"></CustomInput>
                     <CustomInput class="w-full md:w-1/2 px-3" name="password_confirmation" label="Confirm Password" type="password" placeholder="******************"></CustomInput>
                 </div>
-                <i class="block mb-3 text-sm">Already have an account ? <a class="font-medium" href="{{route('login')}}">Log In</a></i>
+                <i class="block mb-3 text-sm">Already have an account ? <router-link class="font-medium" :to="{name: 'login'}">Log In</router-link></i>
                 <button type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Sign Up</button>
             </form>
         </div>
     </div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import CustomInput from '../../components/inputs/CustomInput.vue'

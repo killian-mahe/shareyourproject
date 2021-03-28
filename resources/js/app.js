@@ -24,7 +24,10 @@ import App from './views/AppView'
 
 const app = createApp(App)
 
-app.use(router);
-app.use(store);
+store.dispatch('me').then(() => {
+    app.use(router);
+    app.use(store);
 
-app.mount('#app');
+    app.mount('#app');
+});
+

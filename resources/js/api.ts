@@ -1,5 +1,5 @@
 import {Post, Project, User, Tag} from './models';
-import { AxiosRequestConfig } from 'axios'
+import { AxiosPromise, AxiosRequestConfig } from 'axios'
 
 const API_URL = "/api";
 
@@ -14,16 +14,16 @@ const API_URL = "/api";
 const fetchResource = (method: string, path: string, data = {}, headers = {}) => {
 
     let url = `${ API_URL }${ path }`;
-    if(path === '/logout') url = path;
+    if(path === '/logout' || path === '/login') url = path;
 
     // Variable which will be used for storing response
 
-    return window.axios({
+    return ((window as any).axios({
         method: method,
         url: url,
         data: data,
         headers: headers
-    } as AxiosRequestConfig).then(response => {
+    } as AxiosRequestConfig) as AxiosPromise<any>).then(response => {
 
         if (response.status >= 200 && response.status < 300) {
             return response.data;
@@ -208,10 +208,10 @@ let API = {
          * @param {string} query Query string
          * @return {Promise<Array<Tag>>} Tags
          */
-        search: function(query: string) : Promise<Array<Tag>> {
-            const url = `${this.url}/search/${query}`;
-            return fetchResource('get', url);
-        }
+        // search: function(query: string) : Promise<Array<Tag>> {
+        //     const url = `${this.url}/search/${query}`;
+        //     return fetchResource('get', url);
+        // }
     },
     /**
      * Badge API wrapper

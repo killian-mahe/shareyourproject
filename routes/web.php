@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('app');
 })->name('home');
 
-// Auth::routes();
+Route::post('/login', 'Auth\LoginController@login')->name('login');
 
 // Route::get('/email/verify', function () {
 //     return view('auth.verify');

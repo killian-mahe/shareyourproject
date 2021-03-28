@@ -20,15 +20,16 @@
 
                 <i class="block mb-3 text-sm">No account yet ? <router-link class="font-medium" :to="{name: 'register'}">Register</router-link></i>
 
-                <button v-on:submit.prevent="onSubmit" type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Log In</button>
+                <button v-on:click="onSubmit($event)" type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Log In</button>
             </form>
         </div>
     </div>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { API } from '../../api'
 import CustomInput from '../../components/inputs/CustomInput.vue'
+import { mapActions, mapGetters } from 'vuex'
 
 export default defineComponent({
     components: {
@@ -42,13 +43,24 @@ export default defineComponent({
             }
         }
     },
+    computed: {
+        ...mapGetters({
+            isAuthenticated: 'isAuthenticated'
+        })
+    },
     methods: {
-        onSubmit() {
-            API.login(this.form).then(response => {
-                console.log(response);
-            });
+        ...mapActions({
+            signIn: 'signIn'
+        }),
+        async onSubmit(event: Event) {
+            event.preventDefault();
+
+            await this.signIn(this.form);
+
+            if (await this.isAuthenticated) {
+                this.$router.push({name: 'register'});
+            }
         }
     }
 })
 </script>
-

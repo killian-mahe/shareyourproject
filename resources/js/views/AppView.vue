@@ -4,6 +4,7 @@
     <!-- component matched by the route will render here -->
     <router-view></router-view>
 </template>
+
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
