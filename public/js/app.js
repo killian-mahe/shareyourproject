@@ -14448,10 +14448,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm-bundler.js");
 /* harmony import */ var _views_HomeView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../views/HomeView */ "./resources/js/views/HomeView.vue");
 /* harmony import */ var _views_auth_LoginView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/auth/LoginView */ "./resources/js/views/auth/LoginView.vue");
 /* harmony import */ var _views_auth_RegisterView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/auth/RegisterView */ "./resources/js/views/auth/RegisterView.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store */ "./resources/js/store/index.ts");
+
 
 
 
@@ -14463,17 +14465,58 @@ var routes = [{
 }, {
   path: '/login',
   name: 'login',
-  component: _views_auth_LoginView__WEBPACK_IMPORTED_MODULE_1__.default
+  component: _views_auth_LoginView__WEBPACK_IMPORTED_MODULE_1__.default,
+  meta: {
+    requiresAuth: false
+  },
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (_store__WEBPACK_IMPORTED_MODULE_3__.default.getters.isAuthenticated) {
+      next({
+        name: 'feed'
+      });
+      return;
+    }
+
+    next();
+  }
 }, {
   path: '/register',
   name: 'register',
-  component: _views_auth_RegisterView__WEBPACK_IMPORTED_MODULE_2__.default
+  component: _views_auth_RegisterView__WEBPACK_IMPORTED_MODULE_2__.default,
+  meta: {
+    requiresAuth: false
+  },
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (_store__WEBPACK_IMPORTED_MODULE_3__.default.getters.isAuthenticated) {
+      next({
+        name: 'feed'
+      });
+      return;
+    }
+
+    next();
+  }
 }];
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createRouter)({
-  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.createWebHashHistory)(),
+var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.createRouter)({
+  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.createWebHashHistory)(),
   routes: routes // short for `routes: routes`
 
-}));
+});
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(function (record) {
+    return record.meta.requiresAuth;
+  })) {
+    if (_store__WEBPACK_IMPORTED_MODULE_3__.default.getters.isAuthenticated) {
+      next();
+      return;
+    }
+
+    next('/login');
+  } else {
+    next();
+  }
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
 /***/ }),
 

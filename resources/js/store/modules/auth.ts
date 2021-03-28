@@ -41,7 +41,6 @@ const actions = {
 const mutations = {
 
     SET_USER (state: State, user: User) {
-        console.log(user)
         state.authUser = user;
     }
 }
