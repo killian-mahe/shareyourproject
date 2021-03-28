@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -19,7 +21,9 @@ Route::get('/', function () {
     return view('app');
 })->name('home');
 
-Route::post('/login', 'Auth\LoginController@login')->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
 // Route::get('/email/verify', function () {
 //     return view('auth.verify');

@@ -22,14 +22,8 @@ const getters = {
 
 // actions
 const actions = {
-    async signIn({ dispatch }: any, credentials: any) {
-        await ((window as any).axios as AxiosStatic).get('/sanctum/csrf-cookie');
-        await API.login(credentials);
-
-        return dispatch('me');
-    },
     me ({ commit }: any) {
-        return ((window as any).axios as AxiosStatic).get('/api/user').then((response) => {
+        return ((window as any).axios as AxiosStatic).get<User>('/api/user').then((response) => {
           commit('SET_USER', response.data);
         }).catch(() => {
           commit('SET_USER', null);

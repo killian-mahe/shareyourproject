@@ -1,20 +1,19 @@
-import {Post, Project, User, Tag} from './models';
-import { AxiosPromise, AxiosRequestConfig } from 'axios'
+import {Post, Project, User, Tag, Badge} from './models';
+import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const API_URL = "/api";
 
 /**
  *
- * @param {String} method
- * @param {String} path
- * @param {?Object} data
- * @param {?Object} headers
- * @return {Promise}
+ * @param method
+ * @param path
+ * @param data
+ * @param headers
  */
-const fetchResource = (method: string, path: string, data = {}, headers = {}) => {
+const fetchResource = <T = any>(method: string, path: string, data = {}, headers = {}) : Promise<AxiosResponse<T>> => {
 
     let url = `${ API_URL }${ path }`;
-    if(path === '/logout' || path === '/login') url = path;
+    if(path === '/logout' || path === '/login' || path === '/register') url = path;
 
     // Variable which will be used for storing response
 
@@ -23,29 +22,33 @@ const fetchResource = (method: string, path: string, data = {}, headers = {}) =>
         url: url,
         data: data,
         headers: headers
-    } as AxiosRequestConfig) as AxiosPromise<any>).then(response => {
+    } as AxiosRequestConfig) as AxiosPromise<T>).then(response => {
 
-        if (response.status >= 200 && response.status < 300) {
-            return response.data;
-        } else {
-            throw response;
+        return response.data;
+
+    }).catch(error => {
+        if (error.response) {
+            /*
+             * The request was made and the server responded with a
+             * status code that falls out of the range of 2xx
+             */
+            return error.response;
         }
+        throw error;
     })
 }
 
 let API = {
     /**
      * Search posts and users from a query
-     * @param {String} query
-     * @return {Promise<Array<User | Project>>}
+     * @param query
      */
-    search: function(query: string) : Promise<Array<User | Project>>{
+    search: function(query: string){
         const url = `/search/${query}`;
-        return fetchResource('get', url);
+        return fetchResource<Array<User>>('get', url);
     },
     /**
      * Logout the user
-     * @return {Promise}
      */
     logout: function() {
         const url = '/logout';
@@ -53,10 +56,16 @@ let API = {
     },
     /**
      * Login the user
-     * @return {Promise<User>}
      */
-    login: function(credentials: object) : Promise<User> {
+    login: function(credentials: object) {
         const url = '/login';
+        return fetchResource('post', url, credentials);
+    },
+    /**
+     * Register a new user
+     */
+    register: function(credentials: object) {
+        const url = '/register';
         return fetchResource('post', url, credentials);
     },
     /**
@@ -69,8 +78,7 @@ let API = {
         url: '/posts',
         /**
          * Like a post
-         * @param {Number} id
-         * @return {Promise}
+         * @param id
          */
         like: function(id: number) {
             const url = `${this.url}/${id}/like`;
@@ -78,8 +86,7 @@ let API = {
         },
         /**
          * Unike a post
-         * @param {Number} id
-         * @return {Promise}
+         * @param id
          */
         unlike: function(id: number) {
             const url = `${this.url}/${id}/unlike`;
@@ -87,22 +94,20 @@ let API = {
         },
         /**
          * Load user feed and return loaded posts
-         * @param {?Array<Number>} except_ids Post ids that mustn't be loaded
-         * @return {Promise<Array<Post>>}
+         * @param except_ids Post ids that mustn't be loaded
          */
-        feed: function(except_ids: Array<number>) : Promise<Array<Post>>{
+        feed: function(except_ids: Array<number>) {
             const url = '/feed';
-            return fetchResource('post', url, {except: except_ids});
+            return fetchResource<Array<Post>>('post', url, {except: except_ids});
         },
         /**
          * Create a new post
-         * @param {String} content Post content
-         * @param {?Number} project_author Project author id
-         * @param {?Number} reshare Reshared post id
-         * @param {?Array<File>} images Post images
-         * @return {Promise<Post>}
+         * @param content Post content
+         * @param project_author Project author id
+         * @param reshare Reshared post id
+         * @param images Post images
          */
-        create: function(content: string, project_author : number | null = null, reshare : number | null = null, images: Array<File> | null = null) : Promise<Post> {
+        create: function(content: string, project_author : number | null = null, reshare : number | null = null, images: Array<File> | null = null) {
             const url = `${this.url}`;
             let formData = new FormData();
             // Post content
@@ -120,7 +125,7 @@ let API = {
                     formData.append(`image[${index}]`, image);
                 });
             }
-            return fetchResource('post', url, formData, {
+            return fetchResource<Post>('post', url, formData, {
                 'Content-Type': 'multipart/form-data'
             });
         }
@@ -135,21 +140,19 @@ let API = {
         url: '/users',
         /**
          * Search users that correspond to the given query string
-         * @param {string} query Query string
-         * @return {Promise<Array<User>>} Users
+         * @param query Query string
          */
-        search: function(query: string) : Promise<Array<User>>{
+        search: function(query: string) {
             const url = `${this.url}/search/${query}`;
-            return fetchResource('get', url);
+            return fetchResource<Array<User>>('get', url);
         },
         /**
          * Get the corresponding user
-         * @param {!Number} id User id
-         * @return {Promise<User>} User
+         * @param id User id
          */
-        get: function(id: string) : Promise<User> {
+        get: function(id: string) {
             const url = `${this.url}/${id}`;
-            return fetchResource('get', url);
+            return fetchResource<User>('get', url);
         }
     },
     /**
@@ -162,16 +165,15 @@ let API = {
         url: '/projects',
         /**
          * Get a project corresponding to the id passed to the function
-         * @param {!Number} id Project id
-         * @return {Promise<Project>}
+         * @param id Project id
          */
-        get: function(id: number) : Promise<Project> {
+        get: function(id: number) {
             const url = `${this.url}/${id}`;
-            return fetchResource('get', url);
+            return fetchResource<Project>('get', url);
         },
         /**
          * Make the authenticated user follows the project
-         * @param {Number} id Project id
+         * @param id Project id
          */
         follow: function(id: number) {
             const url = `${this.url}/${id}/follow`;
@@ -179,7 +181,7 @@ let API = {
         },
         /**
          * Make the authenticated user unfollows the project
-         * @param {Number} id Project id
+         * @param id Project id
          */
         unfollow: function(id :number) {
             const url = `${this.url}/${id}/unfollow`;
@@ -187,12 +189,11 @@ let API = {
         },
         /**
          * Get projects corresponding to the ids passed to the function
-         * @param {?Array<Number>} projects_ids Project ids to restrieve
-         * @return {Promise<Array<Project>>}
+         * @param projects_ids Project ids to restrieve
          */
-        getMany: function(projects_ids: Array<number> = []) : Promise<Array<Project>> {
+        getMany: function(projects_ids: Array<number> = []) {
             const url = `${this.url}/get`;
-            return fetchResource('post', url, {projects_ids: projects_ids});
+            return fetchResource<Array<Project>>('post', url, {projects_ids: projects_ids});
         }
     },
     /**
@@ -223,12 +224,11 @@ let API = {
         url: '/badges',
         /**
          * Search badges that correspond to the given query string
-         * @param {string} query Query string
-         * @return {Promise<Array<Badge>>} Badges
+         * @param query Query string
          */
         search: function(query: string) {
             const url = `${this.url}/search/${query}`;
-            return fetchResource('get', url);
+            return fetchResource<Array<Badge>>('get', url);
         }
     },
     /**
@@ -241,22 +241,20 @@ let API = {
         url: '/comments',
         /**
          * Get many comments
-         * @param {Array<Number>} ids
-         * @return {Promise<Array<Comment>>} Comments
+         * @param ids
          */
         getMany : function(ids: Array<number>) {
             const url = `${this.url}/get`;
-            return fetchResource('post', url, {comments_ids: ids});
+            return fetchResource<Array<Comment>>('post', url, {comments_ids: ids});
         },
         /**
          * Create a new comment
-         * @param {!String} content Comment content
-         * @param {!Number} post Post id
-         * @return {Promise<Comment>} Comment
+         * @param content Comment content
+         * @param post Post id
          */
         create: function(content: string, post: number) {
             const url = this.url;
-            return fetchResource('post', url, {
+            return fetchResource<Comment>('post', url, {
                 content: content,
                 post_id: post
             });

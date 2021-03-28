@@ -31,6 +31,10 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+        $request->validate([
+            'username' => ['required', 'string', 'max:255', 'exists:users'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
         // return 'Hello !';
         if ($this->attemptLogin($request))
         {
