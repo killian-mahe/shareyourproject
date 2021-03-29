@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +22,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/', function () {
     return view('app');
 })->name('home');
+
+Auth::routes(['verify' => true]);
 
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 

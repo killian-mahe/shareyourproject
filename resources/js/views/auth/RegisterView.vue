@@ -19,8 +19,8 @@
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <CustomInput
-                    v-model="form.user_name"
-                    :error="errors.user_name"
+                    v-model="form.username"
+                    :error="errors.username"
                     class="w-full px-3 mb-6 md:mb-0" name="username" label="Username" type="text" placeholder="jane-doe" value=""></CustomInput>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-6">
@@ -47,10 +47,11 @@
 </template>
 
 <script lang="ts">
-import { AxiosResponse } from 'axios'
 import { defineComponent } from 'vue'
 import { API } from '../../api'
+import { mapActions, mapGetters } from 'vuex'
 import CustomInput from '../../components/inputs/CustomInput.vue'
+import { AxiosStatic } from 'axios'
 
 export default defineComponent({
     components: {
@@ -61,7 +62,7 @@ export default defineComponent({
             form: {
                 first_name: "",
                 last_name: "",
-                user_name: "",
+                username: "",
                 email: "",
                 password: "",
                 password_confirmation:""
@@ -69,27 +70,65 @@ export default defineComponent({
             errors: {
                 first_name: "",
                 last_name: "",
-                user_name: "",
+                username: "",
                 email: "",
                 password: "",
                 password_confirmation:""
             }
         }
     },
+    computed: {
+        ...mapGetters({
+            isAuthenticated: 'isAuthenticated'
+        })
+    },
     methods: {
+        ...mapActions({
+            me: 'me'
+        }),
+        resetErrors() {
+            this.errors = {
+                first_name: "",
+                last_name: "",
+                username: "",
+                email: "",
+                password: "",
+                password_confirmation: ""
+            };
+        },
         async onSubmit(event: Event): Promise<void> {
+            await ((window as any).axios as AxiosStatic).get('/sanctum/csrf-cookie');
 
             API.register(this.form).then(response => {
-                if (response.status == 422) {
-                    let errorsObject = response.data.errors;
+                this.resetErrors()
 
-                    for (var key in errorsObject) {
-                        if (errorsObject.hasOwnProperty(key)) {
-                            errorsObject[key] = errorsObject[key][0];
+                switch (response.status) {
+                    case 201:
+                        // Authenticated
+                        this.me().then(() => {
+                            if (this.isAuthenticated)
+                            {
+                                this.$router.push({name: 'feed'});
+                            }
+                        })
+
+                        break;
+
+                    case 422:
+                        // Invalid form
+                        let errorsObject = response.data.errors;
+
+                        for (var key in errorsObject) {
+                            if (errorsObject.hasOwnProperty(key)) {
+                                errorsObject[key] = errorsObject[key][0];
+                            }
                         }
-                    }
 
-                    this.errors = errorsObject;
+                        this.errors = errorsObject;
+                        break;
+
+                    default:
+                        break;
                 }
             });
 

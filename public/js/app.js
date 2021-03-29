@@ -13351,34 +13351,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _api__WEBPACK_IMPORTED_MODULE_3__.API.login(_this.form).then(function (response) {
                   _this.resetErrors();
 
-                  console.log(response);
+                  switch (response.status) {
+                    case 200:
+                      // Authenticated
+                      _this.me().then(function () {
+                        if (_this.isAuthenticated) {
+                          _this.$router.push({
+                            name: 'feed'
+                          });
+                        }
+                      });
 
-                  if (response.status == 200) {
-                    // Authenticated
-                    console.log("Retrieving authenticated user...");
+                      break;
 
-                    _this.me().then(function () {
-                      if (_this.isAuthenticated) {
-                        console.log("User authenticated !");
+                    case 422:
+                      // Invalid form
+                      var errorsObject = response.data.errors;
 
-                        _this.$router.push({
-                          name: 'register'
-                        });
+                      for (var key in errorsObject) {
+                        if (errorsObject.hasOwnProperty(key)) {
+                          errorsObject[key] = errorsObject[key][0];
+                        }
                       }
-                    });
-                  } else if (response.status == 422) {
-                    // Invalid form
-                    var errorsObject = response.data.errors;
 
-                    for (var key in errorsObject) {
-                      if (errorsObject.hasOwnProperty(key)) {
-                        errorsObject[key] = errorsObject[key][0];
-                      }
-                    }
+                      _this.errors = errorsObject;
+                      break;
 
-                    _this.errors = errorsObject;
-                  } else if (response.status == 401) {
-                    _this.credentialError = response.data;
+                    case 401:
+                      _this.credentialError = response.data;
+                      break;
+
+                    default:
+                      break;
                   }
                 });
 
@@ -13410,12 +13414,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../api */ "./resources/js/api.ts");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _components_inputs_CustomInput_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/inputs/CustomInput.vue */ "./resources/js/components/inputs/CustomInput.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -13429,7 +13441,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       form: {
         first_name: "",
         last_name: "",
-        user_name: "",
+        username: "",
         email: "",
         password: "",
         password_confirmation: ""
@@ -13437,14 +13449,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       errors: {
         first_name: "",
         last_name: "",
-        user_name: "",
+        username: "",
         email: "",
         password: "",
         password_confirmation: ""
       }
     };
   },
-  methods: {
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)({
+    isAuthenticated: 'isAuthenticated'
+  })),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapActions)({
+    me: 'me'
+  })), {}, {
+    resetErrors: function resetErrors() {
+      this.errors = {
+        first_name: "",
+        last_name: "",
+        username: "",
+        email: "",
+        password: "",
+        password_confirmation: ""
+      };
+    },
     onSubmit: function onSubmit(event) {
       var _this = this;
 
@@ -13453,21 +13480,45 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _context.next = 2;
+                return window.axios.get('/sanctum/csrf-cookie');
+
+              case 2:
                 _api__WEBPACK_IMPORTED_MODULE_2__.API.register(_this.form).then(function (response) {
-                  if (response.status == 422) {
-                    var errorsObject = response.data.errors;
+                  _this.resetErrors();
 
-                    for (var key in errorsObject) {
-                      if (errorsObject.hasOwnProperty(key)) {
-                        errorsObject[key] = errorsObject[key][0];
+                  switch (response.status) {
+                    case 201:
+                      // Authenticated
+                      _this.me().then(function () {
+                        if (_this.isAuthenticated) {
+                          _this.$router.push({
+                            name: 'feed'
+                          });
+                        }
+                      });
+
+                      break;
+
+                    case 422:
+                      // Invalid form
+                      var errorsObject = response.data.errors;
+
+                      for (var key in errorsObject) {
+                        if (errorsObject.hasOwnProperty(key)) {
+                          errorsObject[key] = errorsObject[key][0];
+                        }
                       }
-                    }
 
-                    _this.errors = errorsObject;
+                      _this.errors = errorsObject;
+                      break;
+
+                    default:
+                      break;
                   }
                 });
 
-              case 1:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -13475,7 +13526,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     }
-  }
+  })
 }));
 
 /***/ }),
@@ -14029,6 +14080,7 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Explore");
 
 var _hoisted_16 = {
+  key: 0,
   "class": "my-auto"
 };
 
@@ -14103,7 +14155,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_search_bar, {
     "class": "w-1/4"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @auth\r\n\r\n        <div class=\"my-auto flex space-x-6 items-center\">\r\n            <notification-view\r\n                :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'\r\n                :projects='@json(Auth::user()->projects->pluck('id'))'\r\n                :initial_notifications='@json(Auth::user()->notifications->take(5)->pluck('data'))'\r\n                ></notification-view>\r\n            <personal-menu :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'></personal-menu>\r\n        </div>\r\n\r\n        @else "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @auth\n\n        <div class=\"my-auto flex space-x-6 items-center\">\n            <notification-view\n                :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'\n                :projects='@json(Auth::user()->projects->pluck('id'))'\n                :initial_notifications='@json(Auth::user()->notifications->take(5)->pluck('data'))'\n                ></notification-view>\n            <personal-menu :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'></personal-menu>\n        </div>\n\n        @else "), !_ctx.isAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
       name: 'register'
     },
@@ -14127,7 +14179,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @endauth ")])])], 2112
+  })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @endauth ")])])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   );
 }
@@ -14406,11 +14458,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["modelValue", "error"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CustomInput, {
-    modelValue: _ctx.form.user_name,
+    modelValue: _ctx.form.username,
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return _ctx.form.user_name = $event;
+      return _ctx.form.username = $event;
     }),
-    error: _ctx.errors.user_name,
+    error: _ctx.errors.username,
     "class": "w-full px-3 mb-6 md:mb-0",
     name: "username",
     label: "Username",

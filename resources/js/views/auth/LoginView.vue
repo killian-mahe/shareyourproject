@@ -78,30 +78,36 @@ export default defineComponent({
             API.login(this.form).then(response => {
                 this.resetErrors()
 
-                if (response.status == 200) {
-                    // Authenticated
-                    this.me().then(() => {
-                        if (this.isAuthenticated)
-                        {
-                            this.$router.push({name: 'feed'});
+                switch (response.status) {
+                    case 200:
+                        // Authenticated
+                        this.me().then(() => {
+                            if (this.isAuthenticated)
+                            {
+                                this.$router.push({name: 'feed'});
+                            }
+                        })
+
+                        break;
+
+                    case 422:
+                        // Invalid form
+                        let errorsObject = response.data.errors;
+
+                        for (var key in errorsObject) {
+                            if (errorsObject.hasOwnProperty(key)) {
+                                errorsObject[key] = errorsObject[key][0];
+                            }
                         }
-                    })
 
-                } else if (response.status == 422) {
-                    // Invalid form
-                    let errorsObject = response.data.errors;
+                        this.errors = errorsObject;
+                        break;
 
-                    for (var key in errorsObject) {
-                        if (errorsObject.hasOwnProperty(key)) {
-                            errorsObject[key] = errorsObject[key][0];
-                        }
-                    }
-
-                    this.errors = errorsObject;
-                } else if (response.status == 401) {
-
-                    this.credentialError = response.data;
-
+                    case 401:
+                        this.credentialError = response.data;
+                        break;
+                    default:
+                        break;
                 }
             });
 

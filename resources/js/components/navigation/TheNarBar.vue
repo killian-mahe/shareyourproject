@@ -27,7 +27,7 @@
 
         @else -->
 
-        <div class="my-auto">
+        <div class="my-auto" v-if="!isAuthenticated">
             <router-link :to="{name: 'register'}" class="btn-classic mr-5 a-none">Sign Up</router-link>
             <router-link :to="{name: 'login'}" class="btn btn-viridiant hover:text-cultured-100 a-none">Log In</router-link>
         </div>
