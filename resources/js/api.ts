@@ -24,7 +24,7 @@ const fetchResource = <T = any>(method: string, path: string, data = {}, headers
         headers: headers
     } as AxiosRequestConfig) as AxiosPromise<T>).then(response => {
 
-        return response.data;
+        return response;
 
     }).catch(error => {
         if (error.response) {

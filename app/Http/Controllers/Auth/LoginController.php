@@ -32,17 +32,22 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'username' => ['required', 'string', 'max:255', 'exists:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'exists:users'],
             'password' => ['required', 'string', 'min:8'],
         ]);
-        // return 'Hello !';
+
         if ($this->attemptLogin($request))
         {
             $request->session()->regenerate();
-            return response()->json(Auth::user(), 200);
+            return response()->json(
+                status: 200
+            );
         }
 
-        return response()->json('ERROR', 202);
+        return response()->json(
+            data: 'Invalid credentials',
+            status: 401
+        );
     }
 
     /**

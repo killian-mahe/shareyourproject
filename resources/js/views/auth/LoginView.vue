@@ -17,10 +17,12 @@
                     <CustomInput
                     v-model="form.password"
                     :error="errors.password"
-                    class="w-full px-3 mb-6 md:mb-0" name="password" label="Password" type="password" placeholder="******************"></CustomInput>
+                    class="w-full px-3 mb-3 md:mb-0" name="password" label="Password" type="password" placeholder="******************"></CustomInput>
                 </div>
 
-                <i class="block mb-3 text-sm">No account yet ? <router-link class="font-medium" :to="{name: 'register'}">Register</router-link></i>
+                <div class="alert alert-danger" v-if="credentialError">{{ credentialError }}</div>
+
+                <i class="block my-3 text-sm">No account yet ? <router-link class="font-medium" :to="{name: 'register'}">Register</router-link></i>
 
                 <button type="submit" class="my-4 btn btn-viridiant hover:text-cultured-100">Log In</button>
             </form>
@@ -48,7 +50,8 @@ export default defineComponent({
             errors: {
                 email: "",
                 password: ""
-            }
+            },
+            credentialError: ""
         }
     },
     computed: {
@@ -60,19 +63,32 @@ export default defineComponent({
         ...mapActions({
             me: 'me'
         }),
+        resetErrors() {
+            this.errors = {
+                email: "",
+                password: ""
+            };
+
+            this.credentialError = "";
+        },
         async onSubmit(event: Event) {
 
             await ((window as any).axios as AxiosStatic).get('/sanctum/csrf-cookie');
 
             API.login(this.form).then(response => {
-                console.log(response)
+                this.resetErrors()
+
                 if (response.status == 200) {
-                    this.me()
-                    if (this.isAuthenticated)
-                    {
-                        this.$router.push({name: 'register'});
-                    }
+                    // Authenticated
+                    this.me().then(() => {
+                        if (this.isAuthenticated)
+                        {
+                            this.$router.push({name: 'feed'});
+                        }
+                    })
+
                 } else if (response.status == 422) {
+                    // Invalid form
                     let errorsObject = response.data.errors;
 
                     for (var key in errorsObject) {
@@ -82,6 +98,10 @@ export default defineComponent({
                     }
 
                     this.errors = errorsObject;
+                } else if (response.status == 401) {
+
+                    this.credentialError = response.data;
+
                 }
             });
 
