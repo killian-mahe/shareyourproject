@@ -2,7 +2,9 @@
     <the-nav-bar v-if="displayNavBar"></the-nav-bar>
     <!-- route outlet -->
     <!-- component matched by the route will render here -->
-    <router-view></router-view>
+    <div class="flex justify-center min-h-screen" :class="{'mt-16': displayNavBar}">
+        <router-view></router-view>
+    </div>
 </template>
 
 <script lang="ts">

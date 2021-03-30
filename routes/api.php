@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FeedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\User;
@@ -25,6 +26,10 @@ use App\Http\Resources\Comment as CommentResource;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::name('feed.')->prefix('feed')->group(function() {
+    Route::get('/', [FeedController::class, 'get'])->name('get');
 });
 
 // Route::middleware(['auth:sanctum', 'api'])->group(function () {

@@ -1,4 +1,4 @@
-import {Post, Project, User, Tag, Badge} from './models';
+import {Post, Project, User, Tag, Badge, FeedPage} from './models';
 import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const API_URL = "/api";
@@ -91,14 +91,6 @@ let API = {
         unlike: function(id: number) {
             const url = `${this.url}/${id}/unlike`;
             return fetchResource('get', url);
-        },
-        /**
-         * Load user feed and return loaded posts
-         * @param except_ids Post ids that mustn't be loaded
-         */
-        feed: function(except_ids: Array<number>) {
-            const url = '/feed';
-            return fetchResource<Array<Post>>('post', url, {except: except_ids});
         },
         /**
          * Create a new post
@@ -259,6 +251,16 @@ let API = {
                 post_id: post
             });
         }
+    },
+    Feed: {
+        /**
+         * Load user feed and return loaded posts
+         * @param page Page to load
+         */
+        get: function(page: number = 1) {
+            const url = `/feed?page=${ page }`;
+            return fetchResource<FeedPage>('get', url);
+        },
     }
 };
 
