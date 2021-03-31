@@ -151,7 +151,6 @@
     import TextArea from '../inputs/TextArea.vue';
     import ModalComponent from '../navigation/ModalComponent.vue';
     import PostCreation from '../inputs/PostCreation.vue';
-    import CarouselList from '../lists/CarouselList.vue';
     import PostModal from '../posts/PostModal.vue';
     import vClickOutside from 'v-click-outside';
     import moment from 'moment';
@@ -164,7 +163,6 @@
             TextArea,
             ModalComponent,
             PostCreation,
-            CarouselList,
             PostModal
         },
         directives: {

@@ -13268,8 +13268,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({}));
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
+    isAuthenticated: 'isAuthenticated',
+    user: 'user',
+    posts: 'feedPosts'
+  })),
+  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)({
+    getNewPosts: 'getNewPosts'
+  })),
+  mounted: function mounted() {
+    this.getNewPosts();
+  }
+}));
 
 /***/ }),
 
@@ -13639,17 +13659,6 @@ var API = {
     },
 
     /**
-     * Load user feed and return loaded posts
-     * @param except_ids Post ids that mustn't be loaded
-     */
-    feed: function feed(except_ids) {
-      var url = '/feed';
-      return fetchResource('post', url, {
-        except: except_ids
-      });
-    },
-
-    /**
      * Create a new post
      * @param content Post content
      * @param project_author Project author id
@@ -13829,6 +13838,17 @@ var API = {
         post_id: post
       });
     }
+  },
+  Feed: {
+    /**
+     * Load user feed and return loaded posts
+     * @param page Page to load
+     */
+    get: function get() {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      var url = "/feed?page=".concat(page);
+      return fetchResource('get', url);
+    }
   }
 };
 
@@ -13846,14 +13866,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _modules_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/auth */ "./resources/js/store/modules/auth.ts");
+/* harmony import */ var _modules_feed__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/feed */ "./resources/js/store/modules/feed.ts");
+
 
  // Create a new store instance.
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
   modules: {
-    auth: _modules_auth__WEBPACK_IMPORTED_MODULE_0__.default
+    auth: _modules_auth__WEBPACK_IMPORTED_MODULE_0__.default,
+    feed: _modules_feed__WEBPACK_IMPORTED_MODULE_1__.default
   }
 }));
 
@@ -13898,6 +13921,88 @@ var actions = {
 var mutations = {
   SET_USER: function SET_USER(state, user) {
     state.authUser = user;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/feed.ts":
+/*!********************************************!*\
+  !*** ./resources/js/store/modules/feed.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../api */ "./resources/js/api.ts");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+ // initial state
+
+var state = {
+  nextPage: 1,
+  lastPage: undefined,
+  posts: []
+}; // getters
+
+var getters = {
+  feedPosts: function feedPosts(state) {
+    return state.posts;
+  }
+}; // actions
+
+var actions = {
+  getNewPosts: function getNewPosts(_ref) {
+    var commit = _ref.commit,
+        state = _ref.state;
+    _api__WEBPACK_IMPORTED_MODULE_0__.API.Feed.get(state.nextPage).then(function (response) {
+      switch (response.status) {
+        case 200:
+          commit('ADD_POSTS', response.data.data);
+          commit('SET_LAST_PAGE', response.data.last_page);
+          commit('INCREMENT_NEXT_PAGE');
+          break;
+
+        default:
+          break;
+      }
+    });
+  }
+}; // mutations
+
+var mutations = {
+  ADD_POSTS: function ADD_POSTS(state, posts) {
+    var _state$posts;
+
+    (_state$posts = state.posts).push.apply(_state$posts, _toConsumableArray(posts));
+  },
+  SET_NEXT_PAGE: function SET_NEXT_PAGE(state, page) {
+    state.nextPage = page > 0 ? page : 0;
+  },
+  INCREMENT_NEXT_PAGE: function INCREMENT_NEXT_PAGE(state) {
+    state.nextPage++;
+  },
+  SET_LAST_PAGE: function SET_LAST_PAGE(state, page) {
+    state.lastPage = page > 0 ? page : 0;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -14017,7 +14122,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50 fixed h-16"
+  "class": "w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50 fixed h-16 top-0"
 };
 var _hoisted_2 = {
   "class": "flex justify-around w-full "
@@ -14206,7 +14311,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_ctx.displayNavBar ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_the_nav_bar, {
     key: 0
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" route outlet "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" component matched by the route will render here "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)], 64
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" route outlet "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" component matched by the route will render here "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+    "class": ["flex justify-center min-h-screen", {
+      'mt-16': _ctx.displayNavBar
+    }]
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)], 2
+  /* CLASS */
+  )], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -14224,8 +14335,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "w-full md:w-2/3 lg:w-2/3 xl:w-2/5 mx-auto"
+};
+var _hoisted_2 = {
+  key: 0,
+  "class": "text-2xl font-semibold text-gray-800 mt-5 pl-5 md:pl-0"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return null;
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_ctx.isAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, " Bonjour " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.user.first_name) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.user.last_name) + " ! ", 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),

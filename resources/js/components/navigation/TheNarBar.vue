@@ -1,7 +1,7 @@
 <template>
 
     <!-- Laptop Navbar -->
-    <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50 fixed h-16">
+    <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50 fixed h-16 top-0">
         <div class="flex justify-around w-full ">
         <router-link :to="{name: 'feed'}"><img class="m-2 " :src="'vendor/courier/logos/svg/fit/Logo_viridiant_fit.svg'" width="90" height="90"></router-link>
         <ul class="my-auto hidden lg:flex space-x-4">
