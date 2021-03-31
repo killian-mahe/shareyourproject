@@ -1,4 +1,5 @@
 <template>
+<!-- delete reshared_post -->
     <div v-if="post !== undefined" class="card md:rounded-lg" :class="{'shadow-md mb-6': !reshared_post, 'border border-gray-400 hover:bg-cultured-300': reshared_post}">
         <div v-if="post.project" class="card-title justify-between">
             <div class="flex items-center">
@@ -48,8 +49,9 @@
             <div class="space-x-1 md:px-4">
                 <tag-label v-for="tag in post.tags" :key="'tag_'+tag.name" :label="tag.name" link="#"></tag-label>
             </div>
-
+            <!-- This is the reshared post -->
             <post-card v-if="post.reshared_post" :post_props="post.reshared_post" :auth_user="auth_user" :reshared_post="true"></post-card>
+
             <div v-if="post.images_url.length > 0" @click="open_modal = true">
                 <div v-if="post.images_url.length == 1" class="h-1/2">
                     <img :src="post.images_url[0]" class="w-full object-cover h-120 cursor-pointer" alt="">
@@ -74,6 +76,7 @@
             </div>
         </div>
 
+        <!-- delete v-if -->
         <div class="card-footer" v-if="!reshared_post">
             <div class="card-link">
                 <!-- Unlike -->
@@ -98,6 +101,8 @@
 
             </div>
         </div>
+
+        <!-- delte div -->
         <div v-if="displayComments && !reshared_post" class="p-5 mb-2 border-t-0.0625 border-onyx-100 space-y-3">
             <div v-if="auth_user != null" class="flex relative items-start">
                 <img :src="auth_user.profile_picture" class="h-10 w-10 rounded-full mr-3" alt="profile_picture">
@@ -109,6 +114,7 @@
             <div v-show="loadingComments" class="h-10 mb-3" ref="loader"></div>
         </div>
 
+        <!-- delete modal on_send -->
         <modal-component v-if='on_send'>
             <template v-slot:header>
                 <div class="border-b pb-3 flex justify-between items-center">
@@ -134,7 +140,7 @@
                 <div></div>
             </template>
         </modal-component>
-
+        <!-- delete post_modal -->
         <post-modal v-if="open_modal"
         @close="open_modal = false"
         @like="like(true)"
@@ -142,6 +148,8 @@
         :post="post"
         :auth_user="auth_user"></post-modal>
 
+        <!-- delete post creation -->
+        <!-- we need title | body | footer (like, comment share) not more -->
         <post-creation v-if="on_share" @close="on_share=false" :auth_user="auth_user" :reshare_post="post.reshared_post ? post.reshared_post : post" :only_modal="true" :enableExtraContent="false"></post-creation>
     </div>
 </template>
@@ -158,6 +166,7 @@
     import lottie from 'lottie-web';
 
     export default {
+        // no components
         components: {
             CommentComponent,
             TextArea,
@@ -165,12 +174,14 @@
             PostCreation,
             PostModal
         },
+        // delete Vclick
         directives: {
             clickOutside: vClickOutside.directive
         },
         data() {
             return {
                 post: this.post_props,
+                // keep post
                 comments: this.post_props.comments_overview,
                 comments_to_load: [],
                 displayComments: false,
@@ -183,10 +194,12 @@
                 on_options: false,
                 loadingComments: false,
                 loadingAnimation: null,
+                // keep like animation
                 likeAnimation: null
             }
         },
         props: {
+            // keep and rename post_props to post
             post_props: {
                 type: Object,
                 required: true,
@@ -231,6 +244,7 @@
             timeSinceCreation: function() {
                 return moment(this.post.created_at).fromNow();
             },
+            // delete
             orderedComments: function() {
                 return this.comments.sort((a, b) => {
                     if (a.created_at > b.created_at) {
@@ -248,6 +262,7 @@
                 document.execCommand("copy");
                 this.copied_var = "Copied !";
             },
+            // later
             like: function(like) {
                 if (!this.auth_user) return;
                 if (like == true) {
