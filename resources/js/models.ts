@@ -1,14 +1,3 @@
-export interface PostLinks {
-    author: string;
-    post: string;
-}
-
-export interface ProjectLinks {
-    index: string;
-    members: string;
-    description: string;
-}
-
 export interface Post {
 
     id : number;
@@ -18,20 +7,20 @@ export interface Post {
     project: Project;
     images_url : Array<string>;
     tags: Array<Tag>;
-    url: PostLinks;
-    reshared_post: Post | false;
+    url: {
+        author: string;
+        post: string;
+    };
+    reshared_post: number | null;
     liked: boolean;
-    comments_overview: Array<number>;
-    stats: object;
-    followed_projects: Array<number>;
+    stats: {
+        comments: number;
+        like: number;
+    };
     created_at: Date;
     updated_at: Date;
 };
 
-
-export interface UserLinks {
-    index: string;
-}
 
 export interface User {
     id: number;
@@ -41,7 +30,9 @@ export interface User {
     email: string;
     email_verified_at: string;
     title: string;
-    url: UserLinks;
+    url: {
+        index: string;
+    };
     profile_picture: string;
     banner_picture: string;
     owned_projects: Array<Project>
@@ -51,19 +42,28 @@ export interface User {
     bio: string;
 }
 
-export interface FeedPage {
-    total: number,
-    per_page: number,
-    current_page: number,
-    last_page: number,
-    first_page_url: string,
-    last_page_url: string,
-    next_page_url: string,
-    prev_page_url: string,
-    path: string,
-    from: number,
-    to: number,
-    data: Array<Post>
+export interface PaginateResponse<T = any> {
+    data: Array<T>;
+    links: {
+        first: string;
+        last: string;
+        next: string;
+        prev: string;
+    };
+    meta: {
+        current_page: number;
+        from: number;
+        last_page: number;
+        links: Array<{
+            url: string;
+            active: boolean;
+            label: number;
+        }>;
+        path: string;
+        per_page: number;
+        to: number;
+        total: number;
+    }
 }
 
 export interface Tag {
@@ -80,7 +80,11 @@ export interface Project {
     name: string;
     is_public: boolean;
     owner_id: number;
-    url: ProjectLinks;
+    url: {
+        index: string;
+        members: string;
+        description: string;
+    };
     technologies: Array<Technology>;
     members_ids: Array<Number>;
     profile_picture: string;

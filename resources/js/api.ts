@@ -1,4 +1,4 @@
-import {Post, Project, User, Tag, Badge, FeedPage} from './models';
+import { Post, Project, User, Badge, PaginateResponse } from './models';
 import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const API_URL = "/api";
@@ -259,7 +259,7 @@ let API = {
          */
         get: function(page: number = 1) {
             const url = `/feed?page=${ page }`;
-            return fetchResource<FeedPage>('get', url);
+            return fetchResource<PaginateResponse<Post>>('get', url);
         },
     }
 };

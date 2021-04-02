@@ -13978,7 +13978,7 @@ var actions = {
       switch (response.status) {
         case 200:
           commit('ADD_POSTS', response.data.data);
-          commit('SET_LAST_PAGE', response.data.last_page);
+          commit('SET_LAST_PAGE', response.data.meta.last_page);
           commit('INCREMENT_NEXT_PAGE');
           break;
 
