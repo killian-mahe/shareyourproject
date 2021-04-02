@@ -1,20 +1,18 @@
 {
     "private": true,
     "scripts": {
-        "development": "mix",
-        "dev": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "mix --production",
-        "production": "mix --production"
+        "dev": "npm run development",
+        "development": "npx mix",
+        "watch": "npx mix watch",
+        "prod": "npm run production",
+        "production": "npx mix -p"
     },
     "devDependencies": {
         "@vue/compiler-sfc": "^3.0.7",
         "axios": "^0.21.1",
         "cross-env": "^7.0.3",
         "laravel-echo": "^1.10.0",
-        "laravel-mix": "^6.0.0-beta.17",
+        "laravel-mix": "^6.0.13",
         "lodash": "^4.17.21",
         "node-forge": ">=0.10.0",
         "pusher-js": "^7.0.3",
@@ -22,12 +20,10 @@
         "sass": "^1.32.8",
         "sass-loader": "^8.0.0",
         "stylelint-config-recommended": "^3.0.0",
-        "vue-loader": "^16.1.2"
+        "vue-loader": "^16.1.0"
     },
     "dependencies": {
         "autoprefixer": "^10.2.5",
-        "clamp-js": "^0.7.0",
-        "clamp-js-main": "^0.11.6",
         "feather-icons": "^4.28.0",
         "lottie-web": "^5.7.6",
         "moment": "^2.29.1",
@@ -35,10 +31,7 @@
         "tailwindcss": "^2.0.4",
         "ts-loader": "^8.0.18",
         "typescript": "^4.2.3",
-        "v-click-outside": "^3.1.2",
         "vue": "^3.0.8",
-        "vue-awesome-swiper": "^4.1.1",
-        "vue-clamp": "^0.3.2",
         "vue-router": "^4.0.5",
         "vuex": "^4.0.0"
     }

@@ -3,12 +3,12 @@
         <div class="z-10 relative shadow bg-cultured-100 w-full h-full flex justify-around items-center">
             <!-- Logo -->
             <router-link :to="{name: 'feed'}" class="h-auto">
-                <img :src="logo_simple" class="w-12">
+                <img :src="'vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg'" class="w-12">
             </router-link>
 
             <!-- Search Bar -->
             <div class="w-3/5 h-auto">
-                <search-bar></search-bar>
+                <!-- <search-bar></search-bar> -->
             </div>
 
             <!-- Navigation icon -->
@@ -26,12 +26,12 @@
         <ul class="mobile-nav-bar-list" :class="{'top-16':display2, '-top-64':!display2}">
             <li class="mobile-nav-bar-list-li divide-y divide-gray-400">
                 <router-link :to="{name: 'feed'}"><i data-feather="home" class="mr-1"></i>My feed</router-link>
-                <router-link v-if="auth_user" to="#"><i data-feather="layout" class="mr-1"></i>My dashboard</router-link>
-                <router-link v-if="auth_user" to="#"><i data-feather="message-circle" class="mr-1"></i>My message</router-link>
-                <router-link v-if="auth_user" to="#"><i data-feather="compass" class="mr-1"></i>Explore</router-link>
+                <router-link v-if="isAuthenticated" to="#"><i data-feather="layout" class="mr-1"></i>My dashboard</router-link>
+                <router-link v-if="isAuthenticated" to="#"><i data-feather="message-circle" class="mr-1"></i>My message</router-link>
+                <router-link v-if="isAuthenticated" to="#"><i data-feather="compass" class="mr-1"></i>Explore</router-link>
             </li>
             <li class="flex justify-end">
-                <div v-if='!auth_user' class="h-auto space-x-4 inline-block">
+                <div v-if='!isAuthenticated' class="h-auto space-x-4 inline-block">
                     <router-link :to="{name: 'register'}" class="btn-classic a-none">Sign Up</router-link>
                     <router-link :to="{name :'login'}" class="btn btn-viridiant hover:text-cultured-100 a-none">Log In</router-link>
                 </div>
@@ -42,6 +42,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { mapGetters } from 'vuex'
 
 export default defineComponent({
     data() {
@@ -51,19 +52,10 @@ export default defineComponent({
             timeout: 100,
         }
     },
-    props: {
-        logo_simple: {
-            type: String, // Logo link
-            required: true
-        },
-        home_link: {
-            type: String, // Home path
-            required: true
-        },
-        auth_user: {
-            type: Object, // Authenticated user
-            required: false
-        }
+    computed: {
+        ...mapGetters([
+            'isAuthenticated',
+        ])
     },
     methods: {
         toggle: function() {

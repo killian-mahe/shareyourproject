@@ -3,8 +3,8 @@
 
         <!-- Logo -->
         <div class="flex items-center mt-6 h-8">
-            <router-link :to="{name: 'feed'}"><img :class="{'w-16 h-auto':display}" class="w-10 h-auto mx-3 transform ease-in-out duration-250" :src="logo_simple"></router-link>
-            <router-link :to="{name: 'feed'}"><img :class="{'w-32 h-auto ml-2':display2}" class="w-0 h-auto transform ease-in-out duration-200" :src="logo_text"></router-link>
+            <router-link :to="{name: 'feed'}"><img :class="{'w-16 h-auto':display}" class="w-10 h-auto mx-3 transform ease-in-out duration-250" :src="'vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg'"></router-link>
+            <router-link :to="{name: 'feed'}"><img :class="{'w-32 h-auto ml-2':display2}" class="w-0 h-auto transform ease-in-out duration-200" :src="'vendor/courier/logos/svg/text/Logo_viridiant_text.svg'"></router-link>
         </div>
 
         <!-- Search bar -->
@@ -15,16 +15,17 @@
         <!-- Links -->
         <ul class="tablet-nav-bar-list" :class="{'left-16':display2, '-left-128':!display2}">
             <li><router-link :to="{name: 'feed'}"><i data-feather="home" class="mr-1"></i>My feed</router-link></li>
-            <li><router-link v-if="auth_user" to="#"><i data-feather="layout" class="mr-1"></i>My dashboard</router-link></li>
-            <li><router-link v-if="auth_user" to="#"><i data-feather="message-circle" class="mr-1"></i>My message</router-link></li>
-            <li><router-link v-if="auth_user" to="#"><i data-feather="compass" class="mr-1"></i>Explore</router-link></li>
+            <li><router-link v-if="isAuthenticated" to="#"><i data-feather="layout" class="mr-1"></i>My dashboard</router-link></li>
+            <li><router-link v-if="isAuthenticated" to="#"><i data-feather="message-circle" class="mr-1"></i>My message</router-link></li>
+            <li><router-link v-if="isAuthenticated" to="#"><i data-feather="compass" class="mr-1"></i>Explore</router-link></li>
         </ul>
 
         <!-- Login/register buttons -->
-        <div v-if='!auth_user' class="absolute w-48 h-auto space-x-6 inline-block bottom-12 md:bottom-1/8 transform duration-250" :class="{'left-10':display2, '-left-128':!display2}">
+        <div v-if='!isAuthenticated' class="absolute w-48 h-auto space-x-6 inline-block bottom-12 md:bottom-1/8 transform duration-250" :class="{'left-10':display2, '-left-128':!display2}">
             <router-link :to="{name: 'register'}" class="btn-classic ml-1 a-none">Sign Up</router-link>
             <router-link :to="{name: 'login'}" class="btn btn-viridiant hover:text-cultured-100 a-none">Log In</router-link>
         </div>
+
 
         <!-- Navigation icon -->
         <div id="nav-icon" class="absolute left-4 bottom-4">
@@ -41,6 +42,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { mapGetters } from 'vuex'
 
 export default defineComponent({
     data() {
@@ -50,17 +52,10 @@ export default defineComponent({
             timeout: 100,
         }
     },
-    props: {
-        logo_simple: {
-            type: String,
-        },
-        logo_text: {
-            type: String,
-        },
-        home_link: {
-            type: String,
-        },
-        auth_user: Object
+    computed: {
+        ...mapGetters([
+            'isAuthenticated',
+        ])
     },
     methods: {
         toggle: function() {
@@ -69,6 +64,7 @@ export default defineComponent({
                 setTimeout(() => {
                     this.display = false;
                 },this.timeout);
+
             } else {
                 this.display = true;
                 setTimeout(() => {

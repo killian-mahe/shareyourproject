@@ -41,7 +41,8 @@ mix.js('resources/js/app.js', 'public/js')
             },
             resolve: {
                 extensions: ["*", ".js", ".jsx", ".vue", ".ts", ".tsx"]
-            }
+            },
+            watchOptions: { ignored: /node_modules/ }
         }
     });
 
