@@ -187,20 +187,6 @@ components:
           type: object
     User:
       type: object
-      required:
-        - id
-        - username
-        - first_name
-        - last_name
-        - email
-        - email_verified_at
-        - is_admin
-        - bio
-        - banner_picture
-        - profile_picture
-        - title
-        - updated_at
-        - created_at
       properties:
         id:
           type: number
@@ -229,56 +215,101 @@ components:
         created_at:
           type: string
 
+    Tag:
+      type: object
+
+    Project:
+      type: object
+
     Post:
       type: object
       properties:
         id:
           type: number
-        author_id:
-          type: number
+        author:
+          $ref: '#/components/schemas/User'
         content:
           type: string
-        created_at:
+        formated_content:
+          type: string
+        project:
+          $ref: '#/components/schemas/Project'
+        images_url:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        url:
+          type: object
+          properties:
+            author:
+              type: string
+            post:
+              type: string
+        reshared_post:
+          type: number
+        liked:
+          type: boolean
+        stats:
+          type: object
+          properties:
+            comments:
+              type: number
+            like:
+              type: number
+        updated_at:
           type: string
           format: date
-        project_id:
-          type: number
-        shared_post:
-          type: boolean
-        updated_at:
+        created_at:
           type: string
           format: date
 
     FeedResponse:
       type: object
       properties:
-        current_page:
-          type: number
         data:
           type: array
           items:
             $ref: '#/components/schemas/Post'
-        first_page_url:
-          type: string
-        from:
-          type: number
-        last_page:
-          type: number
-        last_page_url:
-          type: number
         links:
-          type: array
-          items:
-            type: object
-        next_page_url:
-          type: string
-        path:
-          type: string
-        per_page:
-          type: number
-        prev_page_url:
-          type: string
-        to:
-          type: number
-        total:
-          type: number
+          type: object
+          properties:
+            first :
+              type: string
+            last:
+              type: string
+            next:
+              type: string
+            prev:
+              type: string
+        meta:
+          type: object
+          properties:
+            current_page:
+              type: number
+            from:
+              type: number
+            last_page:
+              type: number
+            links:
+              type: array
+              items:
+                type: object
+                properties:
+                  active:
+                    type: boolean
+                  label:
+                    type: number
+                  url:
+                    type: string
+            path:
+              type: string
+            per_page:
+              type: number
+            to:
+              type: number
+            total:
+              type: number
