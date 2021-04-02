@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\Post as PostResource;
+use App\Http\Resources\PostCollection;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -33,10 +33,7 @@ class FeedController extends Controller
             $posts = $this->getWithoutAuth($request);
         }
 
-        return response()->json(
-            data: $posts,
-            status: 200
-        );
+        return new PostCollection($posts);
     }
 
     /**

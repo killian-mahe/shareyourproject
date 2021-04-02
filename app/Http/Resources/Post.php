@@ -34,16 +34,16 @@ class Post extends JsonResource
             'images_url' => $images_url,
             'tags' => TagResource::collection($this->tags),
             'url' => [
-                'author' => route('users.show', ['user'=>$this->author_id]),
-                'post' => route('posts.show', ['post'=>$this->id])
+                // 'author' => route('users.show', ['user'=>$this->author_id]),
+                // 'post' => route('posts.show', ['post'=>$this->id])
             ],
-            'reshared_post' => $this->shared_post_id ? new Post(\App\Models\Post::where('id', $this->shared_post_id)->first()) : false,
+            'reshared_post' => $this->shared_post_id,
             'liked' => Auth::user() ? Auth::user()->does_it_like($this->resource) : false,
-            'comments_overview' => CommentResource::collection($this->comments()->latest()->take(2)->get()),
-            'comments_ids' => $this->comments->pluck('id'),
+            // 'comments_overview' => CommentResource::collection($this->comments()->latest()->take(2)->get()),
+            // 'comments_ids' => $this->comments->pluck('id'),
             'stats'=> [
-                'comments_number' => $this->comments->count(),
-                'likes_number' => $this->liking_users->count()
+                'comments' => $this->comments->count(),
+                'like' => $this->liking_users->count()
             ],
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at

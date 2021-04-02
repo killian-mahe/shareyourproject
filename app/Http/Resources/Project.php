@@ -22,9 +22,9 @@ class Project extends JsonResource
             'public' => $this->is_public,
             'owner_id' => $this->owner_id,
             'url' => [
-                'index' => route('projects.show', ['project'=>$this->id]),
-                'members' => route('projects.members', ['project'=>$this->id]),
-                'description' => route('projects.about', ['project'=>$this->id]),
+                // 'index' => route('projects.show', ['project'=>$this->id]),
+                // 'members' => route('projects.members', ['project'=>$this->id]),
+                // 'description' => route('projects.about', ['project'=>$this->id]),
             ],
             'technologies' => $this->technologies,
             'members_ids' => $this->members->pluck('id'),
