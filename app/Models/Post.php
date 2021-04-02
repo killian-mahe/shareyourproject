@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -96,5 +97,23 @@ class Post extends Model
     public function reshare_post(int $id)
     {
         $this->shared_post_id = $id;
+    }
+
+    /**
+     * Like the post
+     * @param \App\User $user
+     */
+    public function like(User $user)
+    {
+        $user->liked_posts()->attach($this);
+    }
+
+    /**
+     * Unlike the post
+     * @param \App\User $user
+     */
+    public function unlike(User $user)
+    {
+        $user->liked_posts()->detach($this);
     }
 }

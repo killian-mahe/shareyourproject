@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FeedController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\User;
@@ -30,6 +31,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::name('feed.')->prefix('feed')->group(function() {
     Route::get('/', [FeedController::class, 'get'])->name('get');
+});
+
+Route::name('post.')->prefix('post')->group(function() {
+    Route::put('/{post}/like', [PostController::class, 'like'])->name('like');
+    Route::put('/{post}/unlike', [PostController::class, 'unlike'])->name('unlike');
 });
 
 // Route::middleware(['auth:sanctum', 'api'])->group(function () {

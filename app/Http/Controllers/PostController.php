@@ -91,4 +91,34 @@ class PostController extends Controller
     {
         //
     }
+
+    /**
+     * Like the post
+     * @param \App\Models\Post $post
+     * @return \Illuminate\Http\Response
+     */
+    public function like(Post $post)
+    {
+        $post->like(Auth::user());
+
+        return response()->json(
+            data: new PostResource($post),
+            status: 200
+        );
+    }
+
+    /**
+     * Unlike the post
+     * @param \App\Models\Post $post
+     * @return \Illuminate\Http\Response
+     */
+    public function unlike(Post $post)
+    {
+        $post->unlike(Auth::user());
+
+        return response()->json(
+            data: new PostResource($post),
+            status: 200
+        );
+    }
 }
