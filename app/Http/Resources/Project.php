@@ -27,7 +27,7 @@ class Project extends JsonResource
                 // 'description' => route('projects.about', ['project'=>$this->id]),
             ],
             'technologies' => $this->technologies,
-            'members_ids' => $this->members->pluck('id'),
+            'member_ids' => $this->members->pluck('id'),
             'profile_picture' => $this->profile_picture(),
             'banner_picture' => $this->banner_picture(),
             'created_ad' => $this->created_at,

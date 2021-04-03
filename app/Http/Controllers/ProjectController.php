@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Project;
+use App\Http\Resources\Project as ProjectResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -82,5 +83,18 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+    }
+
+    /**
+     * Search a list of project
+     */
+    public function search(Request $request, string $query)
+    {
+        $projects = Project::where('name', 'like', '%'.$query.'%')
+                            ->limit(5)->get();
+        return response()->json(
+            data: ProjectResource::collection($projects),
+            status: 200
+        );
     }
 }

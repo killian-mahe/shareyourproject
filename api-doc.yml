@@ -12,6 +12,9 @@ info:
 tags:
   - name: Authentication
     description: For authentication purposes
+  - name: Post
+  - name: User
+  - name: Project
 paths:
   /login:
     post:
@@ -116,7 +119,7 @@ paths:
           description: Unauthorized
 
 
-  /post/{postId}/like:
+  /posts/{postId}/like:
     put:
       security:
         - cookieAuth: []
@@ -142,7 +145,7 @@ paths:
         '401':
           description: Unauthenticated
 
-  /post/{postId}/unlike:
+  /posts/{postId}/unlike:
     put:
       security:
         - cookieAuth: []
@@ -167,6 +170,50 @@ paths:
           description: Post not found
         '401':
           description: Unauthenticated
+
+  /projects/search/{query}:
+    get:
+      tags:
+       - Project
+      parameters:
+        - in: path
+          name: query
+          schema:
+            type: string
+          required: true
+          description: The search query string
+      summary: Search for projects
+      responses:
+        '200':
+          description: List of project
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+
+  /users/search/{query}:
+    get:
+      tags:
+       - User
+      parameters:
+        - in: path
+          name: query
+          schema:
+            type: string
+          required: true
+          description: The search query string
+      summary: Search for user profiles
+      responses:
+        '200':
+          description: List of user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
 
 components:
   securitySchemes:
@@ -219,6 +266,40 @@ components:
       type: object
 
     Project:
+      type: object
+      properties:
+        id:
+          type: number
+        description:
+          type: string
+        formated_content:
+          type: string
+        name:
+          type: string
+        public:
+          type: boolean
+        owner_id:
+          type: number
+        technologies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Technologie'
+        member_ids:
+          type: array
+          items:
+            type: number
+        profile_picture:
+          type: string
+        banner_picture:
+          type: string
+        created_at:
+          type: string
+          format: date
+        updated_at:
+          type: string
+          format: date
+
+    Technologie:
       type: object
 
     Post:
