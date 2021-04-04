@@ -34,11 +34,11 @@ Route::name('post.')->prefix('posts')->group(function() {
 });
 
 Route::name('user.')->prefix('users')->group(function() {
-    Route::get('/search/{query}', [UserController::class, 'search'])->name('search');
+    Route::get('/search', [UserController::class, 'search'])->name('search');
 });
 
 Route::name('project.')->prefix('projects')->group(function() {
-    Route::get('/search/{query}', [ProjectController::class, 'search'])->name('search');
+    Route::get('/search', [ProjectController::class, 'search'])->name('search');
 });
 
 // Route::middleware(['auth:sanctum', 'api'])->group(function () {

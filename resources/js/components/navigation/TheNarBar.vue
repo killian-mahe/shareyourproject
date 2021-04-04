@@ -40,8 +40,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { mapGetters } from 'vuex'
+import SearchBar from '../navigation/SearchBar.vue'
 
 export default defineComponent({
+    components: {
+        SearchBar
+    },
     computed: {
         ...mapGetters([
             'isAuthenticated',

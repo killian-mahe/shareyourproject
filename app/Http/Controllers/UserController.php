@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        
+
     }
 
 
@@ -122,8 +122,9 @@ class UserController extends Controller
      * @param String $string
      * @return \App\Http\Resource\User
      */
-    public function search(Request $request, String $query)
+    public function search(Request $request)
     {
+        $query = $request->query('query');
         $users = User::where('first_name', 'like', '%'.$query.'%')
                     ->orWhere('last_name', 'like', '%'.$query.'%')
                     ->orWhere('username', 'like', '%'.$query.'%')

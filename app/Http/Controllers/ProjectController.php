@@ -88,8 +88,9 @@ class ProjectController extends Controller
     /**
      * Search a list of project
      */
-    public function search(Request $request, string $query)
+    public function search(Request $request)
     {
+        $query = $request->query('query');
         $projects = Project::where('name', 'like', '%'.$query.'%')
                             ->limit(5)->get();
         return response()->json(

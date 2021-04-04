@@ -93,6 +93,9 @@ let API = {
             return fetchResource('put', url);
         },
     },
+    /**
+     * Fedd API wrapper
+     */
     Feed: {
         /**
          * Load user feed and return loaded posts
@@ -102,6 +105,35 @@ let API = {
             const url = `/feed?page=${ page }`;
             return fetchResource<PaginateResponse<Post>>('get', url);
         },
+    },
+    /**
+     * Project API wrapper
+     */
+    Project: {
+        /**
+         *  Base project requests url
+         */
+        url: '/projects',
+        /**
+         * Search projects
+         */
+        search: function(query: string) {
+            const url = `${this.url}/search?query=${query}`;
+            return fetchResource<Array<Project>>('get', url);
+        }
+    },
+    User: {
+        /**
+         * Base user requests url
+         */
+        url: '/users',
+        /**
+         * Search users
+         */
+         search: function(query: string) {
+            const url = `${this.url}/search?query=${query}`;
+            return fetchResource<Array<User>>('get', url);
+        }
     }
 };
 
