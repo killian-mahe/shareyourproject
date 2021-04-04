@@ -4,7 +4,7 @@
 
             <!-- Search input -->
             <div class="flex items-center relative">
-                <i class="search-glass" data-feather="search"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search search-glass"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 <input autocomplete="off" @input="refreshLists" type="text" placeholder="Search" v-model="searchQuery" class="search-input placeholder-onyx-300">
             </div>
 
@@ -102,7 +102,7 @@ export default defineComponent({
                         }
                     });
                 }
-            }, 250);
+            }, 100);
         }
     }
 })
