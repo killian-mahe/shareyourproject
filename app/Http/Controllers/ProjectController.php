@@ -92,7 +92,7 @@ class ProjectController extends Controller
     {
         $query = $request->query('query');
         $projects = Project::where('name', 'like', '%'.$query.'%')
-                            ->limit(5)->get();
+                            ->limit(3)->get();
         return response()->json(
             data: ProjectResource::collection($projects),
             status: 200

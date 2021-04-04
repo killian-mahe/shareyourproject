@@ -130,7 +130,7 @@ class UserController extends Controller
                     ->orWhere('username', 'like', '%'.$query.'%')
                     ->orWhereRaw(
                         "concat(first_name, ' ', last_name) like '%" . $query . "%' "
-                    )->limit(5)->get();
+                    )->limit(3)->get();
 
         return response()->json(UserResource::collection($users), 200);
     }
