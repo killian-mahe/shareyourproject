@@ -8,8 +8,8 @@
         </div>
 
         <!-- Search bar -->
-        <div class="w-3/4 h-auto my-6 absolute" :class="{'left-8':display2, '-left-128':!display2}">
-            <search-bar></search-bar>
+        <div class="w-3/4 h-auto my-6 absolute top-12" :class="{'left-8':display2, '-left-128':!display2}">
+            <SearchBar></SearchBar>
         </div>
 
         <!-- Links -->
@@ -43,8 +43,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { mapGetters } from 'vuex'
+import SearchBar from '../navigation/SearchBar.vue'
 
 export default defineComponent({
+    components: {
+        SearchBar
+    },
     data() {
         return {
             display: false,
