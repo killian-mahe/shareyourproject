@@ -120,6 +120,13 @@ let API = {
         search: function(query: string) {
             const url = `${this.url}/search?query=${query}`;
             return fetchResource<Array<Project>>('get', url);
+        },
+        /**
+         * Get a project
+         */
+        get: function(projectId: number) {
+            const url = `${this.url}/${projectId}`;
+            return fetchResource<Project>('get', url);
         }
     },
     User: {

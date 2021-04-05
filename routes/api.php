@@ -46,6 +46,7 @@ Route::name('user.')->prefix('users')->group(function() {
 
 Route::name('project.')->prefix('projects')->group(function() {
     Route::get('/search', [ProjectController::class, 'search'])->name('search');
+    route::get('/{project}', [ProjectController::class, 'get'])->name('get');
 });
 
 // Route::middleware(['auth:sanctum', 'api'])->group(function () {

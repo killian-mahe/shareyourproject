@@ -193,6 +193,28 @@ paths:
                 items:
                   $ref: '#/components/schemas/Project'
 
+  /project/{projectId}:
+    get:
+      tags:
+        - Project
+      parameters:
+        - in: path
+          name: projectId
+          schema:
+            type: number
+          required: true
+          description: Numeric ID of the project to retrieve
+      summary: Get a project
+      responses:
+        '200':
+          description: A project resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '404':
+          description: Project not found
+
   /users/search/{query}:
     get:
       tags:
