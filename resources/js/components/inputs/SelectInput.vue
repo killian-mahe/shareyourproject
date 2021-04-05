@@ -17,9 +17,18 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     props: {
-        'label': String,
-        'options': Array,
-        'name': String
+        label: {
+            type: String,
+            default: "",
+        },
+        options: {
+            type: Array,
+            default : [],
+        },
+        name: {
+            type: String,
+            default: "",
+        },
     },
     mounted() {
     }
