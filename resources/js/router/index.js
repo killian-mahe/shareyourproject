@@ -2,12 +2,14 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView'
 import LoginView from '../views/auth/LoginView'
 import RegisterView from '../views/auth/RegisterView'
+import ProfileView from '../views/user/ProfileView.vue'
 import store from '../store'
 
 const routes = [
     {
-        path: '/feed',
+        path: '/',
         name: 'feed',
+        alias: '/feed',
         component: HomeView
     },
     {
@@ -38,6 +40,14 @@ const routes = [
                 return
             }
             next()
+        }
+    },
+    {
+        path: '/user/:id',
+        name: 'profile',
+        component: ProfileView,
+        meta: {
+            requiresAuth: false
         }
     }
 ]

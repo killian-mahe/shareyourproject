@@ -1,6 +1,6 @@
 <template>
 
-<div class="flex justify-center mt-4 min-h-screen">
+<div class="flex justify-center mt-4 min-h-screen" v-if="user">
 
     <div class="hidden md:block md:w-1/3 md:ml-4 lg:w-1/4 xl:w-1/6">
 
@@ -9,7 +9,7 @@
             <div class="flex justify-between py-2"><span class="text-linkedin">LinkedIn</span><a href="https://www.linkedin.com/in/killian-mah%C3%A9-246928135/">killian-mahe</a></div>
             <div class="flex justify-between py-2"><span class="text-github">GitHub</span><a href="https://github.com/killian-mahe">@killian-mahe</a></div>
         </div>
-        
+
     </div>
 
     <div class="w-full md:w-2/3 lg:w-1/2 md:mx-4">
@@ -32,12 +32,46 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { mapGetters } from 'vuex'
-import { User } from '../models'
+import { API } from '../../api'
+import { User } from '../../models'
 
 export default defineComponent({
+    data() {
+        return {
+            user: undefined as unknown as User
+        }
+    },
+    beforeMount() {
+        API.User.get(Number(this.$route.params['id'])).then(response => {
+            switch (response.status) {
+                case 200:
+                    this.user = response.data
+                    break;
+
+                default:
+                    break;
+            }
+        });
+    },
+    beforeRouteUpdate(to, from, next) {
+        API.User.get(Number(to.params['id'])).then(response => {
+            switch (response.status) {
+                case 200:
+                    this.user = response.data
+                    break;
+
+                case 404:
+                    break;
+
+                default:
+                    break;
+            }
+        });
+        next();
+    },
     computed: {
         ...mapGetters({
-            user: 'user'
+            authUser: 'user'
         })
     },
 })
