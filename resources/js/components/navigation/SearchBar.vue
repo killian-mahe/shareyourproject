@@ -15,13 +15,13 @@
                 <div v-if="users.length > 0">
                     <span class="leading-4 font-medium">Users</span>
                     <hr class="mb-1">
-                    <a v-for="user in users" :key="'user_'+user.id" class="flex justify-between p-2 w-full rounded hover:bg-gray-200 cursor-pointer">
+                    <router-link :to="{ name: 'profile', params: { id: user.id }}" v-for="user in users" :key="'user_'+user.id" class="flex justify-between p-2 w-full rounded hover:bg-gray-200 cursor-pointer">
                         <span class="flex items-center">
                             <img :src="user.profile_picture" alt="profile_picture" class="w-8 h-8 rounded-full mr-2">
                             <span class="leading-4">{{ user.first_name }} {{ user.last_name }}</span>
                         </span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    </a>
+                    </router-link>
                 </div>
 
                 <!-- Pojects -->

@@ -23,6 +23,25 @@
         </div>
 
 
+        <!-- Main -->
+        <div class="box p-5">
+
+            <h2 class="category-title">Who am I ?</h2>
+            <span class="font-light text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac eros vitae nisl ultrices laoreet.
+                Donec id mi ut arcu iaculis rhoncus eu sollicitudin dolor. Nulla ultricies arcu sed nisi convallis tincidunt.
+                Nullam a dui enim. Donec ac est eget mauris gravida maximus. Nulla eu dolor et sem porta ullamcorper.
+                Phasellus nec orci vulputate, pretium mi et, fringilla metus. Cras quis placerat felis. </span>
+            <span class="font-light text-xs block text-right">Member since {{ user.created_at }}</span>
+        </div>
+
+        <!-- Projects -->
+        <h2 class="font-semibold text-xl my-5 ml-3">Projects</h2>
+        <ProjectCard
+            v-for="project in user.projects"
+            :key="'project_'+project.id"
+            :project="project"></ProjectCard>
+
+
     </div>
     <div class="hidden xl:block lg:w-1/6 xl:w-1/8"></div>
 
@@ -34,8 +53,12 @@ import { defineComponent } from 'vue'
 import { mapGetters } from 'vuex'
 import { API } from '../../api'
 import { User } from '../../models'
+import ProjectCard from '../../components/cards/ProjectCard.vue'
 
 export default defineComponent({
+    components: {
+        ProjectCard
+    },
     data() {
         return {
             user: undefined as unknown as User

@@ -39,6 +39,7 @@ export interface User {
     created_at: Date;
     updated_at: Date;
     is_admin: boolean;
+    projects: Array<Project>;
     bio: string;
 }
 
