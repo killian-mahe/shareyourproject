@@ -4,6 +4,7 @@ use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
+use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 // Route::post('login', 'Auth\LoginController@authenticate')->name('api.login');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return new UserResource($request->user());
 });
 
 Route::name('feed.')->prefix('feed')->group(function() {
@@ -29,12 +30,18 @@ Route::name('feed.')->prefix('feed')->group(function() {
 });
 
 Route::name('post.')->prefix('posts')->group(function() {
-    Route::put('/{post}/like', [PostController::class, 'like'])->name('like');
-    Route::put('/{post}/unlike', [PostController::class, 'unlike'])->name('unlike');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::put('/{post}/like', [PostController::class, 'like'])->name('like');
+        Route::put('/{post}/unlike', [PostController::class, 'unlike'])->name('unlike');
+    });
+
 });
 
 Route::name('user.')->prefix('users')->group(function() {
     Route::get('/search', [UserController::class, 'search'])->name('search');
+
+    Route::get('/{user}', [UserController::class, 'get'])->name('get');
 });
 
 Route::name('project.')->prefix('projects')->group(function() {

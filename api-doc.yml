@@ -214,6 +214,27 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/User'
+  /user/{userId}:
+    get:
+      tags:
+        - User
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: number
+          required: true
+          description: Numeric ID of the user to retrieve
+      summary: Get a user
+      responses:
+        '200':
+          description: A user resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
 
 components:
   securitySchemes:

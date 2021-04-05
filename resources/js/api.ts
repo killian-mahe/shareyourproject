@@ -130,9 +130,16 @@ let API = {
         /**
          * Search users
          */
-         search: function(query: string) {
+        search: function(query: string) {
             const url = `${this.url}/search?query=${query}`;
             return fetchResource<Array<User>>('get', url);
+        },
+        /**
+         * Get a user
+         */
+        get: function(userId: number) {
+            const url = `${this.url}/${userId}`;
+            return fetchResource<User>('get', url);
         }
     }
 };

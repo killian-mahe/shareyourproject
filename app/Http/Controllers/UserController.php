@@ -20,6 +20,19 @@ class UserController extends Controller
 
     }
 
+    /**
+     * Get the user
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function get(Request $request, User $user)
+    {
+        return response()->json(
+            status: 200,
+            data: new UserResource($user)
+        );
+    }
 
     /**
      * Update the specified resource in storage.
