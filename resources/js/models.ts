@@ -87,7 +87,7 @@ export interface Project {
         description: string;
     };
     technologies: Array<Technology>;
-    members_ids: Array<Number>;
+    member_ids: Array<number>;
     profile_picture: string;
     banner_picture: string;
     created_at: Date;
