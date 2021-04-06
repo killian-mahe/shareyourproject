@@ -30,7 +30,7 @@ class Project extends JsonResource
             'member_ids' => $this->members->pluck('id'),
             'profile_picture' => $this->profile_picture(),
             'banner_picture' => $this->banner_picture(),
-            'created_ad' => $this->created_at,
+            'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
     }
