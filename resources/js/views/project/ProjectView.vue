@@ -4,8 +4,8 @@
 
     <div class="block w-auto md:mx-4 lg:w-1/4 xl:w-1/6">
         <div class="box w-full h-auto mb-4 flex lg:flex-col flex-none py-2 p-5 md:mt-4 justify-center lg:mt-48 md:space-x-8 lg:space-x-0">
-            <a class="py-2 px-6">Publications</a>
-            <a class="py-2 px-6">Members</a>
+            <router-link :to="{name:'project', params:{id: project.id}}" class="py-2 px-6">Posts</router-link>
+            <router-link :to="{name:'project.members', params:{id: project.id}}" class="py-2 px-6">Members</router-link>
             <a class="py-2 px-6">About</a>
         </div>
     </div>
@@ -37,6 +37,7 @@
             <div class="badges w-full h-auto bg-indigo-300"></div>
         </div>
 
+        <router-view></router-view>
 
     </div>
     <div class="hidden xl:block lg:w-1/6 xl:w-1/8"></div>

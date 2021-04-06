@@ -4,6 +4,7 @@ import LoginView from '../views/auth/LoginView'
 import RegisterView from '../views/auth/RegisterView'
 import ProfileView from '../views/user/ProfileView.vue'
 import ProjectView from '../views/project/ProjectView.vue'
+import MembersView from '../views/project/MembersView.vue'
 import store from '../store'
 
 const routes = [
@@ -13,6 +14,9 @@ const routes = [
         alias: '/feed',
         component: HomeView
     },
+
+    // Authentication
+
     {
         path: '/login',
         name: 'login',
@@ -43,6 +47,9 @@ const routes = [
             next()
         }
     },
+
+    // User
+
     {
         path: '/user/:id',
         name: 'profile',
@@ -51,13 +58,23 @@ const routes = [
             requiresAuth: false
         }
     },
+
+    // Project
+
     {
         path: '/project/:id',
         name: 'project',
         component: ProjectView,
         meta: {
             requiresAuth: false
-        }
+        },
+        children: [
+            {
+                path: 'members',
+                name: 'project.members',
+                component: MembersView
+            }
+        ]
     }
 ]
 
