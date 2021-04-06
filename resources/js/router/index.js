@@ -53,7 +53,7 @@ const routes = [
     },
     {
         path: '/project/:id',
-        name: 'profile',
+        name: 'project',
         component: ProjectView,
         meta: {
             requiresAuth: false
