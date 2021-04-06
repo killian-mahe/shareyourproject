@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView'
 import LoginView from '../views/auth/LoginView'
 import RegisterView from '../views/auth/RegisterView'
 import ProfileView from '../views/user/ProfileView.vue'
+import ProjectView from '../views/project/ProjectView.vue'
 import store from '../store'
 
 const routes = [
@@ -46,6 +47,14 @@ const routes = [
         path: '/user/:id',
         name: 'profile',
         component: ProfileView,
+        meta: {
+            requiresAuth: false
+        }
+    },
+    {
+        path: '/project/:id',
+        name: 'profile',
+        component: ProjectView,
         meta: {
             requiresAuth: false
         }
