@@ -67,26 +67,29 @@ export default defineComponent({
                         if (response.status === 200) {
                             next(vm => (vm as any).setData(project, response.data))
                         }
+                        else next(false);
                     });
                     break;
 
                 default:
+                    next(false)
                     break;
             }
         });
     },
     beforeRouteUpdate(to, from, next) {
-        API.Project.get(Number(this.$route.params['id'])).then(response => {
+        API.Project.get(Number(to.params['id'])).then(response => {
             switch (response.status) {
                 case 200:
                     this.project = response.data
+                    next();
                     break;
 
                 default:
+                    next(false);
                     break;
             }
         });
-        next();
     },
     methods: {
         setData(project: Project, owner: User) {

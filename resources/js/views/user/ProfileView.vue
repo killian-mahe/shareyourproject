@@ -64,14 +64,15 @@ export default defineComponent({
             user: undefined as unknown as User
         }
     },
-    beforeMount() {
-        API.User.get(Number(this.$route.params['id'])).then(response => {
+    beforeRouteEnter(to, from, next) {
+        API.User.get(Number(to.params['id'])).then(response => {
             switch (response.status) {
                 case 200:
-                    this.user = response.data
+                    next(vm => {(vm as any).user = response.data})
                     break;
 
                 default:
+                    next(false)
                     break;
             }
         });
@@ -81,16 +82,14 @@ export default defineComponent({
             switch (response.status) {
                 case 200:
                     this.user = response.data
-                    break;
-
-                case 404:
+                    next();
                     break;
 
                 default:
+                    next(false);
                     break;
             }
         });
-        next();
     },
     computed: {
         ...mapGetters({

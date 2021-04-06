@@ -17359,11 +17359,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               next(function (vm) {
                 return vm.setData(project, response.data);
               });
-            }
+            } else next(false);
           });
           break;
 
         default:
+          next(false);
           break;
       }
     });
@@ -17371,17 +17372,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
     var _this = this;
 
-    _api__WEBPACK_IMPORTED_MODULE_1__.API.Project.get(Number(this.$route.params['id'])).then(function (response) {
+    _api__WEBPACK_IMPORTED_MODULE_1__.API.Project.get(Number(to.params['id'])).then(function (response) {
       switch (response.status) {
         case 200:
           _this.project = response.data;
+          next();
           break;
 
         default:
+          next(false);
           break;
       }
     });
-    next();
   },
   methods: {
     setData: function setData(project, owner) {
@@ -17434,37 +17436,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       user: undefined
     };
   },
-  beforeMount: function beforeMount() {
-    var _this = this;
-
-    _api__WEBPACK_IMPORTED_MODULE_1__.API.User.get(Number(this.$route.params['id'])).then(function (response) {
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    _api__WEBPACK_IMPORTED_MODULE_1__.API.User.get(Number(to.params['id'])).then(function (response) {
       switch (response.status) {
         case 200:
-          _this.user = response.data;
+          next(function (vm) {
+            vm.user = response.data;
+          });
           break;
 
         default:
+          next(false);
           break;
       }
     });
   },
   beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
-    var _this2 = this;
+    var _this = this;
 
     _api__WEBPACK_IMPORTED_MODULE_1__.API.User.get(Number(to.params['id'])).then(function (response) {
       switch (response.status) {
         case 200:
-          _this2.user = response.data;
-          break;
-
-        case 404:
+          _this.user = response.data;
+          next();
           break;
 
         default:
+          next(false);
           break;
       }
     });
-    next();
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)({
     authUser: 'user'
