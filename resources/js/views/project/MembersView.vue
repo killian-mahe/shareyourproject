@@ -5,7 +5,7 @@
             v-for="(member, index) in members"
             :key="'member_'+member.id"
             :member="member"
-            :right="index % 2"
+            :right="Boolean(index % 2)"
             ></MemberCard>
 
     </div>
@@ -27,27 +27,22 @@ export default defineComponent({
             members: new Array<User>()
         }
     },
-    beforeRouteEnter(to, from, next) {
-        console.log('beforeRouterEnter')
-        API.Project.get(Number(to.params['id'])).then(response => {
+    created() {
+        API.Project.get(Number(this.$route.params['id'])).then(response => {
             switch (response.status) {
                 case 200:
-                    let project = response.data
-                    let members = new Array<User>();
+                    this.project = response.data
 
-                    project.member_ids.forEach(id => {
+                    this.project.member_ids.forEach(id => {
                         API.User.get(id).then((response) => {
                             if (response.status === 200) {
-                                members.push(response.data)
+                                this.members.push(response.data)
                             }
-                            else next(false);
                         });
                     });
-                    next(vm => (vm as any).setData(project, members))
                     break;
 
                 default:
-                    next(false)
                     break;
             }
         });
@@ -79,6 +74,7 @@ export default defineComponent({
     },
     methods: {
         setData(project: Project, members: User[]) {
+            console.log("Setting Data")
             this.project = project;
             this.members = members;
         }

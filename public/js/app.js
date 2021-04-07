@@ -17372,45 +17372,66 @@ __webpack_require__.r(__webpack_exports__);
       members: new Array()
     };
   },
-  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    console.log('beforeRouterEnter');
-    _api__WEBPACK_IMPORTED_MODULE_1__.API.Project.get(Number(to.params['id'])).then(function (response) {
-      switch (response.status) {
-        case 200:
-          var project = response.data;
-          var members = new Array();
-          project.member_ids.forEach(function (id) {
-            _api__WEBPACK_IMPORTED_MODULE_1__.API.User.get(id).then(function (response) {
-              if (response.status === 200) {
-                members.push(response.data);
-              } else next(false);
-            });
-          });
-          next(function (vm) {
-            return vm.setData(project, members);
-          });
-          break;
-
-        default:
-          next(false);
-          break;
-      }
-    });
-  },
-  beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
+  // beforeRouteEnter(to, from, next) {
+  //     console.log('beforeRouterEnter')
+  //     API.Project.get(Number(to.params['id'])).then(response => {
+  //         switch (response.status) {
+  //             case 200:
+  //                 let project = response.data
+  //                 let members = new Array<User>();
+  //                 project.member_ids.forEach(id => {
+  //                     API.User.get(id).then((response) => {
+  //                         if (response.status === 200) {
+  //                             members.push(response.data)
+  //                         }
+  //                         else next(false);
+  //                     });
+  //                 });
+  //                 next(vm => (vm as any).setData(project, members))
+  //                 break;
+  //             default:
+  //                 next(false)
+  //                 break;
+  //         }
+  //     });
+  // },
+  created: function created() {
     var _this = this;
 
-    console.log('beforeRouterUpdate');
-    _api__WEBPACK_IMPORTED_MODULE_1__.API.Project.get(Number(to.params['id'])).then(function (response) {
+    _api__WEBPACK_IMPORTED_MODULE_1__.API.Project.get(Number(this.$route.params['id'])).then(function (response) {
       switch (response.status) {
         case 200:
           _this.project = response.data;
-          _this.members = [];
 
           _this.project.member_ids.forEach(function (id) {
             _api__WEBPACK_IMPORTED_MODULE_1__.API.User.get(id).then(function (response) {
               if (response.status === 200) {
                 _this.members.push(response.data);
+              }
+            });
+          });
+
+          break;
+
+        default:
+          break;
+      }
+    });
+  },
+  beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
+    var _this2 = this;
+
+    console.log('beforeRouterUpdate');
+    _api__WEBPACK_IMPORTED_MODULE_1__.API.Project.get(Number(to.params['id'])).then(function (response) {
+      switch (response.status) {
+        case 200:
+          _this2.project = response.data;
+          _this2.members = [];
+
+          _this2.project.member_ids.forEach(function (id) {
+            _api__WEBPACK_IMPORTED_MODULE_1__.API.User.get(id).then(function (response) {
+              if (response.status === 200) {
+                _this2.members.push(response.data);
               } else next(false);
             });
           });
@@ -17426,6 +17447,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     setData: function setData(project, members) {
+      console.log("Setting Data");
       this.project = project;
       this.members = members;
     }
@@ -18166,7 +18188,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
-    "class": ["box w-auto mb-6 p-6 justify-end lg:flex", {
+    "class": ["box w-auto mb-6 p-6 lg:flex", {
       'justify-end': _ctx.right
     }]
   }, [!_ctx.right ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
@@ -18180,7 +18202,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   }, {
     "default": _withId(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-        "class": "h-20 w-20 rounded-full transform ease-in-out duration-200 lg:h-22 lg:w-22 mx-auto lg:mr-0 lg:ml-6 hover:scale-105 hover:shadow-md",
+        "class": "h-20 w-20 rounded-full transform ease-in-out duration-200 lg:h-22 lg:w-22 mx-auto lg:ml-0 lg:mr-6 hover:scale-105 hover:shadow-md",
         src: _ctx.member.profile_picture
       }, null, 8
       /* PROPS */
@@ -19898,7 +19920,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_MemberCard, {
       key: 'member_' + member.id,
       member: member,
-      right: index % 2
+      right: Boolean(index % 2)
     }, null, 8
     /* PROPS */
     , ["member", "right"]);
