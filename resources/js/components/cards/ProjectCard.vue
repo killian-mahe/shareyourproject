@@ -3,9 +3,9 @@
     <img class="w-1/4 md:rounded-tl-md object-cover" :src="'vendor/courier/img/jeff-sheldon-8z2Q6XWLYa4.jpg'" alt="project_picture">
         <div class="p-3 flex flex-col justify-between w-full">
             <div>
-                <a>
+                <router-link :to="{name:'project', params:{id: project.id}}">
                     <h3 class="font-semibold mb-4">{{ project.name }}</h3>
-                </a>
+                </router-link>
                 <p class="font-light text-sm">{{ project.description }}</p>
 
                 <div class="mt-4 mb-2">
