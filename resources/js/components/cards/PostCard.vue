@@ -40,8 +40,8 @@
             </span>
         </div>
 
-        <div class="card-body sm:px-0 md:text-lg pt-5">
-            <p class="mb-4 leading-5 text-sm lg:text-base font-normal text-onyx-600 md:px-4" v-html="post_data.formated_content">
+        <div class="card-body sm:px-0 md:text-lg pt-2">
+            <p class="leading-5 text-sm lg:text-base font-normal text-onyx-600 md:px-4" v-html="post_data.formated_content">
             </p>
 
             <!-- Tags -->
@@ -166,7 +166,9 @@ export default defineComponent({
     })
     },
     methods: {
-        // later
+        onClickOutSideOptions()  {
+
+        },
         like: function(like: boolean) {
             if (!this.isAuthenticated) return;
             if (like) {
