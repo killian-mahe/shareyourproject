@@ -6,6 +6,7 @@
         class="text-2xl font-semibold text-gray-800 mt-5 pl-5 md:pl-0">
             Bonjour {{user.first_name}} {{user.last_name}} !
         </div>
+        <PostCard class="my-6 shadow-sm" v-for="post in posts" :key="'post_' + post.id" :post="post"></PostCard>
 
     </div>
 
@@ -13,8 +14,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { mapGetters, mapActions } from 'vuex'
+import PostCard from '../components/cards/PostCard.vue'
 
 export default defineComponent({
+    components: {
+        PostCard,
+    },
     computed: {
         ...mapGetters({
             isAuthenticated: 'isAuthenticated',
