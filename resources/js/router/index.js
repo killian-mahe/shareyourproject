@@ -2,14 +2,21 @@ import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView'
 import LoginView from '../views/auth/LoginView'
 import RegisterView from '../views/auth/RegisterView'
+import ProfileView from '../views/user/ProfileView.vue'
+import ProjectView from '../views/project/ProjectView.vue'
+import MembersView from '../views/project/MembersView.vue'
 import store from '../store'
 
 const routes = [
     {
-        path: '/feed',
+        path: '/',
         name: 'feed',
+        alias: '/feed',
         component: HomeView
     },
+
+    // Authentication
+
     {
         path: '/login',
         name: 'login',
@@ -39,6 +46,35 @@ const routes = [
             }
             next()
         }
+    },
+
+    // User
+
+    {
+        path: '/user/:id',
+        name: 'profile',
+        component: ProfileView,
+        meta: {
+            requiresAuth: false
+        }
+    },
+
+    // Project
+
+    {
+        path: '/project/:id',
+        name: 'project',
+        component: ProjectView,
+        meta: {
+            requiresAuth: false
+        },
+        children: [
+            {
+                path: 'members',
+                name: 'project.members',
+                component: MembersView
+            }
+        ]
     }
 ]
 

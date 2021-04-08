@@ -39,6 +39,7 @@ export interface User {
     created_at: Date;
     updated_at: Date;
     is_admin: boolean;
+    projects: Array<Project>;
     bio: string;
 }
 
@@ -86,7 +87,7 @@ export interface Project {
         description: string;
     };
     technologies: Array<Technology>;
-    members_ids: Array<Number>;
+    member_ids: Array<number>;
     profile_picture: string;
     banner_picture: string;
     created_at: Date;

@@ -1,11 +1,14 @@
 <template>
-  <resize-auto>
+  <resize-auto class="w-full">
     <template v-slot:default="{ resize }">
       <div @click="$emit('click')">
         <InputLabel v-if="label" :label="label" :name="name" />
         <textarea
-          class="appearance-none bg-white text-gray-700 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none"
-          :class="classIntern"
+          class="w-full appearance-none bg-white text-gray-700 border-2 border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none"
+          :class="{
+            'border-red-500': inputValue.length > maxLength,
+            'focus:border-viridiant-600': inputValue.length <= maxLength,
+          }"
           @input="resize"
           @focus="$emit('focus')"
           @blur="$emit('blur')"
@@ -22,47 +25,56 @@
           :class="{ 'text-red-500': inputValue.length > max_length }"
           class="text-gray-600 text-xs italic text-right"
         >
-          {{ inputValue.length }}/{{ max_length }}
+          {{ inputValue.length }}/{{ maxLength }}
         </p>
       </div>
     </template>
   </resize-auto>
 </template>
-<script>
+
+<script lang="ts">
+import { defineComponent } from "vue";
 import ResizeAuto from "../utils/ResizeAuto.vue";
 import InputLabel from "./InputLabel.vue";
 
-export default {
-  components: { ResizeAuto, InputLabel },
+export default defineComponent({
+  components: {
+    ResizeAuto,
+    InputLabel,
+  },
   props: {
-    child_class: String,
-    placeholder: String,
-    value: {
+    placeholder: {
       type: String,
       default: "",
     },
-    name: String,
-    label: String,
-    max_length: Number,
+    modelValue: {
+      type: String,
+      default: "",
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    label: {
+      type: String,
+      default: "",
+    },
+    maxLength: {
+      type: Number,
+      default: 250,
+    },
     rows: {
       type: Number,
       default: 2,
     },
   },
   computed: {
-    classIntern: function () {
-      if (this.inputValue.length > this.max_length) {
-        return this.child_class + " focus:border-red-500 border-red-500";
-      } else {
-        return this.child_class + " focus:border-viridiant-600";
-      }
-    },
     inputValue: {
-      get() {
-        return this.value;
+      get(): string {
+        return this.modelValue;
       },
-      set(val) {
-        this.$emit("input", val);
+      set(value: string) {
+        this.$emit("update:modelValue", value);
       },
     },
   },
@@ -74,6 +86,8 @@ export default {
       this.inputValue = `${this.inputValue}\n`;
     },
   },
-};
+});
 </script>
 
+<style scoped>
+</style>

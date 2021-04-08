@@ -20,6 +20,19 @@ class ProjectController extends Controller
     }
 
     /**
+     * Get a project
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function get(Request $request, Project $project)
+    {
+        return response()->json(
+            status: 200,
+            data: new ProjectResource($project)
+        );
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
