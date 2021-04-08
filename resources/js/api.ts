@@ -82,7 +82,7 @@ let API = {
          */
         like: function(post: Post) {
             const url = `${this.url}/${post.id}/like`;
-            return fetchResource('put', url);
+            return fetchResource<Post>('put', url);
         },
         /**
          * Unike a post
@@ -90,7 +90,7 @@ let API = {
          */
         unlike: function(post: Post) {
             const url = `${this.url}/${post.id}/unlike`;
-            return fetchResource('put', url);
+            return fetchResource<Post>('put', url);
         },
     },
     /**
