@@ -148,6 +148,16 @@ let API = {
             const url = `${this.url}/${userId}`;
             return fetchResource<User>('get', url);
         }
+    },
+    Badge: {
+        /**
+         * Base badge requests url
+         */
+        url: '/badges',
+        search: function(query: string) {
+            const url = `${this.url}/search?query=${query}`;
+            return fetchResource<Array<Badge>>('get', url);
+        }
     }
 };
 
