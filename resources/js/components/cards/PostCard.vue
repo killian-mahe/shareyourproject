@@ -10,14 +10,6 @@
                     <span class="text-xs font-light leading-tight">{{timeSinceCreation}}</span>
                 </div>
             </div>
-
-            <span class="my-auto relative" @click="on_options = !on_options" v-click-outside="onClickOutSideOptions">
-                <svg class="feather feather-more-vertical h-7 w-7 bg-cultured-100 hover:bg-onyx-100 ease-in-out duration-150 p-1 rounded-full cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-
-                <ul class="dropdown-menu right-0" v-if="on_options">
-                    <li class="dropdown-item cursor-pointer" @click="on_send = true">Send</li>
-                </ul>
-            </span>
         </div>
         <div v-else class="card-title justify-between">
             <div class="flex items-center">
@@ -30,14 +22,6 @@
                     <span class="text-xs font-light leading-tight">{{ post_data.author.title }}</span>
                 </div>
             </div>
-
-            <span class="my-auto relative" @click="on_options = !on_options" v-click-outside="onClickOutSideOptions">
-                <svg class="feather feather-more-vertical h-7 w-7 bg-cultured-100 hover:bg-onyx-100 ease-in-out duration-150 p-1 rounded-full cursor-pointer" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-
-                <ul class="dropdown-menu right-0" v-if="on_options">
-                    <li class="dropdown-item cursor-pointer" @click="on_send = true">Send</li>
-                </ul>
-            </span>
         </div>
 
         <div class="card-body sm:px-0 md:text-lg pt-2">
@@ -49,7 +33,7 @@
                 <TagLabel v-for="tag in post_data.tags" :key="'tag_'+tag.name" :label="tag.name" link="#"></TagLabel>
             </div>
 
-            <div v-if="post_data.images_url.length > 0" @click="open_modal = true">
+            <div v-if="post_data.images_url.length > 0">
                 <div v-if="post_data.images_url.length == 1" class="h-1/2">
                     <img :src="post_data.images_url[0]" class="w-full object-cover h-120 cursor-pointer" alt="">
                 </div>
@@ -113,9 +97,12 @@ import { mapGetters } from 'vuex'
 import { API } from '../../api';
 import lottie, { AnimationItem } from 'lottie-web';
 import { Post } from '../../models'
+import TagLabel from '../utils/TagLabel.vue'
 
 export default defineComponent({
-
+    components:{
+        TagLabel
+    },
     directives: {
         clickOutside: vClickOutside
     },

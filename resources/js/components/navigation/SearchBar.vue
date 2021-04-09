@@ -15,7 +15,11 @@
                 <div v-if="users.length > 0">
                     <span class="leading-4 font-medium">Users</span>
                     <hr class="mb-1">
-                    <router-link :to="{ name: 'profile', params: { id: user.id }}" v-for="user in users" :key="'user_'+user.id" class="flex justify-between p-2 w-full rounded hover:bg-gray-200 cursor-pointer">
+                    <router-link
+                        :to="{ name: 'profile', params: { id: user.id }}"
+                        v-for="user in users" :key="'user_'+user.id"
+                        @click="reset"
+                        class="flex justify-between p-2 w-full rounded hover:bg-gray-200 cursor-pointer">
                         <span class="flex items-center">
                             <img :src="user.profile_picture" alt="profile_picture" class="w-8 h-8 rounded-full mr-2">
                             <span class="leading-4">{{ user.first_name }} {{ user.last_name }}</span>
@@ -28,13 +32,17 @@
                 <div v-if="projects.length > 0">
                     <span class="leading-4 font-medium">Projects</span>
                     <hr class="mb-1">
-                    <a v-for="project in projects" :key="'project_'+project.id" class="flex justify-between p-2 w-full rounded hover:bg-gray-200 cursor-pointer">
+                    <router-link
+                        :to="{name: 'project', params:{id: project.id}}"
+                        v-for="project in projects" :key="'project_'+project.id"
+                        @click="reset"
+                        class="flex justify-between p-2 w-full rounded hover:bg-gray-200 cursor-pointer">
                         <span class="flex items-center">
                             <img :src="project.profile_picture" alt="project_picture" class="w-8 h-8 rounded-full mr-2">
                             <span class="leading-4">{{ project.name }}</span>
                         </span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>
-                    </a>
+                    </router-link>
                 </div>
 
 
@@ -72,10 +80,16 @@ export default defineComponent({
         }
     },
     methods: {
-        onClickOutside: function () {
+        onClickOutside(): void {
             this.focus = false;
         },
-        refreshLists: function() {
+        reset(): void {
+            this.focus = false;
+            this.projects = [];
+            this.users = [];
+            this.searchQuery = "";
+        },
+        refreshLists(): void {
             if (this.timer) clearTimeout(this.timer);
 
             this.timer = setTimeout(() => {

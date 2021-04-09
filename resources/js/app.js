@@ -20,7 +20,9 @@ import { createApp } from 'vue'
 import router from './router'
 import store from './store'
 import App from './views/AppView'
+import NProgress from 'nprogress'
 
+NProgress.configure({ showSpinner: false });
 
 const app = createApp(App)
 

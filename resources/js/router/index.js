@@ -7,6 +7,7 @@ import ProjectView from '../views/project/ProjectView.vue'
 import MembersView from '../views/project/MembersView.vue'
 import CreateView from '../views/project/CreateView.vue'
 import store from '../store'
+import NProgress from 'nprogress'
 
 const routes = [
     {
@@ -103,6 +104,17 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
+});
+
+router.beforeResolve((to, from, next) => {
+    if (to.path) {
+        NProgress.start()
+    }
+    next()
+});
+
+router.afterEach((to, from, next) => {
+    setTimeout(() => NProgress.done(), 500);
 });
 
 export default router;
