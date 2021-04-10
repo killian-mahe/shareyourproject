@@ -2,22 +2,27 @@
     <div v-if="post_data !== undefined" class="card md:rounded-lg">
         <div v-if="post_data.project" class="card-title justify-between">
             <div class="flex items-center">
-                <a :href="post_data.project.url.index" class="w-auto inline-grid">
+                <router-link
+                    :to="{name:'project', params:{id: post_data.project.id}}" class="w-auto inline-grid">
+
                     <img class="rounded-full my-auto h-12 w-12 object-cover hover:shadow-md" :src="post_data.project.profile_picture"/>
-                </a>
+                </router-link>
                 <div class="flex flex-col ml-3 justify-start">
-                    <a class="font-semibold leading-tight" :href="post_data.project.url.index">{{ post_data.project.name}}</a>
+                    <router-link class="font-semibold leading-tight"
+                    :to="{name:'project', params:{id: post_data.project.id}}">{{ post_data.project.name}}</router-link>
+
                     <span class="text-xs font-light leading-tight">{{timeSinceCreation}}</span>
                 </div>
             </div>
         </div>
         <div v-else class="card-title justify-between">
             <div class="flex items-center">
-                <a :href="post_data.url.author" class="w-auto inline-grid">
+                <router-link :to="{name:'profile', params:{id: post_data.author.id}}" class="w-auto inline-grid">
                     <img class="rounded-full my-auto h-12 w-12 object-cover hover:shadow-md" :src="post_data.author.profile_picture"/>
-                </a>
+                </router-link>
                 <div class="flex flex-col ml-3 justify-start">
-                    <a class="font-semibold leading-tight" :href="post_data.url.author">{{ post_data.author.first_name }} {{post_data.author.last_name}}</a>
+                    <router-link class="font-semibold leading-tight"
+                        :to="{name:'profile', params:{id: post_data.author.id}}">{{ post_data.author.first_name }} {{post_data.author.last_name}}</router-link>
                     <span class="text-xs font-light leading-tight">{{timeSinceCreation}}</span>
                     <span class="text-xs font-light leading-tight">{{ post_data.author.title }}</span>
                 </div>
@@ -61,7 +66,8 @@
         <div class="card-footer">
             <div class="card-link">
                 <!-- Unlike -->
-                <span @click="like(!post_data.liked)" class="cursor-pointer fill-current flex items-center w-10 h-10">
+                <span @click="like(!post_data.liked)" class="cursor-pointer fill-current flex items-center w-10 h-10"
+                    :class="{'cursor-pointer':isAuthenticated, 'cursor-not-allowed': !isAuthenticated}">
                     <span ref="likeIcon"></span>
                     <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="true" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> -->
                     <span class="ml-1 hidden md:inline text-sm font-medium" :class="{'text-red-600': post_data.liked}">{{post_data.stats.like}}</span>
@@ -132,9 +138,9 @@ export default defineComponent({
             return moment(this.post_data.created_at).fromNow();
         },
         ...mapGetters({
-        user: 'user',
-        isAuthenticated : 'isAuthenticated'
-    })
+            user: 'user',
+            isAuthenticated : 'isAuthenticated'
+        })
     },
     methods: {
         onClickOutSideOptions()  {
