@@ -6,7 +6,7 @@
         class="text-2xl font-semibold text-gray-800 mt-5 pl-5 md:pl-0">
             Bonjour {{user.first_name}} {{user.last_name}} !
         </div>
-        <PostCard class="my-6 shadow-sm" v-for="post in posts" :key="'post_' + post.id" :post="post"></PostCard>
+        <PostCard class="my-6 shadow-md" v-for="post in posts" :key="'post_' + post.id" :post="post"></PostCard>
 
     </div>
 

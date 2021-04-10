@@ -127,6 +127,10 @@ let API = {
         get: function(projectId: number) {
             const url = `${this.url}/${projectId}`;
             return fetchResource<Project>('get', url);
+        },
+        posts: function(project: Project, page: number = 1) {
+            const url = `${this.url}/${project.id}/posts?page=${page}`;
+            return fetchResource<PaginateResponse<Post>>('get', url);
         }
     },
     User: {
@@ -161,4 +165,4 @@ let API = {
     }
 };
 
-export { API };
+export { API, fetchResource };

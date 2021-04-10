@@ -6,6 +6,7 @@ import ProfileView from '../views/user/ProfileView.vue'
 import ProjectView from '../views/project/ProjectView.vue'
 import MembersView from '../views/project/MembersView.vue'
 import CreateView from '../views/project/CreateView.vue'
+import PostsView from '../views/project/PostsView.vue'
 import store from '../store'
 import NProgress from 'nprogress'
 
@@ -65,12 +66,16 @@ const routes = [
 
     {
         path: '/project/:id',
-        name: 'project',
         component: ProjectView,
         meta: {
             requiresAuth: false
         },
         children: [
+            {
+                path: '',
+                name: 'project',
+                component: PostsView
+            },
             {
                 path: 'members',
                 name: 'project.members',

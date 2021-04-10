@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostCollection;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Project;
@@ -110,5 +111,13 @@ class ProjectController extends Controller
             data: ProjectResource::collection($projects),
             status: 200
         );
+    }
+
+    /**
+     * Get the posts of the project
+     */
+    public function posts(Request $request, Project $project)
+    {
+        return new PostCollection($project->posts()->paginate(5));
     }
 }

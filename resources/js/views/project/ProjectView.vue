@@ -49,14 +49,15 @@
 import { defineComponent } from 'vue'
 import { mapGetters } from 'vuex'
 import { API } from '../../api'
-import { Project, User } from '../../models'
+import { Project, User, Post } from '../../models'
 import moment from 'moment';
 
 export default defineComponent({
     data() {
         return {
             project: undefined as unknown as Project,
-            owner: undefined as unknown as User
+            owner: undefined as unknown as User,
+            posts: new Array<Post>()
         }
     },
     beforeRouteEnter(to, from, next) {
