@@ -19010,7 +19010,7 @@ var _hoisted_22 = {
 
 var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "card-link"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Comments "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "hover:text-orange-peel-400 cursor-pointer"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
@@ -19079,7 +19079,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_TagLabel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TagLabel");
 
-  return _ctx.post_data !== undefined ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_ctx.post_data.project ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_ctx.post_data !== undefined ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Title "), _ctx.post_data.project ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
       name: 'project',
       params: {
@@ -19167,7 +19167,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.post_data.author.title), 1
   /* TEXT */
-  )])])])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  )])])])), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Body "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
     "class": "leading-5 text-sm lg:text-base font-normal text-onyx-600 md:px-4",
     innerHTML: _ctx.post_data.formated_content
   }, null, 8
@@ -19220,7 +19220,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["src"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" post_data stats "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Comments "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.post_data.stats.comments) + " comments", 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Card footer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Unlike "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Card footer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Like "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.like(!_ctx.post_data.liked);
     }),
@@ -19243,7 +19243,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return _ctx.share();
     })
-  }, [_hoisted_25, _hoisted_26])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" delete post_data creation "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" we need title | body | footer (like, comment share) not more ")])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+  }, [_hoisted_25, _hoisted_26])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"displayComments && !reshared_post\" class=\"p-5 mb-2 border-t-0.0625 border-onyx-100 space-y-3\">\r\n        <div v-if=\"auth_user != null\" class=\"flex relative items-start\">\r\n            <img :src=\"auth_user.profile_picture\" class=\"h-10 w-10 rounded-full mr-3\" alt=\"profile_picture\">\r\n            <text-area class=\"w-full\" child_class=\"w-full pr-10 overflow-y-hidden resize-none\" placeholder=\"Write a comment...\" @send=\"writeComment\" v-model=\"newCommentContent\" :rows=\"1\"></text-area>\r\n            <svg class=\"feather feather-send absolute right-4 top-3 cursor-pointer\" @click=\"writeComment\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"22\" y1=\"2\" x2=\"11\" y2=\"13\"></line><polygon points=\"22 2 15 22 11 13 2 9 22 2\"></polygon></svg>\r\n        </div>\r\n        <comment-component v-for=\"comment in orderedComments\" :key=\"comment.id\" :comment=\"comment\" class=\"mt-2\"></comment-component>\r\n        <button v-if=\"comments_to_load.length > 0\" class=\"font-sans font-medium text-sm cursor-pointer text-onyx-500 hover:text-onyx-700\" @click=\"addComments\">Load more comments</button>\r\n        <div v-show=\"loadingComments\" class=\"h-10 mb-3\" ref=\"loader\"></div>\r\n    </div> ")], 2112
+  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -20556,7 +20558,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
 
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_search_bar, {
     "class": "w-1/4"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @auth\n\n        <div class=\"my-auto flex space-x-6 items-center\">\n            <notification-view\n                :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'\n                :projects='@json(Auth::user()->projects->pluck('id'))'\n                :initial_notifications='@json(Auth::user()->notifications->take(5)->pluck('data'))'\n                ></notification-view>\n            <personal-menu :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'></personal-menu>\n        </div>\n\n        @else "), !_ctx.isAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @auth\r\n\r\n        <div class=\"my-auto flex space-x-6 items-center\">\r\n            <notification-view\r\n                :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'\r\n                :projects='@json(Auth::user()->projects->pluck('id'))'\r\n                :initial_notifications='@json(Auth::user()->notifications->take(5)->pluck('data'))'\r\n                ></notification-view>\r\n            <personal-menu :auth_user='@json(new \\App\\Http\\Resources\\User(Auth::user()))'></personal-menu>\r\n        </div>\r\n\r\n        @else "), !_ctx.isAuthenticated ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
       name: 'register'
     },
@@ -21453,7 +21455,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     })
   }, null, 8
   /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @php\n                    $options = [\n                        ['text' => 'Ongoing', 'value' => 'ongoing'],\n                        ['text' => 'On Break', 'value' => 'onbreak'],\n                        ['text' => 'Finished', 'value' => 'finished'],\n                        ['text' => 'Abandoned', 'value' => 'abandoned'],\n                    ];\n\n                @endphp\n                <tag-select-input class=\"w-full md:w-1/2\" name=\"tags[]\" label=\"Type your Hash-tag(s)\"></tag-select-input> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1 class=\"text-onyx-600 font-sans font-semiboldbold text-left text-lg pb-4 pt-8\">Project Planning</h1>\n            <hr class=\"mb-6\">\n\n            <div class=\"w-full block xl:flex xl:space-x-4\">\n                <div class=\"block md:flex w-full md:space-x-4 xl:w-2/3\">\n                    <custom-input class=\"md:w-1/2 mb-4\" name=\"start_date\" label=\"Start Date\" type=\"date\" error=\"\"></custom-input>\n                    <custom-input class=\"md:w-1/2 mb-4\" name=\"finished_date\" label=\"Due date\" type=\"date\" error=\"\"></custom-input>\n                </div>\n                <select-input class=\"w-1/2 xl:w-1/3 mb-4\" label=\"Project status\" name=\"status\" :options='@json($options)'>\n                    <i class=\"text-onyx-900 my-auto h-4 w-4 cursor-pointer absolute right-3 transform rotate-90\" data-feather=\"code\"></i>\n                </select-input>\n            </div> "), _hoisted_11])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Main ")]), _hoisted_12]);
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @php\r\n                    $options = [\r\n                        ['text' => 'Ongoing', 'value' => 'ongoing'],\r\n                        ['text' => 'On Break', 'value' => 'onbreak'],\r\n                        ['text' => 'Finished', 'value' => 'finished'],\r\n                        ['text' => 'Abandoned', 'value' => 'abandoned'],\r\n                    ];\r\n\r\n                @endphp\r\n                <tag-select-input class=\"w-full md:w-1/2\" name=\"tags[]\" label=\"Type your Hash-tag(s)\"></tag-select-input> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1 class=\"text-onyx-600 font-sans font-semiboldbold text-left text-lg pb-4 pt-8\">Project Planning</h1>\r\n            <hr class=\"mb-6\">\r\n\r\n            <div class=\"w-full block xl:flex xl:space-x-4\">\r\n                <div class=\"block md:flex w-full md:space-x-4 xl:w-2/3\">\r\n                    <custom-input class=\"md:w-1/2 mb-4\" name=\"start_date\" label=\"Start Date\" type=\"date\" error=\"\"></custom-input>\r\n                    <custom-input class=\"md:w-1/2 mb-4\" name=\"finished_date\" label=\"Due date\" type=\"date\" error=\"\"></custom-input>\r\n                </div>\r\n                <select-input class=\"w-1/2 xl:w-1/3 mb-4\" label=\"Project status\" name=\"status\" :options='@json($options)'>\r\n                    <i class=\"text-onyx-900 my-auto h-4 w-4 cursor-pointer absolute right-3 transform rotate-90\" data-feather=\"code\"></i>\r\n                </select-input>\r\n            </div> "), _hoisted_11])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Main ")]), _hoisted_12]);
 });
 
 /***/ }),
@@ -22031,7 +22033,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".nav-link svg[data-v-1752aeb3] {\n  margin-right: 0.25rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".nav-link svg[data-v-1752aeb3] {\n  margin-right: 0.25rem;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22055,7 +22057,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".nav-link svg[data-v-03ad53b5] {\n  margin-right: 0.25rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".nav-link svg[data-v-03ad53b5] {\n  margin-right: 0.25rem;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22079,7 +22081,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".nav-link svg[data-v-b1381112] {\n  margin-right: 0.25rem;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".nav-link svg[data-v-b1381112] {\n  margin-right: 0.25rem;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22103,7 +22105,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".badge[data-v-119057cc] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(179, 184, 186, var(--tw-bg-opacity));\n  border-radius: 9999px;\n  font-weight: 600;\n  font-size: 0.75rem;\n  line-height: 1rem;\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n  padding-bottom: 0.25rem;\n  padding-top: 0.0625rem;\n  text-transform: lowercase;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".badge[data-v-119057cc] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(179, 184, 186, var(--tw-bg-opacity));\n  border-radius: 9999px;\n  font-weight: 600;\n  font-size: 0.75rem;\n  line-height: 1rem;\n  padding-left: 0.5rem;\n  padding-right: 0.5rem;\n  padding-bottom: 0.25rem;\n  padding-top: 0.0625rem;\n  text-transform: lowercase;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
