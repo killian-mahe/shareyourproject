@@ -26,13 +26,14 @@ class User extends JsonResource
             'last_name' => $this->last_name,
             'full_name' => $this->fullname,
             'url' => [
-                'index' => route('users.show', ['user'=>$this->id]),
-                'settings' => route('users.settings.profile', ['user'=>$this->id])
+                // 'index' => route('users.show', ['user'=>$this->id]),
+                // 'settings' => route('users.settings.profile', ['user'=>$this->id])
             ],
             'profile_picture' => $this->profile_picture(),
             'banner_picture' => $this->banner_picture(),
             'owned_projects' => Project::collection($this->owned_project),
-            'followed_projects' => $this->followed_projects->pluck('id')
+            'followed_projects' => $this->followed_projects->pluck('id'),
+            'projects' => Project::collection($this->projects)
         ];
     }
 }

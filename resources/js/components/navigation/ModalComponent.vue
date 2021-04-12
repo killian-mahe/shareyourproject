@@ -28,10 +28,11 @@
     </div>
 </template>
 
-<script>
-import vClickOutside from 'v-click-outside';
+<script lang="ts">
+import { defineComponent } from 'vue'
+const vClickOutside = require('v-click-outside');
 
-export default {
+export default defineComponent({
     directives: {
         clickOutside: vClickOutside.directive
     },
@@ -47,13 +48,13 @@ export default {
     },
     mounted() {
         let body = document.getElementsByTagName("body").item(0);
-        body.classList.add('overflow-hidden');
-        body.classList.remove('overflow-auto');
+        body?.classList.add('overflow-hidden');
+        body?.classList.remove('overflow-auto');
     },
     beforeDestroy() {
         let body = document.getElementsByTagName("body").item(0);
-        body.classList.add('overflow-auto');
-        body.classList.remove('overflow-hidden');
+        body?.classList.add('overflow-auto');
+        body?.classList.remove('overflow-hidden');
     },
     computed: {
         containerWidth: function() {
@@ -80,5 +81,5 @@ export default {
             this.$emit('close');
         }
     }
-}
+})
 </script>

@@ -15,7 +15,7 @@ class CommentController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //
     }
 
     /**
@@ -36,7 +36,7 @@ class CommentController extends Controller
         $comment->author()->associate(Auth::user());
 
         Post::find($validatedData['post_id'])->comments()->save($comment);
-        
+
         return new CommentResource($comment);
     }
 

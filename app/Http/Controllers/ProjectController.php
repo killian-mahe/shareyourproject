@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostCollection;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Project;
+use App\Http\Resources\Project as ProjectResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,29 +17,20 @@ class ProjectController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except([
-            'index', 'show'
-        ]);
+        //
     }
 
     /**
-     * Display a listing of the resource.
-     *
+     * Get a project
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function get(Request $request, Project $project)
     {
-        return view('project.list');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('project.create');
+        return response()->json(
+            status: 200,
+            data: new ProjectResource($project)
+        );
     }
 
     /**
@@ -96,40 +89,6 @@ class ProjectController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Project $project)
-    {
-        return view('project.public', ['project' => $project]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Project $project)
-    {
-        return view('project.edit', ['project' => $project]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Project $project)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Project  $project
@@ -141,24 +100,24 @@ class ProjectController extends Controller
     }
 
     /**
-     * Display project members list.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * Search a list of project
      */
-    public function members(Project $project)
+    public function search(Request $request)
     {
-        return view('project.members', ['project'=>$project]);
+        $query = $request->query('query');
+        $projects = Project::where('name', 'like', '%'.$query.'%')
+                            ->limit(3)->get();
+        return response()->json(
+            data: ProjectResource::collection($projects),
+            status: 200
+        );
     }
 
     /**
-     * Display project About description.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * Get the posts of the project
      */
-    public function about(Project $project)
+    public function posts(Request $request, Project $project)
     {
-        return view('project.about', ['project'=>$project]);
+        return new PostCollection($project->posts()->paginate(5));
     }
 }

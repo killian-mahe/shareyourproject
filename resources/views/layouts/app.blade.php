@@ -27,7 +27,7 @@
 <body class="bg-cultured-600">
     <div id="app">
         {{-- Laptop NavBar --}}
-        <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50 fixed h-16">
+        {{-- <nav class="w-full shadow bg-cultured-100 nav-bar hidden lg:flex z-50 fixed h-16">
             <div class="flex justify-around w-full ">
               <a href="{{route('home')}}"><img class="m-2 " src="{{asset('vendor/courier/logos/svg/fit/Logo_viridiant_fit.svg')}}" width="90px" height="90px"></a>
               <ul class="my-auto hidden lg:flex space-x-4">
@@ -61,19 +61,19 @@
             @endauth
 
             </div>
-        </nav>
+        </nav> --}}
 
         {{-- Tablet Nav-Bar --}}
-        <tablet-nav-bar class="hidden sm:block lg:hidden" home_link="{{route('home')}}" logo_text="{{asset('vendor/courier/logos/svg/text/Logo_viridiant_text.svg')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}" @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></tablet-nav-bar>
+        {{-- <tablet-nav-bar class="hidden sm:block lg:hidden" home_link="{{route('home')}}" logo_text="{{asset('vendor/courier/logos/svg/text/Logo_viridiant_text.svg')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}" @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></tablet-nav-bar> --}}
 
         {{-- Mobile Nav-Bar --}}
-        <mobile-nav-bar class="block sm:hidden" home_link="{{route('home')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}" @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></mobile-nav-bar>
+        {{-- <mobile-nav-bar class="block sm:hidden" home_link="{{route('home')}}" logo_simple="{{asset('vendor/courier/logos/svg/simple/Logo_viridiant_simple.svg')}}" @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></mobile-nav-bar> --}}
 
 
-        <main class="sm:ml-16 lg:ml-0 lg:pt-16">
+        {{-- <main class="sm:ml-16 lg:ml-0 lg:pt-16">
 
             @yield('content')
-        </main>
+        </main> --}}
     </div>
 </body>
 <script src="{{asset('js/jquery-3.5.1.slim.min.js')}}"></script>

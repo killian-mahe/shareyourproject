@@ -1,20 +1,22 @@
 <template>
-    <span @click="$emit('click')" class="tag"><a v-bind:href="link">#{{label}}</a></span>
+    <span @click="$emit('click')" class="tag">#{{label}}</span>
 </template>
 
-<script>
-    export default {
-        props: {
-            label: {
-                type: String,
-                required: true
-            },
-            link: {
-                type: String,
-                required: true
-            }
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+    props: {
+        label: {
+            type: String,
+            required: true
+        },
+        link: {
+            type: String,
+            required: true
         }
     }
+})
 </script>
 
 <style scoped>

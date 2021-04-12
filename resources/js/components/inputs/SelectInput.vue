@@ -12,15 +12,26 @@
     </div>
 </template>
 
-<script>
-    import InputLabel from './InputLabel.vue';
-    export default {
-        props: {
-            'label': String,
-            'options': Array,
-            'name': String
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+    props: {
+        label: {
+            type: String,
+            default: "",
         },
-        mounted() {
-        }
+        options: {
+            type: Array,
+            default : [],
+        },
+        name: {
+            type: String,
+            default: "",
+        },
+    },
+    mounted() {
     }
+})
 </script>
+

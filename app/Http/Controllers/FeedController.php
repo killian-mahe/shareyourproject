@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Resources\Post as PostResource;
+use App\Http\Resources\PostCollection;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -23,51 +23,37 @@ class FeedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function get(Request $request)
     {
         $posts = new Collection();
-        if (Auth::user()) {
-            $followed_projects = Auth::user()->followed_projects;
-            foreach ($followed_projects as $project) {
-                $posts = $posts->merge($project->posts()->latest()->limit(3)->get());
-            }
+        if (Auth::user())
+        {
+            $posts = $this->getWithAuth($request);
         } else {
-            $posts = $posts->merge(Post::all()->random(10));
+            $posts = $this->getWithoutAuth($request);
         }
 
-        return view('feed', ['posts' => $posts->sortByDesc('created_at')]);
+        return new PostCollection($posts);
     }
 
     /**
-     * Loading more posts
-     *
-     * @param \Illuminate\Http\Request $request
+     * @return Illuminate\Support\Collection
      */
-    public function load(Request $request)
+    protected function getWithAuth(Request $request)
     {
-        $validatedData = $request->validate([
-            'except' => ['array', 'nullable'],
-        ]);
+        $project_ids = $request->user()->followed_projects->pluck('id');
 
-        $posts = new Collection();
+        $posts = Post::whereIn('project_id', $project_ids);
 
-        if ($validatedData['except'] != NULL)
-        {
-            if (Auth::user()) {
+        return $posts->paginate(5);
+    }
 
-                $followed_projects = Auth::user()->followed_projects;
-                foreach ($followed_projects as $project) {
-                    $posts = $posts->merge($project->posts()->whereNotIn('id', $validatedData['except'])->latest()->limit(3)->get());
-                }
-
-            }
-        }
-
-        if ($posts->count() > 0) {
-            return response()->json(PostResource::collection($posts->sortByDesc('created_at')), 200);
-        } else {
-            return response([], 204);
-        }
+    /**
+     * @return Illuminate\Support\Collection
+     */
+    protected function getWithoutAuth(Request $request)
+    {
+        return Post::paginate(5);
     }
 
 }

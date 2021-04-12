@@ -17,41 +17,21 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except([
-            'index', 'show', 'search'
-        ]);
+
     }
 
     /**
-     * Display a listing of the resource.
-     *
+     * Get the user
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function get(Request $request, User $user)
     {
-        return view('user.list');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        return view('user.user', ['user' => $user]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        return view('user.edit.profile', ['user' => $user]);
+        return response()->json(
+            status: 200,
+            data: new UserResource($user)
+        );
     }
 
     /**
@@ -155,14 +135,15 @@ class UserController extends Controller
      * @param String $string
      * @return \App\Http\Resource\User
      */
-    public function search(Request $request, String $query)
+    public function search(Request $request)
     {
+        $query = $request->query('query');
         $users = User::where('first_name', 'like', '%'.$query.'%')
-                                ->orWhere('last_name', 'like', '%'.$query.'%')
-                                ->orWhere('username', 'like', '%'.$query.'%')
-                                ->orWhereRaw(
-                                    "concat(first_name, ' ', last_name) like '%" . $query . "%' "
-                                )->limit(5)->get();
+                    ->orWhere('last_name', 'like', '%'.$query.'%')
+                    ->orWhere('username', 'like', '%'.$query.'%')
+                    ->orWhereRaw(
+                        "concat(first_name, ' ', last_name) like '%" . $query . "%' "
+                    )->limit(3)->get();
 
         return response()->json(UserResource::collection($users), 200);
     }

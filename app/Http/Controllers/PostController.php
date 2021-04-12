@@ -19,33 +19,10 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except([
-            'index', 'show', 'store'
-        ]);
 
         $this->middleware('auth:api')->only([
             'store'
         ]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('post.list');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('post.create');
     }
 
     /**
@@ -105,40 +82,6 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        return view('post.post', ['post' => $post]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        return view('post.edit', ['post' => $post]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Post  $post
@@ -147,5 +90,35 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    /**
+     * Like the post
+     * @param \App\Models\Post $post
+     * @return \Illuminate\Http\Response
+     */
+    public function like(Post $post)
+    {
+        $post->like(Auth::user());
+
+        return response()->json(
+            data: new PostResource($post),
+            status: 200
+        );
+    }
+
+    /**
+     * Unlike the post
+     * @param \App\Models\Post $post
+     * @return \Illuminate\Http\Response
+     */
+    public function unlike(Post $post)
+    {
+        $post->unlike(Auth::user());
+
+        return response()->json(
+            data: new PostResource($post),
+            status: 200
+        );
     }
 }

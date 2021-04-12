@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,80 +20,71 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 
 Route::get('/', function () {
-    return redirect()->route('home');
-});
+    return view('app');
+})->name('home');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/email/verify', function () {
-    return view('auth.verify');
-})->middleware(['auth'])->name('verification.notice');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+// Route::get('/email/verify', function () {
+//     return view('auth.verify');
+// })->middleware(['auth'])->name('verification.notice');
 
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
 
-    return back()->with('status', 'verification-link-sent');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+//     return redirect()->route('home');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
 
-Route::get('/home', 'FeedController@index')->name('home');
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
 
-Route::resource('posts', 'PostController');
+//     return back()->with('status', 'verification-link-sent');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-Route::resource('projects', 'ProjectController');
 
-Route::resource('users', 'UserController')->except([
-    'create', 'store', 'edit', 'update'
-]);
+// Route::name('users.settings.')->prefix('users')->group(function () {
+//     Route::get('{user}/settings/profile', function(User $user) {
+//         return view('user.edit.profile', ['user' => $user]);
+//     })->name('profile');
 
-Route::resource('comments', 'CommentController')->only([
-    'store', 'update', 'destroy'
-]);
+//     Route::get('{user}/settings/account', function(User $user) {
+//         return view('user.edit.account', ['user' => $user]);
+//     })->name('account');
 
-Route::name('users.settings.')->prefix('users')->group(function () {
-    Route::get('{user}/settings/profile', function(User $user) {
-        return view('user.edit.profile', ['user' => $user]);
-    })->name('profile');
+//     Route::get('{user}/settings/notif', function(User $user) {
+//         return view('user.edit.notif', ['user' => $user]);
+//     })->name('notif');
 
-    Route::get('{user}/settings/account', function(User $user) {
-        return view('user.edit.account', ['user' => $user]);
-    })->name('account');
+//     Route::put('{user}/settings/profile', 'UserController@updateProfile');
+//     Route::put('{user}/settings/account', 'UserController@updateAccount');
+//     Route::put('{user}/settings/notif', 'UserController@updateNotif');
+// });
 
-    Route::get('{user}/settings/notif', function(User $user) {
-        return view('user.edit.notif', ['user' => $user]);
-    })->name('notif');
+// Route::name('projects.')->prefix('projects')->group(function () {
+//     Route::get('{project}/members', 'ProjectController@members')->name('members');
+//     Route::get('{project}/about', 'ProjectController@about')->name('about');
+// });
 
-    Route::put('{user}/settings/profile', 'UserController@updateProfile');
-    Route::put('{user}/settings/account', 'UserController@updateAccount');
-    Route::put('{user}/settings/notif', 'UserController@updateNotif');
-});
+// Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin', 'verified'])->group(function() {
 
-Route::name('projects.')->prefix('projects')->group(function () {
-    Route::get('{project}/members', 'ProjectController@members')->name('members');
-    Route::get('{project}/about', 'ProjectController@about')->name('about');
-});
+//     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
 
-Route::name('admin.')->prefix('admin')->middleware(['auth', 'admin', 'verified'])->group(function() {
+//     Route::name('models.')->prefix('models')->group(function() {
 
-    Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
+//         Route::get('projects', 'AdminController@projects')->name('projects');
 
-    Route::name('models.')->prefix('models')->group(function() {
+//         Route::get('posts', 'AdminController@posts')->name('posts');
 
-        Route::get('projects', 'AdminController@projects')->name('projects');
+//         Route::get('users', 'AdminController@users')->name('users');
 
-        Route::get('posts', 'AdminController@posts')->name('posts');
+//         Route::get('tags', 'AdminController@tags')->name('tags');
 
-        Route::get('users', 'AdminController@users')->name('users');
+//         Route::get('technologies', 'AdminController@technologies')->name('technologies');
 
-        Route::get('tags', 'AdminController@tags')->name('tags');
+//     });
 
-        Route::get('technologies', 'AdminController@technologies')->name('technologies');
-
-    });
-
-});
+// });

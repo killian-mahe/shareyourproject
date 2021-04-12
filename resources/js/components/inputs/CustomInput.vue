@@ -11,9 +11,9 @@
                     :id="name"
                     :type="type"
                     :placeholder="placeholder"
-                    :value="value"
+                    :value="modelValue"
                     :autocomplete="_autocmoplete"
-                    v-on:input="$emit('input', $event.target.value)">
+                    @input="onInput">
             <i v-if="icon !== '' && right == false"
                 :data-feather="icon"
                 class="absolute left-3 block"></i>
@@ -28,64 +28,72 @@
     </div>
 </template>
 
-<script>
-    import InputLabel from './InputLabel.vue';
-    export default {
-        components: {
-            InputLabel,
+<script lang="ts">
+import { defineComponent } from 'vue'
+import InputLabel from './InputLabel.vue';
+
+export default defineComponent({
+    components: {
+        InputLabel,
+    },
+    emits: ['update:modelValue'],
+    props: {
+        label: {
+            type: String,
+            default: ""
         },
-        props: {
-            label: {
-                type: String,
-                default: ""
-            },
-            type: {
-                type: String,
-                default: ""
-            },
-            placeholder: {
-                type: String,
-                default: ""
-            },
-            error: {
-                type: String,
-                default: ""
-            },
-            indication: {
-                type: String,
-                default: ""
-            },
-            name: {
-                type: String,
-                default: ""
-            },
-            value: {
-                type: String,
-                default: ""
-            },
-            icon: {
-                type: String,
-                default: ""
-            },
-            right: {
-                type: Boolean,
-                default: false
-            },
-            autocomplete: {
-                type: Boolean,
-                default : false
+
+        type: {
+            type: String,
+            default: ""
+        },
+        placeholder: {
+            type: String,
+            default: ""
+        },
+        error: {
+            type: String,
+            default: ""
+        },
+        indication: {
+            type: String,
+            default: ""
+        },
+        name: {
+            type: String,
+            default: ""
+        },
+        modelValue: {
+            type: String,
+            default: ""
+        },
+        icon: {
+            type: String,
+            default: ""
+        },
+        right: {
+            type: Boolean,
+            default: false
+        },
+        autocomplete: {
+            type: Boolean,
+            default : false
+        }
+    },
+    mounted() {
+    },
+    computed: {
+        _autocmoplete: function() {
+            if (this.autocomplete) {
+                return "on";
             }
-        },
-        mounted() {
-            feather.replace();
-        },
-        computed: {
-            _autocmoplete: function() {
-                if (this.autocomplete) {
-                    return "on";
-                }
-                return "off";
-            }
+            return "off";
+        }
+    },
+    methods: {
+        onInput(event: InputEvent) {
+            this.$emit('update:modelValue', (event.target as HTMLInputElement).value)
         }
     }
+})
 </script>

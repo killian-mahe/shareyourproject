@@ -22,15 +22,15 @@ class Project extends JsonResource
             'public' => $this->is_public,
             'owner_id' => $this->owner_id,
             'url' => [
-                'index' => route('projects.show', ['project'=>$this->id]),
-                'members' => route('projects.members', ['project'=>$this->id]),
-                'description' => route('projects.about', ['project'=>$this->id]),
+                // 'index' => route('projects.show', ['project'=>$this->id]),
+                // 'members' => route('projects.members', ['project'=>$this->id]),
+                // 'description' => route('projects.about', ['project'=>$this->id]),
             ],
             'technologies' => $this->technologies,
-            'members_ids' => $this->members->pluck('id'),
+            'member_ids' => $this->members->pluck('id'),
             'profile_picture' => $this->profile_picture(),
             'banner_picture' => $this->banner_picture(),
-            'created_ad' => $this->created_at,
+            'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
     }

@@ -2,43 +2,41 @@
     "private": true,
     "scripts": {
         "dev": "npm run development",
-        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "watch": "npm run development -- --watch",
-        "watch-poll": "npm run watch -- --watch-poll",
-        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "development": "npx mix",
+        "watch": "npx mix watch",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "production": "npx mix -p"
     },
     "devDependencies": {
-        "axios": "^0.21",
-        "bootstrap": "^4.6.0",
+        "@vue/compiler-sfc": "^3.0.7",
+        "axios": "^0.21.1",
         "cross-env": "^7.0.3",
-        "jquery": "^3.6.0",
         "laravel-echo": "^1.10.0",
-        "laravel-mix": "^5.0.9",
+        "laravel-mix": "^6.0.13",
         "lodash": "^4.17.21",
         "node-forge": ">=0.10.0",
-        "popper.js": "^1.12",
         "pusher-js": "^7.0.3",
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.32.8",
         "sass-loader": "^8.0.0",
         "stylelint-config-recommended": "^3.0.0",
-        "vue": "^2.6.12",
-        "vue-template-compiler": "^2.6.12"
+        "vue-loader": "^16.1.0"
     },
     "dependencies": {
+        "@types/vue-moment": "^4.0.2",
         "autoprefixer": "^10.2.5",
-        "clamp-js": "^0.7.0",
-        "clamp-js-main": "^0.11.6",
         "feather-icons": "^4.28.0",
         "lottie-web": "^5.7.6",
         "moment": "^2.29.1",
+        "nprogress": "^0.2.0",
         "postcss": "^8.2.8",
         "tailwindcss": "^2.0.4",
-        "v-click-outside": "^3.1.2",
-        "vue-awesome-swiper": "^4.1.1",
-        "vue-clamp": "^0.3.2",
-        "vuex": "^3.6.2"
+        "ts-loader": "^8.0.18",
+        "typescript": "^4.2.3",
+        "vue": "^3.0.8",
+        "vue-feather-icons": "^5.1.0",
+        "vue-router": "^4.0.5",
+        "vue3-click-outside": "github:andymark-by/vue3-click-outside",
+        "vuex": "^4.0.0"
     }
 }

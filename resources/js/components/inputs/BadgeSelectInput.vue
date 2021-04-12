@@ -6,7 +6,7 @@
 
         <!-- Input -->
         <div class="flex items-center relative">
-            <input :class="{'border-red-500': error, 'pr-10': icon && right, 'pl-12': icon && !right, 'rounded-b-lg': selectedBadges.length == 0}"
+            <input :class="{'border-red-500': error, 'rounded-b-lg': selectedBadges.length == 0}"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 focus:border-viridiant-600 border-2 border-gray-200 rounded-t-lg py-3 px-4 leading-tight focus:outline-none focus:bg-white"
                     :placeholder="placeholder"
                     v-model="searchQuery"
@@ -14,12 +14,6 @@
                     @click="focus = true"
                     @input="updateBadgeList"
                     autocomplete="off">
-            <i v-if="icon !== '' && right == false"
-                :data-feather="icon"
-                class="absolute left-3 block"></i>
-            <i v-if="icon !== '' && right == true"
-                :data-feather="icon"
-                class="absolute right-3 block"></i>
         </div>
 
         <!-- Searched badges -->
@@ -50,88 +44,86 @@
     </div>
 </template>
 
-<script>
-    import InputLabel from './InputLabel.vue';
-    import BadgeLabel from '../utils/BadgeLabel.vue';
-    import vClickOutside from 'v-click-outside';
-    import {API} from '../../api';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue'
+import InputLabel from './InputLabel.vue';
+import BadgeLabel from '../utils/BadgeLabel.vue';
+import vClickOutside from '../../click-outside';
+import {API} from '../../api';
+import { Badge } from '../../models';
 
-    export default {
-        components: {
-            InputLabel, BadgeLabel
+export default defineComponent({
+    components: {
+        InputLabel,
+        BadgeLabel
+    },
+    directives: {
+        clickOutside: vClickOutside
+    },
+    data() {
+        return {
+            badges: new Array<Badge>(),
+            selectedBadges: new Array<Badge>(),
+            searchQuery: "",
+            focus: false
+        }
+    },
+    props: {
+        label: {
+            type: String,
+            default: ""
         },
-        directives: {
-            clickOutside: vClickOutside.directive
+        name: {
+            type: String,
+            default: ""
         },
-        data() {
-            return {
-                badges: [],
-                selectedBadges: [],
-                searchQuery: "",
-                focus: false
+        placeholder: {
+            type: String,
+            default: ""
+        },
+        error: {
+            type: String,
+            default: ""
+        },
+        indication: {
+            type: String,
+            default: ""
+        },
+        modelValue: {
+            type: Object as PropType<Array<Badge>>,
+            required: true
+        }
+    },
+    methods: {
+        reset() {
+            this.searchQuery = "";
+            this.badges = [];
+            this.focus = false;
+        },
+        updateBadgeList : function () {
+            if (this.searchQuery === "") { this.badges = []; return; }
+
+            API.Badge.search(this.searchQuery).then(response => {
+                this.badges = response.data;
+            });
+        },
+        addBadge : function (badge: Badge) {
+            if (this.selectedBadges.map(badge => badge.id).includes(badge.id)) return;
+
+            this.selectedBadges.push(badge);
+            this.reset()
+            this.$emit('update:modelValue', this.selectedBadges);
+        },
+        removeBadge : function (badge: Badge) {
+            let index = this.selectedBadges.map(badge => badge.id).indexOf(badge.id);
+            if (index > -1) {
+                this.selectedBadges.splice(index, 1);
+                this.$emit('update:modelValue', this.selectedBadges);
             }
         },
-        props: {
-            label: {
-                type: String,
-                default: ""
-            },
-            name: {
-                type: String,
-                default: ""
-            },
-            placeholder: {
-                type: String,
-                default: ""
-            },
-            error: {
-                type: String,
-                default: ""
-            },
-            indication: {
-                type: String,
-                default: ""
-            },
-            icon: {
-                type: String,
-                default: ""
-            },
-            right: {
-                type: Boolean,
-                default: false
-            },
-            multiple: {
-                type: Boolean
-            }
-        },
-        mounted() {
-            feather.replace();
-        },
-        methods: {
-            updateBadgeList : function () {
-                if (this.searchQuery === "") { this.badges = []; return; }
-
-                API.Badge.search(this.searchQuery)
-                        .then(badges => {
-                            this.badges = badges;
-                        });
-            },
-            addBadge : function (badge) {
-                if (this.selectedBadges.map(badge => badge.id).includes(badge.id)) return;
-
-                this.selectedBadges.push(badge);
-                this.searchQuery="";
-                this.badges = [];
-            },
-            removeBadge : function (badge) {
-                let index = this.selectedBadges.map(badge => badge.id).indexOf(badge.id);
-                if (index > -1) {
-                    this.selectedBadges.splice(index, 1);
-                }
-            },
-            onClickOutside : function () {
-                this.focus = false;
-            }
-        },
-    }
+        onClickOutside : function () {
+            this.focus = false;
+        }
+    },
+})
 </script>
