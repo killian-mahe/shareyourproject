@@ -3,6 +3,7 @@
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Resources\User as UserResource;
@@ -47,12 +48,17 @@ Route::name('user.')->prefix('users')->group(function() {
 
 Route::name('project.')->prefix('projects')->group(function() {
     Route::get('/search', [ProjectController::class, 'search'])->name('search');
-    route::get('/{project}', [ProjectController::class, 'get'])->name('get');
+    Route::get('/{project}', [ProjectController::class, 'get'])->name('get');
     Route::get('/{project}/posts', [ProjectController::class, 'posts'])->name('posts');
+    Route::post('/create', [ProjectController::class, 'create'])->name('create');
 });
 
 Route::name('badge.')->prefix('badges')->group(function() {
     Route::get('/search', [TechnologyController::class, 'search'])->name('search');
+});
+
+Route::name('tag.')->prefix('tags')->group(function() {
+    Route::get('/search', [TagController::class, 'search'])->name('search');
 });
 
 // Route::middleware(['auth:sanctum', 'api'])->group(function () {
