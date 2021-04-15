@@ -17584,8 +17584,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _components_cards_PostCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/cards/PostCard.vue */ "./resources/js/components/cards/PostCard.vue");
+/* harmony import */ var lottie_web__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lottie-web */ "./node_modules/lottie-web/build/player/lottie.js");
+/* harmony import */ var lottie_web__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lottie_web__WEBPACK_IMPORTED_MODULE_2__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -17595,20 +17597,54 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   components: {
     PostCard: _components_cards_PostCard_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)({
     isAuthenticated: 'isAuthenticated',
     user: 'user',
-    posts: 'feedPosts'
+    posts: 'feedPosts',
+    currentFeedPage: 'currentFeedPage',
+    lastFeedPage: 'lastFeedPage'
   })),
-  methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapActions)({
+  data: function data() {
+    return {
+      animation: undefined
+    };
+  },
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapActions)({
     getNewPosts: 'getNewPosts'
-  })),
+  })), {}, {
+    scroll: function scroll() {
+      var _this = this;
+
+      window.onscroll = function () {
+        var bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+        if (bottomOfWindow && _this.currentFeedPage < _this.lastFeedPage) {
+          _this.animation.play();
+
+          _this.getNewPosts();
+
+          setTimeout(function () {
+            return _this.animation.stop();
+          }, 1000);
+        }
+      };
+    }
+  }),
   mounted: function mounted() {
     this.getNewPosts();
+    this.animation = lottie_web__WEBPACK_IMPORTED_MODULE_2___default().loadAnimation({
+      container: this.$refs['loader'],
+      renderer: 'svg',
+      loop: true,
+      autoplay: false,
+      path: '/vendor/courier/lottie/loading.json'
+    });
+    this.scroll();
   }
 }));
 
@@ -18900,14 +18936,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
  // initial state
 
 var state = {
-  nextPage: 1,
-  lastPage: undefined,
+  currentPage: 0,
+  lastPage: 1,
   posts: []
 }; // getters
 
 var getters = {
   feedPosts: function feedPosts(state) {
     return state.posts;
+  },
+  currentFeedPage: function currentFeedPage(state) {
+    return state.currentPage;
+  },
+  lastFeedPage: function lastFeedPage(state) {
+    return state.lastPage;
   }
 }; // actions
 
@@ -18915,12 +18957,13 @@ var actions = {
   getNewPosts: function getNewPosts(_ref) {
     var commit = _ref.commit,
         state = _ref.state;
-    _api__WEBPACK_IMPORTED_MODULE_0__.API.Feed.get(state.nextPage).then(function (response) {
+    if (state.currentPage == state.lastPage) return;
+    _api__WEBPACK_IMPORTED_MODULE_0__.API.Feed.get(state.currentPage + 1).then(function (response) {
       switch (response.status) {
         case 200:
           commit('ADD_POSTS', response.data.data);
           commit('SET_LAST_PAGE', response.data.meta.last_page);
-          commit('INCREMENT_NEXT_PAGE');
+          commit('SET_CURRENT_PAGE', response.data.meta.current_page);
           break;
 
         default:
@@ -18936,11 +18979,8 @@ var mutations = {
 
     (_state$posts = state.posts).push.apply(_state$posts, _toConsumableArray(posts));
   },
-  SET_NEXT_PAGE: function SET_NEXT_PAGE(state, page) {
-    state.nextPage = page > 0 ? page : 0;
-  },
-  INCREMENT_NEXT_PAGE: function INCREMENT_NEXT_PAGE(state) {
-    state.nextPage++;
+  SET_CURRENT_PAGE: function SET_CURRENT_PAGE(state, page) {
+    state.currentPage = page;
   },
   SET_LAST_PAGE: function SET_LAST_PAGE(state, page) {
     state.lastPage = page > 0 ? page : 0;
@@ -21208,6 +21248,12 @@ var _hoisted_2 = {
   key: 0,
   "class": "text-2xl font-semibold text-gray-800 mt-5 pl-5 md:pl-0"
 };
+var _hoisted_3 = {
+  "class": "w-full flex justify-center"
+};
+var _hoisted_4 = {
+  ref: "loader"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_PostCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PostCard");
 
@@ -21223,7 +21269,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["post"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]);
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, null, 512
+  /* NEED_PATCH */
+  )])]);
 }
 
 /***/ }),
