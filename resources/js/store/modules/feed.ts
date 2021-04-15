@@ -16,6 +16,12 @@ type State = typeof state
 const getters = {
     feedPosts(state: State): Array<Post> {
         return state.posts;
+    },
+    currentFeedPage(state: State): number {
+        return state.currentPage
+    },
+    lastFeedPage(state: State): number {
+        return state.lastPage
     }
 }
 

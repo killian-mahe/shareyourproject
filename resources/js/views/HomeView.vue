@@ -8,10 +8,9 @@
         </div>
         <PostCard class="my-6 shadow-md" v-for="post in posts" :key="'post_' + post.id" :post="post"></PostCard>
 
-    </div>
-
-    <div class="w-full flex justify-center">
-        <div ref="loader"></div>
+        <div class="w-full flex justify-center">
+            <div ref="loader"></div>
+        </div>
     </div>
 
 </template>
@@ -29,7 +28,9 @@ export default defineComponent({
         ...mapGetters({
             isAuthenticated: 'isAuthenticated',
             user: 'user',
-            posts: 'feedPosts'
+            posts: 'feedPosts',
+            currentFeedPage: 'currentFeedPage',
+            lastFeedPage: 'lastFeedPage'
         })
     },
     data() {
@@ -45,9 +46,10 @@ export default defineComponent({
             window.onscroll = () => {
                 let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
 
-                if (bottomOfWindow) {
+                if (bottomOfWindow && this.currentFeedPage < this.lastFeedPage) {
                     this.animation.play()
                     this.getNewPosts();
+                    setTimeout(() => this.animation.stop(), 1000);
                 }
             }
         }

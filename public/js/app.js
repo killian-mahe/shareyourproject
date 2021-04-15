@@ -17605,7 +17605,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)({
     isAuthenticated: 'isAuthenticated',
     user: 'user',
-    posts: 'feedPosts'
+    posts: 'feedPosts',
+    currentFeedPage: 'currentFeedPage',
+    lastFeedPage: 'lastFeedPage'
   })),
   data: function data() {
     return {
@@ -17621,10 +17623,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       window.onscroll = function () {
         var bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
 
-        if (bottomOfWindow) {
+        if (bottomOfWindow && _this.currentFeedPage < _this.lastFeedPage) {
           _this.animation.play();
 
           _this.getNewPosts();
+
+          setTimeout(function () {
+            return _this.animation.stop();
+          }, 1000);
         }
       };
     }
@@ -18938,6 +18944,12 @@ var state = {
 var getters = {
   feedPosts: function feedPosts(state) {
     return state.posts;
+  },
+  currentFeedPage: function currentFeedPage(state) {
+    return state.currentPage;
+  },
+  lastFeedPage: function lastFeedPage(state) {
+    return state.lastPage;
   }
 }; // actions
 
@@ -21236,6 +21248,12 @@ var _hoisted_2 = {
   key: 0,
   "class": "text-2xl font-semibold text-gray-800 mt-5 pl-5 md:pl-0"
 };
+var _hoisted_3 = {
+  "class": "w-full flex justify-center"
+};
+var _hoisted_4 = {
+  ref: "loader"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_PostCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PostCard");
 
@@ -21251,7 +21269,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["post"]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]);
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, null, 512
+  /* NEED_PATCH */
+  )])]);
 }
 
 /***/ }),

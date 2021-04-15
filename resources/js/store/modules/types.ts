@@ -6,6 +6,6 @@ export interface AuthState {
 
 export interface FeedState {
     currentPage: number,
-    lastPage: number | undefined,
+    lastPage: number,
     posts: Array<Post>
 }
