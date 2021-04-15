@@ -10,11 +10,16 @@
 
     </div>
 
+    <div class="w-full flex justify-center">
+        <div ref="loader"></div>
+    </div>
+
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { mapGetters, mapActions } from 'vuex'
 import PostCard from '../components/cards/PostCard.vue'
+import lottie, { AnimationItem } from 'lottie-web';
 
 export default defineComponent({
     components: {
@@ -27,13 +32,36 @@ export default defineComponent({
             posts: 'feedPosts'
         })
     },
+    data() {
+        return {
+            animation: undefined as unknown as AnimationItem
+        }
+    },
     methods: {
         ...mapActions({
             getNewPosts: 'getNewPosts'
-        })
+        }),
+        scroll() {
+            window.onscroll = () => {
+                let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+                if (bottomOfWindow) {
+                    this.animation.play()
+                    this.getNewPosts();
+                }
+            }
+        }
     },
     mounted() {
         this.getNewPosts();
+        this.animation = lottie.loadAnimation({
+            container: this.$refs['loader'] as Element,
+            renderer: 'svg',
+            loop: true,
+            autoplay: false,
+            path: '/vendor/courier/lottie/loading.json'
+        });
+        this.scroll();
     }
 })
 </script>
