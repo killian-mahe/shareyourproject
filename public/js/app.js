@@ -18900,8 +18900,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
  // initial state
 
 var state = {
-  nextPage: 1,
-  lastPage: undefined,
+  currentPage: 0,
+  lastPage: 1,
   posts: []
 }; // getters
 
@@ -18915,12 +18915,13 @@ var actions = {
   getNewPosts: function getNewPosts(_ref) {
     var commit = _ref.commit,
         state = _ref.state;
-    _api__WEBPACK_IMPORTED_MODULE_0__.API.Feed.get(state.nextPage).then(function (response) {
+    if (state.currentPage == state.lastPage) return;
+    _api__WEBPACK_IMPORTED_MODULE_0__.API.Feed.get(state.currentPage + 1).then(function (response) {
       switch (response.status) {
         case 200:
           commit('ADD_POSTS', response.data.data);
           commit('SET_LAST_PAGE', response.data.meta.last_page);
-          commit('INCREMENT_NEXT_PAGE');
+          commit('SET_CURRENT_PAGE', response.data.meta.current_page);
           break;
 
         default:
@@ -18936,11 +18937,8 @@ var mutations = {
 
     (_state$posts = state.posts).push.apply(_state$posts, _toConsumableArray(posts));
   },
-  SET_NEXT_PAGE: function SET_NEXT_PAGE(state, page) {
-    state.nextPage = page > 0 ? page : 0;
-  },
-  INCREMENT_NEXT_PAGE: function INCREMENT_NEXT_PAGE(state) {
-    state.nextPage++;
+  SET_CURRENT_PAGE: function SET_CURRENT_PAGE(state, page) {
+    state.currentPage = page;
   },
   SET_LAST_PAGE: function SET_LAST_PAGE(state, page) {
     state.lastPage = page > 0 ? page : 0;

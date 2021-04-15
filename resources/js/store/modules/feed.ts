@@ -5,8 +5,8 @@ import { FeedState } from './types'
 
 // initial state
 const state : FeedState = {
-    nextPage: 1,
-    lastPage: undefined,
+    currentPage: 0,
+    lastPage: 1,
     posts: []
 }
 
@@ -22,12 +22,14 @@ const getters = {
 // actions
 const actions = {
     getNewPosts({commit, state}:any) {
-        API.Feed.get(state.nextPage).then(response => {
+        if (state.currentPage == state.lastPage) return;
+
+        API.Feed.get(state.currentPage+1).then(response => {
             switch (response.status) {
                 case 200:
                     commit('ADD_POSTS', response.data.data);
                     commit('SET_LAST_PAGE', response.data.meta.last_page);
-                    commit('INCREMENT_NEXT_PAGE');
+                    commit('SET_CURRENT_PAGE', response.data.meta.current_page);
                     break;
 
                 default:
@@ -42,11 +44,8 @@ const mutations = {
     ADD_POSTS (state: State, posts: Array<Post>) {
         state.posts.push(...posts);
     },
-    SET_NEXT_PAGE(state: State, page: number) {
-        state.nextPage = page > 0 ? page : 0;
-    },
-    INCREMENT_NEXT_PAGE (state: State) {
-        state.nextPage ++;
+    SET_CURRENT_PAGE(state: State, page: number) {
+        state.currentPage = page;
     },
     SET_LAST_PAGE (state: State, page: number) {
         state.lastPage = page > 0 ? page : 0;

@@ -5,7 +5,7 @@ export interface AuthState {
 }
 
 export interface FeedState {
-    nextPage: number,
+    currentPage: number,
     lastPage: number | undefined,
     posts: Array<Post>
 }
