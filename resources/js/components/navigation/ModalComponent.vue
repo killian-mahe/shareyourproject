@@ -30,11 +30,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-const vClickOutside = require('v-click-outside');
+import vClickOutside from '../../click-outside';
 
 export default defineComponent({
     directives: {
-        clickOutside: vClickOutside.directive
+        clickOutside: vClickOutside
     },
     data() {
         return {
