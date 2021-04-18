@@ -1,6 +1,6 @@
 <template>
 
-<div class="flex justify-center mt-4 min-h-screen" v-if="user">
+<div class="w-full flex justify-center mt-4 min-h-screen" v-if="user">
 
     <div class="hidden md:block md:w-1/3 md:ml-4 lg:w-1/4 xl:w-1/6">
 
