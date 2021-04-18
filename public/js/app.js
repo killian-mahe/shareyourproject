@@ -16637,7 +16637,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   components: {
-    TagLabel: _utils_TagLabel_vue__WEBPACK_IMPORTED_MODULE_5__.default
+    TagLabel: _utils_TagLabel_vue__WEBPACK_IMPORTED_MODULE_5__.default,
+    PostCreator: (0,vue__WEBPACK_IMPORTED_MODULE_0__.defineAsyncComponent)(function () {
+      return Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ../cards/PostCreator.vue */ "./resources/js/components/cards/PostCreator.vue"));
+    })
   },
   directives: {
     clickOutside: _click_outside__WEBPACK_IMPORTED_MODULE_1__.default
@@ -16645,16 +16648,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       post_data: this.post,
-      likeAnimation: undefined
+      likeAnimation: undefined,
+      shareModal: false
     };
   },
   props: {
     post: {
       type: Object,
-      required: true,
-      "default": function _default() {
-        return null;
-      }
+      required: true
+    },
+    displayActions: {
+      type: Boolean,
+      "default": true
     }
   },
   mounted: function mounted() {
@@ -16724,12 +16729,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _inputs_TextArea_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../inputs/TextArea.vue */ "./resources/js/components/inputs/TextArea.vue");
 /* harmony import */ var _click_outside__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../click-outside */ "./resources/js/click-outside.ts");
 /* harmony import */ var _navigation_ModalComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../navigation/ModalComponent.vue */ "./resources/js/components/navigation/ModalComponent.vue");
-/* harmony import */ var _utils_ResizeAuto_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/ResizeAuto.vue */ "./resources/js/components/utils/ResizeAuto.vue");
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../api */ "./resources/js/api.ts");
+/* harmony import */ var _cards_PostCard_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../cards/PostCard.vue */ "./resources/js/components/cards/PostCard.vue");
+/* harmony import */ var _utils_ResizeAuto_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../utils/ResizeAuto.vue */ "./resources/js/components/utils/ResizeAuto.vue");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../api */ "./resources/js/api.ts");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -16743,26 +16749,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   components: {
     TextArea: _inputs_TextArea_vue__WEBPACK_IMPORTED_MODULE_1__.default,
-    ResizeAuto: _utils_ResizeAuto_vue__WEBPACK_IMPORTED_MODULE_4__.default,
-    ModelComponent: _navigation_ModalComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default
+    ResizeAuto: _utils_ResizeAuto_vue__WEBPACK_IMPORTED_MODULE_5__.default,
+    ModalComponent: _navigation_ModalComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    PostCard: _cards_PostCard_vue__WEBPACK_IMPORTED_MODULE_4__.default
   },
   directives: {
     clickOutside: _click_outside__WEBPACK_IMPORTED_MODULE_2__.default
+  },
+  emits: {
+    close: null
   },
   props: {
     extraContent: {
       type: Boolean,
       "default": false
+    },
+    resharedPost: {
+      type: Object,
+      "default": undefined
     }
   },
   data: function data() {
     return {
       showSelect: false,
       showModal: false,
-      onlyModal: false,
       content: "",
       AuthorIsProject: false,
       files: new Array(),
@@ -16773,7 +16787,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   beforeMount: function beforeMount() {
     this.author = this.user;
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)(['isAuthenticated', 'user'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)(['isAuthenticated', 'user'])),
   methods: {
     onAuthorSelected: function onAuthorSelected(author) {
       this.author = author;
@@ -16811,13 +16825,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     closeModal: function closeModal() {
       this.showModal = false;
+      this.$emit('close');
     },
     createPost: function createPost() {
       var _this = this;
 
-      _api__WEBPACK_IMPORTED_MODULE_5__.API.Post.create(this.files.map(function (f) {
+      _api__WEBPACK_IMPORTED_MODULE_6__.API.Post.create(this.files.map(function (f) {
         return f.content;
-      }), undefined, this.content, this.AuthorIsProject ? this.author : undefined).then(function (response) {
+      }), this.resharedPost, this.content, this.AuthorIsProject ? this.author : undefined).then(function (response) {
         switch (response.status) {
           case 201:
             _this.errors = [];
@@ -17124,7 +17139,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     name: {
       type: String,
-      required: true
+      "default": ""
     },
     label: {
       type: String,
@@ -19189,7 +19204,7 @@ var _hoisted_10 = {
   "class": "text-xs font-light leading-tight"
 };
 var _hoisted_11 = {
-  "class": "card-body sm:px-0 md:text-lg pt-2"
+  "class": "card-body sm:px-0 md:text-lg py-2"
 };
 var _hoisted_12 = {
   "class": "space-x-1 md:px-4"
@@ -19213,12 +19228,14 @@ var _hoisted_17 = {
   "class": "flex flex-col w-1/2 h-120"
 };
 var _hoisted_18 = {
+  key: 1,
   "class": "flex mt-1 mb-2 justify-end"
 };
 var _hoisted_19 = {
   "class": "text-sm text-onyx-400 cursor-pointer hover:underline"
 };
 var _hoisted_20 = {
+  key: 2,
   "class": "card-footer"
 };
 var _hoisted_21 = {
@@ -19298,6 +19315,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
   var _component_TagLabel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("TagLabel");
+
+  var _component_PostCreator = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PostCreator");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_ctx.post_data !== undefined ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Title "), _ctx.post_data.project ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
@@ -19438,9 +19457,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     alt: ""
   }, null, 8
   /* PROPS */
-  , ["src"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" post_data stats "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Comments "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.post_data.stats.comments) + " comments", 1
+  , ["src"])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" post_data stats "), _ctx.displayActions ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Comments "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.post_data.stats.comments) + " comments", 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Card footer "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Like "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Card footer "), _ctx.displayActions ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Like "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.like(!_ctx.post_data.liked);
     }),
@@ -19461,9 +19480,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )]), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
     "class": "hover:text-viridiant-400 cursor-pointer",
     onClick: _cache[2] || (_cache[2] = function ($event) {
-      return _ctx.share();
+      return _ctx.shareModal = true;
     })
-  }, [_hoisted_25, _hoisted_26])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"displayComments && !reshared_post\" class=\"p-5 mb-2 border-t-0.0625 border-onyx-100 space-y-3\">\r\n        <div v-if=\"auth_user != null\" class=\"flex relative items-start\">\r\n            <img :src=\"auth_user.profile_picture\" class=\"h-10 w-10 rounded-full mr-3\" alt=\"profile_picture\">\r\n            <text-area class=\"w-full\" child_class=\"w-full pr-10 overflow-y-hidden resize-none\" placeholder=\"Write a comment...\" @send=\"writeComment\" v-model=\"newCommentContent\" :rows=\"1\"></text-area>\r\n            <svg class=\"feather feather-send absolute right-4 top-3 cursor-pointer\" @click=\"writeComment\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"22\" y1=\"2\" x2=\"11\" y2=\"13\"></line><polygon points=\"22 2 15 22 11 13 2 9 22 2\"></polygon></svg>\r\n        </div>\r\n        <comment-component v-for=\"comment in orderedComments\" :key=\"comment.id\" :comment=\"comment\" class=\"mt-2\"></comment-component>\r\n        <button v-if=\"comments_to_load.length > 0\" class=\"font-sans font-medium text-sm cursor-pointer text-onyx-500 hover:text-onyx-700\" @click=\"addComments\">Load more comments</button>\r\n        <div v-show=\"loadingComments\" class=\"h-10 mb-3\" ref=\"loader\"></div>\r\n    </div> ")], 2112
+  }, [_hoisted_25, _hoisted_26])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.shareModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PostCreator, {
+    key: 3,
+    onClose: _cache[3] || (_cache[3] = function ($event) {
+      return _ctx.shareModal = false;
+    }),
+    resharedPost: _ctx.post_data
+  }, null, 8
+  /* PROPS */
+  , ["resharedPost"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"displayComments && !reshared_post\" class=\"p-5 mb-2 border-t-0.0625 border-onyx-100 space-y-3\">\n        <div v-if=\"auth_user != null\" class=\"flex relative items-start\">\n            <img :src=\"auth_user.profile_picture\" class=\"h-10 w-10 rounded-full mr-3\" alt=\"profile_picture\">\n            <text-area class=\"w-full\" child_class=\"w-full pr-10 overflow-y-hidden resize-none\" placeholder=\"Write a comment...\" @send=\"writeComment\" v-model=\"newCommentContent\" :rows=\"1\"></text-area>\n            <svg class=\"feather feather-send absolute right-4 top-3 cursor-pointer\" @click=\"writeComment\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"22\" y1=\"2\" x2=\"11\" y2=\"13\"></line><polygon points=\"22 2 15 22 11 13 2 9 22 2\"></polygon></svg>\n        </div>\n        <comment-component v-for=\"comment in orderedComments\" :key=\"comment.id\" :comment=\"comment\" class=\"mt-2\"></comment-component>\n        <button v-if=\"comments_to_load.length > 0\" class=\"font-sans font-medium text-sm cursor-pointer text-onyx-500 hover:text-onyx-700\" @click=\"addComments\">Load more comments</button>\n        <div v-show=\"loadingComments\" class=\"h-10 mb-3\" ref=\"loader\"></div>\n    </div> ")], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
   );
 }
@@ -19484,6 +19511,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  key: 0,
   "class": "card rounded shadow-md w-full h-auto py-2 items-center"
 };
 var _hoisted_2 = {
@@ -19559,7 +19587,7 @@ var _hoisted_14 = {
   "class": "mt-6 max-h-24 overflow-y-auto"
 };
 var _hoisted_15 = {
-  key: 0
+  key: 1
 };
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("line", {
@@ -19653,11 +19681,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_ResizeAuto = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ResizeAuto");
 
-  var _component_ModelComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModelComponent");
+  var _component_PostCard = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("PostCard");
+
+  var _component_ModalComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ModalComponent");
 
   var _directive_click_outside = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("click-outside");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Card "), _ctx.resharedPost != undefined ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.showSelect = !_ctx.showSelect;
     }),
@@ -19718,8 +19748,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, "Post")], 512
   /* NEED_PATCH */
-  ), [[_directive_click_outside, _ctx.onClickOutside]])]), _ctx.showModal || _ctx.onlyModal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ModelComponent, {
-    key: 0,
+  ), [[_directive_click_outside, _ctx.onClickOutside]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.showModal || _ctx.resharedPost != undefined ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ModalComponent, {
+    key: 1,
     size: "md"
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -19762,6 +19792,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
               return _ctx.content = $event;
             }),
+            name: "",
             autofocus: ""
           }, null, 40
           /* PROPS, HYDRATE_EVENTS */
@@ -19770,7 +19801,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         _: 1
         /* STABLE */
 
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <post-card v-if=\"reshare_post\" :post_props=\"reshare_post\" :auth_user=\"auth_user\" :reshared_post=\"true\"></post-card> "), _ctx.files.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_15, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.files, function (file, index) {
+      }), _ctx.resharedPost ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_PostCard, {
+        key: 0,
+        post: _ctx.resharedPost,
+        displayActions: false,
+        "class": "border-1"
+      }, null, 8
+      /* PROPS */
+      , ["post"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.files.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_15, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.files, function (file, index) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: 'file_' + index,
           "class": "relative my-2"
@@ -19800,7 +19838,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), 128
       /* KEYED_FRAGMENT */
       ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.extraContent ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("input", {
-        key: 1,
+        key: 2,
         id: "pictures_input",
         ref: "picture",
         onChange: _cache[7] || (_cache[7] = function () {
@@ -20235,10 +20273,10 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         rows: _ctx.rows
       }, null, 42
       /* CLASS, PROPS, HYDRATE_EVENTS */
-      , ["onInput", "placeholder", "name", "rows"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.inputValue]]), _ctx.max_length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
+      , ["onInput", "placeholder", "name", "rows"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.inputValue]]), _ctx.maxLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("p", {
         key: 1,
         "class": [{
-          'text-red-500': _ctx.inputValue.length > _ctx.max_length
+          'text-red-500': _ctx.inputValue.length > _ctx.maxLength
         }, "text-gray-600 text-xs italic text-right"]
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.inputValue.length) + "/" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.maxLength), 3
       /* TEXT, CLASS */

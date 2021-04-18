@@ -1,5 +1,7 @@
 <template>
-    <div class="card rounded shadow-md w-full h-auto py-2 items-center">
+
+    <!-- Card -->
+    <div class="card rounded shadow-md w-full h-auto py-2 items-center" v-if="resharedPost != undefined">
         <div class="flex items-start relative w-full space-x-3" v-click-outside="onClickOutside">
             <div @click="showSelect = !showSelect" class="inline-flex h-auto items-center cursor-pointer rounded-md hover:bg-cultured-400 text-onyx-500 hover:text-viridiant-600 py-3 px-2">
                 <img class="w-10 h-10 rounded-full object-cover" :src="author.profile_picture" alt="profile_picture">
@@ -22,13 +24,14 @@
         </div>
     </div>
 
-    <ModelComponent v-if="showModal || onlyModal" size="md">
+    <ModalComponent v-if="showModal || (resharedPost != undefined)" size="md">
         <template v-slot:header>
             <div class="border-b pb-3 flex justify-between items-center">
                 <h1 class="font-semibold text-onyx-500 text-xl">Create a new post</h1>
                 <svg @click="closeModal" class="feather feather-x cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </div>
         </template>
+
         <template v-slot:body>
             <div class="mt-4 flex items-center">
                 <img class="w-10 h-10 rounded-full mr-3 inline-block object-cover" :src="author.profile_picture" alt="profile_picture">
@@ -46,11 +49,12 @@
                             @input="resize"
                             placeholder="Write a new exciting post !"
                             v-model="content"
+                            name=""
                             autofocus
                         ></textarea>
                     </template>
                 </ResizeAuto>
-                <!-- <post-card v-if="reshare_post" :post_props="reshare_post" :auth_user="auth_user" :reshared_post="true"></post-card> -->
+                <PostCard v-if="resharedPost" :post="resharedPost" :displayActions="false" class="border-1"></PostCard>
                 <div v-if="files.length > 0">
                     <div v-for="(file, index) in files" :key="'file_'+index" class="relative my-2">
                         <svg @click="removeFile(index)" class="feather feather-x transition-colors ease-in-out duration-75 absolute top-2 right-2 text-cultured-500 bg-onyx-500 hover:bg-onyx-700 p-1 w-8 h-8 rounded-full cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -60,6 +64,7 @@
                 <input v-if="extraContent" id="pictures_input" ref="picture" @change="previewFile" type="file" name="pictures" hidden>
             </div>
         </template>
+
         <template v-slot:footer>
             <div class="w-full flex justify-between items-center mt-2">
                 <span v-if="extraContent" @click="selectFile"><svg class="feather feather-image hover:bg-onyx-100 bg-cultured-100 p-2 w-10 h-10 rounded-full cursor-pointer transition-colors ease-in-out duration-150" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></span>
@@ -70,18 +75,19 @@
                 <li v-for="(error, index) in errors" :key="'error_'+index">{{ error }}</li>
             </ul>
         </template>
-    </ModelComponent>
+    </ModalComponent>
 </template>
 
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { mapGetters } from 'vuex'
 import TextArea from '../inputs/TextArea.vue';
 import vClickOutside from "../../click-outside";
-import ModelComponent from '../navigation/ModalComponent.vue'
+import ModalComponent from '../navigation/ModalComponent.vue'
+import PostCard from '../cards/PostCard.vue'
 import ResizeAuto from '../utils/ResizeAuto.vue'
-import { Project, User } from '../../models';
+import { Post, Project, User } from '../../models';
 import { API } from '../../api';
 
 interface FormFile {
@@ -90,26 +96,32 @@ interface FormFile {
 }
 
 export default defineComponent({
-
     components: {
         TextArea,
         ResizeAuto,
-        ModelComponent
+        ModalComponent,
+        PostCard
     },
     directives: {
         clickOutside: vClickOutside
+    },
+    emits: {
+        close: null
     },
     props: {
         extraContent: {
             type: Boolean,
             default: false
+        },
+        resharedPost: {
+            type: Object as PropType<Post | undefined>,
+            default: undefined
         }
     },
     data() {
         return {
             showSelect: false,
             showModal: false,
-            onlyModal: false,
             content: "",
             AuthorIsProject: false,
             files: new Array<FormFile>(),
@@ -159,9 +171,10 @@ export default defineComponent({
         },
         closeModal() {
             this.showModal = false;
+            this.$emit('close');
         },
         createPost() {
-            API.Post.create((this.files.map(f => f.content) as File[]), undefined,
+            API.Post.create((this.files.map(f => f.content) as File[]), this.resharedPost,
                 this.content, this.AuthorIsProject ? (this.author as Project) : undefined).then(response => {
                     switch (response.status) {
                         case 201:
