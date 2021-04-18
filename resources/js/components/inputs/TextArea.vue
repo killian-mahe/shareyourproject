@@ -21,8 +21,8 @@
           :rows="rows"
         ></textarea>
         <p
-          v-if="max_length"
-          :class="{ 'text-red-500': inputValue.length > max_length }"
+          v-if="maxLength"
+          :class="{ 'text-red-500': inputValue.length > maxLength }"
           class="text-gray-600 text-xs italic text-right"
         >
           {{ inputValue.length }}/{{ maxLength }}
@@ -53,7 +53,7 @@ export default defineComponent({
     },
     name: {
       type: String,
-      required: true,
+      default: ""
     },
     label: {
       type: String,
