@@ -34,7 +34,7 @@
 
         <!-- Body -->
 
-        <div class="card-body sm:px-0 md:text-lg pt-2">
+        <div class="card-body sm:px-0 md:text-lg py-2">
             <p class="leading-5 text-sm lg:text-base font-normal text-onyx-600 md:px-4" v-html="post_data.formated_content">
             </p>
 
@@ -61,7 +61,7 @@
             </div>
 
             <!-- post_data stats -->
-            <div class="flex mt-1 mb-2 justify-end">
+            <div class="flex mt-1 mb-2 justify-end" v-if="displayActions">
                 <!-- Comments -->
                 <span class="text-sm text-onyx-400 cursor-pointer hover:underline">{{post_data.stats.comments}} comments</span>
             </div>
@@ -69,7 +69,7 @@
 
         <!-- Card footer -->
 
-        <div class="card-footer">
+        <div class="card-footer" v-if="displayActions">
             <div class="card-link">
                 <!-- Like -->
                 <span @click="like(!post_data.liked)" class="cursor-pointer fill-current flex items-center w-10 h-10"
@@ -85,12 +85,15 @@
             </div>
             <div class="card-link">
 
-                <span class="hover:text-viridiant-400 cursor-pointer" @click="share()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span class="ml-1 hidden md:inline">Share</span></span>
+                <span class="hover:text-viridiant-400 cursor-pointer" @click="shareModal = true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span class="ml-1 hidden md:inline">Share</span></span>
 
             </div>
         </div>
 
+        <PostCreator v-if="shareModal" @close="shareModal = false" :resharedPost="post_data"></PostCreator>
+
     </div>
+
     <!-- <div v-if="displayComments && !reshared_post" class="p-5 mb-2 border-t-0.0625 border-onyx-100 space-y-3">
         <div v-if="auth_user != null" class="flex relative items-start">
             <img :src="auth_user.profile_picture" class="h-10 w-10 rounded-full mr-3" alt="profile_picture">
@@ -105,7 +108,7 @@
 
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, defineAsyncComponent, PropType } from 'vue'
 import vClickOutside from '../../click-outside'
 import moment from 'moment';
 import { mapGetters } from 'vuex'
@@ -116,7 +119,8 @@ import TagLabel from '../utils/TagLabel.vue'
 
 export default defineComponent({
     components:{
-        TagLabel
+        TagLabel,
+        PostCreator: defineAsyncComponent(() => import('../cards/PostCreator.vue') as any)
     },
     directives: {
         clickOutside: vClickOutside
@@ -124,15 +128,19 @@ export default defineComponent({
     data() {
         return {
             post_data: this.post,
-            likeAnimation:  undefined as unknown as AnimationItem
+            likeAnimation:  undefined as unknown as AnimationItem,
+            shareModal: false
         }
     },
     props: {
         post: {
             type: Object as PropType<Post>,
-            required: true,
-            default: () => {return null;}
+            required: true
         },
+        displayActions: {
+            type: Boolean,
+            default: true
+        }
     },
     mounted() {
 
