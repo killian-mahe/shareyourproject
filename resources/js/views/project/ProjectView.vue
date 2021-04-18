@@ -1,16 +1,16 @@
 <template>
 
-<div class="block lg:flex justify-center mt-4 min-h-screen" v-if="project">
+<div class="block lg:flex justify-center mt-2 md:mt-0 lg:mt-4 min-h-screen" v-if="project">
 
     <div class="block w-auto md:mx-4 lg:w-1/4 xl:w-1/6">
-        <div class="box w-full h-auto mb-4 flex lg:flex-col flex-none py-2 p-5 md:mt-4 justify-center lg:mt-48 md:space-x-8 lg:space-x-0">
+        <div class="box w-full h-auto mb-2 md:mb-4 flex lg:flex-col flex-none py-2 p-5 md:mt-4 justify-center lg:mt-48 md:space-x-8 lg:space-x-0">
             <router-link :to="{name:'project', params:{id: project.id}}" class="py-2 px-6">Posts</router-link>
             <router-link :to="{name:'project.members', params:{id: project.id}}" class="py-2 px-6">Members</router-link>
             <a class="py-2 px-6">About</a>
         </div>
     </div>
 
-    <div class="w-auto md:w-auto lg:w-2/3 md:mx-4">
+    <div class="w-auto lg:w-2/3 md:mx-4">
 
         <div class="box w-full h-auto mb-6">
             <div class="flex relative justify-center">
@@ -24,8 +24,7 @@
                     <!-- <follow-button :project_id='{{$project->id}}' @auth :auth_user='@json(new \App\Http\Resources\User(Auth::user()))' @endauth></follow-button> -->
                 </span>
                 <div class="flex md:justify-start justify-center">
-                    <span class="text-sm">An idea from </span>
-                    <a class="text-sm hover:underline">{{ owner.full_name}}</a>
+                    <span class="text-sm">An idea from <router-link :to="{name:'profile', params:{id: owner.id}}" class="text-sm hover:underline">{{owner.full_name}}</router-link></span>
                 </div>
                 <div class="flex md:justify-end justify-center">
                     <span class="text-sm">Created {{ timeSinceCreation }}</span>

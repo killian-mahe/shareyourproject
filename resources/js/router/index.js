@@ -7,6 +7,9 @@ import ProjectView from '../views/project/ProjectView.vue'
 import MembersView from '../views/project/MembersView.vue'
 import CreateView from '../views/project/CreateView.vue'
 import PostsView from '../views/project/PostsView.vue'
+import SettingsView from '../views/user/settings/SettingsView.vue'
+import AccountSettingsView from '../views/user/settings/AccountSettingsView.vue'
+import ProfileSettingsView from '../views/user/settings/ProfileSettingsView.vue'
 import store from '../store'
 import NProgress from 'nprogress'
 
@@ -60,6 +63,25 @@ const routes = [
         meta: {
             requiresAuth: false
         }
+    },
+    {
+        path: '/user/settings',
+        component: SettingsView,
+        meta: {
+            requiresAuth: true
+        },
+        children: [
+            {
+                path: '',
+                name: 'user.settings',
+                component: ProfileSettingsView
+            },
+            {
+                path: 'account',
+                name: 'user.settings.account',
+                component: AccountSettingsView
+            }
+        ]
     },
 
     // Project
