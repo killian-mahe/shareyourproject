@@ -16724,16 +16724,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _inputs_TextArea_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../inputs/TextArea.vue */ "./resources/js/components/inputs/TextArea.vue");
 /* harmony import */ var _click_outside__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../click-outside */ "./resources/js/click-outside.ts");
 /* harmony import */ var _navigation_ModalComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../navigation/ModalComponent.vue */ "./resources/js/components/navigation/ModalComponent.vue");
 /* harmony import */ var _utils_ResizeAuto_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/ResizeAuto.vue */ "./resources/js/components/utils/ResizeAuto.vue");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../api */ "./resources/js/api.ts");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -16762,6 +16764,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       showModal: false,
       onlyModal: false,
       content: "",
+      AuthorIsProject: false,
       files: new Array(),
       author: undefined,
       errors: []
@@ -16770,17 +16773,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   beforeMount: function beforeMount() {
     this.author = this.user;
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)(['isAuthenticated', 'user'])),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)(['isAuthenticated', 'user'])),
   methods: {
     onAuthorSelected: function onAuthorSelected(author) {
       this.author = author;
+
+      if ('username' in this.author) {
+        this.AuthorIsProject = false;
+      } else {
+        this.AuthorIsProject = true;
+      }
+
       this.showSelect = false;
     },
     onClickOutside: function onClickOutside() {
       this.showSelect = false;
-    },
-    createPost: function createPost() {
-      this.errors = [];
     },
     selectFile: function selectFile() {
       this.$refs.picture.click();
@@ -16804,6 +16811,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     closeModal: function closeModal() {
       this.showModal = false;
+    },
+    createPost: function createPost() {
+      var _this = this;
+
+      _api__WEBPACK_IMPORTED_MODULE_5__.API.Post.create(this.files.map(function (f) {
+        return f.content;
+      }), undefined, this.content, this.AuthorIsProject ? this.author : undefined).then(function (response) {
+        switch (response.status) {
+          case 201:
+            _this.errors = [];
+
+            _this.$router.push({
+              name: 'feed'
+            });
+
+            break;
+
+          case 422:
+            _this.errors = [];
+            Object.values(response.data['errors']).forEach(function (error) {
+              _this.errors = _this.errors.concat(error);
+            });
+            break;
+
+          default:
+            break;
+        }
+      });
     }
   }
 }));
@@ -17274,7 +17309,7 @@ __webpack_require__.r(__webpack_exports__);
     body === null || body === void 0 ? void 0 : body.classList.add('overflow-hidden');
     body === null || body === void 0 ? void 0 : body.classList.remove('overflow-auto');
   },
-  beforeDestroy: function beforeDestroy() {
+  beforeUnmount: function beforeUnmount() {
     var body = document.getElementsByTagName("body").item(0);
     body === null || body === void 0 ? void 0 : body.classList.add('overflow-auto');
     body === null || body === void 0 ? void 0 : body.classList.remove('overflow-hidden');
@@ -18522,6 +18557,23 @@ var API = {
     unlike: function unlike(post) {
       var url = "".concat(this.url, "/").concat(post.id, "/unlike");
       return fetchResource('put', url);
+    },
+    create: function create(files, reshare, content, project) {
+      var url = "".concat(this.url, "/create");
+      var formData = new FormData();
+
+      if (files.length > 0) {
+        files.forEach(function (file, index) {
+          formData.append("image[".concat(index, "]"), file);
+        });
+      }
+
+      if (reshare) formData.append('reshare', String(reshare.id));
+      if (project) formData.append('project', String(project.id));
+      if (content) formData.append('content', content);
+      return fetchResource('post', url, formData, {
+        'Content-Type': 'multipart/form-data'
+      });
     }
   },
 

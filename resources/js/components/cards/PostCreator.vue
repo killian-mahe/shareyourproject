@@ -82,6 +82,7 @@ import vClickOutside from "../../click-outside";
 import ModelComponent from '../navigation/ModalComponent.vue'
 import ResizeAuto from '../utils/ResizeAuto.vue'
 import { Project, User } from '../../models';
+import { API } from '../../api';
 
 interface FormFile {
     content: File | null | undefined;
@@ -110,6 +111,7 @@ export default defineComponent({
             showModal: false,
             onlyModal: false,
             content: "",
+            AuthorIsProject: false,
             files: new Array<FormFile>(),
             author: undefined as unknown as User|Project,
             errors: []
@@ -127,14 +129,15 @@ export default defineComponent({
     methods: {
         onAuthorSelected: function (author:User|Project) {
             this.author = author;
+            if ('username' in this.author) {
+                this.AuthorIsProject = false;
+            } else {
+                this.AuthorIsProject = true;
+            }
             this.showSelect = false;
         },
         onClickOutside : function () {
             this.showSelect = false;
-        },
-        createPost: function() {
-
-            this.errors = [];
         },
         selectFile() {
             (this.$refs.picture as HTMLInputElement).click();
@@ -156,6 +159,27 @@ export default defineComponent({
         },
         closeModal() {
             this.showModal = false;
+        },
+        createPost() {
+            API.Post.create((this.files.map(f => f.content) as File[]), undefined,
+                this.content, this.AuthorIsProject ? (this.author as Project) : undefined).then(response => {
+                    switch (response.status) {
+                        case 201:
+                            this.errors = [];
+                            this.$router.push({name: 'feed'});
+                            break;
+
+                        case 422:
+                            this.errors = [];
+                            Object.values((response.data as any)['errors']).forEach((error: any) => {
+                                this.errors = this.errors.concat(error)
+                            })
+                            break;
+
+                        default:
+                            break;
+                    }
+                })
         }
     }
 })
