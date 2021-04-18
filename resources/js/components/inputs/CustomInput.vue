@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Label -->
-        <InputLabel :label="label"  :name="name" />
+        <InputLabel :label="label"  :name="name" v-if="label" />
 
         <!-- Input -->
         <div class="flex items-center relative">
