@@ -31,7 +31,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validatedData = $request->validate([
             'content' => ['nullable', 'required_without_all:reshare', 'max:255'],
@@ -61,14 +61,15 @@ class PostController extends Controller
 
         if (array_key_exists('image', $validatedData))
         {
+            if ($request->file('image')) {
+                foreach($request->file('image') as $file)
+                {
+                    $path = $file->store('public/images');
 
-            foreach($request->file('image') as $file)
-            {
-                $path = $file->store('public/images');
-
-                $image = new Image;
-                $image->url = $path;
-                $post->images()->save($image);
+                    $image = new Image;
+                    $image->url = $path;
+                    $post->images()->save($image);
+                }
             }
         }
 

@@ -30,11 +30,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-const vClickOutside = require('v-click-outside');
+import vClickOutside from '../../click-outside';
 
 export default defineComponent({
     directives: {
-        clickOutside: vClickOutside.directive
+        clickOutside: vClickOutside
     },
     data() {
         return {
@@ -51,7 +51,7 @@ export default defineComponent({
         body?.classList.add('overflow-hidden');
         body?.classList.remove('overflow-auto');
     },
-    beforeDestroy() {
+    beforeUnmount() {
         let body = document.getElementsByTagName("body").item(0);
         body?.classList.add('overflow-auto');
         body?.classList.remove('overflow-hidden');

@@ -21,8 +21,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::post('login', 'Auth\LoginController@authenticate')->name('api.login');
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return new UserResource($request->user());
 });
@@ -36,6 +34,7 @@ Route::name('post.')->prefix('posts')->group(function() {
     Route::middleware('auth:sanctum')->group(function () {
         Route::put('/{post}/like', [PostController::class, 'like'])->name('like');
         Route::put('/{post}/unlike', [PostController::class, 'unlike'])->name('unlike');
+        Route::post('/create', [PostController::class, 'create'])->name('create');
     });
 
 });

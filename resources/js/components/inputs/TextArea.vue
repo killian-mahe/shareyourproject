@@ -57,7 +57,7 @@ export default defineComponent({
     },
     name: {
       type: String,
-      required: true,
+      default: ""
     },
     label: {
       type: String,
