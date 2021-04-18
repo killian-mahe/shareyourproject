@@ -1,4 +1,4 @@
-import { Post, Project, User, Badge, PaginateResponse } from './models';
+import { Post, Project, User, Badge, PaginateResponse, Tag } from './models';
 import { AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 const API_URL = "/api";
@@ -150,6 +150,10 @@ let API = {
         posts: function(project: Project, page: number = 1) {
             const url = `${this.url}/${project.id}/posts?page=${page}`;
             return fetchResource<PaginateResponse<Post>>('get', url);
+        },
+        create: function(name: string, description: string, status: string, start_date: Date, collaborators?: Array<number>, badges?: Array<number>, tags?: Array<number>, end_date?: Date) {
+            const url = `${this.url}/create`;
+            return fetchResource<Project>('post', url, {name, description, status, collaborators, badges, tags, start_date, end_date});
         }
     },
     User: {
@@ -180,6 +184,13 @@ let API = {
         search: function(query: string) {
             const url = `${this.url}/search?query=${query}`;
             return fetchResource<Array<Badge>>('get', url);
+        }
+    },
+    Tag: {
+        url: '/tags',
+        search: function(query: string) {
+            const url = `${this.url}/search?query=${query}`;
+            return fetchResource<Array<Tag>>('get', url);
         }
     }
 };

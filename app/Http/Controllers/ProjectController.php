@@ -39,7 +39,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validatedData = $request->validate([
             'name' => ['required', 'max:255'],
@@ -48,8 +48,8 @@ class ProjectController extends Controller
             'badges' => ['array', 'exists:technologies,id'],
             'tags' => ['array'],
             'status' => ['required'],
-            'start_date' => ['nullable', 'date'],
-            'finished_date' => ['nullable', 'date'],
+            'start_date' => ['required', 'date'],
+            'end_date' => ['nullable', 'date'],
         ]);
 
         $project = new Project;
@@ -58,12 +58,13 @@ class ProjectController extends Controller
         $project->description = $validatedData['description'];
         $project->status = $validatedData['status'];
         $project->started_at = $validatedData['start_date'];
-        $project->finished_at = $validatedData['finished_date'];
+        $project->finished_at = $request->exists('end_date') ? $validatedData['end_date'] : null;
         $project->save();
 
+        $project->members()->attach(Auth::user()->id);
+        
         if ($request->exists('collaborators')) {
             $project->members()->attach($validatedData['collaborators']);
-            $project->members()->attach(Auth::user()->id);
         }
 
         if ($request->exists('badges')) {
@@ -85,7 +86,9 @@ class ProjectController extends Controller
             $project->tags()->attach($tags);
         }
 
-        return redirect()->route('projects.show', ['project' => $project->id]);
+        $project->refresh();
+
+        return response()->json(status:201, data: new ProjectResource($project));
     }
 
     /**
