@@ -51,7 +51,7 @@ export default defineComponent({
         body?.classList.add('overflow-hidden');
         body?.classList.remove('overflow-auto');
     },
-    beforeDestroy() {
+    beforeUnmount() {
         let body = document.getElementsByTagName("body").item(0);
         body?.classList.add('overflow-auto');
         body?.classList.remove('overflow-hidden');
