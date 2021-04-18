@@ -92,6 +92,25 @@ let API = {
             const url = `${this.url}/${post.id}/unlike`;
             return fetchResource<Post>('put', url);
         },
+        create: function(files: Array<File>, reshare?: Post, content?: string, project?: Project) {
+            const url = `${this.url}/create`;
+
+            let formData = new FormData();
+
+            if (files.length > 0) {
+                files.forEach((file, index) => {
+                    formData.append(`image[${index}]`, file);
+                });
+            }
+
+            if (reshare) formData.append('reshare', String(reshare.id));
+            if (project) formData.append('project', String(project.id));
+            if (content) formData.append('content', content);
+
+            return fetchResource<Post>('post', url, formData, {
+                'Content-Type': 'multipart/form-data'
+            });
+        }
     },
     /**
      * Fedd API wrapper
