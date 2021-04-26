@@ -151,6 +151,13 @@ let API = {
         get: function(userId: number) {
             const url = `${this.url}/${userId}`;
             return fetchResource<User>('get', url);
+        },
+        /**
+         * Update the profile of the user
+         */
+        updateProfile: function(user: User, data: object) {
+            const url = `${this.url}/${user.id}/profile`;
+            return fetchResource<User>('put', url, data);
         }
     },
     Badge: {

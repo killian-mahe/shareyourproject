@@ -43,6 +43,8 @@ Route::name('user.')->prefix('users')->group(function() {
     Route::get('/search', [UserController::class, 'search'])->name('search');
 
     Route::get('/{user}', [UserController::class, 'get'])->name('get');
+
+    Route::put('/{user}/profile', [UserController::class, 'updateProfile'])->name('update');
 });
 
 Route::name('project.')->prefix('projects')->group(function() {

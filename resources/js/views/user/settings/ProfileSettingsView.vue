@@ -3,12 +3,12 @@
     <div class="w-full">
         <div class="box w-full h-auto p-3 md:p-6">
             <div class="font-semibold text-xl border-b pb-3 w-full mb-4 ml-2">Public Profile Settings</div>
-            <form class="px-2 py-2 md:px-3 md:py-3">
+            <form class="px-2 py-2 md:px-3 md:py-3" @submit.prevent="onSubmit">
                 <!-- First Name / Last Name -->
                 <div class="w-full flex items-center space-x-3 md:space-x-8">
                     <div class="w-1/2 md:w-3/4 xl:w-1/2 space-y-4">
-                        <CustomInput class="w-full" name="first_name" label="First name" type="text" placeholder="Jan" :value="user.first_name"></CustomInput>
-                        <CustomInput class="w-full" name="last_name" label="Last name" type="text" placeholder="Doe" :value="user.last_name"></CustomInput>
+                        <CustomInput class="w-full" name="first_name" label="First name" type="text" placeholder="Jan" v-model="form.first_name" :error="errors.first_name"></CustomInput>
+                        <CustomInput class="w-full" name="last_name" label="Last name" type="text" placeholder="Doe" v-model="form.last_name" :error="errors.last_name"></CustomInput>
                     </div>
                     <!-- Profile Picture -->
                     <div class=" w-1/2 md:w-1/4 md:flex-none md:mx-8 lg:w-1/3 xl:w-1/2 flex items-center justify-center">
@@ -19,9 +19,9 @@
                 </div>
                 <span class="text-gray-600 text-xs italic w-1/2">Your name may appear around ShareYourProject where you contribute or are mentioned. You can change it at any time.</span>
                 <!-- Company -->
-                <CustomInput class="w-full mt-8" name="title" label="Company" type="text" :value="user.title" placeholder="ex: Tesla Inc."></CustomInput>
+                <CustomInput class="w-full mt-8" name="title" label="Company" type="text" v-model="form.title" :error="errors.title" placeholder="ex: Tesla Inc."></CustomInput>
                 <!-- Bio -->
-                <TextArea class="mt-4" label="Bio" name="bio" placeholder="Tell us a little bit about yourself" rows="2" :value="user.bio" child_class="w-full" max_length="800"></TextArea>
+                <TextArea class="mt-4" label="Bio" name="bio" placeholder="Tell us a little bit about yourself" rows="2" v-model="form.bio" maxLength="800"></TextArea>
 
                 <!-- Links -->
                 <div class="w-full flex-none space-y-2">
@@ -53,6 +53,7 @@ import CustomInput from '../../../components/inputs/CustomInput.vue'
 import PictureInput from '../../../components/inputs/PictureInput.vue'
 import TextArea from '../../../components/inputs/TextArea.vue'
 import { mapGetters } from 'vuex'
+import { API } from '../../../api'
 
 export default defineComponent({
     components: {
@@ -60,11 +61,80 @@ export default defineComponent({
         PictureInput,
         TextArea,
     },
+    data() {
+        return {
+            form: {
+                first_name: "",
+                last_name: "",
+                title: "",
+                bio: ""
+            },
+            errors: {
+                first_name: "",
+                last_name: "",
+                title: "",
+                bio: ""
+            }
+        }
+    },
     computed: {
         ...mapGetters({
             isAuthenticated: 'isAuthenticated',
             user: 'user',
         })
+    },
+    methods:{
+        onSubmit(): void {
+            API.User.updateProfile(this.user, this.form).then(response => {
+                this.resetErrors()
+
+                switch (response.status) {
+                    case 200:
+                        // Authenticated
+                        this.me().then(() => {
+                            if (this.isAuthenticated)
+                            {
+                                this.$router.push({name: 'feed'});
+                            }
+                        })
+
+                        break;
+
+                    case 422:
+                        // Invalid form
+                        let errorsObject = response.data.errors;
+
+                        for (var key in errorsObject) {
+                            if (errorsObject.hasOwnProperty(key)) {
+                                errorsObject[key] = errorsObject[key][0];
+                            }
+                        }
+
+                        this.errors = errorsObject;
+                        break;
+
+                    case 401:
+                        this.credentialError = response.data;
+                        break;
+                    default:
+                        break;
+                }
+            });
+        },
+        resetErrors() {
+            this.errors = {
+                first_name: "",
+                last_name: "",
+                title: "",
+                bio: ""
+            };
+        },
+    },
+    mounted() {
+        this.form.first_name = this.user.first_name;
+        this.form.last_name = this.user.last_name;
+        this.form.title = this.user.title;
+        this.form.bio = this.user.bio;
     },
 })
 </script>

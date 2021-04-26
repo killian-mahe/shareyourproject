@@ -60,7 +60,9 @@ class UserController extends Controller
 
         $user->save();
 
-        return view('user.edit.profile', ['user' => $user]);
+        return response()->json(
+            status: 200
+        );
     }
 
     /**
